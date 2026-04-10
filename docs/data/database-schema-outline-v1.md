@@ -1170,13 +1170,12 @@ The data model should lock the following decisions now:
 - projections are explicit and limited
 - public discovery should run on controlled projections, not raw operational tables
 
-## 21. Recommended Next Data Artifacts
+## 21. Implementation Handoff Status
 
-After this outline, the strongest next data-layer docs are:
+The implementation handoff path is:
 
-1. `docs/architecture/route-layout-implementation-map-v1.md`
-2. `database-observability-and-maintenance-v1.md`
-3. `data-subject-request-workflow-v1.md`
+1. use `docs/architecture/route-layout-implementation-map-v1.md` for app route shape
+2. use `docs/planning/agent-implementation-decision-index-v1.md` and `docs/planning/implementation-task-template-v1.md` to create concrete implementation tasks
 
 ## 22. Final Recommendation
 

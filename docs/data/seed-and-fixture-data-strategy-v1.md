@@ -494,13 +494,15 @@ The system should lock the following decisions now:
 - auth-capable demo users use one centralized bootstrap path
 - performance-scale data is supported intentionally, not mixed into the baseline
 
-## 17. Recommended Next Data Artifacts
+## 17. Implementation Handoff Status
 
-After this doc, the strongest next data-layer docs are:
+The planning handoff docs now exist:
 
-1. `database-observability-and-maintenance-v1.md`
-2. `data-subject-request-workflow-v1.md`
-3. `api-and-server-action-contracts-v1.md`
+- `docs/planning/agent-implementation-decision-index-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+- `docs/planning/implementation-task-template-v1.md`
+
+The next step is to use them to create concrete implementation tasks, not to add more broad data-layer planning docs by default.
 
 ## 18. Final Recommendation
 

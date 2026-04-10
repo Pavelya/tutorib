@@ -870,13 +870,12 @@ The system should lock the following decisions now:
 - public projections are the right way to serve public discovery and trust surfaces
 - Realtime authorization must mirror canonical read permissions
 
-## 18. Recommended Next Data Artifacts
+## 18. Implementation Handoff Status
 
-After this doc, the strongest next data-layer docs are:
+The implementation handoff path is:
 
-1. `docs/architecture/route-layout-implementation-map-v1.md`
-2. `database-observability-and-maintenance-v1.md`
-3. `data-subject-request-workflow-v1.md`
+1. use `docs/architecture/route-layout-implementation-map-v1.md` for app route shape
+2. use `docs/planning/agent-implementation-decision-index-v1.md` and `docs/planning/implementation-task-template-v1.md` to create concrete implementation tasks
 
 ## 19. Final Recommendation
 

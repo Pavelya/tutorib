@@ -53,9 +53,15 @@ If you want the shortest path through the pack:
 25. `docs/data/database-index-and-query-review-v1.md`
 26. `docs/data/data-retention-erasure-field-map-v1.md`
 27. `docs/data/data-dto-and-query-boundary-map-v1.md`
-28. `docs/data/database-enum-and-status-glossary-v1.md`
-29. `docs/architecture/message-architecture-v1.md`
-30. `docs/planning/implementation-readiness-pack-v1.md`
+28. `docs/data/database-observability-and-maintenance-v1.md`
+29. `docs/data/data-subject-request-workflow-v1.md`
+30. `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+31. `docs/data/api-and-server-action-contracts-v1.md`
+32. `docs/data/database-enum-and-status-glossary-v1.md`
+33. `docs/architecture/message-architecture-v1.md`
+34. `docs/planning/implementation-readiness-pack-v1.md`
+35. `docs/planning/agent-implementation-decision-index-v1.md`
+36. `docs/planning/implementation-task-template-v1.md`
 
 ## By Topic
 
@@ -113,6 +119,10 @@ If you want the shortest path through the pack:
 - `docs/data/database-index-and-query-review-v1.md`
 - `docs/data/data-retention-erasure-field-map-v1.md`
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/data/database-observability-and-maintenance-v1.md`
+- `docs/data/data-subject-request-workflow-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
 - `docs/data/database-enum-and-status-glossary-v1.md`
 
 ### Architecture
@@ -151,6 +161,8 @@ If you want the shortest path through the pack:
 
 ### Implementation planning
 
+- `docs/planning/agent-implementation-decision-index-v1.md`
+- `docs/planning/implementation-task-template-v1.md`
 - `docs/planning/implementation-readiness-pack-v1.md`
 - `docs/planning/implementation-readiness-review-guide-v1.md`
 - `docs/planning/seo-implementation-foundation-v1.md`

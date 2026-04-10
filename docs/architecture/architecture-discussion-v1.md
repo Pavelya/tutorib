@@ -1162,6 +1162,10 @@ A dedicated set of companion architecture and data docs now exists:
 - `docs/data/database-index-and-query-review-v1.md`
 - `docs/data/data-retention-erasure-field-map-v1.md`
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/data/database-observability-and-maintenance-v1.md`
+- `docs/data/data-subject-request-workflow-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
 - `docs/data/database-enum-and-status-glossary-v1.md`
 
 Source URLs are listed in the companion review guide for quick reference.

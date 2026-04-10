@@ -912,13 +912,12 @@ The system should lock the following now:
 - only stable vocabularies should be early DB-enum candidates
 - application, listing, review, and moderation states stay explicitly separate
 
-## 20. Recommended Next Data Artifacts
+## 20. Implementation Handoff Status
 
-After this glossary, the strongest next docs are:
+The implementation handoff path is:
 
-1. `docs/architecture/route-layout-implementation-map-v1.md`
-2. `database-observability-and-maintenance-v1.md`
-3. `data-subject-request-workflow-v1.md`
+1. use `docs/architecture/route-layout-implementation-map-v1.md` for app route shape
+2. use `docs/planning/agent-implementation-decision-index-v1.md` and `docs/planning/implementation-task-template-v1.md` to create concrete implementation tasks
 
 ## 21. Final Recommendation
 

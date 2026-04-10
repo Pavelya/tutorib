@@ -604,13 +604,12 @@ The system should lock the following decisions now:
 - one route-family source for metadata and route-class behavior
 - local `not-found.tsx` on dynamic public profile routes
 
-## 19. Recommended Next Architecture Artifacts
+## 19. Implementation Handoff Status
 
-After this doc, the strongest next implementation-shape docs are:
+The implementation-shape handoff path is:
 
-1. `docs/planning/implementation-backlog-translation-v1.md`
-2. `docs/data/database-observability-and-maintenance-v1.md`
-3. `docs/data/data-subject-request-workflow-v1.md`
+1. use `docs/planning/agent-implementation-decision-index-v1.md` and `docs/planning/implementation-task-template-v1.md` to create concrete implementation tasks
+2. create `docs/planning/implementation-backlog-translation-v1.md` only if a separate backlog translation layer is still needed after task drafting starts
 
 ## 20. Final Recommendation
 

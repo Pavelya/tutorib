@@ -48,6 +48,7 @@ It is the direct companion to:
 - `docs/data/data-retention-erasure-field-map-v1.md`
 - `docs/data/data-ownership-boundary-map-v1.md`
 - `docs/data/database-change-review-checklist-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
 
 It inherits application-shape rules from:
 
@@ -1228,13 +1229,15 @@ The system should lock the following decisions now:
 - Server Actions return minimal operation results, not full rows
 - projections feed DTOs but never replace authorization, retention, or source-of-truth decisions
 
-## 36. Recommended Next Data Artifacts
+## 36. Implementation Handoff Status
 
-After this doc, the strongest next data-layer docs are:
+The planning handoff docs now exist:
 
-1. `database-observability-and-maintenance-v1.md`
-2. `data-subject-request-workflow-v1.md`
-3. `api-and-server-action-contracts-v1.md`
+- `docs/planning/agent-implementation-decision-index-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+- `docs/planning/implementation-task-template-v1.md`
+
+The next step is to use them to create concrete implementation tasks, not to add more broad data-layer planning docs by default.
 
 ## 37. Final Recommendation
 

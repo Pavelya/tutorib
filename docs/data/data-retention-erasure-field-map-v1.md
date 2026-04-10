@@ -36,6 +36,8 @@ It is the direct companion to:
 - `docs/data/projection-maintenance-strategy-v1.md`
 - `docs/data/projection-sql-patterns-v1.md`
 - `docs/data/data-ownership-boundary-map-v1.md`
+- `docs/data/data-subject-request-workflow-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
 - `docs/data/database-change-review-checklist-v1.md`
 
 It inherits higher-level policy posture from:
@@ -1229,13 +1231,15 @@ The system should lock the following decisions now:
 - financial, moderation, and audit records may require restricted retention after account deletion
 - exact retention durations remain a later legal/policy task, but implementation must preserve the ability to enforce them
 
-## 40. Recommended Next Data Artifacts
+## 40. Implementation Handoff Status
 
-After this doc, the strongest next data-layer docs are:
+The planning handoff docs now exist:
 
-1. `database-observability-and-maintenance-v1.md`
-2. `data-subject-request-workflow-v1.md`
-3. `api-and-server-action-contracts-v1.md`
+- `docs/planning/agent-implementation-decision-index-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+- `docs/planning/implementation-task-template-v1.md`
+
+The next step is to use them to create concrete implementation tasks, not to add more broad data-layer planning docs by default.
 
 ## 41. Final Recommendation
 

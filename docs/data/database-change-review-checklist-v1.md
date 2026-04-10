@@ -50,6 +50,10 @@ It is the direct companion to:
 - `docs/data/database-index-and-query-review-v1.md`
 - `docs/data/data-retention-erasure-field-map-v1.md`
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/data/database-observability-and-maintenance-v1.md`
+- `docs/data/data-subject-request-workflow-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
 
 It also inherits release constraints from:
 
@@ -218,6 +222,7 @@ Check:
 Use:
 
 - `docs/data/integration-idempotency-model-v1.md`
+- `docs/data/database-observability-and-maintenance-v1.md`
 - `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
 - `docs/architecture/observability-and-incident-architecture-v1.md`
 
@@ -252,6 +257,7 @@ Use:
 
 - `docs/data/drizzle-schema-and-query-conventions-v1.md`
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
 - `docs/architecture/route-layout-implementation-map-v1.md`
 - `docs/architecture/security-architecture-v1.md`
 
@@ -286,6 +292,8 @@ Use:
 - `docs/architecture/privacy-and-data-retention-architecture-v1.md`
 - `docs/architecture/compliance-and-regulatory-posture-v1.md`
 - `docs/data/data-retention-erasure-field-map-v1.md`
+- `docs/data/data-subject-request-workflow-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
 - `docs/architecture/seo-app-architecture-v1.md`
 
 ## 17. Performance And Index Review
@@ -303,6 +311,7 @@ Use:
 - `docs/architecture/performance-and-runtime-architecture-v1.md`
 - `docs/architecture/query-performance-slos-and-scaling-thresholds-v1.md`
 - `docs/data/database-index-and-query-review-v1.md`
+- `docs/data/database-observability-and-maintenance-v1.md`
 - `docs/data/projection-sql-patterns-v1.md`
 
 ## 18. Documentation Update Review
@@ -314,6 +323,10 @@ Check:
 - Does the RLS boundary doc need a new table-family rule?
 - Does the projection strategy need a new refresh trigger?
 - Does the idempotency model need a new operation family?
+- Does the database observability doc need a new signal, review trigger, or maintenance cadence note?
+- Does the data subject request workflow need a new request type, hold, or provider task?
+- Does the API and Server Action contracts doc need a new boundary, mutation family, endpoint rule, or cache invalidation note?
+- Does the privacy policy data inventory handoff need a new data category, provider, purpose, public exposure, or policy gap?
 - Does the docs map need the new artifact linked?
 
 Do not update docs just for noise.
@@ -348,13 +361,15 @@ The system should lock the following decisions now:
 - destructive and public-surface changes are blocker-level concerns
 - this checklist is a review gate, not a replacement for the dedicated data docs
 
-## 21. Recommended Next Data Artifacts
+## 21. Implementation Handoff Status
 
-After this doc, the strongest next data-layer docs are:
+The planning handoff docs now exist:
 
-1. `database-observability-and-maintenance-v1.md`
-2. `data-subject-request-workflow-v1.md`
-3. `api-and-server-action-contracts-v1.md`
+- `docs/planning/agent-implementation-decision-index-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+- `docs/planning/implementation-task-template-v1.md`
+
+The next step is to use them to create concrete implementation tasks, not to add more broad data-layer planning docs by default.
 
 ## 22. Final Recommendation
 

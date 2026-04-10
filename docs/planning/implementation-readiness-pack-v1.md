@@ -46,6 +46,10 @@ A dedicated planning companion now exists for future SEO work:
 - `docs/planning/public-route-seo-acceptance-checklist-v1.md`
 - `docs/planning/phase1-class-a-route-seo-task-pack-v1.md`
 
+A dedicated implementation-agent index now exists for routing future AI agents to the correct source docs:
+
+- `docs/planning/agent-implementation-decision-index-v1.md`
+
 ## 3. Canonical Approved Artifact Set
 
 These docs should now be treated as the canonical design source pack:
