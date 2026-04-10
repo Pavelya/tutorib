@@ -50,6 +50,26 @@ A dedicated implementation-agent index now exists for routing future AI agents t
 
 - `docs/planning/agent-implementation-decision-index-v1.md`
 
+A dedicated implementation baseline now exists for freezing the repo bootstrap and toolchain choices:
+
+- `docs/planning/implementation-baseline-v1.md`
+
+A dedicated implementation backlog index now exists for structuring the actual task packs:
+
+- `docs/planning/implementation-backlog-index-v1.md`
+
+The active Phase 1 execution pack now also exists:
+
+- `docs/planning/phase1-mvp-task-pack-v1.md`
+
+The next bounded planning pack now also exists:
+
+- `docs/planning/phase1-5-task-pack-v1.md`
+
+The broad Phase 2 planning pack now also exists:
+
+- `docs/planning/phase2-task-pack-v1.md`
+
 ## 3. Canonical Approved Artifact Set
 
 These docs should now be treated as the canonical design source pack:

@@ -92,6 +92,7 @@ For any nontrivial implementation task, read:
 
 - `docs/README.md`
 - `docs/planning/implementation-readiness-pack-v1.md`
+- `docs/planning/implementation-baseline-v1.md`
 - `docs/architecture/architecture-discussion-v1.md`
 - `docs/architecture/route-layout-implementation-map-v1.md`
 - `docs/design-system/design-system-spec-final-v1.md`
@@ -128,6 +129,7 @@ For public route tasks, also read:
 | Database schema or migration | `docs/data/database-schema-outline-v1.md`, `docs/data/migration-conventions-v1.md`, `docs/data/database-change-review-checklist-v1.md` |
 | RLS or authorization policy | `docs/data/database-rls-boundaries-v1.md`, `docs/data/auth-and-authorization-matrix-v1.md`, `docs/architecture/security-architecture-v1.md` |
 | Drizzle query or repository | `docs/data/drizzle-schema-and-query-conventions-v1.md`, `docs/data/data-dto-and-query-boundary-map-v1.md`, `docs/data/database-index-and-query-review-v1.md` |
+| Toolchain, dependency, or scaffold baseline | `docs/planning/implementation-baseline-v1.md`, root `package.json`, lockfile, `tsconfig.json`, `next.config.*` |
 | Projection or search read model | `docs/data/projection-maintenance-strategy-v1.md`, `docs/data/projection-sql-patterns-v1.md`, `docs/architecture/query-performance-slos-and-scaling-thresholds-v1.md` |
 | Reference data, enum, or status | `docs/data/reference-data-governance-v1.md`, `docs/data/database-enum-and-status-glossary-v1.md`, `docs/architecture/configuration-and-governance-architecture-v1.md` |
 | Seed, fixture, or test data | `docs/data/seed-and-fixture-data-strategy-v1.md`, `docs/data/database-test-conventions-v1.md`, `docs/data/supabase-folder-and-file-conventions-v1.md` |
@@ -541,9 +543,16 @@ The implementation task template now exists:
 
 - `docs/planning/implementation-task-template-v1.md`
 
-Use it before turning the architecture pack into concrete build tickets.
+Use it together with:
 
-After that, the next step is actual task creation, not more broad architecture.
+- `docs/planning/implementation-backlog-index-v1.md`
+- `docs/planning/phase1-mvp-task-pack-v1.md`
+- `docs/planning/phase1-5-task-pack-v1.md`
+- `docs/planning/phase2-task-pack-v1.md`
+
+The active next step is Phase 1 implementation from the Phase 1 pack.
+
+The canonical phase task-pack set now exists.
 
 ## 13. Final Recommendation
 

@@ -62,6 +62,11 @@ If you want the shortest path through the pack:
 34. `docs/planning/implementation-readiness-pack-v1.md`
 35. `docs/planning/agent-implementation-decision-index-v1.md`
 36. `docs/planning/implementation-task-template-v1.md`
+37. `docs/planning/implementation-baseline-v1.md`
+38. `docs/planning/implementation-backlog-index-v1.md`
+39. `docs/planning/phase1-mvp-task-pack-v1.md`
+40. `docs/planning/phase1-5-task-pack-v1.md`
+41. `docs/planning/phase2-task-pack-v1.md`
 
 ## By Topic
 
@@ -161,9 +166,14 @@ If you want the shortest path through the pack:
 
 ### Implementation planning
 
+- `docs/planning/implementation-readiness-pack-v1.md`
 - `docs/planning/agent-implementation-decision-index-v1.md`
 - `docs/planning/implementation-task-template-v1.md`
-- `docs/planning/implementation-readiness-pack-v1.md`
+- `docs/planning/implementation-baseline-v1.md`
+- `docs/planning/implementation-backlog-index-v1.md`
+- `docs/planning/phase1-mvp-task-pack-v1.md`
+- `docs/planning/phase1-5-task-pack-v1.md`
+- `docs/planning/phase2-task-pack-v1.md`
 - `docs/planning/implementation-readiness-review-guide-v1.md`
 - `docs/planning/seo-implementation-foundation-v1.md`
 - `docs/planning/seo-route-ownership-map-v1.md`
