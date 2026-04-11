@@ -29,17 +29,23 @@ This document exists to close that gap once, so future coding agents do not inve
 
 This document does not replace:
 
+- `docs/planning/agent-execution-playbook-v1.md`
+- `docs/planning/engineering-guardrails-v1.md`
 - `docs/architecture/architecture-discussion-v1.md`
 - `docs/architecture/route-layout-implementation-map-v1.md`
 - `docs/design-system/design-system-spec-final-v1.md`
 - `docs/planning/implementation-readiness-pack-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
 - the phase task packs
 
 Those documents still define:
 
+- how agents should execute a task
+- which engineering rules and repo hygiene constraints are non-negotiable
 - what the product should do
 - which routes exist
 - how the system should behave
+- which providers and service SDKs are approved
 - what each implementation task means
 
 This document only defines the repo and toolchain baseline that coding should start from.

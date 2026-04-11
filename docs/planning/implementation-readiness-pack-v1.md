@@ -50,9 +50,21 @@ A dedicated implementation-agent index now exists for routing future AI agents t
 
 - `docs/planning/agent-implementation-decision-index-v1.md`
 
+A dedicated execution playbook now exists for turning the approved task packs into actual implementation workflow:
+
+- `docs/planning/agent-execution-playbook-v1.md`
+
+A dedicated engineering guardrails doc now exists for hardcoded-value rules, dependency discipline, repo hygiene, and verification policy:
+
+- `docs/planning/engineering-guardrails-v1.md`
+
 A dedicated implementation baseline now exists for freezing the repo bootstrap and toolchain choices:
 
 - `docs/planning/implementation-baseline-v1.md`
+
+A dedicated service and SDK baseline now exists for freezing the approved provider stack and dependency posture:
+
+- `docs/planning/service-dependency-baseline-v1.md`
 
 A dedicated implementation backlog index now exists for structuring the actual task packs:
 

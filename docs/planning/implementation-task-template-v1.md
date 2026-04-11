@@ -147,8 +147,11 @@ Copy this full template when creating real tasks.
 
 Read these before implementation:
 
+- `docs/planning/agent-execution-playbook-v1.md`
 - `docs/planning/agent-implementation-decision-index-v1.md`
+- `docs/planning/engineering-guardrails-v1.md`
 - `docs/planning/implementation-baseline-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
 - `<area-specific source doc>`
 - `<area-specific source doc>`
 

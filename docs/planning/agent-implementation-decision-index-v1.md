@@ -92,7 +92,10 @@ For any nontrivial implementation task, read:
 
 - `docs/README.md`
 - `docs/planning/implementation-readiness-pack-v1.md`
+- `docs/planning/agent-execution-playbook-v1.md`
+- `docs/planning/engineering-guardrails-v1.md`
 - `docs/planning/implementation-baseline-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
 - `docs/architecture/architecture-discussion-v1.md`
 - `docs/architecture/route-layout-implementation-map-v1.md`
 - `docs/design-system/design-system-spec-final-v1.md`
@@ -113,6 +116,8 @@ For public route tasks, also read:
 
 | Task area | Required docs |
 | --- | --- |
+| Task execution workflow | `docs/planning/agent-execution-playbook-v1.md`, `docs/planning/agent-implementation-decision-index-v1.md`, `docs/planning/implementation-task-template-v1.md` |
+| Engineering guardrails or repo policy | `docs/planning/engineering-guardrails-v1.md`, `docs/planning/implementation-baseline-v1.md`, `docs/planning/service-dependency-baseline-v1.md` |
 | Product direction or scope | `docs/research/ui-ux-research-fresh-start.md`, `docs/research/ui-ux-research-two-sided-ecosystem.md`, `docs/planning/implementation-readiness-pack-v1.md` |
 | Shared object or IA decision | `docs/foundations/ux-object-model.md`, `docs/foundations/ia-map-two-sided.md`, `docs/foundations/service-blueprint-two-sided.md` |
 | Page, route, or layout implementation | `docs/architecture/route-layout-implementation-map-v1.md`, `docs/architecture/architecture-discussion-v1.md`, `docs/planning/implementation-readiness-pack-v1.md` |
@@ -129,7 +134,7 @@ For public route tasks, also read:
 | Database schema or migration | `docs/data/database-schema-outline-v1.md`, `docs/data/migration-conventions-v1.md`, `docs/data/database-change-review-checklist-v1.md` |
 | RLS or authorization policy | `docs/data/database-rls-boundaries-v1.md`, `docs/data/auth-and-authorization-matrix-v1.md`, `docs/architecture/security-architecture-v1.md` |
 | Drizzle query or repository | `docs/data/drizzle-schema-and-query-conventions-v1.md`, `docs/data/data-dto-and-query-boundary-map-v1.md`, `docs/data/database-index-and-query-review-v1.md` |
-| Toolchain, dependency, or scaffold baseline | `docs/planning/implementation-baseline-v1.md`, root `package.json`, lockfile, `tsconfig.json`, `next.config.*` |
+| Toolchain, dependency, or scaffold baseline | `docs/planning/implementation-baseline-v1.md`, `docs/planning/service-dependency-baseline-v1.md`, root `package.json`, lockfile, `tsconfig.json`, `next.config.*` |
 | Projection or search read model | `docs/data/projection-maintenance-strategy-v1.md`, `docs/data/projection-sql-patterns-v1.md`, `docs/architecture/query-performance-slos-and-scaling-thresholds-v1.md` |
 | Reference data, enum, or status | `docs/data/reference-data-governance-v1.md`, `docs/data/database-enum-and-status-glossary-v1.md`, `docs/architecture/configuration-and-governance-architecture-v1.md` |
 | Seed, fixture, or test data | `docs/data/seed-and-fixture-data-strategy-v1.md`, `docs/data/database-test-conventions-v1.md`, `docs/data/supabase-folder-and-file-conventions-v1.md` |
@@ -243,7 +248,44 @@ Rule:
 
 - privacy behavior is workflow-driven and hold-aware; do not infer deletion behavior from table names.
 
-## 7.8 SEO and AI discoverability decisions
+## 7.8 Service and dependency decisions
+
+Owned by:
+
+- `docs/planning/implementation-baseline-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
+- `docs/architecture/configuration-and-governance-architecture-v1.md`
+
+Rule:
+
+- do not add a new provider, SDK family, or overlapping service stack unless the baseline or architecture docs explicitly change.
+
+## 7.9 Execution workflow decisions
+
+Owned by:
+
+- `docs/planning/agent-execution-playbook-v1.md`
+- `docs/planning/implementation-task-template-v1.md`
+- `docs/planning/implementation-backlog-index-v1.md`
+
+Rule:
+
+- implement from a concrete task id and detailed task section, not from a backlog row or general project summary.
+
+## 7.10 Engineering guardrail decisions
+
+Owned by:
+
+- `docs/planning/engineering-guardrails-v1.md`
+- `docs/architecture/configuration-and-governance-architecture-v1.md`
+- `docs/architecture/testing-and-release-architecture-v1.md`
+- `docs/architecture/security-architecture-v1.md`
+
+Rule:
+
+- do not bypass hardcoded-value, env, dependency, repo-hygiene, or verification rules just because a task feels small.
+
+## 7.11 SEO and AI discoverability decisions
 
 Owned by:
 
@@ -261,7 +303,7 @@ Rule:
 
 - public metadata, structured data, sitemap eligibility, and AI discoverability must be route-owned and public-DTO-safe.
 
-## 7.9 Testing and release decisions
+## 7.12 Testing and release decisions
 
 Owned by:
 
