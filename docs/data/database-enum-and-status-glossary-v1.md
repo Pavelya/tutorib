@@ -512,6 +512,54 @@ Definitions:
 - `shared`: intentionally visible to the student
 - `acknowledged`: student has seen or acknowledged it where that product behavior exists
 
+## 11.4 `lesson_issue_cases.case_status`
+
+Purpose:
+
+- lifecycle of an operational lesson-issue case
+
+Allowed values:
+
+- `reported`
+- `counterparty_matched`
+- `under_review`
+- `resolved`
+- `dismissed`
+
+Definitions:
+
+- `reported`: one participant submitted a lesson issue and the case is awaiting counterparty input or policy handling
+- `counterparty_matched`: both sides materially agree on the lesson issue and the case is eligible for automatic resolution
+- `under_review`: claims conflict or need manual internal review
+- `resolved`: outcome recorded and downstream effects can be applied
+- `dismissed`: duplicate, invalid, or withdrawn issue case
+
+## 11.5 `lesson_issue_cases.resolution_outcome`
+
+Purpose:
+
+- normalized outcome used to drive refund, payout, and reliability effects
+
+Allowed values:
+
+- `student_no_show_confirmed`
+- `tutor_no_show_confirmed`
+- `wrong_link_tutor_fault`
+- `technical_issue_no_fault`
+- `partial_delivery_adjusted`
+- `lesson_completed`
+- `duplicate_or_invalid`
+
+Definitions:
+
+- `student_no_show_confirmed`: tutor was available and the student did not attend according to the final outcome
+- `tutor_no_show_confirmed`: student was ready and the tutor did not attend according to the final outcome
+- `wrong_link_tutor_fault`: tutor-provided meeting access prevented the lesson
+- `technical_issue_no_fault`: lesson failed for a technical reason without confirmed tutor-fault penalty
+- `partial_delivery_adjusted`: lesson happened only partially and required an operational adjustment
+- `lesson_completed`: the issue was reported, but the lesson is treated as successfully delivered after review
+- `duplicate_or_invalid`: no operational consequence should be applied
+
 ## 12. Messaging Status Families
 
 ## 12.1 `conversations.conversation_status`

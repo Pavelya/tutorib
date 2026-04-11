@@ -538,7 +538,28 @@ Flagged review text should be reviewable through the moderation architecture.
 
 The architecture should support review disputes later without requiring public star values to be edited directly in random admin screens.
 
-## 17.4 Safety-state rule
+## 17.4 Lesson-issue case rule
+
+Operational lesson failures such as no-show, wrong meeting link, or major technical failure should enter one lesson-issue path rather than being handled through scattered support notes.
+
+## 17.5 Auto-resolution rule
+
+If the student-side and tutor-side lesson issue reports materially agree, the product may auto-resolve the case and apply the approved refund, payout, and reliability rules.
+
+## 17.6 Conflicting-claim rule
+
+If the reports conflict or evidence is insufficient, the case should move to internal review and remain trust-neutral until resolution.
+
+## 17.7 Penalty-application rule
+
+Reliability penalties, ranking drag, or listing gates should only be applied from:
+
+- policy-qualified auto-resolved incidents
+- internally reviewed outcomes
+
+Do not let a one-sided raw accusation immediately reduce tutor trust or public visibility.
+
+## 17.8 Safety-state rule
 
 If a tutor enters a serious moderation state, that state should affect listing and trust through the moderation architecture, not through review text tricks.
 

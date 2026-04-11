@@ -266,6 +266,42 @@ Do not pretend the lesson is fully join-ready when it is not.
 
 If the meeting access for an upcoming lesson changes, that should flow through the approved notifications and background-work architecture.
 
+## 10.5 Lesson-issue entry rule
+
+If a confirmed or recently started lesson fails operationally, both participants should have a clear `Report issue` action from the lesson surface.
+
+Do not force users into generic support contact just to say the tutor was absent or the meeting link was wrong.
+
+## 10.6 MVP issue-reason rule
+
+The first structured lesson-issue reasons should include:
+
+- tutor absent
+- student absent
+- wrong or missing meeting link
+- major technical problem
+- lesson delivered only partially
+
+Structured issue selection should come first, with optional summary text as supporting context.
+
+## 10.7 Reporting-window rule
+
+Lesson-issue reporting should be available only in a bounded operational window tied to the lesson lifecycle.
+
+For MVP, the exact timing should follow the approved lesson policy, but the product should treat it as a short post-start or post-end reporting window rather than an indefinite support form.
+
+## 10.8 Resolution posture
+
+If both tutor and student report the same operational problem, the product may auto-resolve the lesson issue according to policy.
+
+If the reports conflict, or only one side reports a high-impact problem, the lesson issue should move into review rather than immediately applying penalties or payout consequences from a one-sided claim.
+
+## 10.9 Lesson-linking rule
+
+Lesson issues belong to the lesson object and its operational history.
+
+They may link out to support, trust, payout, or notification behavior, but they should not live as ad hoc chat messages or free-floating support notes.
+
 ## 11. Security And Privacy Boundaries
 
 ## 11.1 Main rule

@@ -349,6 +349,26 @@ The architecture should support different source types without requiring a diffe
 
 Cases should support escalation without losing the original decision trail.
 
+## 12.5 Operational lesson-issue rule
+
+Not every lesson problem is an abuse report.
+
+No-show claims, wrong meeting links, and major lesson-delivery failures should create a reviewable operational lesson case linked to the lesson.
+
+## 12.6 Shared-queue rule
+
+Operational lesson cases may share internal queue infrastructure with abuse or trust cases, but they should keep distinct case typing and resolution outcomes.
+
+This avoids mixing ordinary lesson operations with harmful-behavior moderation by accident.
+
+## 12.7 Resolution-trail rule
+
+Lesson-case resolution should record enough outcome detail to support:
+
+- refund or payout consequences
+- reliability penalties where applicable
+- no-penalty outcomes for unresolved or no-fault incidents
+
 ## 13. Block Architecture
 
 ## 13.1 Product block rule

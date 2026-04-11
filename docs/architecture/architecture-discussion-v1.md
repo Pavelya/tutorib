@@ -907,6 +907,7 @@ A dedicated companion now exists for this area:
 - capture on tutor acceptance
 - authorization release on decline or request expiry
 - refund handling tied to cancellation and no-show policy
+- dispute-aware lesson issue handling for no-show, wrong-link, and major technical-failure cases
 - payment status in lesson flow
 - minimal tutor payout-readiness support for live payout operations
 
@@ -927,6 +928,7 @@ That said, the billing domain should be designed from the start with clean bound
 - payout account status
 - payouts
 - ledger-like reporting
+- lesson issue outcomes that drive refund, payout, and reliability decisions
 
 ## 17.3 Stripe integration rule
 

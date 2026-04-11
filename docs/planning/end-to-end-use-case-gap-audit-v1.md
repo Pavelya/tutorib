@@ -82,8 +82,8 @@ That means the architecture assumes a payment-bearing booking flow, but the impl
 | Tutor profile evaluation and compare | `strong` | Public profile, compare, trust proof, and fit rationale are well covered | None at blocker level | Keep current direction |
 | Booking request submission | `decided` | Shared lesson object and request-review model are clear | Must stay aligned with request-expiry and authorization-release behavior | Keep tutor approval as the MVP booking model |
 | Payment capture and lesson confirmation | `mostly_defined` | Payment now follows request-time authorization and tutor-accept capture | Backlog and schema layers must stay aligned with this flow | Keep hosted Checkout plus capture on acceptance |
-| Cancellation, reschedule, and no-show | `mostly_defined` | Platform-wide 2-hour cancellation and no-show direction now exists | Lesson-issue reporting and dispute workflow still need one canonical object model | Keep one platform rule set, not tutor-specific policies |
-| Lesson delivery and meeting access | `partial` | External meeting-link model is clear and practical | Attendance proof and "lesson issue" handling are not defined even though external tools are used | Add a lesson-issue or attendance-dispute flow |
+| Cancellation, reschedule, and no-show | `mostly_defined` | Platform-wide 2-hour cancellation and no-show direction now exists | Reporting-window timing and implementation details must stay aligned with the shared lesson-issue flow | Keep one platform rule set, not tutor-specific policies |
+| Lesson delivery and meeting access | `mostly_defined` | External meeting-link model is clear and practical, and a shared lesson-issue flow now exists | Exact reporting-window timing and review operations still need implementation discipline | Keep the lesson-scoped issue flow tied to the lesson object |
 | Messaging versus notifications | `decided` | System notifications are already separated from user conversations | Keep tutor cold outreach out of MVP | Keep the split |
 | Tutor application flow | `partial` | IA and future task pack both support staged onboarding and a readiness checklist | Missing-info and request-changes lifecycle is not fully canonicalized | Add tutor-facing application status and missing-items policy |
 | Tutor approval and public listing | `partial` | Approval, credential review, and public listing are correctly separated | Tutor-facing explanation of "approved to teach but not publicly listed" needs a clearer product rule | Add a tutor-facing readiness and listing-state model |
@@ -176,11 +176,14 @@ It is a support and evidence question.
   - wrong or missing meeting link
   - major technical failure
   - lesson delivered only partially
+- let both participants report through the lesson surface rather than generic support only
+- auto-resolve when both sides materially agree
+- send conflicting claims to internal review
 - auto-cancel unresolved requests when the tutor has not accepted by `2` hours before lesson start
 - do not let one-sided raw accusations immediately affect tutor ranking
 - record reliability penalties only after policy-qualified or reviewed outcomes
 
-Current docs already support reliability signals, but they do not yet define the user-facing path that creates them safely.
+The current docs now treat this as a normal lesson-operations flow rather than a vague support edge case.
 
 ## 5.5 Tutor ranking should be penalized for confirmed tutor-fault reliability problems
 

@@ -728,6 +728,32 @@ Recommended columns:
 - `next_steps_summary`
 - `student_visible_at`
 
+## 12.5 `lesson_issue_cases`
+
+Purpose:
+
+- canonical operational case for no-show, wrong-link, major technical-failure, or partial-delivery incidents linked to a lesson
+
+Recommended columns:
+
+- `id`
+- `lesson_id`
+- `case_status`
+- `student_claim_type`
+- `student_reported_at`
+- `tutor_claim_type`
+- `tutor_reported_at`
+- `resolution_outcome`
+- `resolution_note`
+- `resolved_by_app_user_id`
+- `resolved_at`
+
+Notes:
+
+- one open lesson issue case per lesson is enough for MVP
+- this is distinct from `abuse_reports`
+- refund, payout, and trust consequences should derive from the resolved lesson issue outcome rather than a one-sided raw claim
+
 ## 13. Messaging Core
 
 ## 13.1 `conversations`

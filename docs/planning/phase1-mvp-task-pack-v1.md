@@ -495,6 +495,7 @@ Create the shared data foundations for student learning needs, matching results,
 - learning needs
 - match result or candidate representation
 - lesson and booking state tables
+- lesson issue case records for no-show and failed-lesson handling
 - payment authorization and capture records linked to bookings
 - schedule-linked lesson snapshots
 - booking mutation idempotency boundary
@@ -509,6 +510,7 @@ Create the shared data foundations for student learning needs, matching results,
 - learning need and lesson objects follow the shared product object model
 - booking state has a clear source of truth
 - booking-linked payment state has a clear source of truth
+- lesson issue state has a clear source of truth separate from abuse reports
 - lesson snapshots preserve historical meaning where needed
 
 **Verification**
@@ -919,6 +921,7 @@ Implement the shared lessons route for the student side, including lesson list a
 
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
 - `docs/architecture/meeting-and-calendar-architecture-v1.md`
+- `docs/architecture/rating-and-review-trust-architecture-v1.md`
 - `docs/design-system/design-system-spec-final-v1.md`
 - `docs/architecture/security-architecture-v1.md`
 
@@ -927,17 +930,20 @@ Implement the shared lessons route for the student side, including lesson list a
 - `/lessons`
 - lesson cards and lesson detail summaries
 - participant-scoped lesson state display
+- lesson issue entry and issue-status display for eligible lesson states
 
 **Out of scope**
 
 - calendar export
 - advanced lesson reporting
+- internal review tooling for lesson issues
 
 **Acceptance criteria**
 
 - lessons route uses role-safe lesson DTOs
 - lesson state language matches the approved system
 - meeting links and sensitive lesson details remain participant-private
+- eligible lesson detail surfaces provide a clear `Report issue` entry without treating chat as the fallback operational system
 
 **Verification**
 

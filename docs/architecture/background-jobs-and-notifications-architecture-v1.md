@@ -188,6 +188,8 @@ Examples:
 - `tutor_application_reviewed`
 - `lesson_booked`
 - `lesson_cancelled`
+- `lesson_issue_reported`
+- `lesson_issue_resolved`
 - `message_created`
 - `user_blocked`
 - `report_created`
@@ -277,6 +279,8 @@ Phase 1 should focus on a small set of high-signal product notifications:
 - lesson declined and payment authorization released
 - lesson auto-cancelled on expiry and payment authorization released
 - lesson cancelled or rescheduled update
+- lesson issue reported acknowledgement
+- lesson issue resolution update
 - upcoming lesson reminder
 - review submitted
 - tutor application submitted confirmation
