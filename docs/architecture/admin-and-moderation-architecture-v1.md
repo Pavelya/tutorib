@@ -265,9 +265,9 @@ Where useful, queue items should support assignment or claim semantics so action
 
 ## 10.1 Application review rule
 
-Tutor approval should be separate from public-profile publication.
+Tutor approval should remain the main human review decision.
 
-Those are related but distinct decisions.
+Public discovery state should still remain distinct because an approved tutor may be withheld from listing for operational reasons such as incomplete payout readiness or an intentional pause.
 
 ## 10.2 Recommended state split
 
@@ -275,7 +275,7 @@ The architecture should conceptually distinguish:
 
 - tutor account application state
 - credential verification state
-- tutor approval state
+- payout readiness state
 - public listing state
 
 ## 10.3 Why the split matters
@@ -283,7 +283,7 @@ The architecture should conceptually distinguish:
 A tutor may be:
 
 - in application review
-- approved to teach but not yet publicly listed
+- approved to teach but not yet publicly listed because payout setup is incomplete
 - temporarily unlisted without losing account access
 - under investigation without immediate account deletion
 
@@ -292,7 +292,7 @@ A tutor may be:
 Public tutor profiles should not become publicly visible or indexable until:
 
 - account approval conditions are met
-- public content quality conditions are met
+- payout readiness conditions are met when paid lessons are active
 - explicit public-listing state allows it
 
 This should align with the SEO quality-gate model.
@@ -534,7 +534,7 @@ These decisions are mature enough to lock now:
 
 - admin and moderation are internal-only operational surfaces
 - internal roles should be capability-based, not one broad default admin role
-- tutor approval is separate from public listing approval
+- tutor approval remains the main review decision, while listing state stays separate for payout-readiness and pause control
 - reports should become durable moderation cases
 - privileged write actions must be server-side and auditable
 - public content takedowns must coordinate with SEO and privacy behavior
@@ -560,7 +560,7 @@ The right practical model is:
 - internal route boundary
 - capability-based internal access
 - queue-driven review work
-- separate tutor approval and public listing states
+- separate application and public listing states where payout readiness or pause control can affect visibility
 - durable moderation cases
 - auditable privileged actions
 

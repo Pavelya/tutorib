@@ -390,6 +390,7 @@ Recommended columns:
 - `profile_visibility_status`
 - `application_status`
 - `public_listing_status`
+- `payout_readiness_status`
 - `intro_video_provider`
 - `intro_video_external_id`
 - `intro_video_url`
@@ -400,6 +401,7 @@ Notes:
 - public consumption should come from controlled shaping, not a second unrelated table for the same concept
 - `intro_video_provider` should reference the `video_media_providers` vocabulary, not `meeting_providers`
 - `public_slug` should normally be generated from `display_name` on first listing and remain stable unless explicitly regenerated or manually changed
+- public listing should usually require admin approval, minimum profile readiness, and payout readiness when paid lessons are active
 
 ## 9.5 `tutor_subject_capabilities`
 
@@ -651,6 +653,7 @@ Recommended columns:
 - `lesson_status`
 - `scheduled_start_at`
 - `scheduled_end_at`
+- `request_expires_at`
 - `lesson_timezone`
 - `meeting_method`
 - `price_amount`
@@ -669,6 +672,7 @@ Notes:
 - lesson history must not be corrupted by later profile or availability edits
 - keep stable booking snapshot fields on the lesson itself
 - `lesson_timezone` is the booking snapshot timezone and should remain stable for the historical lesson record
+- `request_expires_at` should normally be derived from the lesson start time and the platform request-cutoff rule
 
 ## 12.2 `lesson_status_history`
 
@@ -738,10 +742,14 @@ Recommended columns:
 - `student_profile_id`
 - `tutor_profile_id`
 - `conversation_status`
-- `lesson_id`
-- `learning_need_id`
+- `origin_learning_need_id`
 - `last_message_at`
 - `last_message_id`
+
+Notes:
+
+- phase 1 should keep one persistent conversation per student-tutor relationship
+- lesson detail and booking surfaces may deep-link into the same conversation without making the conversation lesson-owned
 
 ## 13.2 `conversation_participants`
 
@@ -979,12 +987,23 @@ Recommended columns:
 - `id`
 - `lesson_id`
 - `payer_app_user_id`
+- `stripe_checkout_session_id`
 - `stripe_payment_intent_id`
 - `payment_status`
 - `amount`
 - `currency_code`
+- `authorized_at`
+- `authorization_expires_at`
 - `captured_at`
+- `capture_cancelled_at`
 - `refunded_at`
+
+Notes:
+
+- phase 1 should authorize payment at booking-request submission
+- tutor acceptance should capture the authorization
+- tutor decline or request expiry should cancel the uncaptured authorization and release funds
+- MVP may start with `USD` only
 
 ## 16.2 `earnings`
 
@@ -1004,14 +1023,44 @@ Recommended columns:
 - `available_at`
 - `paid_at`
 
-## 16.3 Deferred payout tables
+Notes:
 
-These belong to the forward path, but not necessarily phase 1:
+- tutor earnings should become visible as an internal earnings balance, not a separate stored-value wallet product
+- MVP payouts may run on a regular monthly cycle
+## 16.3 `payout_accounts`
 
-- `payout_accounts`
-- `payouts`
+Purpose:
 
-The schema should leave room for them without forcing Stripe Connect complexity on day one.
+- tutor payout-readiness and Stripe Connect onboarding state
+
+Recommended columns:
+
+- `id`
+- `tutor_profile_id`
+- `stripe_connected_account_id`
+- `payout_account_status`
+- `onboarding_started_at`
+- `onboarding_completed_at`
+- `charges_enabled_at`
+- `payouts_enabled_at`
+- `requirements_due_at`
+
+## 16.4 `payouts`
+
+Purpose:
+
+- scheduled payout record for tutor earnings settlements
+
+Recommended columns:
+
+- `id`
+- `tutor_profile_id`
+- `payout_status`
+- `scheduled_for`
+- `gross_amount`
+- `net_amount`
+- `stripe_payout_id`
+- `paid_at`
 
 ## 17. Admin, Moderation, And Audit Core
 

@@ -272,11 +272,17 @@ Later channels can include:
 Phase 1 should focus on a small set of high-signal product notifications:
 
 - new message email and in-app alert
-- lesson booked confirmation
+- lesson request submitted
+- lesson accepted and payment captured
+- lesson declined and payment authorization released
+- lesson auto-cancelled on expiry and payment authorization released
 - lesson cancelled or rescheduled update
 - upcoming lesson reminder
+- review submitted
 - tutor application submitted confirmation
-- tutor application approved or rejected update
+- tutor application changes requested, approved, or rejected update
+- payout processed
+- terms or privacy update
 
 ## 8.6 Auth-email exception
 

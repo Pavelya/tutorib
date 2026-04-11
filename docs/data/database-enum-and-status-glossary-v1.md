@@ -265,6 +265,7 @@ Allowed values:
 - `in_progress`
 - `submitted`
 - `under_review`
+- `changes_requested`
 - `approved`
 - `rejected`
 - `withdrawn`
@@ -275,6 +276,7 @@ Definitions:
 - `in_progress`: tutor is filling it out
 - `submitted`: application submitted by tutor
 - `under_review`: internal review in progress
+- `changes_requested`: tutor must update missing or insufficient information before approval can continue
 - `approved`: approved for tutor capability/use
 - `rejected`: rejected by internal review
 - `withdrawn`: withdrawn by tutor before completion or approval
@@ -296,7 +298,7 @@ Allowed values:
 Definitions:
 
 - `not_listed`: not yet on the public tutor surface
-- `eligible`: passes core gates and can be listed
+- `eligible`: passes core gates such as approval, readiness, and payout setup, and can be listed
 - `listed`: currently visible on public discovery surfaces
 - `paused`: temporarily withheld from new discovery while preserving the profile
 - `delisted`: intentionally removed from public discovery
@@ -304,7 +306,7 @@ Definitions:
 Notes:
 
 - keep separate from `application_status`
-- a tutor can be approved but not listed
+- a tutor can be approved but not listed if payout readiness or another operational gate is incomplete
 
 ## 8.4 `tutor_credentials.review_status`
 
@@ -657,6 +659,7 @@ Allowed values:
 
 - `queued`
 - `under_review`
+- `changes_requested`
 - `approved`
 - `rejected`
 
@@ -664,6 +667,7 @@ Definitions:
 
 - `queued`: waiting for reviewer handling
 - `under_review`: actively being reviewed
+- `changes_requested`: reviewer requires more information or profile changes before approval
 - `approved`: approved by internal reviewer
 - `rejected`: rejected by internal reviewer
 
@@ -791,7 +795,7 @@ Allowed values:
 Definitions:
 
 - `pending`: payment intent or payment flow started but not completed
-- `authorized`: authorized but not yet finalized as paid if that distinction matters later
+- `authorized`: payment hold exists and can be captured or released according to booking outcome
 - `paid`: successful paid state
 - `refunded`: refunded in full or treated as refunded summary state
 - `failed`: payment attempt failed
@@ -801,6 +805,30 @@ Notes:
 
 - Stripe-native sub-states can remain provider-specific
 - this column should reflect the app's canonical summary state
+
+## 15.3 `payout_accounts.payout_account_status`
+
+Purpose:
+
+- tutor payout-readiness lifecycle
+
+Allowed values:
+
+- `not_started`
+- `pending_setup`
+- `pending_verification`
+- `enabled`
+- `restricted`
+- `disabled`
+
+Definitions:
+
+- `not_started`: no payout account setup started
+- `pending_setup`: tutor must still complete hosted onboarding
+- `pending_verification`: setup submitted but Stripe requirements are still pending
+- `enabled`: payout account is ready for charges and payouts
+- `restricted`: account exists but currently cannot operate normally
+- `disabled`: payout account intentionally disconnected or closed
 
 ## 15.2 `earnings.earning_status`
 

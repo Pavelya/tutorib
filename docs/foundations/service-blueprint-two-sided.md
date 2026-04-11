@@ -53,8 +53,9 @@ The service blueprint should therefore be read horizontally, not as two unrelate
 
 ### Support lanes
 
-- Parent: billing wrapper where relevant
 - Admin: approval, moderation, and trust governance
+
+The parent or guardian payer flow is intentionally out of current MVP scope.
 
 ## 4. Lifecycle Overview
 
@@ -62,9 +63,9 @@ The service blueprint should therefore be read horizontally, not as two unrelate
 flowchart LR
   A["Need appears"] --> B["Student gets matched"]
   B --> C["Student evaluates options"]
-  C --> D["Booking request sent"]
+  C --> D["Booking request and payment hold"]
   D --> E["Tutor reviews request"]
-  E --> F["Lesson confirmed"]
+  E --> F["Payment captured and lesson confirmed"]
   F --> G["Pre-lesson preparation"]
   G --> H["Lesson takes place"]
   H --> I["Review and report"]
@@ -79,9 +80,9 @@ flowchart LR
 | 2. Guided matching | "Show me likely good fits." Wants relief, not research work. | Wants to be surfaced for the right student needs. | `LearningNeed`, `Match`, `TutorProfile` | Match flow, recommendation results | Asking subject-first instead of problem-first weakens relevance. | Problem-led intake, urgency, style, language, timezone. |
 | 3. Browse and shortlist | "I want to compare only a few strong options." | Wants profile and credibility to be understood quickly. | `Match`, `TutorProfile`, `Availability`, `Review` | Search results, compare, saved list | Infinite card grids create choice overload. | Use rich list rows with "Why this tutor fits" reasoning. |
 | 4. Tutor evaluation | "Can I trust this tutor and book confidently?" | Wants profile to communicate fit, expertise, and working style. | `TutorProfile`, `Credential`, `Availability`, `Review` | Tutor profile, compare | Biography-first profiles feel like databases. | Start with fit summary, best-for statements, proof, and booking readiness. |
-| 5. Booking request | "I want to request time with minimal friction." | Wants clear request context and low ambiguity. | `Lesson`, `Availability`, `Conversation` | Booking flow, schedule surface, request summary | Booking feels disconnected from timezone and scheduling realities. | Use one lesson object and timezone-aware schedule grammar. |
-| 6. Request review | Waiting for confirmation. Needs reassurance. | "Should I accept this request?" Needs context fast. | `Lesson`, `Student`, `Conversation` | Tutor overview, requests list, lesson detail | Tutor side becomes generic back-office admin. | Show student need, urgency, context, and request actions in one lesson pattern. |
-| 7. Confirmation | Wants certainty and next steps. | Wants operations to update automatically and clearly. | `Lesson`, `Notification`, `Conversation`, `Earning` | Confirmation, lessons hub, messages | Acceptance and next steps can feel fragmented. | Use a consistent confirmed-lesson state across both roles. |
+| 5. Booking request | "I want to request time with minimal friction and not chase the tutor later." | Wants clear request context and low ambiguity. | `Lesson`, `Payment`, `Availability`, `Conversation` | Booking flow, schedule surface, request summary | Booking feels disconnected from timezone, scheduling realities, and payment certainty. | Use one lesson object, timezone-aware schedule grammar, and request-time payment authorization that does not require the student to monitor tutor approval manually. |
+| 6. Request review | Waiting for confirmation. Needs reassurance that the request and payment hold are still safe. | "Should I accept this request?" Needs context fast. | `Lesson`, `Student`, `Conversation`, `Payment` | Tutor overview, requests list, lesson detail | Tutor side becomes generic back-office admin. | Show student need, urgency, request cutoff, and accept/decline actions in one lesson pattern. |
+| 7. Confirmation | Wants certainty, payment clarity, and next steps. | Wants operations and earnings state to update clearly. | `Lesson`, `Notification`, `Conversation`, `Earning` | Confirmation, lessons hub, messages, finance summary | Acceptance and next steps can feel fragmented. | Capture payment on acceptance, then use one consistent confirmed-lesson state across both roles. |
 | 8. Pre-lesson prep | "What do I need to do before the lesson?" | "What do I need ready before I teach?" | `Lesson`, `Conversation`, `Report` | Lesson detail, messages, student detail | Important prep falls into chat history or disappears. | Bring lesson context, notes, and pre-lesson cues into the lesson surface. |
 | 9. Lesson delivery | Wants smooth join experience and confidence. | Wants a clean operational path into the session. | `Lesson` | Lessons hub, lesson detail, join action | Session feels detached from the platform. | One clear join state, countdown, and follow-up entry point. |
 | 10. Post-lesson follow-up | "Was this useful? What next?" | Wants to capture outcomes without admin pain. | `Review`, `Report`, `Lesson` | Review flow, lesson detail, tutor reports | Reviews and reports can feel bolted on. | Make post-lesson continuity part of the core lesson object. |
@@ -112,18 +113,19 @@ These moments can differ in emphasis, but not in visual grammar:
 2. Completes guided intake
 3. Receives 3-5 best-fit tutors
 4. Compares two or three
-5. Books one
-6. Receives confirmation and next steps
+5. Sends booking request and payment hold
+6. Receives confirmation and next steps after tutor acceptance
 
 ### Thread B: Newly approved tutor
 
 1. Tutor is approved
-2. Sees readiness checklist
-3. Completes profile quality and schedule setup
-4. Receives first relevant booking request
-5. Accepts
-6. Teaches
-7. Completes follow-up and builds momentum
+2. Sees readiness checklist and payout-setup gate
+3. Completes profile quality, schedule setup, and payout readiness
+4. Becomes publicly bookable
+5. Receives first relevant booking request
+6. Accepts
+7. Teaches
+8. Completes follow-up and builds momentum
 
 ### Thread C: Ongoing tutor-student relationship
 

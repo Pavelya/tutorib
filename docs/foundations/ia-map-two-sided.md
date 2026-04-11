@@ -207,6 +207,7 @@ Rules:
 - keep to five items max
 - unread states appear on Messages
 - if compare is active, it lives inside Saved rather than as a separate tab
+- the bar may hide or shrink on downward scroll and return on upward scroll, but it must remain the primary mobile navigation model
 
 ## 7. Tutor IA
 
@@ -326,33 +327,31 @@ Recommended flow:
 - Account creation
 - Application
 - Review pending
-- Approved activation checklist
-- Enter tutor mode
+- Admin approved
+- Tutor dashboard with payout-setup CTA
+- Public listing enabled
+- Enter full tutor mode
 
 ## 7.4 Tutor mobile navigation
 
-Recommended bottom nav:
+Recommended mobile navigation:
 
-- Overview
-- Lessons
-- Messages
-- Students
-- More
-
-Inside `More`:
-
-- Schedule
-- Earnings
-- Profile
-- Credentials
-- Reviews
-- Settings
+- hamburger or drawer navigation
+- overview
+- lessons
+- messages
+- students
+- schedule
+- earnings
+- profile
+- credentials
+- settings
 
 Rules:
 
-- keep the same bottom-nav component system as student mode
-- adapt labels and destinations by role
-- do not switch to a completely different mobile interaction model unless necessary
+- tutors should be treated as desktop-primary for dense operational work
+- mobile tutor access should stay available, but secondary to desktop usage
+- do not force a dense bottom nav when the tutor information architecture is broader than the student one
 
 ## 8. Shared Object Entry Points
 
@@ -424,7 +423,6 @@ Entry points:
 
 ## Priority 3
 
-- Parent billing wrapper
 - deeper report archive
 - visibility/performance coaching surfaces
 - advanced scheduling rules

@@ -350,11 +350,21 @@ The rating system should protect against misleading early averages from tiny sam
 
 That means the aggregation should support smoothing or other low-sample stabilizing behavior.
 
+Recommended MVP posture:
+
+- use a Bayesian-smoothed rating rather than a raw arithmetic average
+- use the current platform-wide tutor rating mean as the prior center
+- use a prior weight equivalent to about `5` published reviews
+
 ## 11.4 Public-threshold posture
 
 The public surface may choose not to foreground a star rating until the tutor has enough published review evidence to make it meaningful.
 
-Before that threshold, the trust surface can emphasize:
+Recommended MVP display threshold:
+
+- do not foreground a public star rating until the tutor has at least `3` published reviews
+
+Before that threshold, the trust surface should emphasize:
 
 - verified proof
 - lesson volume
@@ -387,11 +397,24 @@ The reliability layer may include:
 
 Not every reliability issue should be treated the same.
 
-Recommended conceptual split:
+Recommended MVP internal posture:
 
-- mild reliability drag
-- meaningful caution
-- hard operational problem
+- maintain a rolling `180-day` internal reliability score starting from `100`
+- confirmed tutor no-show: `-35`
+- tutor cancellation under `2` hours before lesson start: `-25`
+- tutor cancellation at or above `2` hours before lesson start: `-10`
+- request timeout or non-response that causes auto-cancel: `-12`
+- confirmed tutor-fault wrong or invalid meeting link that prevents the lesson: `-15`
+- student no-show: `0` tutor penalty
+- disputed incidents: `0` until resolved
+- clean completed lessons may recover `+1` each, capped at `+10` recovery points per rolling window
+
+Recommended score bands:
+
+- `90-100`: healthy
+- `75-89`: watch
+- `60-74`: caution and visible ranking drag
+- `<60`: hidden from new public matching until reviewed
 
 ## 12.4 Public visibility rule
 
@@ -419,7 +442,8 @@ These should generally lower internal trust quality or ranking contribution:
 These should generally affect eligibility or public visibility, not just ranking weight:
 
 - suspension
-- severe or repeated no-show behavior
+- `2` confirmed tutor no-shows in a rolling `60-day` window
+- `3` tutor-fault cancellations or no-shows in a rolling `30-day` window
 - unresolved trust-and-safety state
 - hidden or unpublished public listing state
 

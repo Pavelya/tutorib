@@ -70,6 +70,10 @@ A dedicated implementation backlog index now exists for structuring the actual t
 
 - `docs/planning/implementation-backlog-index-v1.md`
 
+A dedicated end-to-end flow and policy audit now exists for checking whether the current docs actually cover the real operating journeys and failure cases:
+
+- `docs/planning/end-to-end-use-case-gap-audit-v1.md`
+
 The active Phase 1 execution pack now also exists:
 
 - `docs/planning/phase1-mvp-task-pack-v1.md`

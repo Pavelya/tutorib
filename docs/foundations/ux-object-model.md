@@ -327,6 +327,7 @@ The lesson is the single most important shared object in the ecosystem.
 - timezone context
 - status
 - meeting method
+- payment state
 - price / trial state
 - message / request context
 
@@ -368,12 +369,12 @@ The actions vary by role; the underlying object does not.
 
 ### Purpose
 
-The conversation is the continuity layer between matching, booking, preparation, and follow-up.
+The conversation is the continuity layer between one student and one tutor across matching, booking, preparation, lessons, and follow-up.
 
 ### Core attributes
 
 - participants
-- lesson context
+- active booking or lesson context when relevant
 - unread state
 - mute state
 - last activity
@@ -397,6 +398,8 @@ The conversation is the continuity layer between matching, booking, preparation,
 ### Design rule
 
 One conversation UI should serve both roles, with only role-specific framing and quick actions.
+
+In MVP, use one persistent conversation per student-tutor relationship rather than creating a new thread for every lesson.
 
 ## 3.11 Review
 

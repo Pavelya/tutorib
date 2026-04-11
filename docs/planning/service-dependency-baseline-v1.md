@@ -178,17 +178,19 @@ Implication for Tutor IB:
 - PostHog remains the approved product-telemetry provider
 - Vercel Web Analytics should stay focused on anonymous route traffic and not become the only product analytics system
 
-## 5.7 Stripe hosted Checkout still fits the MVP
+## 5.7 Stripe hosted Checkout with manual capture still fits the MVP
 
 Stripe still documents:
 
 - `stripe` as the official server-side Node SDK
 - Checkout Sessions as the low-complexity path to a Stripe-hosted payment page
 - webhook signature verification using the `Stripe-Signature` header and `constructEvent()`
+- Connect Express as a low-integration hosted onboarding path for platforms that control payouts
 
 Implication for Tutor IB:
 
 - billing should start with hosted Checkout, not custom Elements flows
+- booking can authorize once and capture on tutor acceptance if the request-expiry rule stays safely inside Stripe's authorization window
 - the server-side `stripe` SDK is enough at first
 - client-side Stripe packages are not required until a later payment UI genuinely needs them
 
@@ -216,7 +218,7 @@ Implication for Tutor IB:
 | Background jobs | internal durable jobs in Postgres | no separate workflow platform package by default | implement when async tasks land | use app-owned job tables and domain events |
 | Short post-response work | Next.js post-response hook | no extra package | use when relevant | safe only for short non-critical follow-up work |
 | Scheduled sweeps and reminders | `Vercel Cron` invoking app routes | no extra package | use only when schedule precision matches plan limits | do not design precise reminder logic around Hobby cron restrictions |
-| Payments | `Stripe` | `stripe` | install only when payment tasks land | hosted Checkout first, Connect later when payouts actually enter scope |
+| Payments | `Stripe` | `stripe` | install only when payment tasks land | hosted Checkout for request-time authorization, capture on tutor acceptance, `Stripe Connect Express` for tutor payout onboarding when tutor finance flow enters scope |
 
 ## 7. Explicitly Deferred Or Rejected By Default
 

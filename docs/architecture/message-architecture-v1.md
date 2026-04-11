@@ -44,8 +44,8 @@ Tutor IB messaging is not generic community chat.
 It is tightly connected to:
 
 - a specific student and a specific tutor
-- lesson context
 - booking and rescheduling context
+- active lesson context when relevant
 - safety actions like block and report
 - unread and follow-up state
 - future lesson continuity
@@ -71,7 +71,8 @@ In other words:
 The approved product direction implies the messaging system should support:
 
 - one-to-one tutor-student conversations
-- lesson-linked context
+- student-initiated first contact before booking
+- one persistent tutor-student thread that survives across lessons
 - conversation list
 - unread state
 - message reply
@@ -85,6 +86,15 @@ It should also leave room for:
 - typing indicators
 - online presence
 - future file attachments
+
+## 4.1 Conversation-initiation rule
+
+For MVP:
+
+- the student may start the first conversation
+- the first conversation can begin from tutor profile, match results, compare, or booking entry points
+- tutors may respond inside an existing student-linked conversation
+- tutors should not be able to send broad cold-outreach messages to students
 
 ## 5. Options Considered
 
@@ -102,7 +112,7 @@ Use:
 
 - one shared product model
 - one identity system
-- one lesson context model
+- one tutor-student relationship thread
 - strong control over block and report behavior
 - no second source of truth for critical tutoring relationships
 - lower long-term product coupling
@@ -170,6 +180,7 @@ This is the best fit for the approved product and the current "minimal tools" pr
 The recommended MVP message scope is:
 
 - one-to-one conversations only
+- student-initiated first contact
 - text messages only
 - conversation list
 - unread state
@@ -248,8 +259,9 @@ The core messaging objects should be:
 ## 9.2 Suggested conversation rules
 
 - a conversation belongs to exactly one student and one tutor in phase 1
-- a conversation may optionally reference a `Lesson`
-- a conversation may optionally reference a `LearningNeed` or booking context
+- a conversation should be relationship-scoped, not recreated per lesson
+- a conversation may carry entry-point provenance such as a `LearningNeed` or booking origin
+- lesson surfaces may deep-link into the same conversation without making the thread lesson-owned
 - a conversation should have one canonical status model
 
 ### Suggested statuses

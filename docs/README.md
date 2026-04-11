@@ -67,9 +67,10 @@ If you want the shortest path through the pack:
 39. `docs/planning/implementation-baseline-v1.md`
 40. `docs/planning/service-dependency-baseline-v1.md`
 41. `docs/planning/implementation-backlog-index-v1.md`
-42. `docs/planning/phase1-mvp-task-pack-v1.md`
-43. `docs/planning/phase1-5-task-pack-v1.md`
-44. `docs/planning/phase2-task-pack-v1.md`
+42. `docs/planning/end-to-end-use-case-gap-audit-v1.md`
+43. `docs/planning/phase1-mvp-task-pack-v1.md`
+44. `docs/planning/phase1-5-task-pack-v1.md`
+45. `docs/planning/phase2-task-pack-v1.md`
 
 ## By Topic
 
@@ -177,6 +178,7 @@ If you want the shortest path through the pack:
 - `docs/planning/implementation-baseline-v1.md`
 - `docs/planning/service-dependency-baseline-v1.md`
 - `docs/planning/implementation-backlog-index-v1.md`
+- `docs/planning/end-to-end-use-case-gap-audit-v1.md`
 - `docs/planning/phase1-mvp-task-pack-v1.md`
 - `docs/planning/phase1-5-task-pack-v1.md`
 - `docs/planning/phase2-task-pack-v1.md`

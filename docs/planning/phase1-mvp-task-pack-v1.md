@@ -481,7 +481,7 @@ Create the tutor data foundations needed for the public tutor profile, trust pro
 
 **Goal**
 
-Create the shared data foundations for student learning needs, matching results, lesson/booking lifecycle, and schedule-linked continuity.
+Create the shared data foundations for student learning needs, matching results, lesson/booking lifecycle, booking-linked payment authorization and capture, and schedule-linked continuity.
 
 **Required source docs**
 
@@ -495,6 +495,7 @@ Create the shared data foundations for student learning needs, matching results,
 - learning needs
 - match result or candidate representation
 - lesson and booking state tables
+- payment authorization and capture records linked to bookings
 - schedule-linked lesson snapshots
 - booking mutation idempotency boundary
 
@@ -507,6 +508,7 @@ Create the shared data foundations for student learning needs, matching results,
 
 - learning need and lesson objects follow the shared product object model
 - booking state has a clear source of truth
+- booking-linked payment state has a clear source of truth
 - lesson snapshots preserve historical meaning where needed
 
 **Verification**
@@ -776,20 +778,24 @@ Implement the results route that shows fit-based tutor matches, reuses shared ca
 
 **Goal**
 
-Implement the booking context route and the first booking request action so a student can move from evaluation into a real request with correct auth, validation, idempotency, and tutor/student context.
+Implement the booking context route and the first booking request action so a student can move from evaluation into a real request with correct auth, validation, idempotency, tutor/student context, and booking-time payment authorization.
 
 **Required source docs**
 
 - `docs/architecture/meeting-and-calendar-architecture-v1.md`
+- `docs/architecture/architecture-discussion-v1.md`
 - `docs/data/api-and-server-action-contracts-v1.md`
 - `docs/data/integration-idempotency-model-v1.md`
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
 
 **Scope**
 
 - `/book/[context]`
 - booking context read DTO
 - booking request Server Action
+- request-time payment authorization via Stripe Checkout
+- acceptance-time capture handoff boundary
 - cache and redirect behavior after booking request
 
 **Out of scope**
@@ -803,6 +809,9 @@ Implement the booking context route and the first booking request action so a st
 - booking route resolves the correct context safely
 - booking action uses the approved mutation boundary
 - unauthorized or invalid actors cannot create booking requests
+- booking request creates an authorization hold without requiring the student to monitor tutor approval manually
+- tutor acceptance can capture the existing authorization
+- tutor decline or request expiry can release the authorization cleanly
 - booking request result is minimal and route-safe
 
 **Verification**

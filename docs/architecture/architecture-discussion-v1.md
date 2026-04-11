@@ -333,11 +333,17 @@ The main path should be:
 ## 7.6 Payments
 
 - `Stripe Checkout` first
-- `Stripe Connect` when tutor payout automation becomes active scope
+- request-time payment authorization with acceptance-time capture
+- `Stripe Connect Express` when tutor payout readiness enters live scope
 
 ### Why
 
-This keeps student payment capture simple in the first build while avoiding unnecessary marketplace payout complexity too early.
+This keeps student payment capture simple in the first build while avoiding custom payment UI and still supports the Tutor IB booking rule:
+
+- student places the booking request and payment hold once
+- tutor accepts or declines inside a short response window
+- acceptance captures the payment
+- decline or timeout releases the authorization
 
 The architecture should still reserve clean module boundaries for:
 
@@ -897,16 +903,18 @@ A dedicated companion now exists for this area:
 
 ### Phase 1
 
-- student payment capture
-- booking-payment linkage
+- booking-linked payment authorization at request submission
+- capture on tutor acceptance
+- authorization release on decline or request expiry
+- refund handling tied to cancellation and no-show policy
 - payment status in lesson flow
+- minimal tutor payout-readiness support for live payout operations
 
 ### Phase 2
 
-- tutor payout onboarding
-- payout account state
-- payout tracking
-- earnings visibility
+- richer finance dashboard
+- payout reconciliation tooling
+- multi-currency or tax-surface expansion if ever needed
 
 ## 17.2 Why this split is recommended
 
@@ -926,8 +934,11 @@ Use Stripe-hosted flows where possible in the first cut.
 
 That applies especially to:
 
-- Checkout for student payments
-- hosted or embedded onboarding later for connected tutor accounts
+- Checkout for booking-time payment authorization
+- capture on tutor acceptance while the authorization is still valid
+- hosted onboarding for connected tutor accounts
+
+The capture model only works safely if the tutor-decision window stays well inside Stripe's authorization validity window.
 
 Avoid custom payout onboarding UI unless the product has a very specific reason to own that complexity.
 
