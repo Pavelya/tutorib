@@ -1,4 +1,4 @@
-# IB Camp Architecture Discussion v1
+# Tutor IB Architecture Discussion v1
 
 **Date:** 2026-04-07
 **Status:** Standalone architecture recommendation for the approved design pack
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document translates the approved IB Camp UX system into a concrete architecture recommendation.
+This document translates the approved Tutor IB UX system into a concrete architecture recommendation.
 
 It is intentionally written to be:
 
@@ -24,7 +24,7 @@ The approved UX work establishes several non-negotiables that architecture must 
 
 ### 2.1 One ecosystem, not two products
 
-IB Camp is one product with two operating modes:
+Tutor IB is one product with two operating modes:
 
 - student guidance mode
 - tutor operating mode
@@ -1095,7 +1095,7 @@ The next architecture-phase deliverables should be:
 
 ## 25. Final Recommendation
 
-IB Camp should start as a **shared-object modular monolith**:
+Tutor IB should start as a **shared-object modular monolith**:
 
 - one Next.js application
 - one cohesive UX shell

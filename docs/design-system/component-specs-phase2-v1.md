@@ -1,4 +1,4 @@
-# IB Camp Shared Component Specs Phase 2 v1
+# Tutor IB Shared Component Specs Phase 2 v1
 
 **Date:** 2026-04-07
 **Status:** Standalone component-spec document
@@ -8,7 +8,7 @@
 
 This document is intentionally self-contained.
 
-It is the second wave of reusable component specs for IB Camp and is written to stand on its own without relying on comparison against earlier iterations.
+It is the second wave of reusable component specs for Tutor IB and is written to stand on its own without requiring context from earlier drafts.
 
 It should still make sense if copied on its own, though it is best paired with:
 
@@ -17,7 +17,7 @@ It should still make sense if copied on its own, though it is best paired with:
 
 ## 2. Product Assumptions
 
-IB Camp is:
+Tutor IB is:
 
 - an IB-native tutoring product
 - matching-first, not marketplace-first

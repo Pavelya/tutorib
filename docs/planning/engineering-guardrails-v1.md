@@ -1,4 +1,4 @@
-# IB Camp Engineering Guardrails v1
+# Tutor IB Engineering Guardrails v1
 
 **Date:** 2026-04-11
 **Status:** Canonical engineering policy layer for AI-agent and human implementation work
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has:
+Tutor IB now has:
 
 - product and UX definition
 - architecture and data decisions
@@ -58,7 +58,7 @@ This document only defines the engineering guardrails that implementation must s
 
 ## 3. Core Principle
 
-IB Camp implementation should optimize for:
+Tutor IB implementation should optimize for:
 
 - small coherent changes
 - stable source-of-truth boundaries
@@ -217,7 +217,7 @@ Agents must not:
 
 ## 11. Reuse And Component Rules
 
-IB Camp should grow through shared primitives, variants, wrappers, and domain-owned components.
+Tutor IB should grow through shared primitives, variants, wrappers, and domain-owned components.
 
 Agents must:
 

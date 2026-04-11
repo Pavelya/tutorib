@@ -1,4 +1,4 @@
-# IB Camp Final Reusable Design System Spec v1
+# Tutor IB Final Reusable Design System Spec v1
 
 **Date:** 2026-04-07
 **Status:** Standalone design-system extraction
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document is the extracted reusable design system for the approved IB Camp design direction.
+This document is the extracted reusable design system for the approved Tutor IB design direction.
 
 It consolidates what is now stable enough to standardize after:
 
@@ -17,7 +17,7 @@ It consolidates what is now stable enough to standardize after:
 - hi-fi desktop screens
 - hi-fi responsive and mobile screens
 
-It is intentionally self-contained and does not depend on comparison against earlier iterations.
+It is intentionally self-contained and does not depend on earlier drafts for interpretation.
 
 This document should be strong enough to act as the starting point for:
 
@@ -28,7 +28,7 @@ This document should be strong enough to act as the starting point for:
 
 ## 2. Product And Experience Model
 
-IB Camp is:
+Tutor IB is:
 
 - an IB-native tutoring product
 - matching-first, not marketplace-first

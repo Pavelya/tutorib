@@ -1,4 +1,4 @@
-# IB Camp Implementation Readiness Review Guide v1
+# Tutor IB Implementation Readiness Review Guide v1
 
 **Date:** 2026-04-07
 **Status:** Review guide for the implementation-readiness pack

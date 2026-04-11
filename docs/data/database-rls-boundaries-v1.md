@@ -1,4 +1,4 @@
-# IB Camp Database RLS Boundaries v1
+# Tutor IB Database RLS Boundaries v1
 
 **Date:** 2026-04-08
 **Status:** Standalone boundary document for Row Level Security coverage, exposed-schema posture, and table-family policy strategy
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines where Row Level Security must apply in IB Camp and where server-only access is the safer boundary.
+This document defines where Row Level Security must apply in Tutor IB and where server-only access is the safer boundary.
 
 It exists now because the approved architecture already assumes:
 
@@ -55,7 +55,7 @@ Those should come later in implementation-facing artifacts.
 
 ## 4. Core Recommendation
 
-IB Camp should use a three-boundary model:
+Tutor IB should use a three-boundary model:
 
 1. exposed data surfaces in the `public` schema with RLS enabled
 2. explicit public-safe projections in the exposed schema with RLS and visibility rules
@@ -879,7 +879,7 @@ The implementation handoff path is:
 
 ## 19. Final Recommendation
 
-IB Camp should use RLS as a deliberate exposed-surface boundary, not as an afterthought.
+Tutor IB should use RLS as a deliberate exposed-surface boundary, not as an afterthought.
 
 The clean model is:
 

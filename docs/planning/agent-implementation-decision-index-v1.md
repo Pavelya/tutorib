@@ -1,4 +1,4 @@
-# IB Camp Agent Implementation Decision Index v1
+# Tutor IB Agent Implementation Decision Index v1
 
 **Date:** 2026-04-10
 **Status:** Agent-facing implementation index for the approved UX, architecture, data, SEO, and planning docs
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has a broad standalone documentation pack covering:
+Tutor IB now has a broad standalone documentation pack covering:
 
 - UI/UX research and product positioning
 - shared UX object model and IA
@@ -569,7 +569,7 @@ Do not update docs for:
 Future agents should not:
 
 - treat this index as the only doc to read
-- implement from the old repo or old Vercel app as the source of truth
+- implement from non-canonical external materials as the source of truth
 - duplicate student and tutor systems
 - create separate UI component families by role
 - create an internal API layer by default
@@ -598,7 +598,7 @@ The canonical phase task-pack set now exists.
 
 ## 13. Final Recommendation
 
-IB Camp has enough architecture and product material to begin implementation planning.
+Tutor IB has enough architecture and product material to begin implementation planning.
 
 The next operational move is:
 

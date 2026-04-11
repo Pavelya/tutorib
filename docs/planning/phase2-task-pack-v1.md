@@ -1,4 +1,4 @@
-# IB Camp Phase 2 Task Pack v1
+# Tutor IB Phase 2 Task Pack v1
 
 **Date:** 2026-04-10
 **Status:** Broad but execution-usable Phase 2 task pack for future AI agents
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has:
+Tutor IB now has:
 
 - an active Phase 1 MVP execution pack
 - a bounded Phase 1.5 pack
@@ -478,7 +478,7 @@ Implement post-lesson reporting and continuity surfaces so lessons build visible
 
 **Goal**
 
-Add the first richer messaging behaviors that materially improve conversation feel without turning IB Camp into a generic chat product.
+Add the first richer messaging behaviors that materially improve conversation feel without turning Tutor IB into a generic chat product.
 
 **Required source docs**
 
@@ -667,7 +667,7 @@ After this Phase 2 pack:
 
 ## 14. Final Recommendation
 
-IB Camp should treat this pack as the broad expansion map for the first post-MVP platform phase.
+Tutor IB should treat this pack as the broad expansion map for the first post-MVP platform phase.
 
 The operating model is:
 

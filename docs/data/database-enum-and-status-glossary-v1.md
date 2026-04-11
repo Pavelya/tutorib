@@ -1,4 +1,4 @@
-# IB Camp Database Enum And Status Glossary v1
+# Tutor IB Database Enum And Status Glossary v1
 
 **Date:** 2026-04-08
 **Status:** Standalone canonical glossary for database statuses, controlled vocabularies, and enum-eligibility rules
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines the canonical meanings of database status and state values in IB Camp.
+This document defines the canonical meanings of database status and state values in Tutor IB.
 
 It exists now because the approved schema and architecture already depend on many controlled values:
 
@@ -55,7 +55,7 @@ It does not define:
 
 ## 4. Core Recommendation
 
-IB Camp should use one canonical status glossary and keep it versioned as a first-class data artifact.
+Tutor IB should use one canonical status glossary and keep it versioned as a first-class data artifact.
 
 The practical rule is:
 
@@ -921,7 +921,7 @@ The implementation handoff path is:
 
 ## 21. Final Recommendation
 
-IB Camp should treat status language as part of the data architecture, not as incidental implementation detail.
+Tutor IB should treat status language as part of the data architecture, not as incidental implementation detail.
 
 One glossary, used consistently, will make:
 

@@ -1,4 +1,4 @@
-# IB Camp Testing And Release Architecture v1
+# Tutor IB Testing And Release Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for testing strategy, environments, CI, preview verification, production release flow, migrations, and rollback posture
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should be tested and released safely.
+This document defines how Tutor IB should be tested and released safely.
 
 It exists now because the approved architecture already implies:
 
@@ -40,7 +40,7 @@ It defines the operational build-and-ship layer that those docs depend on.
 
 ## 3. Core Recommendation
 
-IB Camp should use a **preview-first, gate-driven, rollback-aware release model** with a deliberately small testing stack.
+Tutor IB should use a **preview-first, gate-driven, rollback-aware release model** with a deliberately small testing stack.
 
 The practical rule is:
 
@@ -568,7 +568,7 @@ The architecture should lock the following decisions now:
 
 ## 21. Final Recommendation
 
-IB Camp should use a preview-first release system with a small, explicit testing stack and rollback-aware migration discipline.
+Tutor IB should use a preview-first release system with a small, explicit testing stack and rollback-aware migration discipline.
 
 The recommended posture is:
 

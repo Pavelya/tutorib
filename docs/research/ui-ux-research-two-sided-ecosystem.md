@@ -1,4 +1,4 @@
-# IB Camp Two-Sided UI/UX Ecosystem Research
+# Tutor IB Two-Sided UI/UX Ecosystem Research
 
 **Date:** 2026-04-07
 **Status:** Research and recommendation brief
@@ -6,7 +6,7 @@
 
 ## 1. Core Recommendation
 
-IB Camp should be designed as **one product ecosystem with two operating modes**, not as two separate UI worlds.
+Tutor IB should be designed as **one product ecosystem with two operating modes**, not as two separate UI worlds.
 
 That means:
 
@@ -27,7 +27,7 @@ Two-sided platforms often drift into this failure mode:
 - the visual rhythm, navigation logic, and component behavior change completely
 - users who switch roles feel like they entered another product
 
-That is exactly what IB Camp should avoid.
+That is exactly what Tutor IB should avoid.
 
 This matters even more because:
 
@@ -36,9 +36,9 @@ This matters even more because:
 - tutors are part of the brand experience, not just operators behind it
 - reusable components reduce both design drift and implementation cost
 
-## 3. Current Local Product State
+## 3. Desired Shared Product Scope
 
-The repo already contains the skeleton of a meaningful two-sided product:
+Tutor IB should support a meaningful two-sided product scope that includes:
 
 - student lessons
 - student saved tutors
@@ -53,30 +53,20 @@ The repo already contains the skeleton of a meaningful two-sided product:
 - tutor profile editing
 - tutor certificates
 
-That is a strong starting point.
+That is enough scope to justify a shared ecosystem rather than separate role-specific products.
 
-### Important positive signal from the current codebase
+## 4. Shared Product Intent
 
-Some shared UX logic already exists:
-
-- tutor lessons reuse the student `LessonsClient`
-- tutor and student chat both reuse the same `ChatView`
-- tutor onboarding and tutor schedule editing both reuse the same `SchedulePicker`
-
-This is exactly the right architectural and UX instinct. It should be extended into the new design system instead of abandoned.
-
-## 4. Internal Product Intent
-
-The BRD also already wants this direction:
+The product direction should explicitly support:
 
 - shared components across roles
 - one icon system
 - one mobile navigation logic
 - one account-management approach
 
-What needs to change is not the desire for shared components, but the **UI thesis** behind them.
+What matters is not only the desire for shared components, but the **UI thesis** behind them.
 
-Right now, the shared foundation is still marketplace-first and startup-generic. The new ecosystem should be matching-first and academically specific.
+The shared foundation should be matching-first and academically specific.
 
 ## 5. External Research
 
@@ -101,7 +91,7 @@ This is operationally understandable, but from a UX perspective it is a warning 
 - settings splits
 - mental-model fragmentation
 
-IB Camp should avoid this model.
+Tutor IB should avoid this model.
 
 ### 6.2 Tutor dashboards should be a business snapshot, not an admin maze
 
@@ -159,7 +149,7 @@ Common pattern:
 - schedule and pricing later
 - review/approval checkpoint before full activation
 
-That pattern fits IB Camp well.
+That pattern fits Tutor IB well.
 
 ### 6.5 Availability UX must go beyond a weekly grid
 
@@ -177,7 +167,7 @@ Important capabilities repeatedly shown in their documentation:
 - external calendar conflict handling
 - mutual availability views
 
-For IB Camp, this means the tutor schedule UX should not stop at “pick your weekly slots.”
+For Tutor IB, this means the tutor schedule UX should not stop at “pick your weekly slots.”
 
 ### 6.6 Lesson operations are more than calendar events
 
@@ -185,7 +175,7 @@ TutorCruncher’s lesson model treats lessons as operational objects with states
 
 That is the right direction.
 
-For IB Camp, lessons should be a central shared object with:
+For Tutor IB, lessons should be a central shared object with:
 
 - request state
 - acceptance state
@@ -201,7 +191,7 @@ For IB Camp, lessons should be a central shared object with:
 
 TutorCruncher emphasizes lesson reports and progress tracking for students and clients.
 
-This is especially relevant for IB Camp because the service promise is academic improvement, not generic time-booking.
+This is especially relevant for Tutor IB because the service promise is academic improvement, not generic time-booking.
 
 Even if detailed progress tools are later-phase, the UX should be designed with that future in mind now.
 
@@ -322,7 +312,7 @@ Tutor tone:
 - capable
 - professional
 
-Both should still sound like IB Camp.
+Both should still sound like Tutor IB.
 
 ## 9. UX Architecture Recommendation
 
@@ -363,7 +353,7 @@ These should feel nearly identical across roles:
 
 ## 10.1 Tutor acquisition and application
 
-The current product has a `become-a-tutor` flow, which is right, but the redesign should sharpen the journey.
+Tutor IB should include a `become-a-tutor` flow, and the journey should be sharp, staged, and confidence-building.
 
 Recommended stages:
 
@@ -396,7 +386,7 @@ Recommended stages:
 - Credentials and links
 - Final review
 
-### Important addition for IB Camp
+### Important addition for Tutor IB
 
 Do not ask only “which subject do you teach?”
 
@@ -611,7 +601,7 @@ Recommended combined model:
 
 Preply’s tutor standards policy is useful here: operational behavior and reliability affect discoverability.
 
-IB Camp should eventually surface a tutor-quality panel including:
+Tutor IB should eventually surface a tutor-quality panel including:
 
 - response time
 - decline rate
@@ -720,7 +710,7 @@ Tutor pages can be denser, but they should still feel:
 - calm
 - academic
 - trustworthy
-- distinctly IB Camp
+- distinctly Tutor IB
 
 ## 13. Recommended Product Rules
 

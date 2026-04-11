@@ -1,4 +1,4 @@
-# IB Camp Background Jobs And Notifications Architecture v1
+# Tutor IB Background Jobs And Notifications Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone async-execution and notifications architecture for the shared application stack
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should handle work that should not always happen inside the original request-response cycle.
+This document defines how Tutor IB should handle work that should not always happen inside the original request-response cycle.
 
 It exists now because the approved product already implies the need for:
 
@@ -48,7 +48,7 @@ Those can come later as implementation or operations artifacts.
 
 ## 3. Core Recommendation
 
-IB Camp should use one internal asynchronous-work architecture built around:
+Tutor IB should use one internal asynchronous-work architecture built around:
 
 - domain-owned trigger events
 - explicit notification objects
@@ -98,7 +98,7 @@ The background-jobs and notifications architecture should:
 
 Not all work belongs in the same execution lane.
 
-IB Camp should distinguish between five lanes.
+Tutor IB should distinguish between five lanes.
 
 ## 6.1 Lane A: synchronous domain work
 
@@ -180,7 +180,7 @@ Rule:
 
 ## 7.1 Domain events are internal contracts
 
-IB Camp should use explicit domain events to describe that something meaningful happened in the product.
+Tutor IB should use explicit domain events to describe that something meaningful happened in the product.
 
 Examples:
 
@@ -434,7 +434,7 @@ This keeps the architecture:
 
 ## 11.3 Why not start with a separate workflow platform
 
-IB Camp does not need a second orchestration platform on day one for:
+Tutor IB does not need a second orchestration platform on day one for:
 
 - simple reminders
 - notification sends
@@ -583,7 +583,7 @@ The architecture should lock the following decisions now:
 
 ## 17. Final Recommendation
 
-IB Camp should implement notifications and background work as one explicit internal platform layer inside the application, not as scattered side effects.
+Tutor IB should implement notifications and background work as one explicit internal platform layer inside the application, not as scattered side effects.
 
 The recommended MVP architecture is:
 

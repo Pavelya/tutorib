@@ -1,4 +1,4 @@
-# IB Camp Hi-Fi Key Screen Review Guide v1
+# Tutor IB Hi-Fi Key Screen Review Guide v1
 
 **Date:** 2026-04-07
 **Status:** Review guide for the first hi-fi comp deck

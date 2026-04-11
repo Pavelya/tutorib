@@ -1,4 +1,4 @@
-# IB Camp Hi-Fi Direction Boards v1
+# Tutor IB Hi-Fi Direction Boards v1
 
 **Date:** 2026-04-07
 **Status:** Standalone visual-direction document
@@ -8,7 +8,7 @@
 
 This document translates the product strategy and design foundations into concrete visual directions for hi-fi design.
 
-It is intentionally self-contained and does not rely on comparison against earlier iterations.
+It is intentionally self-contained and does not rely on earlier drafts for context.
 
 Its job is to prevent the product from drifting back into:
 
@@ -19,7 +19,7 @@ Its job is to prevent the product from drifting back into:
 
 ## 2. Brand Stance
 
-IB Camp should feel like:
+Tutor IB should feel like:
 
 - serious but not severe
 - academic but not institutional

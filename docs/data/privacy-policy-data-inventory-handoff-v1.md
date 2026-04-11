@@ -1,4 +1,4 @@
-# IB Camp Privacy Policy Data Inventory Handoff v1
+# Tutor IB Privacy Policy Data Inventory Handoff v1
 
 **Date:** 2026-04-10
 **Status:** Standalone data inventory handoff for final privacy policy, cookie notice, subprocessor review, and implementation-agent privacy checks
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has:
+Tutor IB now has:
 
 - a privacy and retention architecture
 - a compliance posture
@@ -18,7 +18,7 @@ IB Camp now has:
 
 What was still missing was the handoff document for one policy-facing question:
 
-**What concrete personal data does IB Camp expect to collect, where does it live, why is it used, who may receive it, and what must a final privacy policy disclose?**
+**What concrete personal data does Tutor IB expect to collect, where does it live, why is it used, who may receive it, and what must a final privacy policy disclose?**
 
 Without this handoff, implementation can drift into:
 
@@ -89,7 +89,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should maintain a **living data inventory that feeds the privacy policy, cookie notice, data subject request workflow, and implementation review process**.
+Tutor IB should maintain a **living data inventory that feeds the privacy policy, cookie notice, data subject request workflow, and implementation review process**.
 
 The practical rule is:
 
@@ -101,13 +101,13 @@ The practical rule is:
 6. every retention statement must trace back to the field map until final legal durations are approved
 7. agents must update this inventory when introducing new personal-data categories or recipients
 
-This gives IB Camp a privacy-policy handoff without hardcoding legal text too early.
+This gives Tutor IB a privacy-policy handoff without hardcoding legal text too early.
 
 ## 5. Policy Writer Output Checklist
 
 A final privacy policy or privacy notice should be able to answer:
 
-- who operates IB Camp and how to contact them
+- who operates Tutor IB and how to contact them
 - what personal data is collected
 - where the data comes from
 - why the data is used
@@ -119,7 +119,7 @@ A final privacy policy or privacy notice should be able to answer:
 - how users can access, correct, delete, restrict, object, or export data where applicable
 - how minors and guardians are handled
 - how cookies, analytics, and embedded third-party content are handled
-- how payments are handled without IB Camp storing raw card data
+- how payments are handled without Tutor IB storing raw card data
 - how policy changes are communicated
 - how users can complain or contact a supervisory authority where applicable
 
@@ -368,7 +368,7 @@ Policy notes:
 
 - disclose that approved tutor profile information is public
 - disclose that public pages may appear in search engines and AI/search snippets
-- disclose that profile removal can remove IB Camp exposure, but search engines may retain cached/indexed copies for a time
+- disclose that profile removal can remove Tutor IB exposure, but search engines may retain cached/indexed copies for a time
 - disclose third-party video provider behavior if embedded video players are used
 
 Implementation notes:
@@ -415,7 +415,7 @@ Provider recipients:
 Policy notes:
 
 - distinguish public tutor profile data from private application/review data
-- disclose that some private information may be reviewed by IB Camp staff or moderators
+- disclose that some private information may be reviewed by Tutor IB staff or moderators
 
 Implementation notes:
 
@@ -664,7 +664,7 @@ Provider recipients:
 Policy notes:
 
 - disclose Stripe as payment provider when payments are introduced
-- disclose that IB Camp should not store raw card numbers
+- disclose that Tutor IB should not store raw card numbers
 - disclose that Stripe may act under its own privacy terms for certain processing
 - disclose financial record retention may differ from normal account deletion
 
@@ -1075,7 +1075,7 @@ Policy notes:
 
 ## 14. Minors And Guardian Handoff
 
-IB Camp should be minor-aware.
+Tutor IB should be minor-aware.
 
 Policy-facing posture:
 
@@ -1177,7 +1177,7 @@ Agents should:
 Agents should not:
 
 - use a generic privacy policy generator as source of truth
-- copy vendor privacy language into IB Camp policy without review
+- copy vendor privacy language into Tutor IB policy without review
 - add marketing pixels or broad analytics autocapture by default
 - expose raw credential files, meeting links, message bodies, or payment details in public/client DTOs
 - treat public tutor profile deletion as complete without cache, sitemap, projection, and search deindexing review
@@ -1201,7 +1201,7 @@ That template requires each future implementation task to list:
 
 ## 20. Final Recommendation
 
-IB Camp should treat this handoff as the privacy-policy data inventory baseline.
+Tutor IB should treat this handoff as the privacy-policy data inventory baseline.
 
 The operating model is:
 

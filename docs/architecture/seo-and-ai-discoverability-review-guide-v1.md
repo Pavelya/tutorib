@@ -1,4 +1,4 @@
-# IB Camp SEO And AI Discoverability Review Guide v1
+# Tutor IB SEO And AI Discoverability Review Guide v1
 
 **Date:** 2026-04-08
 **Status:** Review companion for `seo-and-ai-discoverability-v1.md`
@@ -9,7 +9,7 @@ This guide helps review the SEO and AI-discoverability direction quickly.
 
 ## 2. Review Goal
 
-The goal is to decide whether IB Camp has the right discoverability architecture before implementation starts.
+The goal is to decide whether Tutor IB has the right discoverability architecture before implementation starts.
 
 This is not yet a keyword-plan review.
 
@@ -34,7 +34,7 @@ Start here in [seo-and-ai-discoverability-v1.md](seo-and-ai-discoverability-v1.m
 3. Is the non-indexable page policy strict enough for personalized and operational surfaces?
 4. Does the rendering guidance fit the approved Next.js architecture?
 5. Is the structured data plan conservative and trustworthy enough?
-6. Does the proposed public page inventory align with IB Camp's matching-first product model?
+6. Does the proposed public page inventory align with Tutor IB's matching-first product model?
 
 ## 5. Official Source Links
 

@@ -1,4 +1,4 @@
-# IB Camp Cross-Role Service Blueprint
+# Tutor IB Cross-Role Service Blueprint
 
 **Date:** 2026-04-07
 **Status:** Foundation document for IA and wireframes
@@ -10,7 +10,7 @@
 
 ## 1. Purpose
 
-This document maps the end-to-end IB Camp experience across student and tutor roles.
+This document maps the end-to-end Tutor IB experience across student and tutor roles.
 
 It is intentionally product- and UX-focused, not technical. The goal is to define:
 
@@ -21,7 +21,7 @@ It is intentionally product- and UX-focused, not technical. The goal is to defin
 
 ## 2. Service Principle
 
-IB Camp is one service with two operating modes:
+Tutor IB is one service with two operating modes:
 
 - Student mode: understand, decide, book, continue
 - Tutor mode: respond, prepare, teach, follow up

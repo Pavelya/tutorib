@@ -1,4 +1,4 @@
-# IB Camp Data DTO And Query Boundary Map v1
+# Tutor IB Data DTO And Query Boundary Map v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer boundary document for DTO-safe query surfaces, route-facing data shapes, server-only data access, public/private/admin DTO separation, and AI-agent-safe query ownership
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already has:
+Tutor IB already has:
 
 - a canonical schema outline
 - access-control and RLS docs
@@ -86,7 +86,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should use a **server-only, domain-owned data access layer that returns minimal, role-safe DTOs**.
+Tutor IB should use a **server-only, domain-owned data access layer that returns minimal, role-safe DTOs**.
 
 The practical rule is:
 
@@ -856,7 +856,7 @@ Blocked fields:
 
 Rule:
 
-- Stripe should remain the system of record for sensitive payment details; IB Camp DTOs expose only operational summaries.
+- Stripe should remain the system of record for sensitive payment details; Tutor IB DTOs expose only operational summaries.
 
 ## 21. Admin And Moderation DTOs
 
@@ -1241,7 +1241,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 37. Final Recommendation
 
-IB Camp should treat DTOs as a safety and product-consistency boundary, not just TypeScript convenience.
+Tutor IB should treat DTOs as a safety and product-consistency boundary, not just TypeScript convenience.
 
 The clean operating model is:
 

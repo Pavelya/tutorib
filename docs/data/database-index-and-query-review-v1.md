@@ -1,4 +1,4 @@
-# IB Camp Database Index And Query Review v1
+# Tutor IB Database Index And Query Review v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer review document for database indexes, query shape, hot-path query review, projection-backed access, query plans, and scaling thresholds
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp depends on fast query experiences:
+Tutor IB depends on fast query experiences:
 
 - public tutor discovery
 - guided matching
@@ -80,7 +80,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should use **access-pattern-driven indexing over query-friendly projections**, not broad reactive indexing over raw normalized tables.
+Tutor IB should use **access-pattern-driven indexing over query-friendly projections**, not broad reactive indexing over raw normalized tables.
 
 The practical rule is:
 
@@ -91,7 +91,7 @@ The practical rule is:
 5. validate important hot queries with query-plan review
 6. avoid adding indexes that do not map to an actual query
 
-Performance is not a later polish item for IB Camp.
+Performance is not a later polish item for Tutor IB.
 
 If a route is part of matching, search, messaging, lessons, or tutor operations, query speed is part of the product contract.
 
@@ -259,7 +259,7 @@ Use when a reviewed query genuinely needs:
 - array containment at scale
 - JSON containment where JSON is justified and not hiding relational fields
 
-For IB Camp, GIN should be deliberate, not automatic.
+For Tutor IB, GIN should be deliberate, not automatic.
 
 ## 8.3 Trigram indexes
 
@@ -577,7 +577,7 @@ Rules:
 
 ## 21. Text Search And Typo Tolerance Review
 
-IB Camp is not a generic search product in MVP.
+Tutor IB is not a generic search product in MVP.
 
 Text search should remain controlled.
 
@@ -813,7 +813,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 32. Final Recommendation
 
-IB Camp should treat database query speed as a product and data-model design constraint.
+Tutor IB should treat database query speed as a product and data-model design constraint.
 
 The clean operating model is:
 

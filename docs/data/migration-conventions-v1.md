@@ -1,4 +1,4 @@
-# IB Camp Migration Conventions v1
+# Tutor IB Migration Conventions v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer contract for schema changes, data backfills, projection changes, and RLS-safe database rollout
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already approved:
+Tutor IB already approved:
 
 - a normalized relational write model
 - explicit RLS boundaries for exposed data paths
@@ -60,7 +60,7 @@ Those can be decided later as long as they obey the rules here.
 
 ## 4. Core Recommendation
 
-IB Camp should use forward-safe, version-controlled, SQL-first database migrations with explicit separation between:
+Tutor IB should use forward-safe, version-controlled, SQL-first database migrations with explicit separation between:
 
 1. schema shape changes
 2. data backfills or repair work
@@ -160,7 +160,7 @@ This requires the strongest caution and usually a multi-step rollout.
 
 ## 7. Expand-Before-Contract Rule
 
-IB Camp should default to an expand-before-contract posture.
+Tutor IB should default to an expand-before-contract posture.
 
 That means:
 
@@ -479,7 +479,7 @@ The implementation handoff path is:
 
 ## 21. Final Recommendation
 
-IB Camp should treat migrations as a controlled product-safety surface, not just as SQL files.
+Tutor IB should treat migrations as a controlled product-safety surface, not just as SQL files.
 
 The clean operating model is:
 

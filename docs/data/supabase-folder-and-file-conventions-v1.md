@@ -1,4 +1,4 @@
-# IB Camp Supabase Folder And File Conventions v1
+# Tutor IB Supabase Folder And File Conventions v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer repository-structure contract for Supabase config, migrations, seeds, database tests, and optional Supabase-managed folders
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already approved:
+Tutor IB already approved:
 
 - SQL-first migrations
 - a maintained projection layer
@@ -60,7 +60,7 @@ Those should come later.
 
 ## 4. Core Recommendation
 
-IB Camp should use one explicit `supabase/` directory at repo root, with a small number of clearly owned subfolders.
+Tutor IB should use one explicit `supabase/` directory at repo root, with a small number of clearly owned subfolders.
 
 The main rule is:
 
@@ -196,7 +196,7 @@ If temporary scratch SQL is needed during development, it should live outside th
 
 ## 9.2 Preferred phase 1 posture
 
-Even though Supabase supports the default `supabase/seed.sql` path, IB Camp should prefer a modular seeds folder from the beginning because:
+Even though Supabase supports the default `supabase/seed.sql` path, Tutor IB should prefer a modular seeds folder from the beginning because:
 
 - the project is domain-heavy
 - different seed groups will exist for auth, tutors, availability, lessons, and trust data
@@ -353,7 +353,7 @@ The file name should help a human or agent infer:
 
 Supabase supports both migration-based and declarative schema workflows.
 
-IB Camp already chose the SQL-first migration path for MVP.
+Tutor IB already chose the SQL-first migration path for MVP.
 
 That means:
 
@@ -418,7 +418,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 20. Final Recommendation
 
-IB Camp should keep the `supabase/` workspace small, explicit, and boring:
+Tutor IB should keep the `supabase/` workspace small, explicit, and boring:
 
 - one config file
 - one migrations folder

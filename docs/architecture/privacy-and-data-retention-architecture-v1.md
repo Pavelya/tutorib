@@ -1,4 +1,4 @@
-# IB Camp Privacy And Data Retention Architecture v1
+# Tutor IB Privacy And Data Retention Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone privacy and data-lifecycle architecture for the shared application stack
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should treat personal and operational data across its lifecycle.
+This document defines how Tutor IB should treat personal and operational data across its lifecycle.
 
 It exists now because the product handles:
 
@@ -43,7 +43,7 @@ Those should become later companion artifacts.
 
 ## 3. Core Recommendation
 
-IB Camp should use a conservative privacy architecture built around:
+Tutor IB should use a conservative privacy architecture built around:
 
 - collecting the minimum useful data
 - separating public, private, and highly sensitive data clearly
@@ -368,7 +368,7 @@ The product should store references and operational billing state, not raw payme
 
 Stripe should remain the system of record for payment-method details and sensitive billing internals.
 
-IB Camp should store only the minimum needed to:
+Tutor IB should store only the minimum needed to:
 
 - link product state to Stripe objects
 - support receipts, reconciliation, and support
@@ -637,7 +637,7 @@ These can be designed later as companion topics:
 
 ## 24. Final Recommendation
 
-IB Camp should use a deliberate privacy architecture that separates:
+Tutor IB should use a deliberate privacy architecture that separates:
 
 - what is intentionally public
 - what is private product data

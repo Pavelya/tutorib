@@ -1,4 +1,4 @@
-# IB Camp Accessibility And Inclusive UX Architecture v1
+# Tutor IB Accessibility And Inclusive UX Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone accessibility and inclusive-UX architecture for public, student, tutor, and internal product surfaces
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines the accessibility and inclusive-UX architecture for IB Camp.
+This document defines the accessibility and inclusive-UX architecture for Tutor IB.
 
 It exists now because the approved product already implies:
 
@@ -50,7 +50,7 @@ Those can come later as implementation and QA companions.
 
 ## 3. Core Recommendation
 
-IB Camp should adopt **WCAG 2.2 AA as the baseline product target** with a small number of stronger internal posture rules where the product especially benefits from them.
+Tutor IB should adopt **WCAG 2.2 AA as the baseline product target** with a small number of stronger internal posture rules where the product especially benefits from them.
 
 The practical rule is:
 
@@ -100,7 +100,7 @@ The product should target `WCAG 2.2 AA` as the minimum baseline for public and a
 
 ## 6.2 House rules above the minimum
 
-In addition to the baseline, IB Camp should strongly prefer:
+In addition to the baseline, Tutor IB should strongly prefer:
 
 - clearly visible custom focus indicators
 - target sizes that are comfortable on touch devices, not merely technically passable
@@ -515,7 +515,7 @@ This architecture is meant to prevent:
 
 ## 20. Final Recommendation
 
-IB Camp should treat accessibility and inclusive UX as a first-class product architecture concern.
+Tutor IB should treat accessibility and inclusive UX as a first-class product architecture concern.
 
 The recommended posture is:
 

@@ -1,4 +1,4 @@
-# IB Camp Rating, Review, And Trust Architecture v1
+# Tutor IB Rating, Review, And Trust Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for tutor reviews, derived ratings, trust proof, and operational reliability signals
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should represent trust in a way that is credible, explainable, and safe.
+This document defines how Tutor IB should represent trust in a way that is credible, explainable, and safe.
 
 It exists now because the product already implies the need for:
 
@@ -46,7 +46,7 @@ Those can come later as companion artifacts.
 
 ## 3. Core Recommendation
 
-IB Camp should treat trust as one system made of several distinct inputs:
+Tutor IB should treat trust as one system made of several distinct inputs:
 
 - lesson-linked reviews
 - derived rating aggregates
@@ -94,7 +94,7 @@ The rating, review, and trust architecture should:
 
 ## 6. Trust System Split
 
-IB Camp should treat trust as five related but distinct layers.
+Tutor IB should treat trust as five related but distinct layers.
 
 ## 6.1 Review evidence
 
@@ -620,7 +620,7 @@ The architecture should lock the following decisions now:
 
 ## 23. Final Recommendation
 
-IB Camp should implement trust as a layered system:
+Tutor IB should implement trust as a layered system:
 
 - real lesson-linked review evidence
 - derived public rating

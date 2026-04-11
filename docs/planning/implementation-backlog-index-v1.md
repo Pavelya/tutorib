@@ -1,4 +1,4 @@
-# IB Camp Implementation Backlog Index v1
+# Tutor IB Implementation Backlog Index v1
 
 **Date:** 2026-04-10
 **Status:** Master backlog routing document for converting the approved docs pack into concrete implementation task packs
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has:
+Tutor IB now has:
 
 - product and UX research
 - shared object and IA foundations
@@ -72,7 +72,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should use a **layered backlog system**, not one flat backlog.
+Tutor IB should use a **layered backlog system**, not one flat backlog.
 
 The practical rule is:
 
@@ -463,7 +463,7 @@ Agents should not:
 
 ## 16. Final Recommendation
 
-IB Camp should treat this document as the master routing layer for implementation planning.
+Tutor IB should treat this document as the master routing layer for implementation planning.
 
 The operating model is:
 

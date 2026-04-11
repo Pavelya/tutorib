@@ -1,4 +1,4 @@
-# IB Camp SEO App Architecture v1
+# Tutor IB SEO App Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone app-layer architecture for SEO and AI discoverability
@@ -40,7 +40,7 @@ This document only defines the technical and structural architecture for how SEO
 
 ## 3. Core Recommendation
 
-IB Camp should implement SEO as a first-class route-layer system inside the shared Next.js App Router application.
+Tutor IB should implement SEO as a first-class route-layer system inside the shared Next.js App Router application.
 
 The practical rule is:
 
@@ -683,7 +683,7 @@ These decisions are mature enough to lock now:
 
 ## 18. Final Recommendation
 
-IB Camp should complete SEO architecture by making discoverability a route-layer capability of the shared Next.js app.
+Tutor IB should complete SEO architecture by making discoverability a route-layer capability of the shared Next.js app.
 
 The correct model is:
 

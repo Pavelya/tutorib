@@ -1,4 +1,4 @@
-# IB Camp Student Core Wireframes v1
+# Tutor IB Student Core Wireframes v1
 
 **Date:** 2026-04-07
 **Status:** Low-fi structural wireframes

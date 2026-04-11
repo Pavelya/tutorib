@@ -1,4 +1,4 @@
-# IB Camp Performance And Runtime Architecture v1
+# Tutor IB Performance And Runtime Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone performance and runtime architecture for route rendering, Core Web Vitals, runtime selection, caching, and asset delivery
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should stay fast in ways that matter both to users and to Google's real-world page experience metrics.
+This document defines how Tutor IB should stay fast in ways that matter both to users and to Google's real-world page experience metrics.
 
 It exists now because the approved product already implies the need for:
 
@@ -45,7 +45,7 @@ Those can come later as companion artifacts.
 
 ## 3. Core Recommendation
 
-IB Camp should use a server-first, route-class-based performance architecture built around:
+Tutor IB should use a server-first, route-class-based performance architecture built around:
 
 - strict Core Web Vitals posture for public Class A routes
 - React Server Components by default
@@ -91,7 +91,7 @@ The performance and runtime architecture should:
 
 ## 6. Route Performance Classes
 
-IB Camp should treat performance differently by route class.
+Tutor IB should treat performance differently by route class.
 
 ## 6.1 Class A public indexable routes
 
@@ -145,7 +145,7 @@ Rule:
 
 ## 7.1 Main rule
 
-IB Camp should optimize public routes for real-world page experience, not only for Lighthouse screenshots.
+Tutor IB should optimize public routes for real-world page experience, not only for Lighthouse screenshots.
 
 ## 7.2 Core Web Vitals targets
 
@@ -505,7 +505,7 @@ The architecture should lock the following decisions now:
 
 ## 22. Final Recommendation
 
-IB Camp should use a server-first runtime and performance architecture that is strict where Google and first impressions care most, and pragmatic where authenticated workflows need freshness and operational depth.
+Tutor IB should use a server-first runtime and performance architecture that is strict where Google and first impressions care most, and pragmatic where authenticated workflows need freshness and operational depth.
 
 The recommended MVP is:
 

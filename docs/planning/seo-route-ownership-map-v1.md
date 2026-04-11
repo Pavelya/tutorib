@@ -1,4 +1,4 @@
-# IB Camp SEO Route Ownership Map v1
+# Tutor IB SEO Route Ownership Map v1
 
 **Date:** 2026-04-08
 **Status:** Standalone planning map for public-route SEO and AI discoverability ownership
@@ -963,7 +963,7 @@ Do not:
 
 ## 10. Final Recommendation
 
-IB Camp should manage discoverability through route-family ownership, not through scattered page-by-page improvisation.
+Tutor IB should manage discoverability through route-family ownership, not through scattered page-by-page improvisation.
 
 The practical rule is:
 

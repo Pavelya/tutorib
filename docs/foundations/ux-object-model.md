@@ -1,4 +1,4 @@
-# IB Camp Canonical UX Object Model
+# Tutor IB Canonical UX Object Model
 
 **Date:** 2026-04-07
 **Status:** Foundation document for IA, wireframes, and component planning
@@ -9,7 +9,7 @@
 
 ## 1. Purpose
 
-This document defines the canonical product objects that should drive the IB Camp UX.
+This document defines the canonical product objects that should drive the Tutor IB UX.
 
 The main rule is simple:
 

@@ -1,4 +1,4 @@
-# IB Camp SEO Implementation Foundation v1
+# Tutor IB SEO Implementation Foundation v1
 
 **Date:** 2026-04-08
 **Status:** Standalone planning foundation for future SEO and AI discoverability tasks
@@ -39,7 +39,7 @@ This document only defines:
 
 ## 3. Core Recommendation
 
-IB Camp should treat SEO and AI discoverability as a shared implementation contract for public routes, not as a separate product stream.
+Tutor IB should treat SEO and AI discoverability as a shared implementation contract for public routes, not as a separate product stream.
 
 The practical rule is:
 
@@ -291,7 +291,7 @@ Each task should define:
 
 AI discoverability should not become its own speculative task stream.
 
-For IB Camp, AI discoverability is satisfied when a public page:
+For Tutor IB, AI discoverability is satisfied when a public page:
 
 - is crawlable and indexable where appropriate
 - renders meaningful content on the server
@@ -419,7 +419,7 @@ The public-route SEO acceptance checklist now exists and should be used as the s
 
 ## 18. Final Recommendation
 
-IB Camp should not treat SEO and AI discoverability as a separate platform inside the product.
+Tutor IB should not treat SEO and AI discoverability as a separate platform inside the product.
 
 The right approach is:
 

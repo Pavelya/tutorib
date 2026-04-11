@@ -1,4 +1,4 @@
-# IB Camp Phase 1 Class A Route SEO Task Pack v1
+# Tutor IB Phase 1 Class A Route SEO Task Pack v1
 
 **Date:** 2026-04-08
 **Status:** Standalone implementation-facing route task pack for phase 1 Class A public routes
@@ -140,7 +140,7 @@ Checklist attachment:
 Done when:
 
 - the route passes the full shared checklist
-- the homepage clearly distinguishes IB Camp from a generic tutor marketplace
+- the homepage clearly distinguishes Tutor IB from a generic tutor marketplace
 - the route provides a credible path into matching
 - metadata, canonical, robots, schema, and sitemap behavior are correct
 
@@ -490,7 +490,7 @@ The next useful move after this pack is:
 
 ## 12. Final Recommendation
 
-IB Camp should treat phase 1 public-route discoverability as a small, high-quality launch surface.
+Tutor IB should treat phase 1 public-route discoverability as a small, high-quality launch surface.
 
 The right practical model is:
 

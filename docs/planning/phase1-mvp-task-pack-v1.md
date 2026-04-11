@@ -1,4 +1,4 @@
-# IB Camp Phase 1 MVP Task Pack v1
+# Tutor IB Phase 1 MVP Task Pack v1
 
 **Date:** 2026-04-10
 **Status:** Implementation-ready Phase 1 MVP task pack for future AI agents
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has:
+Tutor IB now has:
 
 - the approved design and architecture pack
 - the agent implementation decision index
@@ -1189,7 +1189,7 @@ After this Phase 1 pack:
 
 ## 12. Final Recommendation
 
-IB Camp should use this task pack as the first real implementation backlog for AI agents.
+Tutor IB should use this task pack as the first real implementation backlog for AI agents.
 
 The operating model is:
 

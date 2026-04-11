@@ -1,4 +1,4 @@
-# IB Camp Metadata Matrix v1
+# Tutor IB Metadata Matrix v1
 
 **Date:** 2026-04-08
 **Status:** Standalone metadata policy and page-type matrix
@@ -39,7 +39,7 @@ Use this pattern by default:
 
 Example:
 
-- `IB Biology HL Tutors for IA Feedback and Exam Prep | IB Camp`
+- `IB Biology HL Tutors for IA Feedback and Exam Prep | Tutor IB`
 
 Avoid leading with the brand on most discovery pages.
 
@@ -119,7 +119,7 @@ Route:
 
 Title pattern:
 
-- `Find the Right IB Tutor for the Help You Actually Need | IB Camp`
+- `Find the Right IB Tutor for the Help You Actually Need | Tutor IB`
 
 Description pattern:
 
@@ -149,7 +149,7 @@ Route:
 
 Title pattern:
 
-- `How IB Camp Matching Works for Students and Parents | IB Camp`
+- `How Tutor IB Matching Works for Students and Parents | Tutor IB`
 
 Description pattern:
 
@@ -175,7 +175,7 @@ Route:
 
 Title pattern:
 
-- `How IB Camp Reviews Tutors, Safety, and Student Fit | IB Camp`
+- `How Tutor IB Reviews Tutors, Safety, and Student Fit | Tutor IB`
 
 Description pattern:
 
@@ -201,7 +201,7 @@ Route:
 
 Title pattern:
 
-- `IB Camp Support and Common Questions | IB Camp`
+- `Tutor IB Support and Common Questions | Tutor IB`
 
 Description pattern:
 
@@ -231,7 +231,7 @@ Route:
 
 Title pattern:
 
-- `Become an IB Tutor on IB Camp | Standards, Fit, and Application`
+- `Become an IB Tutor on Tutor IB | Standards, Fit, and Application`
 
 Description pattern:
 
@@ -257,11 +257,11 @@ Route:
 
 Title pattern:
 
-- `[Tutor Name], IB [Primary Subject] Tutor for [Primary Need] | IB Camp`
+- `[Tutor Name], IB [Primary Subject] Tutor for [Primary Need] | Tutor IB`
 
 Fallback title pattern:
 
-- `[Tutor Name], IB Tutor | IB Camp`
+- `[Tutor Name], IB Tutor | Tutor IB`
 
 Description pattern:
 
@@ -293,7 +293,7 @@ Route:
 
 Title pattern:
 
-- `IB [Subject Name] Tutors for [Primary Outcome] | IB Camp`
+- `IB [Subject Name] Tutors for [Primary Outcome] | Tutor IB`
 
 Description pattern:
 
@@ -323,12 +323,12 @@ Route:
 
 Title pattern:
 
-- `IB Tutors for [Need Name] | IB Camp`
+- `IB Tutors for [Need Name] | Tutor IB`
 
 Examples:
 
-- `IB Tutors for TOK Essay Help | IB Camp`
-- `IB Tutors for IA Feedback | IB Camp`
+- `IB Tutors for TOK Essay Help | Tutor IB`
+- `IB Tutors for IA Feedback | Tutor IB`
 
 Description pattern:
 
@@ -354,7 +354,7 @@ Route:
 
 Title pattern:
 
-- `IB [Subject Name] Tutors for [Need Name] | IB Camp`
+- `IB [Subject Name] Tutors for [Need Name] | Tutor IB`
 
 Description pattern:
 

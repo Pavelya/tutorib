@@ -1,4 +1,4 @@
-# IB Camp Service Dependency Baseline v1
+# Tutor IB Service Dependency Baseline v1
 
 **Date:** 2026-04-10
 **Status:** Execution-facing service and SDK baseline for the first implementation phase
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already has:
+Tutor IB already has:
 
 - product and UX direction
 - architecture decisions
@@ -84,7 +84,7 @@ If a task requires a new third-party service that is not approved here, the agen
 
 ## 4. Core Recommendation
 
-IB Camp should keep the MVP service stack intentionally small:
+Tutor IB should keep the MVP service stack intentionally small:
 
 - `Vercel` for hosting, previews, runtime, and platform observability
 - `Supabase` for Postgres, Auth, Storage, and Realtime
@@ -110,7 +110,7 @@ As of 2026-04-10, Supabase still documents that the default SMTP service:
 
 Supabase explicitly recommends configuring custom SMTP for real production use.
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - development can temporarily use the default Supabase email behavior for private testing
 - any public auth flow, invite flow, or real magic-link MVP requires custom SMTP
@@ -121,7 +121,7 @@ Supabase passwordless email login still supports Magic Link and OTP.
 
 Its docs also state that if the user has not signed up yet, they are automatically created by default unless `shouldCreateUser` is set to `false`.
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - the approved product flow remains valid
 - one entry action can support both existing-user login and new-user account creation
@@ -131,7 +131,7 @@ Implication for IB Camp:
 
 Supabase custom domains are documented as a paid add-on for projects on a paid plan.
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - development and early private testing can live with the default Supabase domain during Google OAuth
 - branded auth-domain cleanup can happen when the project moves to the paid MVP posture
@@ -144,7 +144,7 @@ As of 2026-04-10, Resend officially supports:
 - SMTP via `smtp.resend.com`
 - the `resend` Node.js SDK for direct API sends
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - one provider can cover Supabase Auth SMTP and app-originated transactional email
 - we do not need a second email vendor for MVP
@@ -159,7 +159,7 @@ As of 2026-04-10, Vercel documents that:
 - Hobby cron jobs are limited to once per day and have hourly scheduling precision
 - Pro cron jobs support once-per-minute schedules with per-minute precision
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - structured server logs should be single-line and machine-readable
 - reminder and scheduled-job precision must not depend on Hobby cron behavior
@@ -173,7 +173,7 @@ As of 2026-04-10, PostHog still documents:
 - `posthog-node` for server capture
 - a generous free tier for analytics
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - PostHog remains the approved product-telemetry provider
 - Vercel Web Analytics should stay focused on anonymous route traffic and not become the only product analytics system
@@ -186,7 +186,7 @@ Stripe still documents:
 - Checkout Sessions as the low-complexity path to a Stripe-hosted payment page
 - webhook signature verification using the `Stripe-Signature` header and `constructEvent()`
 
-Implication for IB Camp:
+Implication for Tutor IB:
 
 - billing should start with hosted Checkout, not custom Elements flows
 - the server-side `stripe` SDK is enough at first
@@ -323,7 +323,7 @@ It makes the service-specific no-hardcoding rule explicit for implementation wor
 
 ## 11. Logging And Error-Handling Baseline
 
-IB Camp should start with one shared application logging contract:
+Tutor IB should start with one shared application logging contract:
 
 - one internal `appLogger`
 - structured machine-readable logs

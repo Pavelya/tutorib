@@ -1,4 +1,4 @@
-# IB Camp Security Architecture v1
+# Tutor IB Security Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone security architecture for the shared application stack
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines the security architecture for IB Camp.
+This document defines the security architecture for Tutor IB.
 
 It exists now because security decisions cut across:
 
@@ -43,7 +43,7 @@ Those should become dedicated companion docs later.
 
 ## 3. Core Recommendation
 
-IB Camp should use a defense-in-depth security model built around:
+Tutor IB should use a defense-in-depth security model built around:
 
 - `Supabase Auth` for identity
 - Next.js server-side authorization as the main business-rule layer
@@ -656,7 +656,7 @@ These can be designed later as companion topics:
 
 ## 24. Final Recommendation
 
-IB Camp should anchor security in a small number of hard rules:
+Tutor IB should anchor security in a small number of hard rules:
 
 - identity through `Supabase Auth`
 - authorization in the Next.js server layer

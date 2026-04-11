@@ -1,4 +1,4 @@
-# IB Camp Reference Data Governance v1
+# Tutor IB Reference Data Governance v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer contract for shared vocabularies, taxonomies, provider lists, and reference-data lifecycle governance
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already approved:
+Tutor IB already approved:
 
 - a canonical schema with explicit taxonomy tables
 - centralized anti-hardcoding governance
@@ -64,7 +64,7 @@ Those can come later.
 
 ## 4. Core Recommendation
 
-IB Camp should treat shared vocabularies and taxonomies as **reference data with one canonical owner**, normally database-backed and version-controlled.
+Tutor IB should treat shared vocabularies and taxonomies as **reference data with one canonical owner**, normally database-backed and version-controlled.
 
 The main rule is:
 
@@ -78,7 +78,7 @@ The main rule is:
 
 Reference data is shared product vocabulary that changes slowly and is reused across multiple product surfaces.
 
-Good examples for IB Camp:
+Good examples for Tutor IB:
 
 - `subjects`
 - `subject_focus_areas`
@@ -165,7 +165,7 @@ A value family should usually be modeled as a reference table when one or more o
 - it needs a stable key independent of a mutable label
 - it may later need lifecycle fields such as active or deprecated state
 
-This is the default posture for IB Camp's main shared vocabularies.
+This is the default posture for Tutor IB's main shared vocabularies.
 
 ## 9. When To Use An Enum Or Validated Text Instead
 
@@ -181,7 +181,7 @@ Use validated text when the family is controlled but not worth a dedicated table
 
 ## 9.3 MVP rule
 
-For IB Camp MVP, most shared reusable vocabularies should prefer reference tables over hard enums because:
+For Tutor IB MVP, most shared reusable vocabularies should prefer reference tables over hard enums because:
 
 - labels may evolve
 - slugs may matter
@@ -238,7 +238,7 @@ If rows may be retired, include a clear lifecycle posture such as:
 
 Prefer deactivation over hard deletion when rows are already referenced by canonical data.
 
-## 11. Canonical IB Camp Reference Families
+## 11. Canonical Tutor IB Reference Families
 
 These families should be treated as true reference data from the start.
 
@@ -407,7 +407,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 19. Final Recommendation
 
-IB Camp should treat reference data as a shared product contract, not as a scattering of convenient option lists.
+Tutor IB should treat reference data as a shared product contract, not as a scattering of convenient option lists.
 
 The clean phase 1 model is:
 

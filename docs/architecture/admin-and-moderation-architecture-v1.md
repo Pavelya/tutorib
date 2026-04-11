@@ -1,4 +1,4 @@
-# IB Camp Admin And Moderation Architecture v1
+# Tutor IB Admin And Moderation Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone privileged-operations architecture for admin, trust and safety, and moderation workflows
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how privileged internal operations should work in IB Camp.
+This document defines how privileged internal operations should work in Tutor IB.
 
 It exists now because the product already implies the need for:
 
@@ -46,7 +46,7 @@ Those can come later as dedicated implementation or operations artifacts.
 
 ## 3. Core Recommendation
 
-IB Camp should treat admin and moderation as a tightly scoped internal product capability with explicit privilege boundaries.
+Tutor IB should treat admin and moderation as a tightly scoped internal product capability with explicit privilege boundaries.
 
 The practical rule is:
 
@@ -385,7 +385,7 @@ The system must support rapid removal of public tutor content from:
 
 Moderation is not only about private product access.
 
-Because IB Camp has public tutor pages, moderation can affect the public web surface too.
+Because Tutor IB has public tutor pages, moderation can affect the public web surface too.
 
 ## 14.3 Search-surface coordination
 
@@ -553,7 +553,7 @@ These can be designed later as companion topics:
 
 ## 23. Final Recommendation
 
-IB Camp should treat admin and moderation as a small, explicit, auditable operational system.
+Tutor IB should treat admin and moderation as a small, explicit, auditable operational system.
 
 The right practical model is:
 

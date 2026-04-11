@@ -1,4 +1,4 @@
-# IB Camp Data Ownership Boundary Map v1
+# Tutor IB Data Ownership Boundary Map v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer ownership map for domain modules, table families, source-of-truth boundaries, access boundaries, and projection ownership
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has a strong data-architecture pack, but future implementation agents still need a fast answer to one recurring question:
+Tutor IB now has a strong data-architecture pack, but future implementation agents still need a fast answer to one recurring question:
 
 **Where does this data belong, and who owns it?**
 
@@ -61,7 +61,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should use a **domain-owned data model**:
+Tutor IB should use a **domain-owned data model**:
 
 1. every canonical fact has one source-of-truth owner
 2. every table family has one primary domain owner
@@ -331,7 +331,7 @@ Rules:
 Rules:
 
 - Stripe owns provider payment state
-- IB Camp owns app-facing payment and lesson linkage
+- Tutor IB owns app-facing payment and lesson linkage
 - payout automation remains deferred until in scope
 
 ## 18. Admin, Moderation, And Audit Ownership
@@ -435,7 +435,7 @@ The system should lock the following decisions now:
 - projections are read models, not write models
 - routes compose services; they do not own data placement
 - public exposure must go through public-safe surfaces
-- provider systems own provider truth, while IB Camp owns app-facing linkage
+- provider systems own provider truth, while Tutor IB owns app-facing linkage
 - new data facts require an ownership decision before implementation
 
 ## 24. Implementation Handoff Status
@@ -450,7 +450,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 25. Final Recommendation
 
-IB Camp should use this document as the fast ownership lookup for future data work.
+Tutor IB should use this document as the fast ownership lookup for future data work.
 
 The practical outcome should be:
 

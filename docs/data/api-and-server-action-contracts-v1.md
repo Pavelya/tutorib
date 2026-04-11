@@ -1,4 +1,4 @@
-# IB Camp API And Server Action Contracts v1
+# Tutor IB API And Server Action Contracts v1
 
 **Date:** 2026-04-10
 **Status:** Standalone data-layer contract for Server Actions, Route Handlers, app-facing mutation boundaries, provider callbacks, DTO-safe responses, validation, authorization, idempotency, cache invalidation, and AI-agent-safe implementation rules
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already has:
+Tutor IB already has:
 
 - a Next.js App Router architecture
 - a route-layout implementation map
@@ -92,7 +92,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should use **Next.js Server Components and domain services as the default read boundary, Server Actions as the default in-app mutation boundary, and Route Handlers only for explicit HTTP endpoint needs**.
+Tutor IB should use **Next.js Server Components and domain services as the default read boundary, Server Actions as the default in-app mutation boundary, and Route Handlers only for explicit HTTP endpoint needs**.
 
 The practical rule is:
 
@@ -992,7 +992,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 29. Final Recommendation
 
-IB Camp should keep the backend boundary intentionally simple for the MVP:
+Tutor IB should keep the backend boundary intentionally simple for the MVP:
 
 - reads through Server Components and domain services
 - UI mutations through Server Actions

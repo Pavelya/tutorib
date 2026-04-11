@@ -1,4 +1,4 @@
-# IB Camp Drizzle Schema And Query Conventions v1
+# Tutor IB Drizzle Schema And Query Conventions v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer implementation contract for Drizzle schema declarations, query organization, and server-side database access boundaries
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already approved:
+Tutor IB already approved:
 
 - `Drizzle ORM` as the preferred typed server-side database access layer
 - SQL-first migrations under `supabase/migrations/`
@@ -65,7 +65,7 @@ Those can be finalized later as long as they obey the rules here.
 
 ## 4. Core Recommendation
 
-IB Camp should use Drizzle as a **typed server-side access layer around the approved database**, not as a second competing schema-ownership system.
+Tutor IB should use Drizzle as a **typed server-side access layer around the approved database**, not as a second competing schema-ownership system.
 
 The main rule is:
 
@@ -102,7 +102,7 @@ Drizzle should not own:
 
 ## 5.3 No parallel schema-system rule
 
-IB Camp already chose a SQL-first migration model.
+Tutor IB already chose a SQL-first migration model.
 
 That means:
 
@@ -231,7 +231,7 @@ Recommended posture:
 
 ## 8.3 Column-property rule
 
-For IB Camp, Drizzle column property keys should usually match the actual database column names exactly.
+For Tutor IB, Drizzle column property keys should usually match the actual database column names exactly.
 
 Examples:
 
@@ -356,7 +356,7 @@ Public discovery, matching, trust, and schedule hot reads should prefer the appr
 
 Drizzle is valuable partly because it stays close to SQL.
 
-IB Camp should lean into that rather than trying to hide SQL-shaped logic completely.
+Tutor IB should lean into that rather than trying to hide SQL-shaped logic completely.
 
 ## 11.1 Preferred default
 
@@ -439,7 +439,7 @@ If nested transactions or savepoint-like behavior becomes necessary, use it inte
 
 ## 14. Complex SQL And Performance-Critical Query Rule
 
-IB Camp should not force every hot-path query through the most ORM-shaped API.
+Tutor IB should not force every hot-path query through the most ORM-shaped API.
 
 For:
 
@@ -564,7 +564,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 22. Final Recommendation
 
-IB Camp should use Drizzle as a disciplined typed query layer, not as a magical abstraction that tries to own the whole data system.
+Tutor IB should use Drizzle as a disciplined typed query layer, not as a magical abstraction that tries to own the whole data system.
 
 The clean phase 1 model is:
 

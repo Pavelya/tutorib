@@ -1,4 +1,4 @@
-# IB Camp Search And Query Architecture v1
+# Tutor IB Search And Query Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for search bars, browse queries, filter behavior, typo tolerance, and scaling boundaries
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how search bars and query-based discovery should behave across IB Camp.
+This document defines how search bars and query-based discovery should behave across Tutor IB.
 
 It exists now because the product is intentionally:
 
@@ -48,7 +48,7 @@ Those can come later as implementation companions.
 
 ## 3. Core Recommendation
 
-IB Camp should use **one query architecture with multiple constrained query surfaces**, not one magical search bar that tries to understand everything.
+Tutor IB should use **one query architecture with multiple constrained query surfaces**, not one magical search bar that tries to understand everything.
 
 The practical rule is:
 
@@ -72,7 +72,7 @@ The practical rule is:
 
 ## 4.2 Product rule
 
-IB Camp should never present a search bar as though it replaces the guided matching flow.
+Tutor IB should never present a search bar as though it replaces the guided matching flow.
 
 If a user has a real academic problem but no clear tutor in mind, the product should steer them toward:
 
@@ -567,7 +567,7 @@ The architecture should lock the following decisions now:
 
 ## 19. Final Recommendation
 
-IB Camp should build search as a small set of explicit, route-scoped query tools around a strong match-first core.
+Tutor IB should build search as a small set of explicit, route-scoped query tools around a strong match-first core.
 
 The recommended MVP posture is:
 

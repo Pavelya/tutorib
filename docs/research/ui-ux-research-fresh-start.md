@@ -1,4 +1,4 @@
-# IB Camp Fresh-Start UI/UX Research
+# Tutor IB Fresh-Start UI/UX Research
 
 **Date:** 2026-04-07
 **Status:** Research and recommendation brief
@@ -6,9 +6,9 @@
 
 ## 1. Executive Summary
 
-IB Camp should not continue from the current marketplace-first design language.
+Tutor IB should adopt a matching-first design language that feels specific, memorable, and IB-native.
 
-The live product is clean and functional, but it feels like a generic tutoring marketplace with polished SaaS styling. The current internal design docs reinforce that direction:
+The product should avoid a generic tutoring-marketplace aesthetic with polished but interchangeable SaaS styling. The design direction should not be defined by:
 
 - `Airbnb-inspired`
 - `search-first`
@@ -18,16 +18,16 @@ The live product is clean and functional, but it feels like a generic tutoring m
 
 That approach is coherent, but it is too close to the default visual and interaction vocabulary used by many AI projects, marketplaces, and startup templates. It also frames the product as a broad tutor directory when the stronger opportunity is a guided matching tool for IB students in moments of pressure.
 
-## 2. What The Current Product Signals
+## 2. What The Product Must Signal
 
-Based on the live pages and internal docs, the current experience signals:
+The experience should not primarily signal:
 
 - browse a catalog
 - compare cards
 - pick a tutor
 - book a lesson
 
-It does not yet strongly signal:
+It should strongly signal:
 
 - we understand the IB journey
 - we can quickly guide you to the right kind of tutor
@@ -35,19 +35,19 @@ It does not yet strongly signal:
 - we reduce choice anxiety
 - we help you decide, not just browse
 
-### Key observations from the live audit
+### Key strategic observations
 
 - The UI is visually tidy, but the overall feel is template-like rather than branded or memorable.
 - The search experience uses familiar marketplace patterns: horizontal filters, card grids, pricing, heart/save, and generic list browsing.
 - Tutor cards are image-led but not insight-led. They show attributes, but not enough fit rationale.
 - The profile page is usable but reads like a database record more than a coached decision page.
 - The homepage promise is actually closer to the right direction than the rest of the product: it mentions IA feedback, TOK writing, oral practice, and exam rescue. That language should become the core model, not just hero copy.
-- There is visible whitespace rhythm and brand-consistency drift in the live UI, which makes the product feel unfinished.
+- Visual rhythm and brand consistency need to feel deliberate enough to create trust and memorability.
 - Several tutor photos look synthetic or inconsistent in style, which hurts trust and reinforces the “AI-built” feeling.
 
 ## 3. Competitor Research
 
-I reviewed the current live experience alongside several tutoring platforms:
+I reviewed Tutor IB's intended product category alongside several tutoring platforms:
 
 - Preply
 - Wyzant
@@ -70,7 +70,7 @@ What to avoid:
 - The density is useful, but the page becomes noisy quickly.
 - The visual system is distinctive, but the brand energy is broad language-learning commerce, not high-trust academic support.
 
-Takeaway for IB Camp:
+Takeaway for Tutor IB:
 
 - Reuse the evidence density.
 - Do not reuse the “endless commercial list of tutors” feeling.
@@ -90,7 +90,7 @@ What to avoid:
 - It is trustworthy, but not emotionally specific.
 - The density can feel like research work rather than relief.
 
-Takeaway for IB Camp:
+Takeaway for Tutor IB:
 
 - Reuse the trust architecture.
 - Avoid the “large national directory” tone.
@@ -110,7 +110,7 @@ What to avoid:
 - The emotional register is generic “better grades and confidence”.
 - The imagery and marketing tone are more K-12 than IB-specific.
 
-Takeaway for IB Camp:
+Takeaway for Tutor IB:
 
 - Reuse the matching model.
 - Avoid generic school-success marketing.
@@ -128,7 +128,7 @@ What to avoid:
 - It feels like a huge classified directory rather than a curated academic product.
 - Subject sprawl weakens trust for specialist use cases.
 
-Takeaway for IB Camp:
+Takeaway for Tutor IB:
 
 - Broad supply is not the goal.
 - Specialisation should feel like the advantage.
@@ -146,7 +146,7 @@ What to avoid:
 - The model is still broad-category browsing.
 - It is not designed around high-stakes academic decision support.
 
-Takeaway for IB Camp:
+Takeaway for Tutor IB:
 
 - Human warmth matters.
 - Warmth alone is not enough without expert-match clarity.
@@ -167,7 +167,7 @@ The weakest experiences:
 
 ## 5. Strategic Recommendation
 
-IB Camp should reposition as:
+Tutor IB should reposition as:
 
 **A guided IB tutor matching product for specific academic pressure points.**
 
@@ -308,7 +308,7 @@ The first screen should reduce uncertainty, not repeat metadata.
 
 Comparison is underused in tutoring products and is especially valuable here.
 
-IB Camp should support comparing saved tutors across:
+Tutor IB should support comparing saved tutors across:
 
 - IB subjects and components
 - teaching style
@@ -511,7 +511,7 @@ This is a small copy change with big positioning impact.
 
 Yes, a fresh start is justified on the design side.
 
-Not because the current product is bad, but because its core interaction model, visual language, and emotional framing are all optimized for a category you no longer want to be in.
+The reason is that a generic marketplace interaction model, visual language, and emotional framing are optimized for the wrong category.
 
 The right move is:
 
@@ -536,11 +536,11 @@ Internal context reviewed:
 
 - `.agents/workflows/ui-ux.md`
 
-Live product reviewed:
+Representative product page types reviewed:
 
-- `https://ibcamp.vercel.app/`
-- `https://ibcamp.vercel.app/search`
-- `https://ibcamp.vercel.app/tutors/ivan-0d0b09e5`
+- homepage
+- tutor search and discovery
+- tutor profile detail
 
 External platforms reviewed:
 

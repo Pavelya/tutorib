@@ -1,4 +1,4 @@
-# IB Camp Design System Foundations v3
+# Tutor IB Design System Foundations v3
 
 **Date:** 2026-04-07
 **Status:** Fresh-start foundation direction

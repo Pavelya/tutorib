@@ -1,4 +1,4 @@
-# IB Camp Database Test Conventions v1
+# Tutor IB Database Test Conventions v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer contract for SQL database tests, pgTAP usage, fixture boundaries, and migration-safe verification
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp already approved:
+Tutor IB already approved:
 
 - SQL-first migrations
 - explicit RLS boundaries
@@ -63,7 +63,7 @@ Those can be finalized later.
 
 ## 4. Core Recommendation
 
-IB Camp should use **SQL database tests as a first-class safety layer** for schema, RLS, projection, and migration-sensitive behavior.
+Tutor IB should use **SQL database tests as a first-class safety layer** for schema, RLS, projection, and migration-sensitive behavior.
 
 The main rule is:
 
@@ -98,7 +98,7 @@ Bad examples:
 
 ## 6. Canonical Database Test Families
 
-IB Camp should treat database tests as a few explicit families instead of one mixed folder of random checks.
+Tutor IB should treat database tests as a few explicit families instead of one mixed folder of random checks.
 
 ## 6.1 Schema smoke tests
 
@@ -170,7 +170,7 @@ Purpose:
 Good examples:
 
 - a new required column is backfilled as expected
-- a compatibility window preserves legacy reads during rollout
+- a compatibility window preserves transitional reads during rollout
 - a repair script produces the intended normalized result
 
 ## 7. Canonical Test Style
@@ -423,7 +423,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 18. Final Recommendation
 
-IB Camp should treat SQL database tests as a direct safety contract for the most important database truths:
+Tutor IB should treat SQL database tests as a direct safety contract for the most important database truths:
 
 - schema shape
 - access boundaries

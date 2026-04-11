@@ -1,4 +1,4 @@
-# IB Camp File And Media Architecture v1
+# Tutor IB File And Media Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone file, storage, and media architecture for private verification assets, public profile media, and external video previews
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should treat files and media across private tutor verification, public tutor profiles, and future product expansion.
+This document defines how Tutor IB should treat files and media across private tutor verification, public tutor profiles, and future product expansion.
 
 It exists now because the approved product already implies the need for:
 
@@ -46,7 +46,7 @@ Those can come later as implementation or operational artifacts.
 
 ## 3. Core Recommendation
 
-IB Camp should use one media architecture with three clear asset classes:
+Tutor IB should use one media architecture with three clear asset classes:
 
 - private verification assets
 - public profile media assets
@@ -142,7 +142,7 @@ Rule:
 
 ## 6.4 Class M4: external public video references
 
-These are hosted outside IB Camp but intentionally referenced on tutor public surfaces.
+These are hosted outside Tutor IB but intentionally referenced on tutor public surfaces.
 
 Examples:
 
@@ -189,7 +189,7 @@ The exact schema can vary, but the separation should exist.
 
 ## 7.3 `FileAsset` purpose
 
-This is the low-level metadata record for any stored file IB Camp actually owns.
+This is the low-level metadata record for any stored file Tutor IB actually owns.
 
 Suggested attributes:
 
@@ -269,7 +269,7 @@ Rule:
 
 ## 8.1 Recommended MVP storage platform
 
-Use Supabase Storage for files IB Camp actually stores.
+Use Supabase Storage for files Tutor IB actually stores.
 
 That includes:
 
@@ -735,7 +735,7 @@ Consider later:
 
 ## 21.1 Main rule
 
-If IB Camp later needs direct native video uploads, do not build custom video hosting out of generic file storage alone.
+If Tutor IB later needs direct native video uploads, do not build custom video hosting out of generic file storage alone.
 
 ## 21.2 Why this matters
 
@@ -775,7 +775,7 @@ The architecture should lock the following decisions now:
 
 ## 23. Final Recommendation
 
-IB Camp should implement one clear file and media architecture with separate privacy and publication rules for:
+Tutor IB should implement one clear file and media architecture with separate privacy and publication rules for:
 
 - private verification evidence
 - public profile media

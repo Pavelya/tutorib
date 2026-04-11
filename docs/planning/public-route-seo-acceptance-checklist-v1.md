@@ -1,4 +1,4 @@
-# IB Camp Public Route SEO Acceptance Checklist v1
+# Tutor IB Public Route SEO Acceptance Checklist v1
 
 **Date:** 2026-04-08
 **Status:** Standalone reusable acceptance checklist for Class A public routes
@@ -190,7 +190,7 @@ These checks are applied in addition to the core checklist.
 
 ## 8.1 Home page
 
-- the page clearly states what IB Camp is and how it differs from a generic marketplace
+- the page clearly states what Tutor IB is and how it differs from a generic marketplace
 - the first viewport establishes category, trust, and matching-first value
 - the page provides a credible route into matching
 - homepage schema and brand metadata are present and truthful

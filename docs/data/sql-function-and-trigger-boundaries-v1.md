@@ -1,12 +1,12 @@
-# IB Camp SQL Function And Trigger Boundaries v1
+# Tutor IB SQL Function And Trigger Boundaries v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer boundary document for SQL functions, RPC-style database entry points, triggers, RLS helper functions, and projection maintenance helpers
-**Scope:** when IB Camp should use SQL functions and triggers, when to avoid them, security-definer posture, exposed function boundaries, trigger side-effect limits, projection refresh boundaries, migration and testing expectations, and AI-agent implementation rules
+**Scope:** when Tutor IB should use SQL functions and triggers, when to avoid them, security-definer posture, exposed function boundaries, trigger side-effect limits, projection refresh boundaries, migration and testing expectations, and AI-agent implementation rules
 
 ## 1. Why This Document Exists
 
-IB Camp is using Supabase Postgres as the primary data platform.
+Tutor IB is using Supabase Postgres as the primary data platform.
 
 That gives the project useful database-native tools:
 
@@ -76,7 +76,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-IB Camp should treat SQL functions and triggers as **narrow database-boundary tools**, not as a hidden domain-service layer.
+Tutor IB should treat SQL functions and triggers as **narrow database-boundary tools**, not as a hidden domain-service layer.
 
 Use them when database locality improves:
 
@@ -693,7 +693,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 31. Final Recommendation
 
-IB Camp should use SQL functions and triggers sparingly and deliberately.
+Tutor IB should use SQL functions and triggers sparingly and deliberately.
 
 The clean operating model is:
 

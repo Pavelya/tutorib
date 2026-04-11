@@ -1,4 +1,4 @@
-# IB Camp Phase 1.5 Task Pack v1
+# Tutor IB Phase 1.5 Task Pack v1
 
 **Date:** 2026-04-10
 **Status:** Implementation-usable Phase 1.5 task pack for future AI agents
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-IB Camp now has:
+Tutor IB now has:
 
 - an active Phase 1 MVP execution pack
 - a master backlog index
@@ -510,7 +510,7 @@ After this Phase 1.5 pack:
 
 ## 13. Final Recommendation
 
-IB Camp should treat this pack as the bounded bridge between MVP and broader Phase 2.
+Tutor IB should treat this pack as the bounded bridge between MVP and broader Phase 2.
 
 The operating model is:
 

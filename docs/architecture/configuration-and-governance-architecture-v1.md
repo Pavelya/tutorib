@@ -1,4 +1,4 @@
-# IB Camp Configuration And Governance Architecture v1
+# Tutor IB Configuration And Governance Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for configuration boundaries, anti-hardcoding rules, component reuse governance, feature-flag posture, and AI-agent-safe implementation ownership
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should centralize values, behavior switches, shared patterns, and ownership rules so implementation does not drift into scattered constants and duplicated UI.
+This document defines how Tutor IB should centralize values, behavior switches, shared patterns, and ownership rules so implementation does not drift into scattered constants and duplicated UI.
 
 It exists now because the approved product already depends on:
 
@@ -52,7 +52,7 @@ Those can be refined later as implementation companions.
 
 ## 3. Core Recommendation
 
-IB Camp should use a **centralized, versioned, schema-validated configuration model** with clear ownership boundaries:
+Tutor IB should use a **centralized, versioned, schema-validated configuration model** with clear ownership boundaries:
 
 - design tokens own visual values
 - route content modules own route-specific copy
@@ -604,7 +604,7 @@ This architecture is meant to prevent:
 
 ## 21. Final Recommendation
 
-IB Camp should treat configuration and governance as part of the core product architecture, not as cleanup work after implementation starts.
+Tutor IB should treat configuration and governance as part of the core product architecture, not as cleanup work after implementation starts.
 
 The recommended posture is:
 

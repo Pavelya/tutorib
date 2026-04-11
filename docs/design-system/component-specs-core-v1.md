@@ -1,4 +1,4 @@
-# IB Camp Core Shared Component Specs v1
+# Tutor IB Core Shared Component Specs v1
 
 **Date:** 2026-04-07
 **Status:** Standalone component-spec document
@@ -14,7 +14,7 @@ If only one component-spec file is used on its own, this should still make sense
 
 ## 2. Product Assumptions
 
-IB Camp is:
+Tutor IB is:
 
 - an IB-native tutoring product
 - matching-first, not marketplace-first

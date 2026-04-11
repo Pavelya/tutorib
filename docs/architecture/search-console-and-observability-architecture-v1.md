@@ -1,4 +1,4 @@
-# IB Camp Search Console And Observability Architecture v1
+# Tutor IB Search Console And Observability Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone operational architecture for SEO and AI discoverability validation
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how IB Camp should verify and monitor the SEO system after it is implemented.
+This document defines how Tutor IB should verify and monitor the SEO system after it is implemented.
 
 It exists to answer:
 
@@ -35,7 +35,7 @@ This document only defines how the discoverability system is observed, validated
 
 ## 3. Core Recommendation
 
-IB Camp should treat Search Console and route-level validation as part of the SEO architecture, not as an afterthought after launch.
+Tutor IB should treat Search Console and route-level validation as part of the SEO architecture, not as an afterthought after launch.
 
 The practical rule is:
 
@@ -436,7 +436,7 @@ These decisions are mature enough to lock now:
 
 ## 18. Final Recommendation
 
-IB Camp should complete the SEO architecture by treating Search Console and route validation as operational parts of the same discoverability system.
+Tutor IB should complete the SEO architecture by treating Search Console and route validation as operational parts of the same discoverability system.
 
 The correct model is:
 
