@@ -166,6 +166,8 @@ Bad parallel examples:
 | `P15-STUD-001` | `ready` | `P1` | 3 | tutor_students | Tutor students roster DTO and query path |
 | `P15-STUD-002` | `ready` | `P1` | 3 | tutor_students | Tutor students route and roster surface |
 | `P15-STUD-003` | `draft` | `P1` | 3 | tutor_students | Tutor student relationship detail surface |
+| `P15-SEO-001` | `ready` | `P1` | 2 | seo | Subject and service SEO landing pages |
+| `P15-SAVED-001` | `ready` | `P1` | 1 | saved | Saved tutors persistent surface |
 | `P15-QUALITY-001` | `ready` | `P2` | 4 | quality | Phase 1.5 verification and hardening pass |
 
 ## 10. Detailed Tasks
@@ -446,7 +448,109 @@ Add the first tutor student relationship detail surface so a tutor can open one 
 - detail interaction review
 - DTO and privacy review
 
-## 10.7 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
+## 10.7 `P15-SEO-001` Subject and service SEO landing pages
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 2
+**Depends on:** `P1-SEO-001`, `P1-DATA-002`, `P1-PUBLIC-003`
+
+**Goal**
+
+Implement the first subject and service SEO landing pages so Tutor IB captures problem-led and subject-led search demand with quality-gated, server-rendered pages that work for both traditional search and AI discoverability.
+
+**Required source docs**
+
+- `docs/architecture/seo-and-ai-discoverability-v1.md`
+- `docs/architecture/seo-page-inventory-v1.md`
+- `docs/architecture/metadata-matrix-v1.md`
+- `docs/architecture/structured-data-map-v1.md`
+- `docs/architecture/content-template-spec-v1.md`
+- `docs/planning/seo-route-ownership-map-v1.md`
+- `docs/planning/phase1-class-a-route-seo-task-pack-v1.md`
+
+**Scope**
+
+- `/subjects/[subject-slug]` — subject pages (e.g., `/subjects/biology-hl`)
+- `/services/[need-slug]` — problem-led pages (e.g., `/services/tok-essay-help`)
+- `/subjects/[subject-slug]/[need-slug]` — curated combinations only (e.g., `/subjects/english-a-io/oral-practice`)
+- server-rendered with unique copy per page
+- quality gate: only publish pages with real tutor coverage and useful unique content
+- metadata, canonical URLs, and Open Graph per page
+- JSON-LD structured data where appropriate
+- internal linking from home, subject pages, and tutor profiles
+- AI discoverability through clear entity structure and people-first content
+
+**Out of scope**
+
+- mass-generated thin landing pages
+- pages for every possible subject-need combination
+- editorial resource hub (Phase 2+)
+
+**Acceptance criteria**
+
+- each page answers: what the need is, who it's for, when support matters, what kind of tutor fits, and what action to take next
+- pages with insufficient tutor coverage or thin content are not published
+- metadata is unique per page and follows the metadata matrix
+- pages are server-rendered with meaningful content in the initial HTML
+- internal links between subject, service, and tutor pages are crawlable HTML links
+- structured data matches visible page content (no fake or hidden markup)
+
+**Verification**
+
+- content quality review per page
+- metadata and structured data validation
+- sitemap inclusion review
+- public-route SEO acceptance checklist pass
+
+## 10.8 `P15-SAVED-001` Saved tutors persistent surface
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 1
+**Depends on:** `P15-DATA-001`, `P1-MATCH-002`, `P1-PUBLIC-003`
+
+**Goal**
+
+Implement the saved tutors surface so students can view, manage, and return to tutors they have shortlisted across sessions without losing state, and so Compare has a natural entry point from saved items.
+
+**Required source docs**
+
+- `docs/foundations/ia-map-two-sided.md`
+- `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/design-system/component-specs-core-v1.md`
+
+**Scope**
+
+- saved tutors list accessible from student navigation ("Saved" in bottom nav on mobile, in primary nav on desktop)
+- persistent shortlist state across sessions (not UI-only)
+- remove from saved action
+- entry point into compare flow from saved list
+- entry point into tutor profile from saved list
+- empty state when no tutors are saved
+
+**Out of scope**
+
+- saved searches or saved needs
+- recommendation engine on saved page
+- a full "favorites" system beyond tutor shortlisting
+
+**Acceptance criteria**
+
+- saved tutors persist across sessions and devices for authenticated students
+- saved list uses shared MatchRow or PersonSummary components
+- compare entry is clearly accessible from saved list
+- mobile bottom nav includes "Saved" as one of the 5 destinations per the IA
+- removing a tutor from saved updates state immediately
+
+**Verification**
+
+- cross-session persistence review
+- mobile navigation integration review
+- component reuse review
+
+## 10.9 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
 
 **Status:** `ready`
 **Priority:** `P2`

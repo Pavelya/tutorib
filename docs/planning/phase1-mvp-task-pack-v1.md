@@ -153,6 +153,8 @@ Bad parallel examples:
 
 | Task id | Status | Priority | Wave | Workstream | Short title |
 | --- | --- | --- | --- | --- | --- |
+| `P1-JOBS-001` | `ready` | `P0` | 1 | infrastructure | Background job and async task infrastructure |
+| `P1-SEO-001` | `ready` | `P0` | 1 | seo | SEO and AI discoverability foundations |
 | `P1-FOUND-001` | `ready` | `P0` | 1 | foundations | App shell and route-family skeleton |
 | `P1-FOUND-002` | `ready` | `P0` | 1 | foundations | Design tokens and primitive component baseline |
 | `P1-FOUND-003` | `ready` | `P1` | 1 | foundations | Shared continuity anchors and common screen states |
@@ -188,6 +190,106 @@ Bad parallel examples:
 ## 9. Detailed Tasks
 
 Each task below is intentionally shorter than the full task template, but it already contains the minimum required structure for implementation.
+
+## 9.1a `P1-JOBS-001` Background job and async task infrastructure
+
+**Status:** `ready`
+**Priority:** `P0`
+**Wave:** 1
+**Depends on:** `P1-DATA-001`
+
+**Goal**
+
+Create the background job infrastructure needed by booking expiry, payment capture, notification delivery, payout processing, and trust snapshot refresh so async work has a durable, observable, and idempotent execution model from day one.
+
+**Required source docs**
+
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+- `docs/data/integration-idempotency-model-v1.md`
+- `docs/data/database-schema-outline-v1.md`
+- `docs/planning/phase1-payment-scope-decision-v1.md`
+
+**Scope**
+
+- `job_runs` table and job status lifecycle
+- `webhook_events` table with verification and processing status
+- Vercel Cron route for scheduled job execution
+- Next.js `after()` pattern for post-response lightweight work
+- job deduplication via idempotency keys
+- Stripe webhook receiver route with signature verification
+- dead-letter logging for permanently failed jobs
+
+**Out of scope**
+
+- Vercel Queues or external job queue services
+- complex retry backoff strategies beyond simple linear retry
+
+**Acceptance criteria**
+
+- background jobs can be dispatched, tracked, and retried through a durable model
+- Stripe webhooks are received, verified, deduplicated, and processed idempotently
+- Vercel Cron can trigger scheduled jobs such as booking expiry checks and trust snapshot refresh
+- job failures are logged with enough context for diagnosis
+- `after()` is used only for short post-response work under 100ms
+
+**Verification**
+
+- job lifecycle and idempotency review
+- webhook handler verification and deduplication review
+
+## 9.1b `P1-SEO-001` SEO and AI discoverability foundations
+
+**Status:** `ready`
+**Priority:** `P0`
+**Wave:** 1
+**Depends on:** `P1-FOUND-001`
+
+**Goal**
+
+Create the shared SEO and AI discoverability infrastructure so Phase 1 public routes launch with correct metadata, structured data, sitemap, robots configuration, and AI-search readiness from day one.
+
+**Required source docs**
+
+- `docs/architecture/seo-and-ai-discoverability-v1.md`
+- `docs/architecture/seo-app-architecture-v1.md`
+- `docs/architecture/structured-data-map-v1.md`
+- `docs/architecture/metadata-matrix-v1.md`
+- `docs/planning/seo-foundation-task-pack-v1.md`
+- `docs/planning/public-route-seo-acceptance-checklist-v1.md`
+
+**Scope**
+
+- route classification system (Class A indexable, Class B non-indexable, Class C authenticated)
+- shared metadata generation using Next.js App Router metadata APIs
+- `robots.txt` with correct crawl rules for public versus product routes
+- dynamic sitemap generation for Phase 1 public pages
+- JSON-LD structured data helpers for `Organization`, `BreadcrumbList`, and `ProfilePage`
+- preview deployment noindex enforcement via `X-Robots-Tag` or meta robots
+- canonical URL generation for public routes
+- Open Graph and social sharing metadata defaults
+- entity clarity signals for AI discoverability (who, how, why)
+
+**Out of scope**
+
+- subject or service landing pages (Phase 1.5)
+- editorial content calendar
+- Search Console setup (operational, not code)
+
+**Acceptance criteria**
+
+- every Phase 1 public route has correct metadata generated through the approved system
+- Class B and Class C routes are noindex
+- sitemap includes only quality-gated public pages
+- JSON-LD is server-rendered, validated, and matches visible page content
+- preview deployments default to noindex
+- structured data does not mark up hidden, fake, or placeholder content
+- AI discoverability is addressed through strong SEO fundamentals, not separate hacks
+
+**Verification**
+
+- metadata and structured data review against the metadata matrix
+- robots and sitemap validation
+- public-route SEO acceptance checklist pass
 
 ## 9.1 `P1-FOUND-001` App shell and route-family skeleton
 
@@ -1472,32 +1574,44 @@ Implement the tutor earnings route and payout-readiness experience so approved t
 
 - `docs/architecture/architecture-discussion-v1.md`
 - `docs/planning/service-dependency-baseline-v1.md`
+- `docs/planning/phase1-payment-scope-decision-v1.md`
+- `docs/data/tutor-listing-readiness-model-v1.md`
 - `docs/design-system/design-system-spec-final-v1.md`
 - `docs/foundations/cross-role-journey-inventory-v1.md`
 
 **Scope**
 
 - `/tutor/earnings`
-- payout readiness state
-- Stripe Connect setup CTA handoff
+- payout readiness state and listing-gate interaction
+- Stripe Connect Express account creation with pre-filled tutor data (name, email, country, date of birth)
+- Stripe hosted onboarding redirect so tutor only needs to provide verification documents and bank account
+- return handling from Stripe onboarding (success, incomplete, resume)
+- `account.updated` webhook handling for payout account status sync
 - monthly payout-cycle summary
 - payout hold or missing-setup notices
+- readiness checklist integration on tutor overview
 
 **Out of scope**
 
 - advanced finance reconciliation tools
 - tax-document collection beyond payout-provider handoff
+- custom KYC forms (use Stripe hosted onboarding only)
 
 **Acceptance criteria**
 
 - tutors can clearly see whether they are payout-ready and publicly bookable
+- Stripe Connect Express account is created with maximum pre-filling from application data
+- tutor only needs to upload verification docs and add bank account during Stripe onboarding
 - the route explains the hosted payout setup step without inventing a custom KYC flow
 - earnings and payout states use shaped product language rather than raw Stripe terms
+- `account.updated` webhooks correctly update payout account status
+- listing gate correctly blocks public discovery until payout is enabled
 
 **Verification**
 
 - payout-readiness UX review
 - provider-handoff boundary review
+- Stripe Connect pre-fill and webhook handling review
 
 ## 10. Task Drafting Rules For Follow-Up
 

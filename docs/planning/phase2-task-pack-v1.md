@@ -192,6 +192,9 @@ Bad parallel examples:
 | `P2-OPS-001` | `draft` | `P2` | 3 | internal_ops | Admin trust and report-management internal surfaces |
 | `P2-OPS-002` | `draft` | `P2` | 3 | internal_ops | Admin user detail and finance intervention surfaces |
 | `P2-OPS-003` | `draft` | `P2` | 3 | internal_ops | Admin reference-data and policy broadcast management |
+| `P2-DISPUTE-001` | `draft` | `P2` | 3 | internal_ops | Lesson-issue internal review and dispute resolution surface |
+| `P2-DSR-001` | `draft` | `P2` | 3 | compliance | Data subject request implementation |
+| `P2-NOTIF-PREF-001` | `draft` | `P2` | 2 | notifications | Notification preferences and channel controls |
 | `P2-GROW-001` | `planned` | `P3` | 4 | growth | Public browse search scaling and external search activation path |
 | `P2-QUALITY-001` | `ready` | `P2` | 4 | quality | Phase 2 verification and operational hardening pass |
 
@@ -219,6 +222,8 @@ Implement the staged tutor application flow so becoming a tutor feels confidence
 - `docs/design-system/component-specs-phase2-v1.md`
 - `docs/data/api-and-server-action-contracts-v1.md`
 - `docs/architecture/route-layout-implementation-map-v1.md`
+- `docs/data/tutor-listing-readiness-model-v1.md`
+- `docs/data/database-enum-and-status-glossary-v1.md` (section 8.2 — application statuses)
 
 **Scope**
 
@@ -226,7 +231,8 @@ Implement the staged tutor application flow so becoming a tutor feels confidence
 - staged application sections
 - progress and readiness language
 - save-and-resume behavior
-- pending-review state
+- pending-review state and `changes_requested` return flow
+- readiness checklist reflecting 6-gate listing model
 - preview-public-profile handoff where applicable
 - draft and submit mutations through approved boundaries
 
@@ -267,13 +273,14 @@ Implement the internal tutor-review surface and decision workflow so application
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
 - `docs/data/api-and-server-action-contracts-v1.md`
 - `docs/architecture/route-layout-implementation-map-v1.md`
+- `docs/data/database-enum-and-status-glossary-v1.md` (section 8.2 — canonical `changes_requested` status)
 
 **Scope**
 
 - `/internal/tutor-reviews`
 - review queue and detail surface
 - credential review cues
-- approve, reject, and request-changes actions
+- approve, reject, and request-changes actions using the canonical `changes_requested` application status
 - application audit trail expectations
 
 **Out of scope**
@@ -311,13 +318,15 @@ Implement deeper tutor profile management so tutors can improve listing quality,
 - `docs/design-system/design-system-spec-final-v1.md`
 - `docs/architecture/file-and-media-architecture-v1.md`
 - `docs/data/data-ownership-boundary-map-v1.md`
+- `docs/data/tutor-listing-readiness-model-v1.md`
 
 **Scope**
 
 - tutor profile editor DTO and service boundary
 - publication-status and preview controls
 - public versus private field separation
-- profile-quality or readiness guidance where approved
+- profile-quality or readiness guidance reflecting the 6-gate listing readiness model
+- clear indication of which profile fields affect listing gates
 
 **Out of scope**
 
@@ -400,6 +409,7 @@ Implement the lesson-linked tutor review flow so public review and rating signal
 - `docs/data/auth-and-authorization-matrix-v1.md`
 - `docs/data/data-ownership-boundary-map-v1.md`
 - `docs/architecture/compliance-and-regulatory-posture-v1.md`
+- `docs/data/tutor-reliability-thresholds-v1.md`
 
 **Scope**
 
@@ -534,15 +544,17 @@ Implement the first internal admin trust surfaces so abuse reports, blocks, and 
 - `docs/data/database-rls-boundaries-v1.md`
 - `docs/data/data-dto-and-query-boundary-map-v1.md`
 - `docs/data/sql-function-and-trigger-boundaries-v1.md`
+- `docs/data/lesson-issue-and-dispute-model-v1.md`
 
 **Scope**
 
 - `/internal/moderation`
 - report queue and case handling
 - block/report review context
-- lesson-issue case review for conflicting claims
+- lesson-issue case review for conflicting claims (disputes in `under_review` state require admin resolution)
 - trust-case lifecycle visibility
 - explicit internal action boundaries
+- refund and payout consequence execution from resolved disputes
 
 **Out of scope**
 
@@ -647,7 +659,151 @@ Implement the internal admin surface for managing canonical reference data and p
 - reference-data workflow review
 - legal-broadcast workflow review
 
-## 11.11 `P2-GROW-001` Public browse search scaling and external search activation path
+## 11.11 `P2-DISPUTE-001` Lesson-issue internal review and dispute resolution surface
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 3
+**Depends on:** `P1-LESS-002`, `P2-OPS-001`
+
+**Goal**
+
+Implement the internal admin surface for reviewing and resolving lesson-issue disputes that reach `under_review` state, so conflicting participant claims are resolved through explicit, auditable decisions rather than ad hoc manual processes.
+
+**Required source docs**
+
+- `docs/data/lesson-issue-and-dispute-model-v1.md`
+- `docs/architecture/admin-and-moderation-architecture-v1.md`
+- `docs/data/auth-and-authorization-matrix-v1.md`
+- `docs/data/tutor-reliability-thresholds-v1.md`
+- `docs/planning/phase1-payment-scope-decision-v1.md`
+
+**Scope**
+
+- `/internal/disputes`
+- dispute queue filtered by `under_review` state
+- side-by-side view of both participant claims and evidence
+- resolution actions: uphold student claim, uphold tutor claim, split, dismiss
+- consequence execution: refund trigger, payout adjustment, reliability penalty application
+- resolution audit trail
+
+**Out of scope**
+
+- auto-resolved disputes (handled by the lesson-issue model automatically)
+- public-facing dispute UI beyond what the lesson-issue flow already provides
+- legal arbitration tooling
+
+**Acceptance criteria**
+
+- disputes in `under_review` state appear in a prioritized internal queue
+- admins can review both sides before making a resolution decision
+- resolution triggers the correct refund, payout, and reliability consequences per the lesson-issue model
+- all resolution actions are auditable and stateful
+- resolved disputes notify both participants of the outcome
+
+**Verification**
+
+- consequence-correctness review against the lesson-issue model
+- privilege and DTO review
+- notification delivery review
+
+## 11.12 `P2-DSR-001` Data subject request implementation
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 3
+**Depends on:** `P1-DATA-001`, `P2-OPS-002`
+
+**Goal**
+
+Implement the data subject request workflow so access, erasure, and portability requests are handled through explicit internal tooling with correct field-level retention and erasure behavior.
+
+**Required source docs**
+
+- `docs/data/data-subject-request-workflow-v1.md`
+- `docs/data/data-retention-erasure-field-map-v1.md`
+- `docs/architecture/privacy-and-data-retention-architecture-v1.md`
+- `docs/architecture/compliance-and-regulatory-posture-v1.md`
+- `docs/data/privacy-policy-data-inventory-handoff-v1.md`
+
+**Scope**
+
+- `/internal/dsr`
+- DSR intake and tracking queue
+- access request: generate portable data export per the field inventory
+- erasure request: execute field-level erasure per the retention-erasure field map
+- request lifecycle: received → in_progress → completed or rejected
+- audit trail for all DSR actions
+- statutory deadline tracking
+
+**Out of scope**
+
+- self-service account deletion in Phase 2 (may be Phase 3)
+- automated bulk anonymization
+- cross-border legal routing
+
+**Acceptance criteria**
+
+- DSR requests are tracked with explicit status and statutory deadlines
+- access exports include all fields marked as subject-accessible in the privacy inventory
+- erasure correctly nullifies or pseudonymizes fields per the retention-erasure map without breaking referential integrity
+- financial and legal-hold records are preserved per retention policy
+- all DSR actions are auditable
+
+**Verification**
+
+- field-level erasure review against the retention-erasure map
+- data export completeness review against privacy inventory
+- referential integrity review after erasure
+
+## 11.13 `P2-NOTIF-PREF-001` Notification preferences and channel controls
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 2
+**Depends on:** `P1-NOTIF-001`
+
+**Goal**
+
+Implement user-facing notification preferences so students and tutors can control which notification types they receive and through which channels, without losing critical operational notifications.
+
+**Required source docs**
+
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+- `docs/architecture/message-architecture-v1.md`
+- `docs/data/database-schema-outline-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+- `docs/architecture/privacy-and-data-retention-architecture-v1.md`
+
+**Scope**
+
+- notification preference surface in student and tutor settings
+- per-category opt-in/opt-out for non-critical notifications
+- channel selection where multiple channels exist (in-app, email)
+- critical operational notifications remain mandatory and non-dismissable (booking confirmations, payment receipts, lesson cancellations, dispute outcomes)
+- preference persistence and immediate effect on notification dispatch
+
+**Out of scope**
+
+- push notifications (no native mobile in Phase 2)
+- per-conversation mute controls (covered by P2-MSG-001 if needed)
+- notification scheduling or digest mode
+
+**Acceptance criteria**
+
+- users can manage notification preferences from their settings
+- non-critical notifications respect user channel preferences
+- critical notifications are clearly marked as mandatory and cannot be disabled
+- preference changes take effect immediately for subsequent notifications
+- defaults are sensible (all channels on) and explicit
+
+**Verification**
+
+- notification category and criticality review
+- preference persistence and dispatch review
+- critical notification bypass review
+
+## 11.14 `P2-GROW-001` Public browse search scaling and external search activation path
 
 **Status:** `planned`
 **Priority:** `P3`
@@ -691,7 +847,7 @@ Respond to real browse-search scale pressure by activating the approved search-s
 - threshold evidence review
 - contract-parity review
 
-## 11.12 `P2-QUALITY-001` Phase 2 verification and operational hardening pass
+## 11.15 `P2-QUALITY-001` Phase 2 verification and operational hardening pass
 
 **Status:** `ready`
 **Priority:** `P2`

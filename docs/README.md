@@ -69,9 +69,13 @@ If you want the shortest path through the pack:
 41. `docs/planning/service-dependency-baseline-v1.md`
 42. `docs/planning/implementation-backlog-index-v1.md`
 43. `docs/planning/end-to-end-use-case-gap-audit-v1.md`
-44. `docs/planning/phase1-mvp-task-pack-v1.md`
-45. `docs/planning/phase1-5-task-pack-v1.md`
-46. `docs/planning/phase2-task-pack-v1.md`
+44. `docs/planning/phase1-payment-scope-decision-v1.md`
+45. `docs/data/lesson-issue-and-dispute-model-v1.md`
+46. `docs/data/tutor-listing-readiness-model-v1.md`
+47. `docs/data/tutor-reliability-thresholds-v1.md`
+48. `docs/planning/phase1-mvp-task-pack-v1.md`
+49. `docs/planning/phase1-5-task-pack-v1.md`
+50. `docs/planning/phase2-task-pack-v1.md`
 
 ## By Topic
 
@@ -112,6 +116,9 @@ If you want the shortest path through the pack:
 
 ### Data model
 
+- `docs/data/lesson-issue-and-dispute-model-v1.md`
+- `docs/data/tutor-listing-readiness-model-v1.md`
+- `docs/data/tutor-reliability-thresholds-v1.md`
 - `docs/data/database-schema-outline-v1.md`
 - `docs/data/auth-and-authorization-matrix-v1.md`
 - `docs/data/database-rls-boundaries-v1.md`
@@ -172,6 +179,7 @@ If you want the shortest path through the pack:
 
 ### Implementation planning
 
+- `docs/planning/phase1-payment-scope-decision-v1.md`
 - `docs/planning/implementation-readiness-pack-v1.md`
 - `docs/planning/agent-implementation-decision-index-v1.md`
 - `docs/planning/agent-execution-playbook-v1.md`

@@ -59,18 +59,20 @@ Decision update after product review on `2026-04-11`:
 - parent or guardian payer flow is deferred
 - student mobile keeps bottom navigation, while tutor mobile becomes hamburger-driven and desktop-primary
 
-The most important unresolved areas are now:
+The following areas have been resolved since the original audit:
 
-1. exact lesson-issue and dispute object model
-2. final tutor listing gate wording around payout readiness
-3. internal trust thresholds and recovery math tuning
+1. lesson-issue and dispute object model → resolved in `docs/data/lesson-issue-and-dispute-model-v1.md`
+2. tutor listing gate and payout readiness → resolved in `docs/data/tutor-listing-readiness-model-v1.md`
+3. internal trust thresholds and recovery math → resolved in `docs/data/tutor-reliability-thresholds-v1.md`
+4. payment scope and Phase 1 billing → resolved in `docs/planning/phase1-payment-scope-decision-v1.md`
+5. Phase 1 task pack now includes background job infrastructure (`P1-JOBS-001`) and SEO/AI discoverability foundations (`P1-SEO-001`)
+6. Stripe Connect Express onboarding is explicitly quick: pre-fill tutor data, tutor only provides verification docs and bank account
+7. tutor mobile navigation anti-pattern locked in design system (no bottom nav on tutor mobile)
 
-There is also one planning mismatch that should be treated seriously:
+The planning mismatch between architecture and backlog is now resolved:
 
-- `docs/architecture/architecture-discussion-v1.md` explicitly places student payment capture in Phase 1
-- the current phase task packs do not yet contain a real billing or payments task lane
-
-That means the architecture assumes a payment-bearing booking flow, but the implementation backlog does not yet operationalize it.
+- Phase 1 ships real payment (authorization at booking request, capture on tutor acceptance)
+- Phase 1 task pack explicitly includes payment-bearing booking, Stripe Connect quick onboarding, and webhook handling
 
 ## 4. Coverage Matrix
 
@@ -314,28 +316,22 @@ The product promises continuity, but the docs are still light on:
 - Phase 1 should support one-off lessons plus fast rebook
 - recurring series or subscription logic should stay later unless the business model proves it is essential
 
-## 6.4 Default schedule-policy values are not yet canonical
+## 6.4 Default schedule-policy values — resolved
 
-The system models schedule rules well, but it does not yet freeze defaults such as:
+Decision confirmed on `2026-04-13`:
 
-- minimum booking notice
-- buffer between lessons
-- same-day booking allowance
-- default session lengths
-- how reschedule availability is constrained
+- minimum booking notice: **8 hours** — slots closer than 8 hours to lesson start are hidden from the student booking surface
+- all times are always displayed in the **user's local timezone**, for both students and tutors
+- buffer between lessons, default session lengths, and reschedule constraints should be confirmed during booking implementation but the 8-hour minimum notice is canonical
 
-The current hi-fi comps imply some values, but they are not yet canonical policy.
+## 6.5 IA decisions — resolved
 
-## 6.5 A few IA decisions still remain formally open
+All previously open IA decisions were confirmed on `2026-04-13` and locked in `docs/foundations/ia-map-two-sided.md` section 11:
 
-The IA doc still leaves these as open decisions:
-
-- signed-in student `Home` versus `Get Matched` as first destination
-- combined versus separate `Saved` and `Compare`
-- one tutor `Requests and Lessons` hub versus more split navigation
-- combined versus split `Reviews and Outcomes`
-
-These are not blocker-level problems, but they should be deliberately closed before route implementation starts expanding.
+- `Get Matched` is the signed-in student first destination
+- `Saved` and `Compare` are combined (compare lives inside Saved)
+- tutor `Requests and Lessons` is one combined hub
+- `Reviews and Outcomes` remains combined
 
 ## 7. Planning And Canonical-Doc Mismatches
 
@@ -383,12 +379,12 @@ These areas are in good shape:
 
 ## 9. Highest-Priority Decisions To Lock Before Booking And Payment Work
 
-These are the most important remaining decisions:
+The following decisions are now locked:
 
-1. lesson-issue and dispute path
-2. tutor application request-changes and missing-items model
-3. tutor payout onboarding posture and launch-country scope
-4. internal trust thresholds and recovery tuning
+1. lesson-issue and dispute path → locked in `docs/data/lesson-issue-and-dispute-model-v1.md`
+2. tutor application request-changes and missing-items model → `changes_requested` is canonical in the enum glossary (section 8.2)
+3. tutor payout onboarding posture → locked in `docs/planning/phase1-payment-scope-decision-v1.md` (Stripe Connect Express, pre-filled, quick)
+4. internal trust thresholds and recovery tuning → locked in `docs/data/tutor-reliability-thresholds-v1.md`
 
 ## 10. Current Remaining Focus
 

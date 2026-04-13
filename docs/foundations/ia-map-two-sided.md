@@ -450,14 +450,14 @@ Tutor mode should be operationally denser, but not structurally alien.
 
 Public and authenticated areas should share the same design DNA.
 
-## 11. Open IA Decisions To Confirm Later
+## 11. IA Decisions — Resolved
 
-These do not block the IA, but should be resolved during wireframing:
+These decisions were confirmed during product review on `2026-04-13`:
 
-- Should student mode have a dedicated logged-in `Home`, or should `Get Matched` remain the default first destination?
-- Should `Saved` and `Compare` be one combined IA node or two?
-- Should tutor `Requests` and `Lessons` be one combined hub or separate tabs inside the same route?
-- Should `Reviews and Outcomes` remain one area or split into `Reviews` and `Reports` later?
+- `Get Matched` is the default signed-in student first destination. There is no separate logged-in `Home` that competes with it.
+- `Saved` and `Compare` are one combined IA node. Compare lives inside the Saved surface, not as a separate destination. This keeps mobile bottom nav to five items (Home, Match, Lessons, Messages, Saved) with compare functionality accessible from the saved list.
+- Tutor `Requests and Lessons` is one combined hub, not separate navigation entries.
+- `Reviews and Outcomes` remains one combined area. Both are post-lesson tutor content (reviews received and lesson outcomes/reports) and share lesson context. Splitting would add navigational complexity without clear user benefit.
 
 ## 12. What This IA Should Drive Next
 

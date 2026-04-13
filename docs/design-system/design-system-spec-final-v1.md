@@ -425,8 +425,10 @@ They should convert into:
 
 - Public and tablet can keep a larger header with selected links.
 - Phone header should keep brand plus one clear contextual action.
-- Bottom navigation is justified on phone for app-mode student and tutor surfaces.
-- Bottom navigation remains role-specific in destinations, but visually shared.
+- Bottom navigation is justified on phone for app-mode student surfaces.
+- Student mobile uses bottom navigation as the primary navigation model with up to 5 destinations.
+- Tutor mobile must NOT use bottom navigation. Tutor mobile uses a hamburger or drawer navigation model because the tutor IA is wider and tutor usage is desktop-primary.
+- Do not accidentally reintroduce bottom navigation on tutor mobile surfaces during implementation.
 
 ## 7. Shared State System
 
@@ -808,6 +810,7 @@ The final system should explicitly avoid:
 - booking and scheduling as separate visual systems
 - generic CRM tables for tutor students
 - giant dashboard-like onboarding forms
+- bottom navigation on tutor mobile surfaces (tutor uses hamburger or drawer)
 
 ## 15. Standardization Priorities
 
