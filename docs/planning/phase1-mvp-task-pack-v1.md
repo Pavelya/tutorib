@@ -151,41 +151,43 @@ Bad parallel examples:
 
 ## 8. Task Pack Table
 
-| Task id | Status | Priority | Wave | Workstream | Short title |
+**This table is sorted by execution order, not by workstream.** Tasks on the same step can run in parallel. Complete all tasks in a step before moving to the next step.
+
+| Step | Task id | Status | Priority | Wave | Short title |
 | --- | --- | --- | --- | --- | --- |
-| `P1-JOBS-001` | `ready` | `P0` | 1 | infrastructure | Background job and async task infrastructure |
-| `P1-SEO-001` | `ready` | `P0` | 1 | seo | SEO and AI discoverability foundations |
-| `P1-FOUND-001` | `ready` | `P0` | 1 | foundations | App shell and route-family skeleton |
-| `P1-FOUND-002` | `ready` | `P0` | 1 | foundations | Design tokens and primitive component baseline |
-| `P1-FOUND-003` | `ready` | `P1` | 1 | foundations | Shared continuity anchors and common screen states |
-| `P1-AUTH-001` | `ready` | `P0` | 1 | auth | Magic link and Google sign-in entry with callback flow |
-| `P1-AUTH-002` | `ready` | `P0` | 1 | auth | Role selection and authenticated setup routing |
-| `P1-AUTH-003` | `ready` | `P1` | 1 | auth | Google provider safety and branded auth-email setup |
-| `P1-DATA-001` | `ready` | `P0` | 1 | data | Identity, account, and profile schema baseline |
-| `P1-DATA-002` | `ready` | `P0` | 1 | data | Tutor profile, trust, and availability schema baseline |
-| `P1-DATA-003` | `ready` | `P0` | 1 | data | Learning need, match, lesson, and booking schema baseline |
-| `P1-DATA-004` | `ready` | `P0` | 1 | data | Conversation and message schema baseline |
-| `P1-DATA-005` | `ready` | `P1` | 1 | data | Notification, delivery, and legal-notice schema baseline |
-| `P1-PUBLIC-001` | `ready` | `P1` | 1 | public | Public marketing route shell set |
-| `P1-PUBLIC-002` | `ready` | `P1` | 2 | public | Home route implementation |
-| `P1-PUBLIC-003` | `ready` | `P1` | 2 | public | Public tutor profile route and SEO surface |
-| `P1-ACCOUNT-001` | `ready` | `P1` | 2 | account | Shared account routes and legal-notice surfaces |
-| `P1-MATCH-001` | `ready` | `P1` | 2 | match | Match flow route implementation |
-| `P1-MATCH-002` | `ready` | `P1` | 2 | match | Results route and match result cards |
-| `P1-BOOK-001` | `ready` | `P1` | 2 | booking | Booking context route and booking request action |
-| `P1-MSG-001` | `ready` | `P1` | 3 | messages | Shared conversation list and message thread routes |
-| `P1-MSG-002` | `ready` | `P1` | 3 | messages | Message send, unread state, and notification hooks |
-| `P1-NOTIF-001` | `ready` | `P1` | 3 | notifications | In-app lifecycle notifications and legal-update notice flow |
-| `P1-NOTIF-002` | `ready` | `P1` | 3 | notifications | Transactional email delivery and branded email templates |
-| `P1-LESS-001` | `ready` | `P1` | 3 | lessons | Shared lessons route and lesson summary/detail surfaces |
-| `P1-LESS-002` | `ready` | `P1` | 3 | lessons | Lesson actions: join, calendar, cancellation, and issue reporting |
-| `P1-TUTOR-001` | `ready` | `P1` | 4 | tutor | Tutor overview route |
-| `P1-TUTOR-002` | `ready` | `P1` | 4 | tutor | Tutor lessons route |
-| `P1-TUTOR-003` | `ready` | `P1` | 4 | tutor | Tutor schedule route |
-| `P1-TUTOR-004` | `ready` | `P1` | 4 | tutor | Tutor messages route using shared conversation system |
-| `P1-TUTOR-005` | `ready` | `P1` | 4 | tutor | Tutor earnings route and payout-readiness flow |
-| `P1-QUALITY-001` | `ready` | `P2` | 4 | quality | Observability, analytics, and safe logging baseline |
-| `P1-QUALITY-002` | `ready` | `P2` | 4 | quality | Phase 1 release and verification checklist pass |
+| 1 | `P1-FOUND-001` | `ready` | `P0` | 1 | App shell and route-family skeleton |
+| 1 | `P1-DATA-001` | `ready` | `P0` | 1 | Identity, account, and profile schema baseline |
+| 2 | `P1-FOUND-002` | `ready` | `P0` | 1 | Design tokens and primitive component baseline |
+| 2 | `P1-SEO-001` | `ready` | `P0` | 1 | SEO and AI discoverability foundations |
+| 2 | `P1-AUTH-001` | `ready` | `P0` | 1 | Magic link and Google sign-in entry with callback flow |
+| 2 | `P1-JOBS-001` | `ready` | `P0` | 1 | Background job and async task infrastructure |
+| 2 | `P1-DATA-002` | `ready` | `P0` | 1 | Tutor profile, trust, and availability schema baseline |
+| 2 | `P1-DATA-004` | `ready` | `P0` | 1 | Conversation and message schema baseline |
+| 3 | `P1-FOUND-003` | `ready` | `P1` | 1 | Shared continuity anchors and common screen states |
+| 3 | `P1-AUTH-002` | `ready` | `P0` | 1 | Role selection and authenticated setup routing |
+| 3 | `P1-AUTH-003` | `ready` | `P1` | 1 | Google provider safety and branded auth-email setup |
+| 3 | `P1-DATA-003` | `ready` | `P0` | 1 | Learning need, match, lesson, and booking schema baseline |
+| 3 | `P1-DATA-005` | `ready` | `P1` | 1 | Notification, delivery, and legal-notice schema baseline |
+| 4 | `P1-PUBLIC-001` | `ready` | `P1` | 1 | Public marketing route shell set |
+| 5 | `P1-PUBLIC-002` | `ready` | `P1` | 2 | Home route implementation |
+| 5 | `P1-PUBLIC-003` | `ready` | `P1` | 2 | Public tutor profile route and SEO surface |
+| 5 | `P1-MATCH-001` | `ready` | `P1` | 2 | Match flow route implementation |
+| 5 | `P1-ACCOUNT-001` | `ready` | `P1` | 2 | Shared account routes and legal-notice surfaces |
+| 6 | `P1-MATCH-002` | `ready` | `P1` | 2 | Results route and match result cards |
+| 6 | `P1-BOOK-001` | `ready` | `P1` | 2 | Booking context route and booking request action |
+| 7 | `P1-MSG-001` | `ready` | `P1` | 3 | Shared conversation list and message thread routes |
+| 7 | `P1-LESS-001` | `ready` | `P1` | 3 | Shared lessons route and lesson summary/detail surfaces |
+| 7 | `P1-NOTIF-001` | `ready` | `P1` | 3 | In-app lifecycle notifications and legal-update notice flow |
+| 8 | `P1-MSG-002` | `ready` | `P1` | 3 | Message send, unread state, and notification hooks |
+| 8 | `P1-LESS-002` | `ready` | `P1` | 3 | Lesson actions: join, calendar, cancellation, and issue reporting |
+| 8 | `P1-NOTIF-002` | `ready` | `P1` | 3 | Transactional email delivery and branded email templates |
+| 9 | `P1-TUTOR-001` | `ready` | `P1` | 4 | Tutor overview route |
+| 9 | `P1-TUTOR-003` | `ready` | `P1` | 4 | Tutor schedule route |
+| 10 | `P1-TUTOR-002` | `ready` | `P1` | 4 | Tutor lessons route |
+| 10 | `P1-TUTOR-004` | `ready` | `P1` | 4 | Tutor messages route using shared conversation system |
+| 10 | `P1-TUTOR-005` | `ready` | `P1` | 4 | Tutor earnings route and payout-readiness flow |
+| 11 | `P1-QUALITY-001` | `ready` | `P2` | 4 | Observability, analytics, and safe logging baseline |
+| 12 | `P1-QUALITY-002` | `ready` | `P2` | 4 | Phase 1 release and verification checklist pass |
 
 ## 9. Detailed Tasks
 

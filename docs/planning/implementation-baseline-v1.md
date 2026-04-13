@@ -405,6 +405,8 @@ This should align with:
 
 ## 15. Agent Execution Rule
 
+> **Note:** When `CLAUDE.md` exists at the repo root, it is loaded automatically and defines the authoritative execution protocol, read order, and stack identity. The layered model below is the detailed reference. If `CLAUDE.md` and this section conflict, `CLAUDE.md` wins.
+
 This section answers the practical coding question directly.
 
 Future agents should not treat the docs pack as one giant thing to read every time.

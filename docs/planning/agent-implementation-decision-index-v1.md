@@ -88,6 +88,8 @@ If the answer is unclear, read the docs listed in the relevant section below bef
 
 ## 5. Universal Docs To Read First
 
+> **Note:** When `CLAUDE.md` exists at the repo root, it is loaded automatically and already contains the condensed stack, rules, and read protocol. Agents do NOT need to read this full universal list on every task — follow `CLAUDE.md`'s Step 2 read order instead. Use this section only for deep reference or when `CLAUDE.md` does not exist.
+
 For any nontrivial implementation task, read:
 
 - `docs/README.md`
@@ -599,14 +601,14 @@ The canonical phase task-pack set now exists.
 
 ## 13. Final Recommendation
 
-Tutor IB has enough architecture and product material to begin implementation planning.
+> **Note:** When `CLAUDE.md` exists at the repo root, it is the agent entrypoint — not this index. This index remains the authoritative decision-routing reference that `CLAUDE.md` points agents to when they need to find which docs own a specific decision area.
 
-The next operational move is:
+Tutor IB has enough architecture and product material to begin implementation.
 
-- use this index as the agent entrypoint
-- keep the dedicated docs as the source of truth
-- create implementation tasks from small coherent slices
-- require each task to name the docs it used
+The operational model is:
+
+- `CLAUDE.md` is the agent entrypoint (loaded automatically every session)
+- this index is the decision-routing layer (read when a task touches an unfamiliar area)
+- the dedicated source docs remain the source of truth for each decision area
+- the phase task packs define what to build and in what order
 - update docs only when a real decision changes
-
-That gives the future AI agents a practical RAG-style path through the project without forcing them to rediscover the architecture from scratch.

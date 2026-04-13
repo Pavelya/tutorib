@@ -158,17 +158,19 @@ Bad parallel examples:
 
 ## 9. Task Pack Table
 
-| Task id | Status | Priority | Wave | Workstream | Short title |
+**This table is sorted by execution order, not by workstream.** Tasks on the same step can run in parallel. Complete all tasks in a step before moving to the next step.
+
+| Step | Task id | Status | Priority | Wave | Short title |
 | --- | --- | --- | --- | --- | --- |
-| `P15-DATA-001` | `ready` | `P1` | 1 | data | Shortlist and compare state baseline |
-| `P15-COMP-001` | `ready` | `P1` | 1 | compare | Compare entry affordances on student surfaces |
-| `P15-COMP-002` | `ready` | `P1` | 2 | compare | Compare route and decision surface |
-| `P15-STUD-001` | `ready` | `P1` | 3 | tutor_students | Tutor students roster DTO and query path |
-| `P15-STUD-002` | `ready` | `P1` | 3 | tutor_students | Tutor students route and roster surface |
-| `P15-STUD-003` | `draft` | `P1` | 3 | tutor_students | Tutor student relationship detail surface |
-| `P15-SEO-001` | `ready` | `P1` | 2 | seo | Subject and service SEO landing pages |
-| `P15-SAVED-001` | `ready` | `P1` | 1 | saved | Saved tutors persistent surface |
-| `P15-QUALITY-001` | `ready` | `P2` | 4 | quality | Phase 1.5 verification and hardening pass |
+| 1 | `P15-DATA-001` | `ready` | `P1` | 1 | Shortlist and compare state baseline |
+| 1 | `P15-SEO-001` | `ready` | `P1` | 2 | Subject and service SEO landing pages |
+| 1 | `P15-STUD-001` | `ready` | `P1` | 3 | Tutor students roster DTO and query path |
+| 2 | `P15-COMP-001` | `ready` | `P1` | 1 | Compare entry affordances on student surfaces |
+| 2 | `P15-SAVED-001` | `ready` | `P1` | 1 | Saved tutors persistent surface |
+| 2 | `P15-STUD-002` | `ready` | `P1` | 3 | Tutor students route and roster surface |
+| 3 | `P15-COMP-002` | `ready` | `P1` | 2 | Compare route and decision surface |
+| 3 | `P15-STUD-003` | `draft` | `P1` | 3 | Tutor student relationship detail surface |
+| 4 | `P15-QUALITY-001` | `ready` | `P2` | 4 | Phase 1.5 verification and hardening pass |
 
 ## 10. Detailed Tasks
 

@@ -180,23 +180,25 @@ Bad parallel examples:
 
 ## 10. Task Pack Table
 
-| Task id | Status | Priority | Wave | Workstream | Short title |
+**This table is sorted by execution order, not by workstream.** Tasks on the same step can run in parallel. Complete all tasks in a step before moving to the next step.
+
+| Step | Task id | Status | Priority | Wave | Short title |
 | --- | --- | --- | --- | --- | --- |
-| `P2-APPLY-001` | `ready` | `P1` | 1 | supply | Tutor application staged flow and readiness experience |
-| `P2-APPLY-002` | `draft` | `P2` | 1 | internal_ops | Internal tutor review queue and approval decisions |
-| `P2-PROFILE-001` | `draft` | `P1` | 1 | supply | Tutor profile editor and listing publication controls |
-| `P2-MEDIA-001` | `draft` | `P1` | 1 | supply | Tutor credential, media, and intro video management |
-| `P2-TRUST-001` | `ready` | `P1` | 2 | trust | Lesson-linked review capture and publication flow |
-| `P2-REPORT-001` | `draft` | `P1` | 2 | continuity | Lesson reports and post-lesson continuity surfaces |
-| `P2-MSG-001` | `draft` | `P2` | 3 | messages | Rich messaging behaviors wave |
-| `P2-OPS-001` | `draft` | `P2` | 3 | internal_ops | Admin trust and report-management internal surfaces |
-| `P2-OPS-002` | `draft` | `P2` | 3 | internal_ops | Admin user detail and finance intervention surfaces |
-| `P2-OPS-003` | `draft` | `P2` | 3 | internal_ops | Admin reference-data and policy broadcast management |
-| `P2-DISPUTE-001` | `draft` | `P2` | 3 | internal_ops | Lesson-issue internal review and dispute resolution surface |
-| `P2-DSR-001` | `draft` | `P2` | 3 | compliance | Data subject request implementation |
-| `P2-NOTIF-PREF-001` | `draft` | `P2` | 2 | notifications | Notification preferences and channel controls |
-| `P2-GROW-001` | `planned` | `P3` | 4 | growth | Public browse search scaling and external search activation path |
-| `P2-QUALITY-001` | `ready` | `P2` | 4 | quality | Phase 2 verification and operational hardening pass |
+| 1 | `P2-APPLY-001` | `ready` | `P1` | 1 | Tutor application staged flow and readiness experience |
+| 1 | `P2-TRUST-001` | `ready` | `P1` | 2 | Lesson-linked review capture and publication flow |
+| 1 | `P2-REPORT-001` | `draft` | `P1` | 2 | Lesson reports and post-lesson continuity surfaces |
+| 1 | `P2-MSG-001` | `draft` | `P2` | 3 | Rich messaging behaviors wave |
+| 1 | `P2-NOTIF-PREF-001` | `draft` | `P2` | 2 | Notification preferences and channel controls |
+| 2 | `P2-APPLY-002` | `draft` | `P2` | 1 | Internal tutor review queue and approval decisions |
+| 2 | `P2-PROFILE-001` | `draft` | `P1` | 1 | Tutor profile editor and listing publication controls |
+| 2 | `P2-GROW-001` | `planned` | `P3` | 4 | Public browse search scaling and external search activation path |
+| 3 | `P2-MEDIA-001` | `draft` | `P1` | 1 | Tutor credential, media, and intro video management |
+| 3 | `P2-OPS-001` | `draft` | `P2` | 3 | Admin trust and report-management internal surfaces |
+| 3 | `P2-OPS-003` | `draft` | `P2` | 3 | Admin reference-data and policy broadcast management |
+| 4 | `P2-OPS-002` | `draft` | `P2` | 3 | Admin user detail and finance intervention surfaces |
+| 4 | `P2-DISPUTE-001` | `draft` | `P2` | 3 | Lesson-issue internal review and dispute resolution surface |
+| 5 | `P2-DSR-001` | `draft` | `P2` | 3 | Data subject request implementation |
+| 6 | `P2-QUALITY-001` | `ready` | `P2` | 4 | Phase 2 verification and operational hardening pass |
 
 ## 11. Detailed Tasks
 

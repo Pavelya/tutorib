@@ -139,6 +139,8 @@ If multiple agents are used:
 
 ## 8. Agent Read Order
 
+> **Note:** When `CLAUDE.md` exists at the repo root, it is loaded automatically and defines the authoritative read order and execution protocol. The list below is the full reference version. If `CLAUDE.md` and this section conflict, `CLAUDE.md` wins.
+
 For any nontrivial implementation task, the agent should read in this order:
 
 1. `docs/README.md`
@@ -323,9 +325,22 @@ Recommended concise structure:
 - `Verification:` `<commands, manual checks, or not run with reason>`
 - `Notes:` `<assumptions, blockers, or doc updates>`
 
-## 18. Copy-Paste Launch Prompt For Humans
+## 18. Launch Prompt For Humans
 
-Use this prompt pattern when launching an agent on a real implementation task:
+> **Note:** When `CLAUDE.md` exists at the repo root, it is loaded automatically every session. The full execution protocol, read order, rules, and reporting format are already defined there. The long launch prompt below is no longer needed — just say the task ID.
+
+Use this prompt to launch a task:
+
+```text
+Implement <TASK_ID>
+```
+
+`CLAUDE.md` handles everything else: which docs to read, which rules to follow, how to verify, and how to report.
+
+If `CLAUDE.md` does not exist for any reason, use the full prompt below as a fallback:
+
+<details>
+<summary>Full fallback launch prompt (only needed without CLAUDE.md)</summary>
 
 ```text
 Implement task <TASK_ID> from <PHASE_TASK_PACK_PATH>.
@@ -354,6 +369,7 @@ When finished, report:
 3. verification run
 4. blockers, assumptions, or doc mismatches
 ```
+</details>
 
 ## 19. Parallel-Agent Rule
 
