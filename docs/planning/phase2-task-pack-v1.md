@@ -154,7 +154,7 @@ Goal:
 
 Goal:
 
-- support internal review and moderation work, and expand messaging only where the product now clearly benefits
+- support internal admin review and trust work, and expand messaging only where the product now clearly benefits
 
 ## 8.4 Wave 4: Growth and scaling
 
@@ -189,7 +189,9 @@ Bad parallel examples:
 | `P2-TRUST-001` | `ready` | `P1` | 2 | trust | Lesson-linked review capture and publication flow |
 | `P2-REPORT-001` | `draft` | `P1` | 2 | continuity | Lesson reports and post-lesson continuity surfaces |
 | `P2-MSG-001` | `draft` | `P2` | 3 | messages | Rich messaging behaviors wave |
-| `P2-OPS-001` | `draft` | `P2` | 3 | internal_ops | Moderation and report-management internal surfaces |
+| `P2-OPS-001` | `draft` | `P2` | 3 | internal_ops | Admin trust and report-management internal surfaces |
+| `P2-OPS-002` | `draft` | `P2` | 3 | internal_ops | Admin user detail and finance intervention surfaces |
+| `P2-OPS-003` | `draft` | `P2` | 3 | internal_ops | Admin reference-data and policy broadcast management |
 | `P2-GROW-001` | `planned` | `P3` | 4 | growth | Public browse search scaling and external search activation path |
 | `P2-QUALITY-001` | `ready` | `P2` | 4 | quality | Phase 2 verification and operational hardening pass |
 
@@ -514,7 +516,7 @@ Add the first richer messaging behaviors that materially improve conversation fe
 - Realtime/privacy review
 - phased-scope review against the message architecture
 
-## 11.8 `P2-OPS-001` Moderation and report-management internal surfaces
+## 11.8 `P2-OPS-001` Admin trust and report-management internal surfaces
 
 **Status:** `draft`
 **Priority:** `P2`
@@ -523,7 +525,7 @@ Add the first richer messaging behaviors that materially improve conversation fe
 
 **Goal**
 
-Implement the first internal report and moderation surfaces so abuse reports, blocks, and trust-and-safety workflows are handled inside clear privileged boundaries rather than ad hoc manual processes.
+Implement the first internal admin trust surfaces so abuse reports, blocks, and trust workflows are handled inside clear privileged boundaries rather than ad hoc manual processes.
 
 **Required source docs**
 
@@ -538,28 +540,114 @@ Implement the first internal report and moderation surfaces so abuse reports, bl
 - `/internal/moderation`
 - report queue and case handling
 - block/report review context
-- moderation case lifecycle visibility
+- lesson-issue case review for conflicting claims
+- trust-case lifecycle visibility
 - explicit internal action boundaries
 
 **Out of scope**
 
 - one giant internal everything-app
 - generalized customer-support tooling
-- automated moderation judgments without explicit review policy
+- automated trust judgments without explicit review policy
 
 **Acceptance criteria**
 
-- moderation surfaces stay inside privileged route and DTO boundaries
+- internal trust surfaces stay inside privileged route and DTO boundaries
 - actions are auditable and stateful
 - sensitive fields are more restricted than ordinary support data
 - block and report workflows remain consistent with the message and trust architectures
+- lesson-issue review outcomes can trigger the approved refund, payout, and notification paths
 
 **Verification**
 
 - privilege and DTO review
-- moderation state-transition review
+- trust state-transition review
 
-## 11.9 `P2-GROW-001` Public browse search scaling and external search activation path
+## 11.9 `P2-OPS-002` Admin user detail and finance intervention surfaces
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 3
+**Depends on:** `P1-DATA-001`, `P1-TUTOR-005`, `P2-OPS-001`
+
+**Goal**
+
+Implement the internal admin user-detail and finance-intervention surfaces so account restrictions, payout holds, and case-driven user support can be handled through explicit internal tools.
+
+**Required source docs**
+
+- `docs/architecture/admin-and-moderation-architecture-v1.md`
+- `docs/data/auth-and-authorization-matrix-v1.md`
+- `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+- `docs/architecture/route-layout-implementation-map-v1.md`
+
+**Scope**
+
+- `/internal/users/[id]`
+- account state and role-safe internal user detail
+- payout hold or finance-anomaly intervention record
+- shaped internal action history
+
+**Out of scope**
+
+- raw database browsing
+- bulk support queue tooling
+
+**Acceptance criteria**
+
+- admins can inspect and act on user-state issues through scoped DTOs
+- payout or finance interventions remain auditable and explicit
+- internal pages follow the approved 404 rule for unauthorized access
+
+**Verification**
+
+- DTO and privilege review
+- finance-intervention state review
+
+## 11.10 `P2-OPS-003` Admin reference-data and policy broadcast management
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 3
+**Depends on:** `P1-DATA-005`, `P2-APPLY-002`
+
+**Goal**
+
+Implement the internal admin surface for managing canonical reference data and publishing policy broadcasts so shared vocabularies and legal updates are not maintained through ad hoc code edits.
+
+**Required source docs**
+
+- `docs/data/reference-data-governance-v1.md`
+- `docs/data/database-schema-outline-v1.md`
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+- `docs/architecture/route-layout-implementation-map-v1.md`
+- `docs/design-system/design-system-spec-final-v1.md`
+
+**Scope**
+
+- `/internal/reference-data`
+- admin CRUD for subjects, subject focus areas, languages, countries, meeting providers, and video media providers
+- policy broadcast publish action for terms or privacy updates
+- audit trail expectations for internal changes
+
+**Out of scope**
+
+- localization management
+- broad CMS ambitions
+
+**Acceptance criteria**
+
+- shared product vocabularies can be managed inside the internal admin surface
+- reference changes remain canonical and auditable
+- publishing a policy update can trigger the approved email, in-app, and post-login notice flow
+
+**Verification**
+
+- reference-data workflow review
+- legal-broadcast workflow review
+
+## 11.11 `P2-GROW-001` Public browse search scaling and external search activation path
 
 **Status:** `planned`
 **Priority:** `P3`
@@ -603,7 +691,7 @@ Respond to real browse-search scale pressure by activating the approved search-s
 - threshold evidence review
 - contract-parity review
 
-## 11.10 `P2-QUALITY-001` Phase 2 verification and operational hardening pass
+## 11.12 `P2-QUALITY-001` Phase 2 verification and operational hardening pass
 
 **Status:** `ready`
 **Priority:** `P2`

@@ -183,7 +183,7 @@ Minor-aware rule:
 Use this sequence for account-level deletion or meaningful privacy-erasure requests.
 
 1. Confirm identity and request scope.
-2. Classify role scope: student, tutor, admin/moderator, payer, or multiple roles.
+2. Classify role scope: student, tutor, admin, payer, or multiple roles.
 3. Check legal, financial, dispute, safety, and moderation holds.
 4. Remove public exposure first: public routes, sitemap eligibility, projections, structured data, and external search removal workflow where relevant.
 5. Remove or detach storage objects and public media references.
@@ -295,7 +295,7 @@ Sensitive fields:
 
 Privacy class:
 
-- `P2`, with higher sensitivity for admin/moderator roles
+- `P2`, with higher sensitivity for admin roles
 
 Default retention:
 
@@ -309,7 +309,7 @@ Erasure posture:
 
 Do not:
 
-- erase admin/moderator action context without an audit review
+- erase admin action context without an audit review
 
 ## 12. `student_profiles`
 
@@ -1167,7 +1167,7 @@ If a user is both student and tutor:
 - do not assume student deletion implies tutor public-data deletion unless request scope includes both or account deletion is complete
 - do not preserve a public tutor profile after full account deletion unless there is an explicit business/legal reason and user-facing policy supports it
 
-## 36.4 Admin or moderator deletion
+## 36.4 Admin deletion
 
 Primary actions:
 

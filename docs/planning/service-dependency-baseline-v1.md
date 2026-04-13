@@ -204,9 +204,10 @@ Implication for Tutor IB:
 | Runtime logs and request debugging | `Vercel Runtime Logs` via shared app logger | no extra logging package by default | required from scaffold | use one internal `appLogger` wrapper over console methods |
 | Database, auth, storage, realtime | `Supabase` | `@supabase/supabase-js`, `@supabase/ssr` | required from scaffold | single managed backend boundary for Postgres, Auth, Storage, and Realtime |
 | SQL access | internal query layer on Supabase Postgres | `drizzle-orm`, `drizzle-kit`, `postgres` | required from scaffold | already chosen in `implementation-baseline-v1.md` |
-| Magic link and Google login | `Supabase Auth` | same Supabase packages as above | install-ready from scaffold | no Auth.js, Clerk, Firebase Auth, or Auth0 baseline |
+| Magic link and Google login | `Supabase Auth` | same Supabase packages as above | install-ready from scaffold | callback allowlist and Google provider config must follow the shared auth boundary; no Auth.js, Clerk, Firebase Auth, or Auth0 baseline |
 | Auth email delivery | `Supabase Auth` with `Resend` SMTP | no app SMTP package required | configure before public auth testing | default Supabase SMTP is not production-ready |
-| App transactional email | `Resend` API | `resend` | install when the first app-originated email task lands | use for reminders, message alerts, support replies, and similar transactional sends |
+| App transactional email | `Resend` API | `resend` | install when the first app-originated email task lands | use for lesson lifecycle, tutor application, payout, legal, and similar transactional sends |
+| Branded app email templates | `React Email` rendered through the app email service | `@react-email/components`, `@react-email/render` | install with the first transactional email task | keep email templates brand-aligned but email-safe; do not send raw provider HTML from random features |
 | Product telemetry | `PostHog` | `posthog-js`, `posthog-node` | install when telemetry tasks land | use one internal analytics adapter instead of vendor calls scattered through UI code |
 | Search discoverability monitoring | `Google Search Console` | none | operational only | no runtime SDK needed |
 | Public browse search | internal Postgres-backed read model | no extra vendor SDK | required by search implementation | no Algolia dependency at launch |
@@ -264,6 +265,7 @@ Practical examples:
 - do not install `stripe` until a payment task enters active scope
 - do not install `posthog-js` and `posthog-node` until telemetry work actually starts
 - do not install `resend` until app-originated transactional email enters scope
+- do not install React Email packages until branded app email templates enter scope
 - do not install `@vercel/analytics` and `@vercel/speed-insights` until public-route measurement work lands
 
 After a package is installed:
@@ -282,6 +284,7 @@ Recommended boundary pattern:
 
 - auth helpers own Supabase session and auth-entry behavior
 - email service owns Resend usage
+- email service owns React Email template rendering
 - billing service owns Stripe usage
 - analytics service owns PostHog event mapping
 - logger owns structured server logging

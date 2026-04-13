@@ -328,7 +328,7 @@ RLS posture:
 
 - enabled if still in exposed schema
 - owner limited read
-- admin/moderator review access only
+- admin review access only
 - never public
 
 Preferred posture:
@@ -495,7 +495,7 @@ Boundary type:
 
 RLS posture:
 
-- if exposed, very narrow reporter and moderator/admin policies only
+- if exposed, very narrow reporter and admin policies only
 
 Preferred posture:
 
@@ -837,7 +837,7 @@ These rules should be assumed unless explicitly opened:
 - students cannot read other students' lessons
 - non-participants cannot read conversation rows
 - public users cannot inspect raw availability rules
-- moderators do not automatically gain read access to every operational table
+- admins should still get only the internal tables their action family requires
 
 ## 16. AI-Agent Implementation Rules
 

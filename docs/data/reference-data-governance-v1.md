@@ -58,7 +58,7 @@ It does not define:
 
 - final UI labels for every surface
 - the final localization system
-- the exact admin UI for editing approved taxonomies later
+- the final post-MVP internal tooling split beyond the MVP `admin` role
 
 Those can come later.
 
@@ -83,6 +83,7 @@ Good examples for Tutor IB:
 - `subjects`
 - `subject_focus_areas`
 - `languages`
+- `countries`
 - `meeting_providers`
 - `video_media_providers`
 
@@ -266,11 +267,36 @@ Purpose:
 
 - supported external meeting providers for lesson access
 
-## 11.5 `video_media_providers`
+## 11.4 `countries`
+
+Purpose:
+
+- canonical country vocabulary reused by tutor payout-readiness, admin reference management, and any country-aware operational filtering
+
+## 11.5 `meeting_providers`
+
+Purpose:
+
+- supported external meeting providers for lesson access
+
+## 11.6 `video_media_providers`
 
 Purpose:
 
 - supported external media providers for public tutor intro videos
+
+## 13. Internal Admin Editing Rule
+
+MVP internal editing of reference data is `admin`-only.
+
+The initial internal admin surface should manage at least:
+
+- subjects
+- subject focus areas
+- languages
+- countries
+- meeting providers
+- video media providers
 
 ## 12. Usage Conventions In Queries And UI
 

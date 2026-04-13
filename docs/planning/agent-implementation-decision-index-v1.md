@@ -118,8 +118,8 @@ For public route tasks, also read:
 | --- | --- |
 | Task execution workflow | `docs/planning/agent-execution-playbook-v1.md`, `docs/planning/agent-implementation-decision-index-v1.md`, `docs/planning/implementation-task-template-v1.md` |
 | Engineering guardrails or repo policy | `docs/planning/engineering-guardrails-v1.md`, `docs/planning/implementation-baseline-v1.md`, `docs/planning/service-dependency-baseline-v1.md` |
-| Product direction or scope | `docs/research/ui-ux-research-fresh-start.md`, `docs/research/ui-ux-research-two-sided-ecosystem.md`, `docs/planning/implementation-readiness-pack-v1.md` |
-| Shared object or IA decision | `docs/foundations/ux-object-model.md`, `docs/foundations/ia-map-two-sided.md`, `docs/foundations/service-blueprint-two-sided.md` |
+| Product direction or scope | `docs/research/ui-ux-research-fresh-start.md`, `docs/research/ui-ux-research-two-sided-ecosystem.md`, `docs/planning/implementation-readiness-pack-v1.md`, `docs/foundations/cross-role-journey-inventory-v1.md` |
+| Shared object or IA decision | `docs/foundations/ux-object-model.md`, `docs/foundations/ia-map-two-sided.md`, `docs/foundations/service-blueprint-two-sided.md`, `docs/foundations/cross-role-journey-inventory-v1.md` |
 | Page, route, or layout implementation | `docs/architecture/route-layout-implementation-map-v1.md`, `docs/architecture/architecture-discussion-v1.md`, `docs/planning/implementation-readiness-pack-v1.md` |
 | Visual UI or component implementation | `docs/design-system/design-system-spec-final-v1.md`, `docs/design-system/component-specs-core-v1.md`, `docs/design-system/component-specs-phase2-v1.md` |
 | Responsive or mobile UI | `docs/visual-design/hi-fi-key-screen-comps-wave2-v1.html`, `docs/visual-design/hi-fi-key-screen-review-guide-wave2-v1.md`, `docs/design-system/design-system-spec-final-v1.md` |
@@ -162,6 +162,7 @@ Owned by:
 - `docs/research/ui-ux-research-fresh-start.md`
 - `docs/research/ui-ux-research-two-sided-ecosystem.md`
 - `docs/foundations/service-blueprint-two-sided.md`
+- `docs/foundations/cross-role-journey-inventory-v1.md`
 - `docs/foundations/ux-object-model.md`
 - `docs/foundations/ia-map-two-sided.md`
 

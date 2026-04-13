@@ -346,7 +346,7 @@ Supported role scopes:
 - `tutor_scope`
 - `payer_scope`
 - `guardian_scope`
-- `admin_or_moderator_scope`
+- `admin_scope`
 - `multi_role_scope`
 - `unknown_or_unverified_scope`
 
@@ -354,7 +354,7 @@ Rules:
 
 - a student data request should not automatically delete tutor public data on the same account unless the request is full account deletion or scope is clarified
 - a tutor deletion request should immediately address public tutor exposure if the public profile is in scope
-- an admin/moderator deletion request must preserve privileged action audit trails where required
+- an admin deletion request must preserve privileged action audit trails where required
 - payer-related requests must account for financial records and Stripe references
 - guardian requests require proof of authority before student data is disclosed
 

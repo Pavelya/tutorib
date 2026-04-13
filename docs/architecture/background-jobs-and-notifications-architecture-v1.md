@@ -273,7 +273,7 @@ Later channels can include:
 
 Phase 1 should focus on a small set of high-signal product notifications:
 
-- new message email and in-app alert
+- new message in-app alert only
 - lesson request submitted
 - lesson accepted and payment captured
 - lesson declined and payment authorization released
@@ -287,6 +287,12 @@ Phase 1 should focus on a small set of high-signal product notifications:
 - tutor application changes requested, approved, or rejected update
 - payout processed
 - terms or privacy update
+
+Channel rule for MVP:
+
+- new chat-message alerts stay in-app only
+- lesson lifecycle, tutor application, payout, and legal notices send both in-app and email
+- terms or privacy updates also trigger a visible post-login notice so the update is not hidden only inside the bell surface
 
 ## 8.6 Auth-email exception
 
@@ -302,6 +308,33 @@ Use a simple product rule:
 
 - required transactional notifications send by policy
 - optional engagement notifications can arrive later as a separate preference layer
+
+## 8.8 Branded email-template rule
+
+Tutor IB transactional emails should use a branded template system that derives from the main design language without trying to mirror the app pixel-for-pixel.
+
+Required traits:
+
+- Tutor IB brand name, typography direction, and color family stay recognizable
+- layouts stay email-safe and conservative
+- primary CTA is singular and obvious
+- legal, payout, and booking emails link back to authenticated product surfaces for detail
+- message-body notifications should not send full chat content by email in MVP
+
+## 8.9 Legal-update visibility rule
+
+When terms or privacy content is updated, the system should:
+
+- create an in-app notification
+- send the required transactional email
+- show a visible notice after the next login
+
+Default MVP behavior:
+
+- show a post-login modal or top-level blocking notice until the user opens the latest policy update
+- keep the legal update available later in Notifications
+
+If a future policy version explicitly requires acknowledgement, the product can escalate this into a stronger acknowledgement gate.
 
 ## 9. Background Job Architecture
 
@@ -518,6 +551,8 @@ than the feature actually requires.
 Transactional emails should avoid unnecessary sensitive detail.
 
 Especially for student-related flows, email content should be conservative and link users back into authenticated product surfaces for detail when appropriate.
+
+They should also reuse the approved branded email template system rather than one-off provider HTML.
 
 ## 14. Observability Architecture For Async Work
 

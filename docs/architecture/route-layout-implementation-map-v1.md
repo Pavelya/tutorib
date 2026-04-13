@@ -146,12 +146,14 @@ src/app/
     schedule/page.tsx
     messages/page.tsx
     students/page.tsx
+    earnings/page.tsx
 
   internal/
     layout.tsx
     page.tsx
     tutor-reviews/page.tsx
     moderation/page.tsx
+    reference-data/page.tsx
     users/[id]/page.tsx
 
   api/
@@ -290,6 +292,7 @@ Examples:
 - `/tutor/schedule`
 - `/tutor/messages`
 - `/tutor/students`
+- `/tutor/earnings`
 
 Route class:
 
@@ -310,6 +313,7 @@ Examples:
 - `/internal`
 - `/internal/tutor-reviews`
 - `/internal/moderation`
+- `/internal/reference-data`
 - `/internal/users/[id]`
 
 Route class:
@@ -447,7 +451,7 @@ Recommended coarse rules:
 - `student_active` -> allowed on student routes and shared account routes
 - `tutor_pending_review` -> allowed on `/tutor/apply` and limited tutor setup surfaces
 - `tutor_active` -> allowed on full tutor routes
-- `admin` and `moderator` -> internal routes only when explicitly granted
+- `admin` -> internal routes only when explicitly granted
 
 ## 11. Metadata, Robots, And Route-Class Rules
 
@@ -498,6 +502,14 @@ Dynamic public routes should use route-local `not-found.tsx` where a missing or 
 The clearest phase 1 case is:
 
 - `src/app/(public)/tutors/[slug]/not-found.tsx`
+
+Private and internal routes should follow the same outward security posture.
+
+If the actor lacks permission to view a route or object detail page, the route should render `notFound()` or an equivalent 404 response instead of a visible permission explanation.
+
+Exception:
+
+- explicit account-state flows such as limited or suspended access can still show shaped restriction messaging on their own safe route
 
 ## 12.5 `template.tsx` posture
 

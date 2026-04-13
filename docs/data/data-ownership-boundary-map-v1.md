@@ -198,8 +198,8 @@ Rules:
 | Data family | Source label | Domain owner | Primary mutation authority | Read exposure |
 | --- | --- | --- | --- | --- |
 | `auth.users` | provider | Supabase Auth | Supabase Auth | server/auth integration only |
-| `app_users` | canonical | accounts | auth resolution and account service | self, admin, limited moderator |
-| `user_roles` | canonical | accounts | role/admin service | self inspection, admin, limited moderator |
+| `app_users` | canonical | accounts | auth resolution and account service | self, admin |
+| `user_roles` | canonical | accounts | role/admin service | self inspection, admin |
 | `student_profiles` | canonical | students | student profile service | self, admin, shaped tutor context |
 | `tutor_profiles` | canonical | tutors | tutor profile service, admin listing service | owner, admin, public projection |
 
@@ -216,7 +216,7 @@ Rules:
 | --- | --- | --- | --- | --- |
 | `tutor_subject_capabilities` | relationship | tutors | tutor profile service | owner, admin, public-safe projection |
 | `tutor_language_capabilities` | relationship | tutors | tutor profile service | owner, admin, public-safe projection |
-| `tutor_credentials` | canonical/private evidence | tutors and trust review | tutor upload flow, admin/moderator review | owner limited, internal full, never public raw |
+| `tutor_credentials` | canonical/private evidence | tutors and trust review | tutor upload flow, admin review | owner limited, internal full, never public raw |
 | intro video fields | canonical public media reference | tutors | tutor profile service | public only when approved/listable |
 
 Rules:
@@ -259,7 +259,7 @@ Rules:
 
 | Data family | Source label | Domain owner | Primary mutation authority | Read exposure |
 | --- | --- | --- | --- | --- |
-| `lessons` | canonical | lessons | lesson service | lesson participants, admin, limited moderator |
+| `lessons` | canonical | lessons | lesson service | lesson participants, admin |
 | lesson snapshot fields | snapshot | lessons | lesson service at booking/update boundary | lesson participants, admin |
 | `lesson_status_history` | canonical audit/history | lessons | lesson service | shaped participant history, admin |
 | `lesson_meeting_access` | canonical access record | lessons | lesson service | lesson participants, admin |
@@ -281,7 +281,7 @@ Rules:
 | `messages` | canonical | conversations | message send/edit/remove service | participants, limited moderation |
 | `message_reads` | relationship/state | conversations | read-state service | self/participant scoped |
 | `user_blocks` | canonical interaction rule | reports/trust with conversations input | block service | blocker, limited product disclosure, internal |
-| `abuse_reports` | canonical trust intake | reports/moderation | report service | reporter limited, moderator/admin full |
+| `abuse_reports` | canonical trust intake | reports/moderation | report service | reporter limited, admin full |
 
 Rules:
 
@@ -294,7 +294,7 @@ Rules:
 | Data family | Source label | Domain owner | Primary mutation authority | Read exposure |
 | --- | --- | --- | --- | --- |
 | `reviews` | canonical evidence | reviews | review service, moderation status service | published public-safe, reviewer, tutor shaped, internal |
-| `tutor_reliability_events` | canonical internal signal | trust/reviews | system/admin/moderator service | internal only by default |
+| `tutor_reliability_events` | canonical internal signal | trust/reviews | system/admin service | internal only by default |
 | `tutor_rating_snapshot` | projection | reviews/trust | projection refresh path | public-safe derived fields |
 | `tutor_trust_snapshot` | projection | reviews/trust | projection refresh path | split public-safe and internal signals |
 
@@ -339,8 +339,8 @@ Rules:
 | Data family | Source label | Domain owner | Primary mutation authority | Read exposure |
 | --- | --- | --- | --- | --- |
 | `tutor_application_reviews` | internal review record | tutors/admin | admin or approved reviewer service | internal, applicant only through shaped status |
-| `moderation_cases` | internal case record | moderation | moderator/admin service | internal only |
-| `moderation_case_events` | internal case timeline | moderation | moderator/admin service | internal only |
+| `moderation_cases` | internal case record | moderation | admin service | internal only |
+| `moderation_case_events` | internal case timeline | moderation | admin service | internal only |
 | `admin_action_logs` | internal audit record | admin/platform | system/server privileged flows | highly restricted internal |
 
 Rules:

@@ -158,23 +158,30 @@ Bad parallel examples:
 | `P1-FOUND-003` | `ready` | `P1` | 1 | foundations | Shared continuity anchors and common screen states |
 | `P1-AUTH-001` | `ready` | `P0` | 1 | auth | Magic link and Google sign-in entry with callback flow |
 | `P1-AUTH-002` | `ready` | `P0` | 1 | auth | Role selection and authenticated setup routing |
+| `P1-AUTH-003` | `ready` | `P1` | 1 | auth | Google provider safety and branded auth-email setup |
 | `P1-DATA-001` | `ready` | `P0` | 1 | data | Identity, account, and profile schema baseline |
 | `P1-DATA-002` | `ready` | `P0` | 1 | data | Tutor profile, trust, and availability schema baseline |
 | `P1-DATA-003` | `ready` | `P0` | 1 | data | Learning need, match, lesson, and booking schema baseline |
 | `P1-DATA-004` | `ready` | `P0` | 1 | data | Conversation and message schema baseline |
+| `P1-DATA-005` | `ready` | `P1` | 1 | data | Notification, delivery, and legal-notice schema baseline |
 | `P1-PUBLIC-001` | `ready` | `P1` | 1 | public | Public marketing route shell set |
 | `P1-PUBLIC-002` | `ready` | `P1` | 2 | public | Home route implementation |
 | `P1-PUBLIC-003` | `ready` | `P1` | 2 | public | Public tutor profile route and SEO surface |
+| `P1-ACCOUNT-001` | `ready` | `P1` | 2 | account | Shared account routes and legal-notice surfaces |
 | `P1-MATCH-001` | `ready` | `P1` | 2 | match | Match flow route implementation |
 | `P1-MATCH-002` | `ready` | `P1` | 2 | match | Results route and match result cards |
 | `P1-BOOK-001` | `ready` | `P1` | 2 | booking | Booking context route and booking request action |
 | `P1-MSG-001` | `ready` | `P1` | 3 | messages | Shared conversation list and message thread routes |
 | `P1-MSG-002` | `ready` | `P1` | 3 | messages | Message send, unread state, and notification hooks |
+| `P1-NOTIF-001` | `ready` | `P1` | 3 | notifications | In-app lifecycle notifications and legal-update notice flow |
+| `P1-NOTIF-002` | `ready` | `P1` | 3 | notifications | Transactional email delivery and branded email templates |
 | `P1-LESS-001` | `ready` | `P1` | 3 | lessons | Shared lessons route and lesson summary/detail surfaces |
+| `P1-LESS-002` | `ready` | `P1` | 3 | lessons | Lesson actions: join, calendar, cancellation, and issue reporting |
 | `P1-TUTOR-001` | `ready` | `P1` | 4 | tutor | Tutor overview route |
 | `P1-TUTOR-002` | `ready` | `P1` | 4 | tutor | Tutor lessons route |
 | `P1-TUTOR-003` | `ready` | `P1` | 4 | tutor | Tutor schedule route |
 | `P1-TUTOR-004` | `ready` | `P1` | 4 | tutor | Tutor messages route using shared conversation system |
+| `P1-TUTOR-005` | `ready` | `P1` | 4 | tutor | Tutor earnings route and payout-readiness flow |
 | `P1-QUALITY-001` | `ready` | `P2` | 4 | quality | Observability, analytics, and safe logging baseline |
 | `P1-QUALITY-002` | `ready` | `P2` | 4 | quality | Phase 1 release and verification checklist pass |
 
@@ -627,6 +634,7 @@ Implement the Phase 1 home route using the approved hi-fi direction, the shared 
 
 - `/`
 - hero, trust framing, core CTA flow, and supporting content blocks
+- signed-in student continuation state on the same home route
 - route metadata and structured data as applicable
 
 **Out of scope**
@@ -638,6 +646,7 @@ Implement the Phase 1 home route using the approved hi-fi direction, the shared 
 
 - home page follows the approved visual and product direction
 - route communicates the matching-first proposition rather than a generic marketplace feel
+- signed-in students can resume from the home route without being dropped into a blank public-only experience
 - public-route SEO acceptance basics are satisfied
 
 **Verification**
@@ -814,6 +823,7 @@ Implement the booking context route and the first booking request action so a st
 - booking request creates an authorization hold without requiring the student to monitor tutor approval manually
 - tutor acceptance can capture the existing authorization
 - tutor decline or request expiry can release the authorization cleanly
+- request expiry timing and release behavior are explicit in the booking boundary
 - booking request result is minimal and route-safe
 
 **Verification**
@@ -844,6 +854,7 @@ Implement the shared conversation list and thread UI for the student-side messag
 - `/messages`
 - conversation list shell
 - thread view
+- block and report entry points inside the thread experience
 - empty and selected states
 
 **Out of scope**
@@ -857,6 +868,8 @@ Implement the shared conversation list and thread UI for the student-side messag
 - the route uses shared message objects and shared conversation shell patterns
 - only participant-scoped DTOs are used
 - empty, loading, and denied-access states are explicit
+- unauthorized thread access resolves through the approved 404 posture
+- student-started conversation rules remain compatible with the shared tutor reply flow
 
 **Verification**
 
@@ -885,7 +898,7 @@ Implement the message send mutation, unread-state updates, and the first notific
 
 - send message Server Action
 - unread state updates
-- minimal new-message notification trigger
+- minimal in-app new-message notification trigger
 - safe logging and audit posture
 
 **Out of scope**
@@ -899,6 +912,7 @@ Implement the message send mutation, unread-state updates, and the first notific
 - non-participants cannot send messages
 - message body is persisted through the approved domain boundary
 - unread state updates correctly for the participant model
+- new-message activity stays inside the chat and in-app notification model for MVP
 - notification hooks do not leak message body into logs or analytics
 
 **Verification**
@@ -1011,7 +1025,8 @@ Implement the tutor-side lessons route using the shared lesson domain with tutor
 
 - `/tutor/lessons`
 - tutor lesson list and detail views
-- tutor-facing action affordances that are already in Phase 1 scope
+- tutor-facing request accept or decline actions that are already in Phase 1 scope
+- clear pending, confirmed, expired, cancelled, and issue-state language
 
 **Out of scope**
 
@@ -1023,6 +1038,7 @@ Implement the tutor-side lessons route using the shared lesson domain with tutor
 - tutor lessons reuse the shared lesson object model
 - tutor-specific route chrome does not introduce a second UI system
 - role-safe tutor lesson DTOs are used
+- tutor can review and act on pending requests without leaving the shared lesson hub
 
 **Verification**
 
@@ -1052,6 +1068,7 @@ Implement the tutor schedule route for viewing and editing availability/schedule
 - `/tutor/schedule`
 - availability and schedule policy reads
 - availability update mutation boundary where needed for Phase 1
+- default meeting-link settings needed for lesson operations
 
 **Out of scope**
 
@@ -1063,6 +1080,7 @@ Implement the tutor schedule route for viewing and editing availability/schedule
 - tutor can view and update the basic schedule/availability model
 - updates follow the approved Server Action boundary
 - schedule UI matches the approved shared schedule patterns
+- default meeting-link settings are captured through the approved tutor-owned boundary
 
 **Verification**
 
@@ -1184,6 +1202,302 @@ Run the final Phase 1 verification pass across routing, accessibility, SEO, DTO 
 **Verification**
 
 - checklist-driven review across the approved quality docs
+
+## 9.25 `P1-AUTH-003` Google provider safety and branded auth-email setup
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 1
+**Depends on:** `P1-AUTH-001`
+
+**Goal**
+
+Implement the provider-side and callback-safety parts of shared authentication so Google sign-in, magic links, redirect handling, and branded auth emails are configured through one explicit boundary instead of scattered setup decisions.
+
+**Required source docs**
+
+- `docs/architecture/architecture-discussion-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+- `docs/architecture/security-architecture-v1.md`
+
+**Scope**
+
+- Google provider configuration expectations
+- callback and return-path allowlist behavior
+- failure-state handling for expired links and provider callback errors
+- branded auth email setup boundary for Supabase-managed auth emails
+
+**Out of scope**
+
+- account settings
+- app-originated transactional email templates
+
+**Acceptance criteria**
+
+- Google and magic-link flows still converge into one shared auth path
+- redirect and callback behavior is restricted to approved return paths
+- auth failure states are shaped and explicit
+- auth emails are treated as branded Tutor IB auth surfaces, not ignored provider defaults
+
+**Verification**
+
+- Google callback safety review
+- auth email and error-state review
+
+## 9.26 `P1-DATA-005` Notification, delivery, and legal-notice schema baseline
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 1
+**Depends on:** `P1-DATA-001`
+
+**Goal**
+
+Create the data foundations for in-app notifications, outbound delivery tracking, and legal-notice visibility so lifecycle communication does not become an ad hoc side effect.
+
+**Required source docs**
+
+- `docs/data/database-schema-outline-v1.md`
+- `docs/data/database-enum-and-status-glossary-v1.md`
+- `docs/data/data-ownership-boundary-map-v1.md`
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+
+**Scope**
+
+- notification source tables
+- notification delivery tracking
+- legal-notice version and receipt records
+- async job visibility objects where they are part of the notification boundary
+
+**Out of scope**
+
+- final email copy
+- push notifications
+
+**Acceptance criteria**
+
+- in-app notifications remain the canonical product object
+- email delivery is tracked separately from canonical notification state
+- legal updates can be shown and later proven as seen or acknowledged
+
+**Verification**
+
+- schema review
+- notification object-boundary review
+
+## 9.27 `P1-ACCOUNT-001` Shared account routes and legal-notice surfaces
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 2
+**Depends on:** `P1-AUTH-002`, `P1-DATA-001`, `P1-DATA-005`, `P1-FOUND-003`
+
+**Goal**
+
+Implement the shared account routes so student and tutor use the same account shell for settings, notifications, privacy, billing history, and required legal updates.
+
+**Required source docs**
+
+- `docs/architecture/route-layout-implementation-map-v1.md`
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+
+**Scope**
+
+- `/settings`
+- `/notifications`
+- `/privacy`
+- `/billing`
+- post-login legal-update notice surface
+
+**Out of scope**
+
+- tutor operational earnings route
+- advanced preference center
+
+**Acceptance criteria**
+
+- shared account routes work for both student and tutor without splitting the UI system
+- Notifications clearly separate product notifications from tutor-student chat
+- legal updates are visible outside the bell surface through the approved post-login notice pattern
+- unauthorized account-route access follows the approved 404 posture where applicable
+
+**Verification**
+
+- shared-account route review
+- legal-notice visibility review
+
+## 9.28 `P1-NOTIF-001` In-app lifecycle notifications and legal-update notice flow
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 3
+**Depends on:** `P1-DATA-005`, `P1-BOOK-001`, `P1-LESS-001`, `P1-ACCOUNT-001`
+
+**Goal**
+
+Implement the in-app notification generation and read-state flows for Phase 1 lifecycle events so important product updates appear in one consistent bell-centered system.
+
+**Required source docs**
+
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+- `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/foundations/cross-role-journey-inventory-v1.md`
+
+**Scope**
+
+- create notifications for lesson request submitted, accepted, declined, expired, cancelled or rescheduled, reminder, lesson issue acknowledgement, lesson issue resolution, payout readiness or payout hold, and legal update publication
+- notification list rendering support for `/notifications`
+- read-state mutation boundary
+- post-login legal-update notice trigger
+
+**Out of scope**
+
+- push notifications
+- notification preferences center
+
+**Acceptance criteria**
+
+- Phase 1 lifecycle events produce consistent in-app notifications
+- chat-message notifications remain separate from the rest of the bell-based product notifications
+- legal updates are visible after login and remain accessible later in Notifications
+
+**Verification**
+
+- notification object review
+- route and read-state review
+
+## 9.29 `P1-NOTIF-002` Transactional email delivery and branded email templates
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 3
+**Depends on:** `P1-NOTIF-001`
+
+**Goal**
+
+Implement the first transactional email pipeline so important Phase 1 lifecycle events reach users by email with branded Tutor IB templates, while keeping chat messages out of email.
+
+**Required source docs**
+
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+
+**Scope**
+
+- Resend-backed app email service
+- branded email template system
+- lesson lifecycle emails
+- payout and legal-update emails
+- delivery tracking hooks
+
+**Out of scope**
+
+- marketing campaigns
+- digest emails
+- sending new chat-message emails
+
+**Acceptance criteria**
+
+- Phase 1 system notifications that require email have branded Tutor IB templates
+- emails use safe summaries and link back to authenticated product surfaces for detail
+- new message alerts do not email message content in MVP
+- delivery attempts are trackable through the approved notification-delivery boundary
+
+**Verification**
+
+- template review
+- email delivery and privacy review
+
+## 9.30 `P1-LESS-002` Lesson actions: join, calendar, cancellation, and issue reporting
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 3
+**Depends on:** `P1-LESS-001`, `P1-BOOK-001`
+
+**Goal**
+
+Implement the participant lesson actions that turn lesson detail into a real operational surface instead of a read-only status page.
+
+**Required source docs**
+
+- `docs/architecture/meeting-and-calendar-architecture-v1.md`
+- `docs/architecture/rating-and-review-trust-architecture-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+- `docs/foundations/cross-role-journey-inventory-v1.md`
+
+**Scope**
+
+- join-lesson action and meeting-link status handling
+- add-to-calendar deep link and `.ics` entry
+- participant cancellation and reschedule boundaries for the approved policy
+- lesson issue reporting from lesson detail
+
+**Out of scope**
+
+- recurring calendar sync
+- internal dispute resolution tooling
+
+**Acceptance criteria**
+
+- lesson detail exposes the correct next action for the lesson state
+- cancellation confirms the policy outcome before the action completes
+- tutor-fault and student-fault lesson actions remain distinguishable for downstream refund and payout handling
+- issue reporting uses structured reasons rather than free-form chat fallback
+- meeting-link and calendar actions respect the approved media and calendar boundaries
+
+**Verification**
+
+- lesson action review
+- payment-policy and issue-flow review
+
+## 9.31 `P1-TUTOR-005` Tutor earnings route and payout-readiness flow
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 4
+**Depends on:** `P1-TUTOR-001`, `P1-BOOK-001`, `P1-ACCOUNT-001`
+
+**Goal**
+
+Implement the tutor earnings route and payout-readiness experience so approved tutors understand listing status, payout setup, earnings timing, and payout holds without leaving the Tutor IB ecosystem.
+
+**Required source docs**
+
+- `docs/architecture/architecture-discussion-v1.md`
+- `docs/planning/service-dependency-baseline-v1.md`
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/foundations/cross-role-journey-inventory-v1.md`
+
+**Scope**
+
+- `/tutor/earnings`
+- payout readiness state
+- Stripe Connect setup CTA handoff
+- monthly payout-cycle summary
+- payout hold or missing-setup notices
+
+**Out of scope**
+
+- advanced finance reconciliation tools
+- tax-document collection beyond payout-provider handoff
+
+**Acceptance criteria**
+
+- tutors can clearly see whether they are payout-ready and publicly bookable
+- the route explains the hosted payout setup step without inventing a custom KYC flow
+- earnings and payout states use shaped product language rather than raw Stripe terms
+
+**Verification**
+
+- payout-readiness UX review
+- provider-handoff boundary review
 
 ## 10. Task Drafting Rules For Follow-Up
 

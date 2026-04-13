@@ -230,7 +230,7 @@ Review:
 - who can call it
 - whether anonymous users can call it
 - whether authenticated non-participants can call it
-- whether admins or moderators get different access
+- whether admin-only access is sufficient or finer capability gating is required
 - whether the function leaks existence of private records
 - whether it returns public-safe data only
 - whether it mutates data across multiple owners

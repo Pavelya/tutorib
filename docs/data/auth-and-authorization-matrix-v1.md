@@ -110,7 +110,7 @@ Allowed:
 
 Blocked:
 
-- all private student, tutor, admin, and moderator surfaces
+- all private student, tutor, and admin surfaces
 
 ## 6.2 `authenticated_role_pending`
 
@@ -174,7 +174,7 @@ Allowed:
 
 Blocked:
 
-- internal admin and moderation surfaces unless separately granted
+- internal admin surfaces unless separately granted
 
 ## 6.6 `limited`
 
@@ -235,13 +235,10 @@ Rule:
 
 - privileged internal actor with broad operational access
 
-## 7.7 Moderator actor
-
-- trust-and-safety actor with moderation-specific access
-
 Rule:
 
-- moderators should not automatically get every admin capability
+- MVP uses only the `admin` role for internal operations
+- trust, review, and payout actions should still be capability-scoped inside admin tooling
 
 ## 8. Route-Family Authorization Matrix
 
@@ -264,7 +261,7 @@ Access:
 - authenticated self: allowed
 - student: allowed
 - tutor: allowed
-- admin/moderator: allowed
+- admin: allowed
 
 Rule:
 
@@ -348,7 +345,6 @@ Examples:
 Access:
 
 - admin: allowed where explicitly granted
-- moderator: only where moderation-specific rights apply
 - all public and normal product actors: blocked
 
 ## 9. Authorization Layer Responsibilities
@@ -399,7 +395,6 @@ Read:
 
 - self: own row only
 - admin: allowed
-- moderator: only if moderation workflow requires limited identity inspection
 
 Write:
 
@@ -421,7 +416,6 @@ Read:
 
 - self: allowed to inspect own active capabilities
 - admin: allowed
-- moderator: only where needed
 
 Write:
 
@@ -496,13 +490,11 @@ Read:
 - public routes: public-safe projection only
 - owning tutor: full owner edit view
 - admin: full
-- moderator: limited moderation view where required
 
 Write:
 
 - owning tutor through controlled mutation paths
 - admin for approval/listing interventions
-- moderator only for trust-safety interventions that fall within role scope
 
 ### `tutor_subject_capabilities`
 
@@ -534,13 +526,12 @@ Read:
 
 - owning tutor: limited own-evidence view
 - admin: full
-- moderator: only where trust-case handling requires it
 - public: never
 
 Write:
 
 - owning tutor uploads and manages own evidence through server-owned flows
-- admin/moderator review status changes only through internal tools
+- admin review status changes only through internal tools
 
 Direct client exposure:
 
@@ -596,7 +587,6 @@ Read:
 - lesson student: allowed
 - lesson tutor: allowed
 - admin: allowed
-- moderator: limited only where a trust case requires it
 
 Write:
 
@@ -612,7 +602,6 @@ Read:
 
 - lesson participants: shaped history as relevant
 - admin: allowed
-- moderator: limited if required
 
 Write:
 
@@ -624,7 +613,6 @@ Read:
 
 - lesson participants: allowed
 - admin: allowed
-- moderator: only where necessary
 
 Write:
 
@@ -638,7 +626,6 @@ Read:
 - lesson tutor: full owner access
 - lesson student: only if the report is intentionally shared
 - admin: allowed
-- moderator: only if required for a case
 
 Write:
 
@@ -652,7 +639,6 @@ Read:
 
 - conversation participants: allowed
 - admin: allowed through internal tools
-- moderator: limited and case-driven
 
 Write:
 
@@ -675,7 +661,6 @@ Read:
 
 - conversation participants: allowed
 - admin: internal tools only
-- moderator: limited and case-driven
 
 Write:
 
@@ -697,25 +682,25 @@ Read:
 
 - blocker self
 - blocked user only where product behavior explicitly requires disclosure
-- admin/moderator as needed
+- admin as needed
 
 Write:
 
 - self-service block action
-- admin/moderator interventions where justified
+- admin interventions where justified
 
 ### `abuse_reports`
 
 Read:
 
 - reporter: limited own-case visibility if product exposes it
-- moderator/admin: full internal view
+- admin: full internal view
 - reported user: not by default
 
 Write:
 
 - reporting actor through server-owned report flow
-- moderator/admin through case management
+- admin through case management
 
 ## 10.7 Trust and review tables
 
@@ -726,12 +711,12 @@ Read:
 - public: published public-safe review projection
 - owning student reviewer: own draft/submitted view
 - reviewed tutor: public and owner-appropriate trust view
-- admin/moderator: full
+- admin: full
 
 Write:
 
 - eligible student reviewer through lesson-linked review flow
-- moderator/admin for moderation status changes
+- admin for review status changes
 
 ### `tutor_reliability_events`
 
@@ -743,7 +728,7 @@ Read:
 Write:
 
 - system/server only
-- admin/moderator where operational correction is justified
+- admin where operational correction is justified
 
 ## 10.8 Notification and async tables
 
@@ -796,7 +781,6 @@ Read:
 
 - payer via shaped billing history if exposed
 - admin: full
-- moderator: only if a trust or dispute case requires it
 
 Write:
 
@@ -813,14 +797,13 @@ Write:
 
 - system/server only
 
-## 10.10 Internal-only moderation and audit tables
+## 10.10 Internal-only trust and audit tables
 
 ### `tutor_application_reviews`
 
 Read:
 
 - admin: full
-- moderator: if approved to participate in tutor trust review
 - tutor applicant: only through shaped public status surfaces, not raw internal notes
 
 Write:
@@ -831,22 +814,22 @@ Write:
 
 Read:
 
-- moderator/admin: full
+- admin: full
 - normal product actors: no raw access
 
 Write:
 
-- moderator/admin only
+- admin only
 
 ### `moderation_case_events`
 
 Read:
 
-- moderator/admin only
+- admin only
 
 Write:
 
-- moderator/admin only
+- admin only
 
 ### `admin_action_logs`
 
@@ -881,7 +864,7 @@ Examples:
 Access:
 
 - uploading tutor: limited self-service upload and owner view where product allows
-- admin/moderator: internal review access
+- admin: internal review access
 - public: never
 
 Rule:
@@ -996,7 +979,7 @@ These rules should be assumed unless explicitly opened:
 - students cannot read arbitrary tutor credentials
 - public users cannot inspect raw availability rules
 - participants cannot see other conversations they do not belong to
-- moderators do not automatically get payout editing powers
+- admins do not automatically get payout editing powers outside the explicit finance path
 - admins do not need raw storage access unless operationally justified
 
 ## 17. AI-Agent Implementation Rules
@@ -1028,7 +1011,7 @@ The system should lock the following now:
 - RLS is mandatory for exposed data paths
 - public data must come from explicit public-safe projections or DTOs
 - most critical writes stay server-owned
-- moderation access remains narrower than full admin power
+- trust-sensitive admin access remains narrower than ordinary admin browsing
 - realtime follows the same participant and owner rules as canonical reads
 
 ## 19. Implementation Handoff Status

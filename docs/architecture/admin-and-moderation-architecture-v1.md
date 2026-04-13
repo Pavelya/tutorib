@@ -1,8 +1,8 @@
-# Tutor IB Admin And Moderation Architecture v1
+# Tutor IB Admin And Internal Operations Architecture v1
 
 **Date:** 2026-04-08
-**Status:** Standalone privileged-operations architecture for admin, trust and safety, and moderation workflows
-**Scope:** internal role model, privileged route boundaries, operational queues, review and approval flows, auditability, escalation, and lifecycle rules for moderation actions
+**Status:** Standalone privileged-operations architecture for admin, trust and safety, and internal workflows
+**Scope:** internal role model, privileged route boundaries, operational queues, review and approval flows, auditability, escalation, and lifecycle rules for admin actions
 
 ## 1. Why This Document Exists
 
@@ -38,7 +38,7 @@ It inherits from:
 It does not define:
 
 - final admin UI screens
-- final moderation staffing model
+- final post-MVP internal staffing split
 - final legal escalation policy
 - final support tooling
 
@@ -46,31 +46,31 @@ Those can come later as dedicated implementation or operations artifacts.
 
 ## 3. Core Recommendation
 
-Tutor IB should treat admin and moderation as a tightly scoped internal product capability with explicit privilege boundaries.
+Tutor IB should treat internal operations as a tightly scoped admin product capability with explicit privilege boundaries.
 
 The practical rule is:
 
 - internal operations are not part of the public product surface
 - privileged actions must be auditable
-- no single generic "admin can do everything" model by default
-- moderation decisions should be represented as explicit domain state changes
+- do not turn the MVP into a sprawling internal suite
+- review, trust, and payout decisions should be represented as explicit domain state changes
 - AI-driven implementation should follow explicit action rules instead of inferred operator power
 
 ## 4. Architectural Principles
 
 ## 4.1 Internal by default
 
-Admin and moderation surfaces are internal operational tools.
+Admin internal surfaces are operational tools.
 
 They are never public SEO surfaces and should never be indexable.
 
-## 4.2 Privilege by capability, not by broad title
+## 4.2 Capability-scoped admin access
 
-Use capability-based internal roles instead of one undifferentiated super-admin concept for routine work.
+MVP uses one internal role, `admin`, but individual admin actions should still be capability-scoped rather than treated as automatic global power.
 
 ## 4.3 Reviewable state transitions
 
-Moderation and approval decisions should be modeled as explicit state transitions, not as hidden field edits with no history.
+Trust, approval, and payout-affecting decisions should be modeled as explicit state transitions, not as hidden field edits with no history.
 
 ## 4.4 Auditability first
 
@@ -82,7 +82,7 @@ Even if AI agents help implement the system, privileged production actions shoul
 
 ## 5. Operational Surface Model
 
-The product should distinguish between three internal operational surfaces.
+The product should distinguish between three internal operational surface families even when MVP staff all use the `admin` role.
 
 ## 5.1 Admin surface
 
@@ -91,7 +91,7 @@ This is the general internal operations layer for:
 - user lookup
 - tutor account review
 - public-profile state
-- support-style interventions
+- account and support-style interventions
 
 ## 5.2 Trust and safety surface
 
@@ -101,7 +101,7 @@ This is the narrower operational layer for:
 - blocks
 - abuse handling
 - content or profile takedowns
-- moderation notes
+- internal trust notes
 
 ## 5.3 Finance and operations surface
 
@@ -117,7 +117,7 @@ This does not need to be broad in MVP, but the architecture should keep it separ
 
 ## 6.1 Main rule
 
-Internal roles should be explicit and capability-based.
+MVP internal access should be explicit and capability-based.
 
 Do not start with:
 
@@ -160,7 +160,7 @@ It should not be the normal operating mode.
 
 ## 7.1 Internal route boundary
 
-Admin and moderation routes should live in a clearly internal route boundary.
+Admin trust and operations routes should live in a clearly internal route boundary.
 
 Recommended conceptual shape:
 
@@ -373,9 +373,9 @@ Lesson-case resolution should record enough outcome detail to support:
 
 ## 13.1 Product block rule
 
-Blocking is a product behavior and a moderation signal.
+Blocking is a product behavior and a trust signal.
 
-It should be enforceable in product flows and visible to authorized moderators where relevant.
+It should be enforceable in product flows and visible to authorized admins where relevant.
 
 ## 13.2 Enforcement rule
 
@@ -573,7 +573,7 @@ These can be designed later as companion topics:
 
 ## 23. Final Recommendation
 
-Tutor IB should treat admin and moderation as a small, explicit, auditable operational system.
+Tutor IB should treat internal admin operations as a small, explicit, auditable operational system.
 
 The right practical model is:
 

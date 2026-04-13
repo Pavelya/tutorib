@@ -200,7 +200,7 @@ Examples:
 - one or two student examples
 - several approved tutor examples
 - one pending tutor application example
-- one internal admin or moderator example only if operational surfaces need visual review
+- one internal admin example only if operational surfaces need visual review
 
 ## 7.3 Baseline operational family
 

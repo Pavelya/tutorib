@@ -271,7 +271,18 @@ Key notes:
 - prefer stable ISO-style codes as the shared identifier
 - `app_users`, `learning_needs`, and `tutor_language_capabilities` should all reuse this vocabulary
 
-## 8.4 `meeting_providers`
+## 8.4 `countries`
+
+Purpose:
+
+- canonical country list used for tutor residency, payout-readiness checks, admin reference management, and country-safe filtering where product scope requires it
+
+Key notes:
+
+- use one central ISO-style country vocabulary
+- do not duplicate country labels in app constants or page-local option arrays
+
+## 8.5 `meeting_providers`
 
 Purpose:
 
@@ -286,7 +297,7 @@ Examples:
 
 Use this as a controlled provider vocabulary, even if the exact implementation stores provider identifiers directly.
 
-## 8.5 `video_media_providers`
+## 8.6 `video_media_providers`
 
 Purpose:
 
@@ -309,7 +320,7 @@ Purpose:
 Key relationships:
 
 - references `auth.users`
-- parent identity for student, tutor, admin, and moderation capabilities
+- parent identity for student, tutor, and admin capabilities
 
 Recommended columns:
 
@@ -349,12 +360,12 @@ Typical roles:
 - `student`
 - `tutor`
 - `admin`
-- `moderator`
 
 Notes:
 
-- `moderator` exists for trust-and-safety operations such as abuse reports, review flags, profile takedowns, and moderation cases
-- in MVP, the same human may hold both `admin` and `moderator`, but the role separation is still useful for least-privilege design
+- MVP uses one internal role, `admin`
+- trust, review, listing, payout, and report operations still stay capability-gated even when they sit under the `admin` role
+- finer internal role splits can be introduced later without changing the external product-role model
 
 ## 9.3 `student_profiles`
 
@@ -961,7 +972,46 @@ Recommended columns:
 - `provider_message_id`
 - `attempted_at`
 
-## 15.3 `job_runs`
+Notes:
+
+- Phase 1 uses in-app notification records as canonical product objects
+- important lifecycle notifications also track email delivery through this table
+- new chat-message notifications stay in-app only in MVP
+
+## 15.3 `policy_notice_versions`
+
+Purpose:
+
+- canonical versioned legal-notice record for terms, privacy, or similar mandatory policy broadcasts
+
+Recommended columns:
+
+- `id`
+- `notice_type`
+- `version_label`
+- `published_at`
+- `effective_at`
+- `requires_acknowledgement`
+- `title`
+- `summary`
+- `document_url`
+
+## 15.4 `policy_notice_receipts`
+
+Purpose:
+
+- per-user receipt and acknowledgement state for product-visible legal notices
+
+Recommended columns:
+
+- `id`
+- `policy_notice_version_id`
+- `app_user_id`
+- `first_shown_at`
+- `viewed_at`
+- `acknowledged_at`
+
+## 15.5 `job_runs`
 
 Purpose:
 

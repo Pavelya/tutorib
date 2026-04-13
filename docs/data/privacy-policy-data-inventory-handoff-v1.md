@@ -415,7 +415,7 @@ Provider recipients:
 Policy notes:
 
 - distinguish public tutor profile data from private application/review data
-- disclose that some private information may be reviewed by Tutor IB staff or moderators
+- disclose that some private information may be reviewed by authorized Tutor IB staff
 
 Implementation notes:
 

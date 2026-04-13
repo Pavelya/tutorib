@@ -28,6 +28,7 @@ That approved phase now includes:
 - product positioning and UX strategy
 - two-sided ecosystem logic
 - service blueprint and canonical object model
+- cross-role journey inventory
 - IA and wireframes
 - shared component specifications
 - hi-fi desktop screens
@@ -93,6 +94,7 @@ These docs should now be treated as the canonical design source pack:
 - `docs/research/ui-ux-research-fresh-start.md`
 - `docs/research/ui-ux-research-two-sided-ecosystem.md`
 - `docs/foundations/service-blueprint-two-sided.md`
+- `docs/foundations/cross-role-journey-inventory-v1.md`
 - `docs/foundations/ux-object-model.md`
 - `docs/foundations/ia-map-two-sided.md`
 - `docs/wireframes/low-fi-wireframe-spec.md`
@@ -166,6 +168,10 @@ It avoids starting with:
 - `/book/:tutorOrLessonContext`
 - `/messages`
 - `/lessons`
+- `/notifications`
+- `/settings`
+- `/privacy`
+- `/billing`
 
 ### Secondary
 
@@ -179,6 +185,7 @@ It avoids starting with:
 - `/tutor/lessons`
 - `/tutor/schedule`
 - `/tutor/messages`
+- `/tutor/earnings`
 
 ### Secondary
 

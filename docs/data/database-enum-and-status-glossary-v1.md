@@ -209,7 +209,11 @@ Allowed values:
 - `student`
 - `tutor`
 - `admin`
-- `moderator`
+
+Rule:
+
+- MVP uses only `student`, `tutor`, and `admin` as product roles
+- finer internal capability splits can be added later without changing the MVP public role model
 
 ## 7.4 `user_roles.role_status`
 

@@ -509,6 +509,7 @@ Rules:
 - do not return raw SQL errors
 - do not return raw provider errors
 - do not expose whether a private object exists to an unauthorized actor
+- page-level unauthorized access should render outwardly as `not_found` or 404 rather than a visible forbidden page
 - do not log message bodies, meeting URLs, payment details, or sensitive tutor evidence
 - use field errors for form correction
 - use generic failure messages for security-sensitive operations
@@ -904,17 +905,18 @@ Rules:
 - deletion workflow is hold-aware
 - public exposure is removed early when applicable
 
-## 24.10 Admin and moderation
+## 24.10 Admin internal operations
 
 Default boundary:
 
 - Server Components for internal review screens
-- Server Actions for moderation decisions
+- Server Actions for internal review decisions
 - no generic admin API by default
 
 Rules:
 
-- moderation capability is narrower than full admin power
+- MVP uses only the `admin` role for internal operations
+- internal capabilities still stay scoped by action family
 - internal DTOs are still scoped
 - sensitive actions require durable audit records
 

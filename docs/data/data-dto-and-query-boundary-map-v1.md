@@ -359,11 +359,11 @@ Blocked:
 - unrelated account/profile fields
 - raw security or provider metadata
 
-## 8.8 Class D7: admin/moderation DTO
+## 8.8 Class D7: admin DTO
 
 Audience:
 
-- admin or moderator capability holders
+- admin capability holders
 
 Allowed:
 
@@ -1069,7 +1069,7 @@ Rule:
 
 Do not leak private existence through overly specific public errors.
 
-For public routes, `not_found` and `not_public` may need to collapse into the same outward behavior.
+For page and route rendering, unauthorized, private, and non-public objects should collapse outwardly to `not_found` or equivalent 404 behavior unless the product is intentionally showing an account-state restriction surface.
 
 ## 28. Serialization Rule
 

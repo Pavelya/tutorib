@@ -108,6 +108,10 @@ The most important continuity anchors are:
 
 Every major screen must have one clearly dominant surface and one clearly dominant action path.
 
+### Principle 6
+
+Branded emails should still feel like Tutor IB.
+
 ## 5. Token System
 
 ## 5.1 Typography tokens
@@ -313,7 +317,33 @@ Motion does not exist for:
 - Avoid bounce by default.
 - Tutor operational screens animate less than student discovery screens.
 
-## 5.7 Iconography
+## 5.7 Branded email-template rules
+
+Email templates should inherit the Tutor IB visual identity in a simplified, email-safe way.
+
+Use:
+
+- `font-sans` styling direction first
+- the `paper`, `ink`, and `forest` token families as the core brand reference
+- one primary CTA per email
+- concise hierarchy and short paragraphs
+
+Avoid:
+
+- copying dense app layouts into email
+- multiple competing CTAs
+- decorative motion or app-only layout tricks
+- full chat-message bodies in notification emails
+
+The first branded email families should cover:
+
+- lesson request and lesson decision updates
+- cancellation and issue outcomes
+- tutor application state updates
+- payout processed
+- legal or policy updates
+
+## 5.8 Iconography
 
 ### Icon system
 
