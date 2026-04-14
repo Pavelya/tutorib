@@ -1,0 +1,36 @@
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  border-left: 3px solid;
+}
+
+/* ─── Variants ─── */
+
+.info {
+  background-color: var(--state-info-bg);
+  border-left-color: var(--color-mist-300);
+  color: var(--state-info-text);
+}
+
+.warning {
+  background-color: var(--state-warning-bg);
+  border-left-color: var(--state-warning-border);
+  color: var(--state-warning-text);
+}
+
+.success {
+  background-color: var(--state-positive-bg);
+  border-left-color: var(--state-positive-border);
+  color: var(--state-positive-text);
+}
+
+.actionNeeded {
+  background-color: var(--state-destructive-bg);
+  border-left-color: var(--state-destructive-border);
+  color: var(--state-destructive-text);
+}

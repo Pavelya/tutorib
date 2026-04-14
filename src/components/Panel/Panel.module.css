@@ -1,0 +1,28 @@
+.panel {
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+/* ─── Variants ─── */
+
+.default {
+  background-color: var(--surface-panel);
+  border: var(--border-subtle);
+}
+
+.soft {
+  background-color: var(--surface-panel-soft);
+}
+
+.mist {
+  background-color: var(--surface-panel-mist);
+}
+
+.warm {
+  background-color: var(--surface-panel-warm);
+}
+
+.raised {
+  background-color: var(--surface-raised);
+  box-shadow: var(--shadow-raised);
+}

@@ -1,7 +1,8 @@
 /*
  * Global styles and CSS reset.
- * Design tokens will be defined in P1-FOUND-002.
  */
+
+@import './tokens.css';
 
 *,
 *::before,
@@ -18,6 +19,10 @@ html {
 
 body {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: var(--text-body-md);
+  line-height: var(--line-body);
+  color: var(--color-text-body);
+  background-color: var(--color-page-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,4 +46,16 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+/* ─── Global focus-visible ─── */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background-color: var(--color-forest-100);
+  color: var(--color-ink-900);
 }

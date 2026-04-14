@@ -55,19 +55,22 @@ The human says something like "Implement P1-FOUND-001". If no task ID is given, 
 
 ### Step 2: Read the task (mandatory reads)
 
-Read these files in order. Do NOT skip any.
+Read these files. Do NOT skip any. Do NOT read anything else unless you hit an ambiguity.
 
-1. The **detailed task section** in the relevant phase pack:
+1. The **detailed task section only** (not the entire file) in the relevant phase pack. Use the task ID to locate the section:
    - Phase 1: `docs/planning/phase1-mvp-task-pack-v1.md`
    - Phase 1.5: `docs/planning/phase1-5-task-pack-v1.md`
    - Phase 2: `docs/planning/phase2-task-pack-v1.md`
-2. `docs/planning/engineering-guardrails-v1.md`
-3. `docs/planning/implementation-baseline-v1.md`
-4. `docs/planning/service-dependency-baseline-v1.md`
-5. Every file listed under **Required source docs** for that task
-6. Existing code in the area you'll touch (`package.json`, `tsconfig.json`, `next.config.*`, relevant source files)
+2. Every file listed under **Required source docs** for that task
+3. Existing code in the area you'll touch (`package.json`, `tsconfig.json`, `next.config.*`, relevant source files)
 
-For doc routing when uncertain: `docs/planning/agent-implementation-decision-index-v1.md`
+**Do NOT read these docs every time** — their rules are already condensed in this CLAUDE.md file:
+- `engineering-guardrails-v1.md` (already here in "Non-negotiable rules")
+- `implementation-baseline-v1.md` (already here in "Stack" and "Project structure")
+- `service-dependency-baseline-v1.md` (already here in "Stack")
+- `agent-implementation-decision-index-v1.md` (already here in "Doc navigation")
+
+Only read those full docs if you encounter a specific ambiguity that CLAUDE.md doesn't resolve.
 
 ### Step 3: Answer pre-flight questions (before writing any code)
 

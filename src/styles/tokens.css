@@ -1,0 +1,174 @@
+/*
+ * Tutor IB Design Tokens
+ * Source: docs/design-system/design-system-spec-final-v1.md
+ */
+
+:root {
+  /* ─── Typography: Font Families ─── */
+  /* --font-sans and --font-serif are set by next/font in layout.tsx */
+  /* --font-mono is set by next/font in layout.tsx */
+
+  /* ─── Typography: Type Scale (Desktop) ─── */
+  --text-display-xl: 3.5rem;
+  --text-display-lg: 2.75rem;
+  --text-title-xl: 2.125rem;
+  --text-title-lg: 1.75rem;
+  --text-title-md: 1.375rem;
+  --text-body-lg: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-caption: 0.75rem;
+  --text-utility-sm: 0.8125rem;
+
+  /* ─── Typography: Line Heights ─── */
+  --line-tight: 1.15;
+  --line-body: 1.6;
+  --line-utility: 1.45;
+
+  /* ─── Colors: Core Palette ─── */
+  --color-paper-0: #FCFAF4;
+  --color-paper-1: #F6F1E7;
+  --color-paper-2: #EDE4D4;
+
+  --color-ink-900: #1E1B18;
+  --color-ink-700: #3D3832;
+  --color-ink-500: #6A625A;
+  --color-ink-300: #B4AA9C;
+
+  --color-forest-700: #173C34;
+  --color-forest-600: #215347;
+  --color-forest-500: #2C6A59;
+  --color-forest-100: #DCEBE4;
+  --color-forest-50: #EFF6F1;
+
+  --color-clay-600: #B4573E;
+  --color-clay-500: #C56A50;
+  --color-clay-100: #F3DED7;
+
+  --color-gold-500: #B8913D;
+  --color-gold-100: #F2E8C8;
+
+  --color-mist-100: #E7EEF0;
+  --color-mist-300: #B7C7CC;
+
+  --color-success-500: #2F7A58;
+  --color-warning-500: #A8762A;
+  --color-danger-500: #B2473B;
+
+  /* ─── Colors: Semantic ─── */
+  --color-page-bg: var(--color-paper-0);
+  --color-section-bg: var(--color-paper-1);
+  --color-text-primary: var(--color-ink-900);
+  --color-text-secondary: var(--color-ink-500);
+  --color-text-body: var(--color-ink-700);
+  --color-divider: var(--color-paper-2);
+  --color-border-subtle: var(--color-ink-300);
+  --color-cta-primary: var(--color-forest-700);
+  --color-cta-primary-hover: var(--color-forest-600);
+  --color-accent: var(--color-clay-600);
+  --color-trust: var(--color-gold-500);
+
+  /* ─── Surfaces ─── */
+  --surface-page: var(--color-paper-0);
+  --surface-section: var(--color-paper-1);
+  --surface-panel: rgba(255, 255, 255, 0.72);
+  --surface-panel-soft: rgba(255, 255, 255, 0.58);
+  --surface-panel-mist: rgba(231, 238, 240, 0.78);
+  --surface-panel-warm: var(--color-clay-100);
+  --surface-raised: rgba(255, 255, 255, 0.88);
+  --surface-overlay: rgba(255, 255, 255, 0.95);
+
+  /* ─── Borders & Corners ─── */
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --radius-pill: 9999px;
+
+  --border-subtle: 1px solid var(--color-ink-300);
+
+  /* ─── Shadows ─── */
+  --shadow-soft: 0 18px 50px rgba(26, 23, 17, 0.09);
+  --shadow-raised: 0 28px 90px rgba(26, 23, 17, 0.12);
+  --shadow-action: 0 12px 36px rgba(23, 60, 52, 0.15);
+
+  /* ─── Spacing ─── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ─── Breakpoints (for reference — use in @media queries) ─── */
+  /* phone: 360–767px */
+  /* tablet: 768–1199px */
+  /* desktop: 1200px+ */
+
+  /* ─── Motion ─── */
+  --motion-fast: 140ms ease-out;
+  --motion-default: 200ms ease-out;
+  --motion-panel: 250ms ease-out;
+
+  /* ─── State Colors ─── */
+  --state-positive-bg: var(--color-forest-50);
+  --state-positive-border: var(--color-forest-100);
+  --state-positive-text: var(--color-success-500);
+
+  --state-warning-bg: var(--color-gold-100);
+  --state-warning-border: var(--color-gold-500);
+  --state-warning-text: var(--color-warning-500);
+
+  --state-destructive-bg: #FCEAE8;
+  --state-destructive-border: #E8B4AE;
+  --state-destructive-text: var(--color-danger-500);
+
+  --state-trust-bg: var(--color-gold-100);
+  --state-trust-border: var(--color-gold-500);
+  --state-trust-text: var(--color-gold-500);
+
+  --state-info-bg: var(--color-mist-100);
+  --state-info-border: var(--color-mist-300);
+  --state-info-text: var(--color-ink-700);
+
+  /* ─── Focus ─── */
+  --focus-ring: 0 0 0 2px var(--color-paper-0), 0 0 0 4px var(--color-forest-500);
+}
+
+/* ─── Tablet type scale ─── */
+@media (max-width: 1199px) {
+  :root {
+    --text-display-xl: 3rem;
+    --text-display-lg: 2.375rem;
+    --text-title-xl: 1.875rem;
+    --text-title-lg: 1.5rem;
+    --text-title-md: 1.25rem;
+    --text-body-lg: 1.0625rem;
+  }
+}
+
+/* ─── Phone type scale ─── */
+@media (max-width: 767px) {
+  :root {
+    --text-display-xl: 2.125rem;
+    --text-display-lg: 1.875rem;
+    --text-title-xl: 1.625rem;
+    --text-title-lg: 1.375rem;
+    --text-title-md: 1.125rem;
+    --text-body-lg: 1rem;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-default: 0ms;
+    --motion-panel: 0ms;
+  }
+}
