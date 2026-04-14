@@ -1,4 +1,4 @@
-# Tutor IB Message Architecture v1
+# Mentor IB Message Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone messaging architecture recommendation
@@ -39,7 +39,7 @@ Short version:
 
 ## 3. Why Messaging Is A Core Product Module
 
-Tutor IB messaging is not generic community chat.
+Mentor IB messaging is not generic community chat.
 
 It is tightly connected to:
 
@@ -130,7 +130,7 @@ Examples in this category include products like `Twilio Conversations`, `Stream 
 ### Why it is not recommended for phase 1
 
 - it adds a second core platform for a feature that is tightly bound to lessons and users
-- it introduces another data model that still has to be mapped back to Tutor IB objects
+- it introduces another data model that still has to be mapped back to Mentor IB objects
 - it adds another pricing line as messaging usage grows
 - it does not remove the need for internal trust and safety logic
 
@@ -144,7 +144,7 @@ External chat vendors are strongest when the product needs:
 - advanced off-the-shelf moderation
 - heavy chat scale early
 
-That is not the Tutor IB MVP profile.
+That is not the Mentor IB MVP profile.
 
 ## 5.3 Option C: Internal messaging with no realtime at all
 
@@ -401,7 +401,7 @@ Message send actions should be rate-limited to reduce abuse and accidental spam.
 
 ## 12.1 Why performance is manageable
 
-Tutor IB messaging is expected to be:
+Mentor IB messaging is expected to be:
 
 - one-to-one
 - relatively low-volume
@@ -480,7 +480,7 @@ If attachments are added later, they should be:
 
 ## 15.1 They solve the wrong hardest problem
 
-The hardest part of Tutor IB messaging is not socket transport.
+The hardest part of Mentor IB messaging is not socket transport.
 
 It is:
 
@@ -504,7 +504,7 @@ That increases operational and conceptual complexity.
 
 ## 15.3 They are more justified later if the product changes shape
 
-An external chat platform becomes more reasonable if Tutor IB later needs:
+An external chat platform becomes more reasonable if Mentor IB later needs:
 
 - group classes
 - large-scale communities
@@ -523,7 +523,7 @@ Re-evaluate the "no external chat SaaS" decision if:
 
 ## 17. Final Recommendation
 
-Tutor IB should build messaging **internally as a product module**, not buy it as a separate chat platform in phase 1.
+Mentor IB should build messaging **internally as a product module**, not buy it as a separate chat platform in phase 1.
 
 The recommended phase 1 stack is:
 
@@ -540,7 +540,7 @@ The recommended phase 1 feature scope is:
 - secure
 - notification-capable
 
-This is the smallest architecture that still gives Tutor IB a trustworthy and product-specific messaging system.
+This is the smallest architecture that still gives Mentor IB a trustworthy and product-specific messaging system.
 
 ## 18. Official Source Notes
 

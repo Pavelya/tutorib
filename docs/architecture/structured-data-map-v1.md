@@ -1,4 +1,4 @@
-# Tutor IB Structured Data Map v1
+# Mentor IB Structured Data Map v1
 
 **Date:** 2026-04-08
 **Status:** Standalone structured data policy and route-type mapping
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how structured data should be used across Tutor IB's public pages.
+This document defines how structured data should be used across Mentor IB's public pages.
 
 It exists to make sure:
 
@@ -26,7 +26,7 @@ Structured data should be:
 - visible-content aligned
 - route-aware
 
-If the page does not clearly support a schema type with visible content, Tutor IB should not emit that schema type.
+If the page does not clearly support a schema type with visible content, Mentor IB should not emit that schema type.
 
 ## 3. Implementation Rule
 
@@ -368,7 +368,7 @@ Do not:
 
 ## 11. Final Recommendation
 
-Tutor IB should use structured data as a conservative clarity layer.
+Mentor IB should use structured data as a conservative clarity layer.
 
 The initial schema system should be:
 

@@ -1,4 +1,4 @@
-# Tutor IB Lesson Issue And Dispute Model v1
+# Mentor IB Lesson Issue And Dispute Model v1
 
 **Date:** 2026-04-13
 **Status:** Canonical model for lesson-issue types, dispute states, resolution paths, refund logic, and reliability penalty rules
@@ -32,7 +32,7 @@ This document is a direct companion to:
 
 The lesson-issue flow is a normal part of lesson operations, not an edge case.
 
-Because Tutor IB does not host the video room, it cannot auto-detect attendance. Lesson issues are resolved through structured participant reporting, not raw call telemetry.
+Because Mentor IB does not host the video room, it cannot auto-detect attendance. Lesson issues are resolved through structured participant reporting, not raw call telemetry.
 
 ## 4. Lesson Issue Versus Cancellation
 
@@ -56,7 +56,7 @@ Do not conflate cancellation and lesson-issue handling. They share the lesson ob
 
 ## 5. Platform Cancellation Policy
 
-Tutor IB uses one platform-wide cancellation rule set. Tutors may not define custom cancellation policies.
+Mentor IB uses one platform-wide cancellation rule set. Tutors may not define custom cancellation policies.
 
 ### 5.1 Student cancellation rules
 

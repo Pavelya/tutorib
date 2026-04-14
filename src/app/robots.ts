@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
+import { site, isProduction } from '@/lib/config/site';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = (process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').replace(/\/$/, '');
-  const isProduction = baseUrl.includes('tutorib.com');
+  const baseUrl = site.url.replace(/\/$/, '');
 
   // Non-production environments: block all crawling
-  if (!isProduction) {
+  if (!isProduction()) {
     return {
       rules: {
         userAgent: '*',

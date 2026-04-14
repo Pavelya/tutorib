@@ -1,4 +1,4 @@
-# Tutor IB Projection Maintenance Strategy v1
+# Mentor IB Projection Maintenance Strategy v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer strategy for projection ownership, physical shape, refresh rules, invalidation, and rebuild posture
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already approved a normalized relational write model plus a small projection layer for search, matching, trust, and list performance.
+Mentor IB already approved a normalized relational write model plus a small projection layer for search, matching, trust, and list performance.
 
 What was still missing was the maintenance contract:
 
@@ -61,7 +61,7 @@ Those should come later in implementation-facing artifacts.
 
 ## 4. Core Recommendation
 
-Tutor IB should use one normalized write model plus a small number of explicit maintained projections.
+Mentor IB should use one normalized write model plus a small number of explicit maintained projections.
 
 The main rule is:
 
@@ -87,7 +87,7 @@ The preferred default is:
 
 ## 5. Projection Definition Rules
 
-A projection in Tutor IB is a derived read surface with a narrow purpose.
+A projection in Mentor IB is a derived read surface with a narrow purpose.
 
 A projection must:
 
@@ -271,7 +271,7 @@ Use a dedicated projection table when:
 - the projection needs explicit freshness/version tracking
 - the projection may later feed another system such as a public search index
 
-For Tutor IB, dedicated projection tables are the preferred phase 1 shape for:
+For Mentor IB, dedicated projection tables are the preferred phase 1 shape for:
 
 - `public_tutor_search_projection`
 - `tutor_matching_projection`
@@ -296,7 +296,7 @@ They are less suitable for:
 - highly personalized near-real-time surfaces
 - projections that need targeted per-tutor incremental refresh as the default model
 
-For Tutor IB, materialized views are a later optimization tool, not the phase 1 default.
+For Mentor IB, materialized views are a later optimization tool, not the phase 1 default.
 
 ## 8. Projection Ownership Model
 
@@ -574,7 +574,7 @@ The future migration should be:
 2. verify it as the canonical public-search contract
 3. export/sync that surface to Algolia later if needed
 
-This is how Tutor IB avoids a painful search rewrite while still staying Postgres-first for MVP.
+This is how Mentor IB avoids a painful search rewrite while still staying Postgres-first for MVP.
 
 ## 16. Rebuild And Recovery Rules
 
@@ -645,7 +645,7 @@ The implementation handoff path is:
 
 ## 21. Final Recommendation
 
-Tutor IB should treat projections as a small, explicit, maintained read layer sitting on top of the canonical write model.
+Mentor IB should treat projections as a small, explicit, maintained read layer sitting on top of the canonical write model.
 
 The clean phase 1 model is:
 

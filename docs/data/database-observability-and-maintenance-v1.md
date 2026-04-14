@@ -1,4 +1,4 @@
-# Tutor IB Database Observability And Maintenance v1
+# Mentor IB Database Observability And Maintenance v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer operations document for database health, query visibility, projection freshness, migration/backfill monitoring, backup/restore posture, advisor checks, and AI-agent-safe maintenance rules
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has a strong data-model and query-boundary architecture.
+Mentor IB now has a strong data-model and query-boundary architecture.
 
 What was still missing was the database operations layer:
 
@@ -78,7 +78,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-Tutor IB should use a **lightweight but explicit database operations model**:
+Mentor IB should use a **lightweight but explicit database operations model**:
 
 1. use Supabase as the primary managed database observability surface
 2. use application-owned durable records for jobs, webhooks, projection refreshes, and deletion workflows
@@ -254,7 +254,7 @@ Rules:
 
 ## 8. Query Performance Monitoring
 
-Tutor IB has explicit query SLOs.
+Mentor IB has explicit query SLOs.
 
 Database observability should track whether implementation stays plausible against them.
 
@@ -424,7 +424,7 @@ Do not rely only on provider dashboards for product state.
 
 Provider dashboards show delivery attempts.
 
-Tutor IB must still know whether the domain operation succeeded.
+Mentor IB must still know whether the domain operation succeeded.
 
 ## 14. Migration And Backfill Observability
 
@@ -522,7 +522,7 @@ Restore safety checks:
 
 Postgres requires ongoing maintenance and planning.
 
-For MVP, Supabase handles much of the database platform work, but Tutor IB still needs to watch:
+For MVP, Supabase handles much of the database platform work, but Mentor IB still needs to watch:
 
 - database size growth
 - table growth in messages, lessons, jobs, webhooks, logs, and projections
@@ -711,7 +711,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 28. Final Recommendation
 
-Tutor IB should keep the database operations model simple, but not vague.
+Mentor IB should keep the database operations model simple, but not vague.
 
 The clean operating model is:
 

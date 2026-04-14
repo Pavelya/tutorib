@@ -1,4 +1,4 @@
-# Tutor IB Database Change Review Checklist v1
+# Mentor IB Database Change Review Checklist v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer review gate for database, projection, RLS, seed, Drizzle, and data-access changes
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has dedicated data-layer contracts for:
+Mentor IB now has dedicated data-layer contracts for:
 
 - schema shape
 - authorization and RLS
@@ -373,7 +373,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 22. Final Recommendation
 
-Tutor IB should use this checklist as the shared pre-implementation and review gate for data-layer changes.
+Mentor IB should use this checklist as the shared pre-implementation and review gate for data-layer changes.
 
 The practical outcome should be simple:
 

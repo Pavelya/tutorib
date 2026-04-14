@@ -1,4 +1,4 @@
-# Tutor IB Final Design System Review Guide v1
+# Mentor IB Final Design System Review Guide v1
 
 **Date:** 2026-04-07
 **Status:** Review guide for the extracted final design-system spec

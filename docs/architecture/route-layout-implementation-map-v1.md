@@ -1,4 +1,4 @@
-# Tutor IB Route Layout Implementation Map v1
+# Mentor IB Route Layout Implementation Map v1
 
 **Date:** 2026-04-08
 **Status:** Standalone application-shape document for Next.js App Router route families, layout boundaries, auth gating posture, and implementation ownership
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already approved:
+Mentor IB already approved:
 
 - one shared Next.js App Router application
 - one ecosystem across public, student, and tutor modes
@@ -59,7 +59,7 @@ Those should come later.
 
 ## 4. Core Recommendation
 
-Tutor IB should use one root `app/layout.tsx`, then organize the product with a small number of route families:
+Mentor IB should use one root `app/layout.tsx`, then organize the product with a small number of route families:
 
 1. public marketing and discovery routes
 2. auth entry and callback routes
@@ -88,7 +88,7 @@ The current official Next.js guidance supports the posture already approved else
 - `loading.tsx` and local `Suspense` should be used deliberately for progressive rendering
 - `error.tsx` is a client-side error boundary file
 
-This is why Tutor IB should keep one root layout and use route groups for organization rather than multiple root app shells.
+This is why Mentor IB should keep one root layout and use route groups for organization rather than multiple root app shells.
 
 ## 6. Canonical App Router Topology
 
@@ -538,7 +538,7 @@ This is especially important for:
 
 ## 14. Shared Navigation And Mode Rules
 
-Tutor IB should feel like one product with different modes, not two products.
+Mentor IB should feel like one product with different modes, not two products.
 
 That means:
 
@@ -625,7 +625,7 @@ The implementation-shape handoff path is:
 
 ## 20. Final Recommendation
 
-Tutor IB should implement the app as one Next.js App Router product with a single root layout and a small number of explicit route families.
+Mentor IB should implement the app as one Next.js App Router product with a single root layout and a small number of explicit route families.
 
 The clean phase 1 shape is:
 

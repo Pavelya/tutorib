@@ -1,4 +1,4 @@
-# Tutor IB SEO And AI Discoverability v1
+# Mentor IB SEO And AI Discoverability v1
 
 **Date:** 2026-04-08
 **Status:** Standalone technical SEO and discoverability recommendation
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines the SEO and AI-discoverability policy for Tutor IB at the architecture level.
+This document defines the SEO and AI-discoverability policy for Mentor IB at the architecture level.
 
 It exists now because discoverability decisions affect:
 
@@ -23,7 +23,7 @@ It is the technical and product-policy layer that content and implementation sho
 
 ## 2. Core Recommendation
 
-Tutor IB should treat SEO and AI discoverability as one shared discipline, not as two unrelated workstreams.
+Mentor IB should treat SEO and AI discoverability as one shared discipline, not as two unrelated workstreams.
 
 The main recommendation is:
 
@@ -39,7 +39,7 @@ Short version:
 
 ## 3. What "AI SEO" Means In Practice
 
-For Tutor IB, "AI SEO" should not mean:
+For Mentor IB, "AI SEO" should not mean:
 
 - a separate crawling stack
 - special AI-only landing pages
@@ -52,7 +52,7 @@ The official Google guidance is clear:
 - there are no additional technical requirements for AI Overviews or AI Mode
 - there is no special schema.org markup required just for those features
 
-That means the practical job is to make Tutor IB:
+That means the practical job is to make Mentor IB:
 
 - crawlable
 - indexable where appropriate
@@ -63,7 +63,7 @@ That means the practical job is to make Tutor IB:
 
 ## 4. Product Discoverability Model
 
-Tutor IB has several distinct kinds of discoverability demand.
+Mentor IB has several distinct kinds of discoverability demand.
 
 ## 4.1 High-intent tutoring demand
 
@@ -100,7 +100,7 @@ Examples:
 
 - "best IB tutor platform"
 - "IB tutor reviews"
-- "is Tutor IB legit"
+- "is Mentor IB legit"
 
 These queries map best to:
 
@@ -125,7 +125,7 @@ These queries map best to:
 
 Not every route should be indexable.
 
-Tutor IB should separate:
+Mentor IB should separate:
 
 - public pages intended for discovery
 - operational or personalized pages intended for product use
@@ -399,7 +399,7 @@ Google's current guidance is that AI features in Search are controlled through t
 - snippet controls
 - `noindex`
 
-That means there is no separate AI-search technical control plane required for Tutor IB.
+That means there is no separate AI-search technical control plane required for Mentor IB.
 
 ## 12.3 Practical policy
 
@@ -562,7 +562,7 @@ A Search Console setup and monitoring checklist can be added as a later operatio
 
 ## 20. Final Recommendation
 
-Tutor IB should lock technical SEO now and treat AI discoverability as part of the same system.
+Mentor IB should lock technical SEO now and treat AI discoverability as part of the same system.
 
 The right approach is:
 

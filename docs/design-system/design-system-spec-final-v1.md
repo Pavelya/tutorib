@@ -1,4 +1,4 @@
-# Tutor IB Final Reusable Design System Spec v1
+# Mentor IB Final Reusable Design System Spec v1
 
 **Date:** 2026-04-07
 **Status:** Standalone design-system extraction
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document is the extracted reusable design system for the approved Tutor IB design direction.
+This document is the extracted reusable design system for the approved Mentor IB design direction.
 
 It consolidates what is now stable enough to standardize after:
 
@@ -28,7 +28,7 @@ This document should be strong enough to act as the starting point for:
 
 ## 2. Product And Experience Model
 
-Tutor IB is:
+Mentor IB is:
 
 - an IB-native tutoring product
 - matching-first, not marketplace-first
@@ -110,7 +110,7 @@ Every major screen must have one clearly dominant surface and one clearly domina
 
 ### Principle 6
 
-Branded emails should still feel like Tutor IB.
+Branded emails should still feel like Mentor IB.
 
 ## 5. Token System
 
@@ -319,7 +319,7 @@ Motion does not exist for:
 
 ## 5.7 Branded email-template rules
 
-Email templates should inherit the Tutor IB visual identity in a simplified, email-safe way.
+Email templates should inherit the Mentor IB visual identity in a simplified, email-safe way.
 
 Use:
 

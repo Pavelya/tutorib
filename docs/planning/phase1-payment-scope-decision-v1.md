@@ -1,4 +1,4 @@
-# Tutor IB Phase 1 Payment Scope Decision v1
+# Mentor IB Phase 1 Payment Scope Decision v1
 
 **Date:** 2026-04-13
 **Status:** Locked product decision — Phase 1 includes real payment
@@ -28,7 +28,7 @@ This document locks the first interpretation and aligns the backlog accordingly.
 1. Student selects tutor, time slot, and lesson context
 2. Student is redirected to Stripe Checkout in authorization-only mode
 3. Stripe creates a payment intent with `capture_method: manual`
-4. On successful authorization, student returns to Tutor IB
+4. On successful authorization, student returns to Mentor IB
 5. Booking request is created with `payment_status: authorized`
 
 ### 3.2 Tutor acceptance
@@ -79,7 +79,7 @@ Tutor Stripe onboarding must be quick and easy. The tutor should ideally only ne
 
 ### 4.2 Pre-filling
 
-Tutor IB pre-fills the Stripe Connect Express account with all information already known from the application:
+Mentor IB pre-fills the Stripe Connect Express account with all information already known from the application:
 
 - email (from auth)
 - legal first and last name (from application)
@@ -94,7 +94,7 @@ Use the Stripe Connect Express hosted onboarding flow:
 2. Generate an Account Link for onboarding
 3. Redirect tutor to Stripe's hosted onboarding
 4. Stripe collects only what is missing (verification docs, bank account)
-5. On completion, tutor returns to Tutor IB
+5. On completion, tutor returns to Mentor IB
 6. Listen to `account.updated` webhooks for status changes
 
 ### 4.4 Return handling

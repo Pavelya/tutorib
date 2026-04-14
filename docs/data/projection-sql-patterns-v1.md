@@ -1,4 +1,4 @@
-# Tutor IB Projection SQL Patterns v1
+# Mentor IB Projection SQL Patterns v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer implementation guide for the SQL shapes and update patterns used by maintained projections
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already approved:
+Mentor IB already approved:
 
 - which projection families should exist
 - when projections should be refreshed
@@ -111,7 +111,7 @@ Use a `materialized view` only when:
 - the read surface is more batch-like than interactive
 - the refresh model is simpler than targeted table maintenance
 
-For Tutor IB, this remains a later optimization tool, not the default phase 1 shape.
+For Mentor IB, this remains a later optimization tool, not the default phase 1 shape.
 
 ## 6. Canonical Projection Table Pattern
 
@@ -523,7 +523,7 @@ Bad builder posture:
 
 ## 16. Public Search Export Pattern
 
-If Tutor IB later exports public discovery data to Algolia or another external index, the SQL contract should be:
+If Mentor IB later exports public discovery data to Algolia or another external index, the SQL contract should be:
 
 - `public_tutor_search_projection` is the canonical export surface
 
@@ -594,7 +594,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 21. Final Recommendation
 
-Tutor IB should implement projections with a small, consistent SQL pattern family:
+Mentor IB should implement projections with a small, consistent SQL pattern family:
 
 - dedicated projection tables for hot read surfaces
 - deterministic per-entity upserts for refresh

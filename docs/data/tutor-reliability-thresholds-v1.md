@@ -1,4 +1,4 @@
-# Tutor IB Tutor Reliability Thresholds And Recovery v1
+# Mentor IB Tutor Reliability Thresholds And Recovery v1
 
 **Date:** 2026-04-13
 **Status:** Canonical model for reliability penalty math, threshold rules, and recovery paths

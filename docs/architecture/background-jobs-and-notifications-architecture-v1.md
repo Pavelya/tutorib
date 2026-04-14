@@ -1,4 +1,4 @@
-# Tutor IB Background Jobs And Notifications Architecture v1
+# Mentor IB Background Jobs And Notifications Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone async-execution and notifications architecture for the shared application stack
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how Tutor IB should handle work that should not always happen inside the original request-response cycle.
+This document defines how Mentor IB should handle work that should not always happen inside the original request-response cycle.
 
 It exists now because the approved product already implies the need for:
 
@@ -48,7 +48,7 @@ Those can come later as implementation or operations artifacts.
 
 ## 3. Core Recommendation
 
-Tutor IB should use one internal asynchronous-work architecture built around:
+Mentor IB should use one internal asynchronous-work architecture built around:
 
 - domain-owned trigger events
 - explicit notification objects
@@ -98,7 +98,7 @@ The background-jobs and notifications architecture should:
 
 Not all work belongs in the same execution lane.
 
-Tutor IB should distinguish between five lanes.
+Mentor IB should distinguish between five lanes.
 
 ## 6.1 Lane A: synchronous domain work
 
@@ -180,7 +180,7 @@ Rule:
 
 ## 7.1 Domain events are internal contracts
 
-Tutor IB should use explicit domain events to describe that something meaningful happened in the product.
+Mentor IB should use explicit domain events to describe that something meaningful happened in the product.
 
 Examples:
 
@@ -311,11 +311,11 @@ Use a simple product rule:
 
 ## 8.8 Branded email-template rule
 
-Tutor IB transactional emails should use a branded template system that derives from the main design language without trying to mirror the app pixel-for-pixel.
+Mentor IB transactional emails should use a branded template system that derives from the main design language without trying to mirror the app pixel-for-pixel.
 
 Required traits:
 
-- Tutor IB brand name, typography direction, and color family stay recognizable
+- Mentor IB brand name, typography direction, and color family stay recognizable
 - layouts stay email-safe and conservative
 - primary CTA is singular and obvious
 - legal, payout, and booking emails link back to authenticated product surfaces for detail
@@ -477,7 +477,7 @@ This keeps the architecture:
 
 ## 11.3 Why not start with a separate workflow platform
 
-Tutor IB does not need a second orchestration platform on day one for:
+Mentor IB does not need a second orchestration platform on day one for:
 
 - simple reminders
 - notification sends
@@ -628,7 +628,7 @@ The architecture should lock the following decisions now:
 
 ## 17. Final Recommendation
 
-Tutor IB should implement notifications and background work as one explicit internal platform layer inside the application, not as scattered side effects.
+Mentor IB should implement notifications and background work as one explicit internal platform layer inside the application, not as scattered side effects.
 
 The recommended MVP architecture is:
 

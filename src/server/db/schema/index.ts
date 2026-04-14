@@ -4,3 +4,4 @@
  * for the shared DB client.
  */
 export { appUsers, userRoles, studentProfiles } from '@/modules/accounts/schema';
+export { jobRuns, webhookEvents } from '@/modules/jobs/schema';

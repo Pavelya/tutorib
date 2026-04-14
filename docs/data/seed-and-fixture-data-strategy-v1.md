@@ -1,4 +1,4 @@
-# Tutor IB Seed And Fixture Data Strategy v1
+# Mentor IB Seed And Fixture Data Strategy v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer contract for seed data, scenario fixtures, preview demo data, and synthetic scale datasets
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already approved:
+Mentor IB already approved:
 
 - a normalized write model
 - explicit migration conventions
@@ -64,7 +64,7 @@ Those should come later.
 
 ## 4. Core Recommendation
 
-Tutor IB should use a three-layer non-production data model:
+Mentor IB should use a three-layer non-production data model:
 
 1. **reference seeds** for canonical shared vocabularies and baseline lookup rows
 2. **baseline synthetic seeds** for predictable local and preview environments
@@ -178,7 +178,7 @@ This document does not force one production rollout vehicle, but it does require
 
 ## 7. Canonical Seed Families
 
-Tutor IB should treat seed content as a few explicit families rather than one giant SQL blob.
+Mentor IB should treat seed content as a few explicit families rather than one giant SQL blob.
 
 ## 7.1 Reference vocabulary family
 
@@ -229,7 +229,7 @@ Examples:
 
 This family should contain larger synthetic datasets used only when intentionally validating search, matching, or projection performance.
 
-This is especially important for Tutor IB because public tutor browse and internal matching speed are product-critical surfaces.
+This is especially important for Mentor IB because public tutor browse and internal matching speed are product-critical surfaces.
 
 ## 8. Canonical Folder Strategy Inside `supabase/seeds`
 
@@ -362,7 +362,7 @@ Production must never depend on seeded synthetic auth identities.
 
 Supabase's seeding guidance already recommends keeping seed files focused on data insertion.
 
-Tutor IB should follow that strictly:
+Mentor IB should follow that strictly:
 
 - migrations change schema
 - seeds populate data
@@ -426,7 +426,7 @@ Use only the minimum representative synthetic content needed to test behavior.
 
 ## 13. Scale And Performance Fixture Rules
 
-Tutor IB should explicitly support optional scale fixtures for hot paths such as:
+Mentor IB should explicitly support optional scale fixtures for hot paths such as:
 
 - public tutor browse search
 - guided match generation
@@ -506,7 +506,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 18. Final Recommendation
 
-Tutor IB should keep non-production data boring, explicit, and reusable:
+Mentor IB should keep non-production data boring, explicit, and reusable:
 
 - canonical reference seeds
 - a small synthetic baseline

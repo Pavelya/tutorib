@@ -1,4 +1,4 @@
-# Tutor IB Implementation Backlog Index v1
+# Mentor IB Implementation Backlog Index v1
 
 **Date:** 2026-04-10
 **Status:** Master backlog routing document for converting the approved docs pack into concrete implementation task packs
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has:
+Mentor IB now has:
 
 - product and UX research
 - shared object and IA foundations
@@ -72,7 +72,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-Tutor IB should use a **layered backlog system**, not one flat backlog.
+Mentor IB should use a **layered backlog system**, not one flat backlog.
 
 The practical rule is:
 
@@ -463,7 +463,7 @@ Agents should not:
 
 ## 16. Final Recommendation
 
-Tutor IB should treat this document as the master routing layer for implementation planning.
+Mentor IB should treat this document as the master routing layer for implementation planning.
 
 The operating model is:
 

@@ -1,4 +1,4 @@
-# Tutor IB Matching And Ranking Architecture v1
+# Mentor IB Matching And Ranking Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for tutor matching, ranking, fit explanation, and ranking-configuration control
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how Tutor IB should turn a student's need into a ranked set of tutor fits.
+This document defines how Mentor IB should turn a student's need into a ranked set of tutor fits.
 
 It exists now because matching is one of the product's core differentiators.
 
@@ -49,7 +49,7 @@ Those can come later as companion artifacts.
 
 ## 3. Core Recommendation
 
-Tutor IB should start with a deterministic, explainable, Postgres-backed matching system built around:
+Mentor IB should start with a deterministic, explainable, Postgres-backed matching system built around:
 
 - hard eligibility filters
 - weighted structured signals
@@ -614,7 +614,7 @@ The architecture should lock the following decisions now:
 
 ## 23. Final Recommendation
 
-Tutor IB should implement matching as a domain-owned ranking system, not as a generic search layer.
+Mentor IB should implement matching as a domain-owned ranking system, not as a generic search layer.
 
 The recommended MVP is:
 

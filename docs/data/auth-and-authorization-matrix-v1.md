@@ -1,4 +1,4 @@
-# Tutor IB Auth And Authorization Matrix v1
+# Mentor IB Auth And Authorization Matrix v1
 
 **Date:** 2026-04-08
 **Status:** Standalone access-control matrix for identity resolution, role capability, route families, data surfaces, and RLS posture
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines who can access what in Tutor IB.
+This document defines who can access what in Mentor IB.
 
 It exists now because the approved product already has:
 
@@ -64,7 +64,7 @@ Those should come later in implementation-facing artifacts.
 
 ## 4. Core Recommendation
 
-Tutor IB should use a four-layer access model:
+Mentor IB should use a four-layer access model:
 
 1. identity and session resolution through `Supabase Auth`
 2. route and shell gating in the Next.js server layer
@@ -1023,7 +1023,7 @@ The implementation handoff path is:
 
 ## 20. Final Recommendation
 
-Tutor IB should use a conservative, layered authorization system:
+Mentor IB should use a conservative, layered authorization system:
 
 - Supabase Auth for identity
 - one canonical `app_user`

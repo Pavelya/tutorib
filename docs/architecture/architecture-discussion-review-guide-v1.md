@@ -1,4 +1,4 @@
-# Tutor IB Architecture Discussion Review Guide v1
+# Mentor IB Architecture Discussion Review Guide v1
 
 **Date:** 2026-04-07
 **Status:** Review companion for `architecture-discussion-v1.md`
@@ -11,7 +11,7 @@ This guide helps review the architecture recommendation quickly without re-readi
 
 The goal is not to debate every possible stack.
 
-The goal is to decide whether the recommended architecture is the right fit for the approved Tutor IB product model.
+The goal is to decide whether the recommended architecture is the right fit for the approved Mentor IB product model.
 
 ## 3. Best Sections To Review First
 

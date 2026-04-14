@@ -1,4 +1,4 @@
-# Tutor IB Metadata Matrix v1
+# Mentor IB Metadata Matrix v1
 
 **Date:** 2026-04-08
 **Status:** Standalone metadata policy and page-type matrix
@@ -39,7 +39,7 @@ Use this pattern by default:
 
 Example:
 
-- `IB Biology HL Tutors for IA Feedback and Exam Prep | Tutor IB`
+- `IB Biology HL Tutors for IA Feedback and Exam Prep | Mentor IB`
 
 Avoid leading with the brand on most discovery pages.
 
@@ -119,7 +119,7 @@ Route:
 
 Title pattern:
 
-- `Find the Right IB Tutor for the Help You Actually Need | Tutor IB`
+- `Find the Right IB Tutor for the Help You Actually Need | Mentor IB`
 
 Description pattern:
 
@@ -149,7 +149,7 @@ Route:
 
 Title pattern:
 
-- `How Tutor IB Matching Works for Students and Parents | Tutor IB`
+- `How Mentor IB Matching Works for Students and Parents | Mentor IB`
 
 Description pattern:
 
@@ -175,7 +175,7 @@ Route:
 
 Title pattern:
 
-- `How Tutor IB Reviews Tutors, Safety, and Student Fit | Tutor IB`
+- `How Mentor IB Reviews Tutors, Safety, and Student Fit | Mentor IB`
 
 Description pattern:
 
@@ -201,7 +201,7 @@ Route:
 
 Title pattern:
 
-- `Tutor IB Support and Common Questions | Tutor IB`
+- `Mentor IB Support and Common Questions | Mentor IB`
 
 Description pattern:
 
@@ -231,7 +231,7 @@ Route:
 
 Title pattern:
 
-- `Become an IB Tutor on Tutor IB | Standards, Fit, and Application`
+- `Become an IB Tutor on Mentor IB | Standards, Fit, and Application`
 
 Description pattern:
 
@@ -257,11 +257,11 @@ Route:
 
 Title pattern:
 
-- `[Tutor Name], IB [Primary Subject] Tutor for [Primary Need] | Tutor IB`
+- `[Tutor Name], IB [Primary Subject] Tutor for [Primary Need] | Mentor IB`
 
 Fallback title pattern:
 
-- `[Tutor Name], IB Tutor | Tutor IB`
+- `[Tutor Name], IB Tutor | Mentor IB`
 
 Description pattern:
 
@@ -293,7 +293,7 @@ Route:
 
 Title pattern:
 
-- `IB [Subject Name] Tutors for [Primary Outcome] | Tutor IB`
+- `IB [Subject Name] Tutors for [Primary Outcome] | Mentor IB`
 
 Description pattern:
 
@@ -323,12 +323,12 @@ Route:
 
 Title pattern:
 
-- `IB Tutors for [Need Name] | Tutor IB`
+- `IB Tutors for [Need Name] | Mentor IB`
 
 Examples:
 
-- `IB Tutors for TOK Essay Help | Tutor IB`
-- `IB Tutors for IA Feedback | Tutor IB`
+- `IB Tutors for TOK Essay Help | Mentor IB`
+- `IB Tutors for IA Feedback | Mentor IB`
 
 Description pattern:
 
@@ -354,7 +354,7 @@ Route:
 
 Title pattern:
 
-- `IB [Subject Name] Tutors for [Need Name] | Tutor IB`
+- `IB [Subject Name] Tutors for [Need Name] | Mentor IB`
 
 Description pattern:
 

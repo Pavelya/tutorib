@@ -1,4 +1,4 @@
-# Tutor IB Implementation Baseline v1
+# Mentor IB Implementation Baseline v1
 
 **Date:** 2026-04-10
 **Status:** Repo-bootstrap implementation contract for the first coding phase
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has enough product, UX, architecture, data, SEO, privacy, and planning material to start coding.
+Mentor IB now has enough product, UX, architecture, data, SEO, privacy, and planning material to start coding.
 
 What was still missing was one repo-level implementation contract.
 
@@ -52,7 +52,7 @@ This document only defines the repo and toolchain baseline that coding should st
 
 ## 3. Core Recommendation
 
-Tutor IB should start coding from a conservative 2026 server-first baseline:
+Mentor IB should start coding from a conservative 2026 server-first baseline:
 
 - Node.js LTS, not an EOL line and not a bleeding-edge Current line
 - Next.js App Router
@@ -83,7 +83,7 @@ As of 2026-04-10:
 
 Practical rule:
 
-- use `Node 24.x` as the Tutor IB development and production baseline
+- use `Node 24.x` as the Mentor IB development and production baseline
 - do not use `Node 16`
 - do not use `Node 25` as the default baseline for the first production build
 
@@ -202,7 +202,7 @@ Practical rule:
 
 ## 7. Styling And UI Baseline
 
-Tutor IB already has a strong design-system direction.
+Mentor IB already has a strong design-system direction.
 
 The implementation baseline should support that instead of default utility sprawl.
 
@@ -341,7 +341,7 @@ This is a deliberate simplification, not a missing decision.
 
 ## 12. Date, Timezone, And Scheduling Baseline
 
-Because Tutor IB includes booking, availability, scheduling, and timezone-sensitive UX, the baseline should not leave date handling undefined.
+Because Mentor IB includes booking, availability, scheduling, and timezone-sensitive UX, the baseline should not leave date handling undefined.
 
 Use:
 
@@ -506,7 +506,7 @@ should now be resolved well enough to start.
 
 ## 18. Final Recommendation
 
-Tutor IB should now move into coding with one explicit rule:
+Mentor IB should now move into coding with one explicit rule:
 
 - freeze this baseline first
 - scaffold the repo from it

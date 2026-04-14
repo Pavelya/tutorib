@@ -1,4 +1,4 @@
-# Tutor IB Information Architecture Map
+# Mentor IB Information Architecture Map
 
 **Date:** 2026-04-07
 **Status:** Foundation document for wireframing
@@ -9,7 +9,7 @@
 
 ## 1. Purpose
 
-This document defines the recommended information architecture for the fresh-start Tutor IB experience.
+This document defines the recommended information architecture for the fresh-start Mentor IB experience.
 
 It covers:
 

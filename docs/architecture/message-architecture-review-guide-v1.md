@@ -1,4 +1,4 @@
-# Tutor IB Message Architecture Review Guide v1
+# Mentor IB Message Architecture Review Guide v1
 
 **Date:** 2026-04-08
 **Status:** Review companion for `message-architecture-v1.md`
@@ -9,7 +9,7 @@ This guide helps review the messaging decision quickly.
 
 ## 2. Review Goal
 
-The goal is to decide whether Tutor IB should:
+The goal is to decide whether Mentor IB should:
 
 - own messaging as an internal product module
 

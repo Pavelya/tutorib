@@ -1,4 +1,4 @@
-# Tutor IB Data Subject Request Workflow v1
+# Mentor IB Data Subject Request Workflow v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer workflow document for privacy request intake, verification, access/export, correction, deletion/erasure, restriction, objection, provider coordination, and AI-agent-safe execution rules
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already has a field-level retention and erasure map.
+Mentor IB already has a field-level retention and erasure map.
 
 What was still missing was the request workflow:
 
@@ -77,7 +77,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-Tutor IB should implement data subject requests as a **durable, reviewed, role-scoped workflow**.
+Mentor IB should implement data subject requests as a **durable, reviewed, role-scoped workflow**.
 
 The practical rule is:
 
@@ -99,7 +99,7 @@ Use these request types consistently in implementation.
 
 ## 5.1 `access_request`
 
-A request to know what personal data Tutor IB processes about the person.
+A request to know what personal data Mentor IB processes about the person.
 
 This is broader than data portability.
 
@@ -499,7 +499,7 @@ Rules:
 
 ## 18. Minor And Guardian Workflow
 
-Tutor IB is minor-aware but should not support general self-service under-13 accounts for MVP.
+Mentor IB is minor-aware but should not support general self-service under-13 accounts for MVP.
 
 If the product receives a request involving a minor:
 
@@ -562,7 +562,7 @@ Potential provider surfaces:
 
 Rules:
 
-- Tutor IB controls its own references to external videos, not provider-side media owned by the tutor
+- Mentor IB controls its own references to external videos, not provider-side media owned by the tutor
 - Supabase Storage objects must be deleted through the Storage API, not only SQL metadata deletion
 - Stripe data should be retained, deleted, or redacted according to financial and provider capability review
 - email providers may retain delivery logs according to provider policy; do not store private content in email metadata
@@ -681,7 +681,7 @@ The system should lock the following decisions now:
 - access/export responses are DTO-safe and reviewed, not raw database dumps
 - export artifacts are private, short-lived, and access-controlled
 - guardian/minor requests require authority verification before disclosure
-- provider follow-up must be explicit where product data leaves Tutor IB
+- provider follow-up must be explicit where product data leaves Mentor IB
 - request audit trails must be minimal and restricted
 - exact legal wording and jurisdiction-specific deadlines remain policy/legal review tasks
 
@@ -697,7 +697,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 28. Final Recommendation
 
-Tutor IB should handle privacy requests as a calm, explicit operational workflow.
+Mentor IB should handle privacy requests as a calm, explicit operational workflow.
 
 The clean operating model is:
 

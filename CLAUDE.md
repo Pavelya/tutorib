@@ -2,9 +2,12 @@
 
 ## Identity
 
-Tutor IB is an IB-native tutoring platform. Match-first, not marketplace-first.
+**Mentor IB** is an IB-native tutoring platform. Match-first, not marketplace-first.
 One shared ecosystem for students and tutors — not two separate apps.
-The old name "ibcamp" is dead. Never reference it.
+Production domain: `mentorib.com`.
+Old names "Tutor IB", "tutorib", and "ibcamp" are dead. Always use **Mentor IB** in code, copy, metadata, and comments. The repo folder may still say `tutorib` — ignore that, the product name is Mentor IB.
+
+Brand strings (app name, tagline, domain, description) must live in one shared site config (`src/lib/config/site.ts`), not hardcoded across files. All code must import from that config.
 
 ## Stack (frozen)
 
@@ -158,6 +161,7 @@ Blockers/Notes: <any issues, assumptions, or doc mismatches>
 - JSON-LD on public pages (Organization, BreadcrumbList, ProfilePage).
 - Dynamic sitemap. Quality-gated indexation. Canonical URLs. Open Graph.
 - `noindex` on preview/staging.
+- Production domain is `mentorib.com`. Use site config for all brand references, never hardcode.
 
 ### Git
 - Do not commit, push, or create branches. The human manages git.

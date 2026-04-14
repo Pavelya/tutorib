@@ -1,4 +1,4 @@
-# Tutor IB Hi-Fi Direction Boards v1
+# Mentor IB Hi-Fi Direction Boards v1
 
 **Date:** 2026-04-07
 **Status:** Standalone visual-direction document
@@ -19,7 +19,7 @@ Its job is to prevent the product from drifting back into:
 
 ## 2. Brand Stance
 
-Tutor IB should feel like:
+Mentor IB should feel like:
 
 - serious but not severe
 - academic but not institutional

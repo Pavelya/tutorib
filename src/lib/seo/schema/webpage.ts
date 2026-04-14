@@ -1,4 +1,5 @@
 import { buildCanonicalUrl, getSiteUrl } from '../metadata/canonical';
+import { site } from '@/lib/config/site';
 
 /**
  * WebPage JSON-LD for standard informational public pages.
@@ -20,7 +21,7 @@ export function buildWebPage(options: {
     url,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'Tutor IB',
+      name: site.name,
       url: getSiteUrl(),
     },
   };

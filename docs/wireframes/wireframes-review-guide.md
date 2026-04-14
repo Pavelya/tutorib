@@ -1,4 +1,4 @@
-# Tutor IB Low-Fi Wireframes Review Guide
+# Mentor IB Low-Fi Wireframes Review Guide
 
 **Date:** 2026-04-07
 **Status:** Review guide for the first low-fi wireframe pack

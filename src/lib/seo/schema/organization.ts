@@ -1,4 +1,5 @@
 import { getSiteUrl } from '../metadata/canonical';
+import { site } from '@/lib/config/site';
 
 /**
  * Organization JSON-LD for the home page and brand-level pages.
@@ -11,11 +12,10 @@ export function buildOrganization(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Tutor IB',
+    name: site.name,
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
-    description:
-      'Tutor IB connects IB students with qualified tutors matched to their learning needs.',
+    description: site.description,
   };
 }
 
@@ -29,7 +29,7 @@ export function buildWebSite(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Tutor IB',
+    name: site.name,
     url: siteUrl,
   };
 }

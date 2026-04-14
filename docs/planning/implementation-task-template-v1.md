@@ -1,4 +1,4 @@
-# Tutor IB Implementation Task Template v1
+# Mentor IB Implementation Task Template v1
 
 **Date:** 2026-04-10
 **Status:** Reusable implementation-task template for future AI agents and human reviewers
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has enough design, architecture, data, SEO, privacy, and agent-index material to begin turning the docs into implementation work.
+Mentor IB now has enough design, architecture, data, SEO, privacy, and agent-index material to begin turning the docs into implementation work.
 
 The next risk is not missing architecture.
 
@@ -606,7 +606,7 @@ Notes:
 
 ## 16. Final Recommendation
 
-Tutor IB should use this task template before writing real build tickets.
+Mentor IB should use this task template before writing real build tickets.
 
 The operating model is:
 

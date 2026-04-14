@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Panel } from '@/components/Panel/Panel';
 import { SignInForm } from './SignInForm';
+import { site } from '@/lib/config/site';
 import styles from '../auth.module.css';
 
 export const metadata: Metadata = {
-  title: 'Sign in — Tutor IB',
+  title: `Sign in — ${site.name}`,
   robots: { index: false, follow: false },
 };
 
@@ -20,9 +21,9 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Sign in to Tutor IB</h1>
+          <h1 className={styles.title}>Sign in to {site.name}</h1>
           <p className={styles.subtitle}>
-            Find your perfect IB tutor or manage your tutoring practice.
+            Find your perfect IB mentor or manage your mentoring practice.
           </p>
         </div>
         <Panel>

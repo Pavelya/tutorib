@@ -1,4 +1,4 @@
-# Tutor IB Two-Sided UI/UX Ecosystem Research
+# Mentor IB Two-Sided UI/UX Ecosystem Research
 
 **Date:** 2026-04-07
 **Status:** Research and recommendation brief
@@ -6,7 +6,7 @@
 
 ## 1. Core Recommendation
 
-Tutor IB should be designed as **one product ecosystem with two operating modes**, not as two separate UI worlds.
+Mentor IB should be designed as **one product ecosystem with two operating modes**, not as two separate UI worlds.
 
 That means:
 
@@ -27,7 +27,7 @@ Two-sided platforms often drift into this failure mode:
 - the visual rhythm, navigation logic, and component behavior change completely
 - users who switch roles feel like they entered another product
 
-That is exactly what Tutor IB should avoid.
+That is exactly what Mentor IB should avoid.
 
 This matters even more because:
 
@@ -38,7 +38,7 @@ This matters even more because:
 
 ## 3. Desired Shared Product Scope
 
-Tutor IB should support a meaningful two-sided product scope that includes:
+Mentor IB should support a meaningful two-sided product scope that includes:
 
 - student lessons
 - student saved tutors
@@ -91,7 +91,7 @@ This is operationally understandable, but from a UX perspective it is a warning 
 - settings splits
 - mental-model fragmentation
 
-Tutor IB should avoid this model.
+Mentor IB should avoid this model.
 
 ### 6.2 Tutor dashboards should be a business snapshot, not an admin maze
 
@@ -149,7 +149,7 @@ Common pattern:
 - schedule and pricing later
 - review/approval checkpoint before full activation
 
-That pattern fits Tutor IB well.
+That pattern fits Mentor IB well.
 
 ### 6.5 Availability UX must go beyond a weekly grid
 
@@ -167,7 +167,7 @@ Important capabilities repeatedly shown in their documentation:
 - external calendar conflict handling
 - mutual availability views
 
-For Tutor IB, this means the tutor schedule UX should not stop at “pick your weekly slots.”
+For Mentor IB, this means the tutor schedule UX should not stop at “pick your weekly slots.”
 
 ### 6.6 Lesson operations are more than calendar events
 
@@ -175,7 +175,7 @@ TutorCruncher’s lesson model treats lessons as operational objects with states
 
 That is the right direction.
 
-For Tutor IB, lessons should be a central shared object with:
+For Mentor IB, lessons should be a central shared object with:
 
 - request state
 - acceptance state
@@ -191,7 +191,7 @@ For Tutor IB, lessons should be a central shared object with:
 
 TutorCruncher emphasizes lesson reports and progress tracking for students and clients.
 
-This is especially relevant for Tutor IB because the service promise is academic improvement, not generic time-booking.
+This is especially relevant for Mentor IB because the service promise is academic improvement, not generic time-booking.
 
 Even if detailed progress tools are later-phase, the UX should be designed with that future in mind now.
 
@@ -312,7 +312,7 @@ Tutor tone:
 - capable
 - professional
 
-Both should still sound like Tutor IB.
+Both should still sound like Mentor IB.
 
 ## 9. UX Architecture Recommendation
 
@@ -353,7 +353,7 @@ These should feel nearly identical across roles:
 
 ## 10.1 Tutor acquisition and application
 
-Tutor IB should include a `become-a-tutor` flow, and the journey should be sharp, staged, and confidence-building.
+Mentor IB should include a `become-a-tutor` flow, and the journey should be sharp, staged, and confidence-building.
 
 Recommended stages:
 
@@ -386,7 +386,7 @@ Recommended stages:
 - Credentials and links
 - Final review
 
-### Important addition for Tutor IB
+### Important addition for Mentor IB
 
 Do not ask only “which subject do you teach?”
 
@@ -601,7 +601,7 @@ Recommended combined model:
 
 Preply’s tutor standards policy is useful here: operational behavior and reliability affect discoverability.
 
-Tutor IB should eventually surface a tutor-quality panel including:
+Mentor IB should eventually surface a tutor-quality panel including:
 
 - response time
 - decline rate
@@ -710,7 +710,7 @@ Tutor pages can be denser, but they should still feel:
 - calm
 - academic
 - trustworthy
-- distinctly Tutor IB
+- distinctly Mentor IB
 
 ## 13. Recommended Product Rules
 

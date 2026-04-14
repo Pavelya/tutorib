@@ -1,4 +1,4 @@
-# Tutor IB SEO Foundation Task Pack v1
+# Mentor IB SEO Foundation Task Pack v1
 
 **Date:** 2026-04-08
 **Status:** Standalone implementation-facing task pack for shared SEO and AI discoverability foundations
@@ -38,7 +38,7 @@ This document only defines the one-time implementation tasks that operationalize
 
 ## 3. Core Recommendation
 
-Tutor IB should complete the shared SEO foundation before creating multiple route-specific SEO tasks.
+Mentor IB should complete the shared SEO foundation before creating multiple route-specific SEO tasks.
 
 The practical rule is:
 
@@ -432,7 +432,7 @@ The phase 1 Class A route SEO task pack now exists and should be used as the fir
 
 ## 13. Final Recommendation
 
-Tutor IB should build its discoverability foundation once, centrally, and in the route layer.
+Mentor IB should build its discoverability foundation once, centrally, and in the route layer.
 
 The correct model is:
 

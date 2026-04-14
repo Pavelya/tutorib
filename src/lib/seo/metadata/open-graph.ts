@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { buildCanonicalUrl, getSiteUrl } from './canonical';
+import { site } from '@/lib/config/site';
 
 /**
  * Build Open Graph metadata for a public route.
@@ -23,14 +24,14 @@ export function buildOpenGraph(options: {
     description,
     url,
     type,
-    siteName: 'Tutor IB',
+    siteName: site.name,
     locale: 'en_US',
     images: images ?? [
       {
         url: `${siteUrl}/og-default.png`,
         width: 1200,
         height: 630,
-        alt: 'Tutor IB — Find the right IB tutor',
+        alt: `${site.name} — ${site.tagline}`,
       },
     ],
   };

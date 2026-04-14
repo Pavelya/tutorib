@@ -1,4 +1,4 @@
-# Tutor IB Tutor Listing Readiness Model v1
+# Mentor IB Tutor Listing Readiness Model v1
 
 **Date:** 2026-04-13
 **Status:** Canonical model for tutor listing gates, state transitions, and tutor-facing messaging
@@ -113,13 +113,13 @@ Admin-initiated `paused` and `delisted` states require admin action to restore.
 
 ### 6.1 Onboarding approach
 
-Tutor IB uses Stripe Connect Express with hosted onboarding.
+Mentor IB uses Stripe Connect Express with hosted onboarding.
 
 The onboarding flow must be as quick and frictionless as possible for the tutor.
 
 ### 6.2 Pre-filled information
 
-When creating the Stripe Connect Express account, Tutor IB pre-fills all information already collected during the application process:
+When creating the Stripe Connect Express account, Mentor IB pre-fills all information already collected during the application process:
 
 - legal name (from application identity step)
 - email address (from auth)
@@ -142,12 +142,12 @@ The onboarding experience should:
 - clearly explain why payout setup is needed ("to receive lesson payments")
 - show the tutor what has already been pre-filled
 - provide a single CTA to complete the remaining steps
-- return the tutor to the Tutor IB earnings or overview page after completion
+- return the tutor to the Mentor IB earnings or overview page after completion
 - handle incomplete onboarding gracefully (tutor can return later)
 
 ### 6.5 Stripe account lifecycle sync
 
-Tutor IB listens to Stripe Connect webhooks to track payout account status:
+Mentor IB listens to Stripe Connect webhooks to track payout account status:
 
 - `account.updated` → update `payout_account_status` based on `requirements` and `charges_enabled` / `payouts_enabled`
 - When `charges_enabled` and `payouts_enabled` are both true and no `currently_due` requirements remain → status = `enabled`

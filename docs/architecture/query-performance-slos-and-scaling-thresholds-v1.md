@@ -1,4 +1,4 @@
-# Tutor IB Query Performance SLOs And Scaling Thresholds v1
+# Mentor IB Query Performance SLOs And Scaling Thresholds v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for query latency targets, scaling thresholds, and matching-cache strategy
@@ -37,7 +37,7 @@ It defines the measurable layer that those docs imply.
 
 ## 3. Core Recommendation
 
-Tutor IB should use a **read-model-first, cache-aware, invalidation-driven query architecture** with explicit latency targets.
+Mentor IB should use a **read-model-first, cache-aware, invalidation-driven query architecture** with explicit latency targets.
 
 The practical rule is:
 
@@ -467,7 +467,7 @@ The architecture should lock the following decisions now:
 
 ## 16. Final Recommendation
 
-Tutor IB should treat query speed as a measurable product promise.
+Mentor IB should treat query speed as a measurable product promise.
 
 The recommended posture is:
 

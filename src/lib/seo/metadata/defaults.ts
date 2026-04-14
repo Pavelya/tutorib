@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { site } from '@/lib/config/site';
 
 /**
  * Global brand metadata defaults.
@@ -6,12 +7,11 @@ import type { Metadata } from 'next';
  */
 export const ROOT_METADATA: Metadata = {
   title: {
-    default: 'Tutor IB',
-    template: '%s | Tutor IB',
+    default: site.name,
+    template: `%s | ${site.name}`,
   },
-  description:
-    'Find expert IB tutors matched to your learning needs. Tutor IB connects students with qualified International Baccalaureate tutors.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
+  description: site.description,
+  metadataBase: new URL(site.url),
   icons: {
     icon: '/favicon.ico',
   },

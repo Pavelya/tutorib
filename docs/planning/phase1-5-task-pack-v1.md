@@ -1,4 +1,4 @@
-# Tutor IB Phase 1.5 Task Pack v1
+# Mentor IB Phase 1.5 Task Pack v1
 
 **Date:** 2026-04-10
 **Status:** Implementation-usable Phase 1.5 task pack for future AI agents
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has:
+Mentor IB now has:
 
 - an active Phase 1 MVP execution pack
 - a master backlog index
@@ -459,7 +459,7 @@ Add the first tutor student relationship detail surface so a tutor can open one 
 
 **Goal**
 
-Implement the first subject and service SEO landing pages so Tutor IB captures problem-led and subject-led search demand with quality-gated, server-rendered pages that work for both traditional search and AI discoverability.
+Implement the first subject and service SEO landing pages so Mentor IB captures problem-led and subject-led search demand with quality-gated, server-rendered pages that work for both traditional search and AI discoverability.
 
 **Required source docs**
 
@@ -616,7 +616,7 @@ After this Phase 1.5 pack:
 
 ## 13. Final Recommendation
 
-Tutor IB should treat this pack as the bounded bridge between MVP and broader Phase 2.
+Mentor IB should treat this pack as the bounded bridge between MVP and broader Phase 2.
 
 The operating model is:
 

@@ -1,4 +1,4 @@
-# Tutor IB Engineering Guardrails v1
+# Mentor IB Engineering Guardrails v1
 
 **Date:** 2026-04-11
 **Status:** Canonical engineering policy layer for AI-agent and human implementation work
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has:
+Mentor IB now has:
 
 - product and UX definition
 - architecture and data decisions
@@ -58,7 +58,7 @@ This document only defines the engineering guardrails that implementation must s
 
 ## 3. Core Principle
 
-Tutor IB implementation should optimize for:
+Mentor IB implementation should optimize for:
 
 - small coherent changes
 - stable source-of-truth boundaries
@@ -222,7 +222,7 @@ Agents must not:
 
 ## 11. Reuse And Component Rules
 
-Tutor IB should grow through shared primitives, variants, wrappers, and domain-owned components.
+Mentor IB should grow through shared primitives, variants, wrappers, and domain-owned components.
 
 Agents must:
 

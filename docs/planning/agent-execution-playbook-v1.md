@@ -1,4 +1,4 @@
-# Tutor IB Agent Execution Playbook v1
+# Mentor IB Agent Execution Playbook v1
 
 **Date:** 2026-04-11
 **Status:** Canonical execution workflow for AI agents implementing the approved backlog
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has:
+Mentor IB now has:
 
 - approved UX and design-system docs
 - approved architecture and data docs
@@ -55,7 +55,7 @@ This document only owns the execution workflow.
 
 ## 3. Core Principle
 
-Tutor IB implementation should run as:
+Mentor IB implementation should run as:
 
 - one approved task at a time per agent
 - one clear source-of-truth path per task
@@ -408,7 +408,7 @@ Use this split:
 
 ## 21. Final Recommendation
 
-The practical Tutor IB build workflow should be:
+The practical Mentor IB build workflow should be:
 
 1. human picks one `ready` task id
 2. agent reads this playbook, the detailed task section, the decision index, the baselines, and the task source docs

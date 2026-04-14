@@ -1,4 +1,4 @@
-# Tutor IB Agent Implementation Decision Index v1
+# Mentor IB Agent Implementation Decision Index v1
 
 **Date:** 2026-04-10
 **Status:** Agent-facing implementation index for the approved UX, architecture, data, SEO, and planning docs
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has a broad standalone documentation pack covering:
+Mentor IB now has a broad standalone documentation pack covering:
 
 - UI/UX research and product positioning
 - shared UX object model and IA
@@ -603,7 +603,7 @@ The canonical phase task-pack set now exists.
 
 > **Note:** When `CLAUDE.md` exists at the repo root, it is the agent entrypoint — not this index. This index remains the authoritative decision-routing reference that `CLAUDE.md` points agents to when they need to find which docs own a specific decision area.
 
-Tutor IB has enough architecture and product material to begin implementation.
+Mentor IB has enough architecture and product material to begin implementation.
 
 The operational model is:
 

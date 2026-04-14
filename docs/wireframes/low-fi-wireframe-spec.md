@@ -1,4 +1,4 @@
-# Tutor IB Low-Fi Wireframe Spec
+# Mentor IB Low-Fi Wireframe Spec
 
 **Date:** 2026-04-07
 **Status:** Low-fi content and layout specification

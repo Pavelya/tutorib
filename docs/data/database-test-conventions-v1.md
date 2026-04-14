@@ -1,4 +1,4 @@
-# Tutor IB Database Test Conventions v1
+# Mentor IB Database Test Conventions v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer contract for SQL database tests, pgTAP usage, fixture boundaries, and migration-safe verification
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already approved:
+Mentor IB already approved:
 
 - SQL-first migrations
 - explicit RLS boundaries
@@ -63,7 +63,7 @@ Those can be finalized later.
 
 ## 4. Core Recommendation
 
-Tutor IB should use **SQL database tests as a first-class safety layer** for schema, RLS, projection, and migration-sensitive behavior.
+Mentor IB should use **SQL database tests as a first-class safety layer** for schema, RLS, projection, and migration-sensitive behavior.
 
 The main rule is:
 
@@ -98,7 +98,7 @@ Bad examples:
 
 ## 6. Canonical Database Test Families
 
-Tutor IB should treat database tests as a few explicit families instead of one mixed folder of random checks.
+Mentor IB should treat database tests as a few explicit families instead of one mixed folder of random checks.
 
 ## 6.1 Schema smoke tests
 
@@ -423,7 +423,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 18. Final Recommendation
 
-Tutor IB should treat SQL database tests as a direct safety contract for the most important database truths:
+Mentor IB should treat SQL database tests as a direct safety contract for the most important database truths:
 
 - schema shape
 - access boundaries

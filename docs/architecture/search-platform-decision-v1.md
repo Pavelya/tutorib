@@ -1,4 +1,4 @@
-# Tutor IB Search Platform Decision v1
+# Mentor IB Search Platform Decision v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture decision for Postgres-first search versus Algolia-from-day-one adoption
@@ -8,7 +8,7 @@
 
 This document answers one specific architecture question:
 
-- should Tutor IB use Algolia from the beginning, or keep search on Postgres first and add Algolia only if real need appears later
+- should Mentor IB use Algolia from the beginning, or keep search on Postgres first and add Algolia only if real need appears later
 
 This matters because the product now has:
 
@@ -205,7 +205,7 @@ So Algolia does not remove the need for the hard part of the product architectur
 
 It mainly improves browse-search ergonomics.
 
-## 12. Recommended Direction For Tutor IB
+## 12. Recommended Direction For Mentor IB
 
 ## 12.1 MVP
 
@@ -248,7 +248,7 @@ The architecture should lock the following decisions now:
 
 ## 14. Final Recommendation
 
-Tutor IB should **not** plug in Algolia from the very beginning by default.
+Mentor IB should **not** plug in Algolia from the very beginning by default.
 
 The better direction is:
 

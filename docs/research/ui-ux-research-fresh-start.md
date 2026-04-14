@@ -1,4 +1,4 @@
-# Tutor IB Fresh-Start UI/UX Research
+# Mentor IB Fresh-Start UI/UX Research
 
 **Date:** 2026-04-07
 **Status:** Research and recommendation brief
@@ -6,7 +6,7 @@
 
 ## 1. Executive Summary
 
-Tutor IB should adopt a matching-first design language that feels specific, memorable, and IB-native.
+Mentor IB should adopt a matching-first design language that feels specific, memorable, and IB-native.
 
 The product should avoid a generic tutoring-marketplace aesthetic with polished but interchangeable SaaS styling. The design direction should not be defined by:
 
@@ -47,7 +47,7 @@ It should strongly signal:
 
 ## 3. Competitor Research
 
-I reviewed Tutor IB's intended product category alongside several tutoring platforms:
+I reviewed Mentor IB's intended product category alongside several tutoring platforms:
 
 - Preply
 - Wyzant
@@ -70,7 +70,7 @@ What to avoid:
 - The density is useful, but the page becomes noisy quickly.
 - The visual system is distinctive, but the brand energy is broad language-learning commerce, not high-trust academic support.
 
-Takeaway for Tutor IB:
+Takeaway for Mentor IB:
 
 - Reuse the evidence density.
 - Do not reuse the “endless commercial list of tutors” feeling.
@@ -90,7 +90,7 @@ What to avoid:
 - It is trustworthy, but not emotionally specific.
 - The density can feel like research work rather than relief.
 
-Takeaway for Tutor IB:
+Takeaway for Mentor IB:
 
 - Reuse the trust architecture.
 - Avoid the “large national directory” tone.
@@ -110,7 +110,7 @@ What to avoid:
 - The emotional register is generic “better grades and confidence”.
 - The imagery and marketing tone are more K-12 than IB-specific.
 
-Takeaway for Tutor IB:
+Takeaway for Mentor IB:
 
 - Reuse the matching model.
 - Avoid generic school-success marketing.
@@ -128,7 +128,7 @@ What to avoid:
 - It feels like a huge classified directory rather than a curated academic product.
 - Subject sprawl weakens trust for specialist use cases.
 
-Takeaway for Tutor IB:
+Takeaway for Mentor IB:
 
 - Broad supply is not the goal.
 - Specialisation should feel like the advantage.
@@ -146,7 +146,7 @@ What to avoid:
 - The model is still broad-category browsing.
 - It is not designed around high-stakes academic decision support.
 
-Takeaway for Tutor IB:
+Takeaway for Mentor IB:
 
 - Human warmth matters.
 - Warmth alone is not enough without expert-match clarity.
@@ -167,7 +167,7 @@ The weakest experiences:
 
 ## 5. Strategic Recommendation
 
-Tutor IB should reposition as:
+Mentor IB should reposition as:
 
 **A guided IB tutor matching product for specific academic pressure points.**
 
@@ -308,7 +308,7 @@ The first screen should reduce uncertainty, not repeat metadata.
 
 Comparison is underused in tutoring products and is especially valuable here.
 
-Tutor IB should support comparing saved tutors across:
+Mentor IB should support comparing saved tutors across:
 
 - IB subjects and components
 - teaching style

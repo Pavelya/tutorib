@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/seo/metadata/canonical';
+import { site } from '@/lib/config/site';
 
 /**
  * Public layout metadata — shared defaults for Class A public routes.
@@ -11,14 +12,14 @@ import { getSiteUrl } from '@/lib/seo/metadata/canonical';
 export const metadata: Metadata = {
   openGraph: {
     type: 'website',
-    siteName: 'Tutor IB',
+    siteName: site.name,
     locale: 'en_US',
     images: [
       {
         url: `${getSiteUrl()}/og-default.png`,
         width: 1200,
         height: 630,
-        alt: 'Tutor IB — Find the right IB tutor',
+        alt: `${site.name} — ${site.tagline}`,
       },
     ],
   },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { IBM_Plex_Sans, IBM_Plex_Mono, Instrument_Serif } from 'next/font/google';
 import { ROOT_METADATA } from '@/lib/seo/metadata/defaults';
+import { isProduction } from '@/lib/config/site';
 import '@/styles/globals.css';
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -30,11 +31,9 @@ const instrumentSerif = Instrument_Serif({
  * Preview/staging environments get noindex via the robots field.
  * Production inherits the permissive defaults from ROOT_METADATA.
  */
-const isProduction = (process.env.NEXT_PUBLIC_APP_URL ?? '').includes('tutorib.com');
-
 export const metadata: Metadata = {
   ...ROOT_METADATA,
-  ...(isProduction
+  ...(isProduction()
     ? {}
     : {
         robots: {

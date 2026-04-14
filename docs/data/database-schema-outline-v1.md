@@ -1,4 +1,4 @@
-# Tutor IB Database Schema Outline v1
+# Mentor IB Database Schema Outline v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-model outline for the canonical relational schema, projection layer, and table-family boundaries
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines the first canonical database shape for Tutor IB.
+This document defines the first canonical database shape for Mentor IB.
 
 It exists now because the approved architecture already establishes:
 
@@ -69,7 +69,7 @@ Those should become later data and implementation artifacts.
 
 ## 4. Core Recommendation
 
-Tutor IB should use one normalized relational write model plus a small explicit projection layer.
+Mentor IB should use one normalized relational write model plus a small explicit projection layer.
 
 The practical rule is:
 
@@ -111,7 +111,7 @@ These are owned primarily by Supabase and related managed systems:
 - `auth.identities`
 - `storage.objects`
 
-Tutor IB should reference them, not recreate them.
+Mentor IB should reference them, not recreate them.
 
 ## 6.2 Canonical application write model
 
@@ -720,7 +720,7 @@ Recommended columns:
 Notes:
 
 - phase 1 should store normalized external meeting access
-- Tutor IB owns lesson scheduling and lesson state, not native video conferencing
+- Mentor IB owns lesson scheduling and lesson state, not native video conferencing
 
 ## 12.4 `lesson_reports`
 
@@ -1304,7 +1304,7 @@ The implementation handoff path is:
 
 ## 22. Final Recommendation
 
-Tutor IB should use a relational schema that mirrors the approved shared object model:
+Mentor IB should use a relational schema that mirrors the approved shared object model:
 
 - one canonical identity root
 - one tutor object

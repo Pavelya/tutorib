@@ -1,4 +1,4 @@
-# Tutor IB Implementation Readiness Pack v1
+# Mentor IB Implementation Readiness Pack v1
 
 **Date:** 2026-04-07
 **Status:** Standalone bridge from approved design to build planning
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document exists to turn the approved Tutor IB design system and screen work into an implementation-ready product pack.
+This document exists to turn the approved Mentor IB design system and screen work into an implementation-ready product pack.
 
 It is intentionally written to be:
 

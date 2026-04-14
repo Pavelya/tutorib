@@ -1,4 +1,4 @@
-# Tutor IB Compliance And Regulatory Posture v1
+# Mentor IB Compliance And Regulatory Posture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone compliance-readiness architecture for privacy, minors, communications, public claims, payments, and policy surfaces
@@ -49,7 +49,7 @@ Final jurisdiction-specific legal review still requires qualified counsel.
 
 ## 3. Core Recommendation
 
-Tutor IB should adopt a conservative compliance-readiness posture built around:
+Mentor IB should adopt a conservative compliance-readiness posture built around:
 
 - privacy by design and by default
 - minor-aware product behavior
@@ -99,7 +99,7 @@ The MVP should be architected so later legal review can tighten rules by jurisdi
 
 ## 6.1 Main rule
 
-Tutor IB should be architected as a consumer tutoring platform with minors potentially present, not as:
+Mentor IB should be architected as a consumer tutoring platform with minors potentially present, not as:
 
 - a child-directed product by default
 - a school information system
@@ -114,7 +114,7 @@ The architecture should avoid accidentally presenting the product as something i
 
 ## 6.3 Public-claim rule
 
-Do not imply through product copy or UI that Tutor IB is:
+Do not imply through product copy or UI that Mentor IB is:
 
 - an official IB body
 - a licensed school
@@ -314,7 +314,7 @@ The product should minimize payment-card compliance scope by using Stripe-hosted
 
 ## 12.2 Card-data rule
 
-Tutor IB should not store or process raw payment card details in its own application database or UI.
+Mentor IB should not store or process raw payment card details in its own application database or UI.
 
 ## 12.3 Financial-record rule
 
@@ -345,7 +345,7 @@ Do not architect the MVP as though FERPA automatically governs the platform.
 
 FERPA applies to educational agencies and institutions that receive funds from programs administered by the U.S. Department of Education.
 
-That is not the default consumer-platform posture for Tutor IB.
+That is not the default consumer-platform posture for Mentor IB.
 
 ## 13.3 School-partnership rule
 
@@ -504,7 +504,7 @@ This architecture is meant to prevent:
 
 ## 20. Final Recommendation
 
-Tutor IB should treat compliance as a product-boundary problem early, not as a late legal-copy problem.
+Mentor IB should treat compliance as a product-boundary problem early, not as a late legal-copy problem.
 
 The recommended MVP posture is:
 

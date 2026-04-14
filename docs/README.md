@@ -1,4 +1,4 @@
-# Tutor IB Docs Map
+# Mentor IB Docs Map
 
 **Date:** 2026-04-08
 **Status:** Navigation index for the current docs pack

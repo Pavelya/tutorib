@@ -1,4 +1,4 @@
-# Tutor IB Data Retention And Erasure Field Map v1
+# Mentor IB Data Retention And Erasure Field Map v1
 
 **Date:** 2026-04-09
 **Status:** Standalone data-layer field map for privacy classification, retention posture, deletion and erasure handling, public deindexing, anonymization, redaction, and AI-agent-safe lifecycle rules
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already has a privacy architecture and a schema outline.
+Mentor IB already has a privacy architecture and a schema outline.
 
 What was still missing was the bridge between them:
 
@@ -78,7 +78,7 @@ If there is a conflict:
 
 ## 4. Core Recommendation
 
-Tutor IB should use a **purpose-limited, field-aware retention model**:
+Mentor IB should use a **purpose-limited, field-aware retention model**:
 
 1. public data is removed from public exposure first
 2. highly sensitive data is minimized and deleted as soon as its purpose ends
@@ -967,7 +967,7 @@ Default retention:
 
 Erasure posture:
 
-- do not store raw card or bank details in Tutor IB tables
+- do not store raw card or bank details in Mentor IB tables
 - redact user-facing personal profile linkage where possible
 - retain minimal Stripe ids and transaction state where legitimate financial purpose remains
 - coordinate external Stripe redaction/deletion only when appropriate and legally allowed
@@ -1079,7 +1079,7 @@ Erasure posture:
 - delete private storage objects when no longer needed
 - clear `storage_object_path` after file deletion where appropriate
 - remove external video URLs and provider ids from public profile rendering
-- remember that Tutor IB can stop referencing external media, but may not control provider-side deletion
+- remember that Mentor IB can stop referencing external media, but may not control provider-side deletion
 
 Do not:
 
@@ -1243,7 +1243,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 41. Final Recommendation
 
-Tutor IB should implement retention as a field-aware lifecycle system.
+Mentor IB should implement retention as a field-aware lifecycle system.
 
 The clean operating model is:
 

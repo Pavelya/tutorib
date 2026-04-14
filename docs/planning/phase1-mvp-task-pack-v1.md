@@ -1,4 +1,4 @@
-# Tutor IB Phase 1 MVP Task Pack v1
+# Mentor IB Phase 1 MVP Task Pack v1
 
 **Date:** 2026-04-10
 **Status:** Implementation-ready Phase 1 MVP task pack for future AI agents
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has:
+Mentor IB now has:
 
 - the approved design and architecture pack
 - the agent implementation decision index
@@ -1342,7 +1342,7 @@ Implement the provider-side and callback-safety parts of shared authentication s
 - Google and magic-link flows still converge into one shared auth path
 - redirect and callback behavior is restricted to approved return paths
 - auth failure states are shaped and explicit
-- auth emails are treated as branded Tutor IB auth surfaces, not ignored provider defaults
+- auth emails are treated as branded Mentor IB auth surfaces, not ignored provider defaults
 
 **Verification**
 
@@ -1483,7 +1483,7 @@ Implement the in-app notification generation and read-state flows for Phase 1 li
 
 **Goal**
 
-Implement the first transactional email pipeline so important Phase 1 lifecycle events reach users by email with branded Tutor IB templates, while keeping chat messages out of email.
+Implement the first transactional email pipeline so important Phase 1 lifecycle events reach users by email with branded Mentor IB templates, while keeping chat messages out of email.
 
 **Required source docs**
 
@@ -1508,7 +1508,7 @@ Implement the first transactional email pipeline so important Phase 1 lifecycle 
 
 **Acceptance criteria**
 
-- Phase 1 system notifications that require email have branded Tutor IB templates
+- Phase 1 system notifications that require email have branded Mentor IB templates
 - emails use safe summaries and link back to authenticated product surfaces for detail
 - new message alerts do not email message content in MVP
 - delivery attempts are trackable through the approved notification-delivery boundary
@@ -1570,7 +1570,7 @@ Implement the participant lesson actions that turn lesson detail into a real ope
 
 **Goal**
 
-Implement the tutor earnings route and payout-readiness experience so approved tutors understand listing status, payout setup, earnings timing, and payout holds without leaving the Tutor IB ecosystem.
+Implement the tutor earnings route and payout-readiness experience so approved tutors understand listing status, payout setup, earnings timing, and payout holds without leaving the Mentor IB ecosystem.
 
 **Required source docs**
 
@@ -1634,7 +1634,7 @@ After this Phase 1 pack:
 
 ## 12. Final Recommendation
 
-Tutor IB should use this task pack as the first real implementation backlog for AI agents.
+Mentor IB should use this task pack as the first real implementation backlog for AI agents.
 
 The operating model is:
 

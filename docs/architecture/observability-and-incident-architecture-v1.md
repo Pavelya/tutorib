@@ -1,4 +1,4 @@
-# Tutor IB Observability And Incident Architecture v1
+# Mentor IB Observability And Incident Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone production-observability and incident-response architecture for application health, dependency health, runtime signals, alerting posture, and incident handling
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how Tutor IB should detect, understand, and respond to production problems.
+This document defines how Mentor IB should detect, understand, and respond to production problems.
 
 It exists now because the approved architecture already implies:
 
@@ -51,7 +51,7 @@ It does not redefine:
 
 ## 3. Core Recommendation
 
-Tutor IB should use one shared observability model with separate signal lanes and one explicit incident model.
+Mentor IB should use one shared observability model with separate signal lanes and one explicit incident model.
 
 The practical rule is:
 
@@ -95,7 +95,7 @@ The architecture should answer these questions reliably:
 
 ## 6. Signal System Split
 
-Tutor IB should treat observability as several related systems, not one giant event bucket.
+Mentor IB should treat observability as several related systems, not one giant event bucket.
 
 ## 6.1 Runtime and platform observability
 
@@ -524,7 +524,7 @@ When production behavior changes suddenly, the first correlation questions shoul
 
 ## 16.1 Main rule
 
-Tutor IB depends on multiple managed providers, so observability must include provider health, not only app health.
+Mentor IB depends on multiple managed providers, so observability must include provider health, not only app health.
 
 ## 16.2 Providers that matter most in phase 1
 
@@ -817,7 +817,7 @@ The architecture should lock the following decisions now:
 
 ## 26. Final Recommendation
 
-Tutor IB should run production operations on a lightweight but explicit observability model:
+Mentor IB should run production operations on a lightweight but explicit observability model:
 
 - Vercel for runtime, deployment, and field-performance visibility
 - Supabase for backend and data-platform diagnosis

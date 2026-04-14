@@ -1,4 +1,4 @@
-# Tutor IB Meeting And Calendar Architecture v1
+# Mentor IB Meeting And Calendar Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone architecture for lesson meeting access, external conferencing links, and calendar export behavior
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how Tutor IB should handle the actual meeting access layer for lessons.
+This document defines how Mentor IB should handle the actual meeting access layer for lessons.
 
 It exists now because the approved product already implies the need for:
 
@@ -45,18 +45,18 @@ Those can come later as implementation artifacts.
 
 ## 3. Core Recommendation
 
-Tutor IB should not build native video conferencing for MVP.
+Mentor IB should not build native video conferencing for MVP.
 
 Instead, the MVP should use:
 
-- Tutor IB-owned lesson scheduling and lesson state
+- Mentor IB-owned lesson scheduling and lesson state
 - tutor-provided external meeting links
 - lesson-scoped meeting access objects
 - add-to-calendar actions that do not require full calendar sync
 
 The practical rule is:
 
-- Tutor IB owns lesson scheduling, status, reminders, and continuity
+- Mentor IB owns lesson scheduling, status, reminders, and continuity
 - the conferencing provider owns the actual call
 - meeting access belongs to the `Lesson` domain, not the public media domain
 - calendar export belongs to lesson operations, not availability logic
@@ -197,7 +197,7 @@ Tutors should be able to override the default meeting link for a specific lesson
 
 Use external meeting providers owned or chosen by tutors.
 
-Do not attempt to provision meetings directly from Tutor IB in MVP.
+Do not attempt to provision meetings directly from Mentor IB in MVP.
 
 ## 9.2 Recommended MVP recognized providers
 
@@ -490,7 +490,7 @@ Consider later:
 
 The architecture should lock the following decisions now:
 
-- Tutor IB does not build native conferencing for MVP
+- Mentor IB does not build native conferencing for MVP
 - lessons use tutor-provided external meeting links
 - meeting access belongs to the lesson domain, not public media
 - recognized providers should be normalized through adapter logic
@@ -501,7 +501,7 @@ The architecture should lock the following decisions now:
 
 ## 19. Final Recommendation
 
-Tutor IB should treat meeting access as a lesson-level operational integration, not as a media feature and not as a native conferencing product.
+Mentor IB should treat meeting access as a lesson-level operational integration, not as a media feature and not as a native conferencing product.
 
 The recommended MVP is:
 

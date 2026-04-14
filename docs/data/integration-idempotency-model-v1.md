@@ -1,4 +1,4 @@
-# Tutor IB Integration Idempotency Model v1
+# Mentor IB Integration Idempotency Model v1
 
 **Date:** 2026-04-08
 **Status:** Standalone data-layer contract for idempotent execution across requests, jobs, webhooks, provider calls, and repeatable database mutations
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB already approved:
+Mentor IB already approved:
 
 - SQL-first migrations
 - a durable jobs and notifications architecture
@@ -72,7 +72,7 @@ Those can come later.
 
 ## 4. Core Recommendation
 
-Tutor IB should use a **durable idempotency model** based on:
+Mentor IB should use a **durable idempotency model** based on:
 
 1. natural unique business boundaries where they already exist
 2. explicit operation keys where the same user intent may be retried
@@ -178,7 +178,7 @@ These operations should use deterministic upsert-style SQL and not rely on "run 
 
 ## 7. Canonical Idempotency Key Families
 
-Tutor IB should use a small number of explicit key families.
+Mentor IB should use a small number of explicit key families.
 
 ## 7.1 Natural business uniqueness
 
@@ -269,7 +269,7 @@ If plain uniqueness and state checks are not enough for a specific hot operation
 
 This is an exception tool, not the default answer.
 
-## 9. Operation-Specific Rules For Tutor IB
+## 9. Operation-Specific Rules For Mentor IB
 
 ## 9.1 Auth account resolution
 
@@ -498,7 +498,7 @@ The next step is to use them to create concrete implementation tasks, not to add
 
 ## 18. Final Recommendation
 
-Tutor IB should treat idempotency as a shared system contract, not as an ad hoc payment trick.
+Mentor IB should treat idempotency as a shared system contract, not as an ad hoc payment trick.
 
 The clean phase 1 model is:
 

@@ -1,4 +1,4 @@
-# Tutor IB End-to-End Use-Case Gap Audit v1
+# Mentor IB End-to-End Use-Case Gap Audit v1
 
 **Date:** 2026-04-11
 **Status:** Cross-role product-flow audit before implementation
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-Tutor IB now has a large design, architecture, data, and planning corpus.
+Mentor IB now has a large design, architecture, data, and planning corpus.
 
 That is a strength, but it also creates a real implementation risk:
 
@@ -37,7 +37,7 @@ It also checked current external references for 2026-relevant guidance on:
 
 ## 3. Executive Summary
 
-The current Tutor IB documentation is strong on:
+The current Mentor IB documentation is strong on:
 
 - shared cross-role object model
 - match-first product positioning
@@ -105,7 +105,7 @@ The current service blueprint already leans this way:
 - tutor reviews request
 - lesson moves toward confirmation
 
-That is the right default for Tutor IB because the product is:
+That is the right default for Mentor IB because the product is:
 
 - match-first rather than instant-marketplace-first
 - built around external tutor-owned meeting links
@@ -145,7 +145,7 @@ For MVP, the product flow is:
 
 ## 5.3 Use one platform-wide cancellation and no-show policy
 
-Tutor IB should not start with tutor-specific cancellation rules.
+Mentor IB should not start with tutor-specific cancellation rules.
 
 That would:
 
@@ -164,7 +164,7 @@ That would:
 
 ## 5.4 No-show handling needs a dispute-aware product flow
 
-Because Tutor IB does **not** run the actual video room, it cannot reliably auto-detect attendance from first-party call telemetry.
+Because Mentor IB does **not** run the actual video room, it cannot reliably auto-detect attendance from first-party call telemetry.
 
 That means "no-show" is not only a status question.
 
@@ -206,7 +206,7 @@ The important qualifier is that the penalty should be:
 
 ## 5.6 Tutor Stripe onboarding should be hosted, late in the funnel, and country-gated
 
-Tutor IB should not ask tutors to fill payment-compliance forms during the first application step.
+Mentor IB should not ask tutors to fill payment-compliance forms during the first application step.
 
 That adds friction too early.
 
@@ -413,7 +413,7 @@ The following current references informed this audit:
 
 ## 12. Final Audit Verdict
 
-Tutor IB is **not missing another broad architecture phase**.
+Mentor IB is **not missing another broad architecture phase**.
 
 It is missing a **small number of policy-clarity artifacts** in the flows where trust, money, and operational failure intersect.
 

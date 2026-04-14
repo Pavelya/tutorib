@@ -1,4 +1,4 @@
-# Tutor IB SEO Page Inventory v1
+# Mentor IB SEO Page Inventory v1
 
 **Date:** 2026-04-08
 **Status:** Standalone public-page inventory and indexation policy
@@ -20,7 +20,7 @@ This is the route-level operating document for public discoverability.
 
 ## 2. Core Recommendation
 
-Tutor IB should launch with a deliberately small, high-quality SEO surface.
+Mentor IB should launch with a deliberately small, high-quality SEO surface.
 
 The rule is:
 
@@ -33,7 +33,7 @@ The product should not try to win search by publishing a large volume of thin ro
 
 ## 3. Route Families
 
-Tutor IB's routes fall into four families.
+Mentor IB's routes fall into four families.
 
 ### 3.1 Foundational public pages
 
@@ -452,7 +452,7 @@ Do not:
 
 ## 10. Final Recommendation
 
-Tutor IB should treat its public search surface as a curated product, not as exhaust.
+Mentor IB should treat its public search surface as a curated product, not as exhaust.
 
 The best phase 1 launch set is:
 

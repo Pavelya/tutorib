@@ -1,4 +1,5 @@
 import { buildCanonicalUrl, getSiteUrl } from '../metadata/canonical';
+import { site } from '@/lib/config/site';
 
 /**
  * HelpPage JSON-LD for the /support route.
@@ -21,7 +22,7 @@ export function buildHelpPage(options: {
     url,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'Tutor IB',
+      name: site.name,
       url: getSiteUrl(),
     },
   };

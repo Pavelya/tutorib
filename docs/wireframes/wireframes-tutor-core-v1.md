@@ -1,4 +1,4 @@
-# Tutor IB Core Wireframes v1
+# Mentor IB Core Wireframes v1
 
 **Date:** 2026-04-07
 **Status:** Low-fi structural wireframes

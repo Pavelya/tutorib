@@ -1,4 +1,4 @@
-# Tutor IB Content Template Spec v1
+# Mentor IB Content Template Spec v1
 
 **Date:** 2026-04-08
 **Status:** Standalone public-page content template specification
@@ -174,7 +174,7 @@ This section should sound like student reality, not brochure language.
 Must explain:
 
 - what a useful tutor actually helps with in this subject
-- how Tutor IB approaches matching or tutor choice here
+- how Mentor IB approaches matching or tutor choice here
 
 ### 6.4 Tutor options or matching path
 
@@ -272,7 +272,7 @@ Examples:
 
 Must explain:
 
-- what Tutor IB can help with
+- what Mentor IB can help with
 - what it cannot honestly promise
 
 Quality rule:
@@ -336,7 +336,7 @@ Route:
 
 Primary intent:
 
-- help strong tutors decide whether Tutor IB is a good fit before applying
+- help strong tutors decide whether Mentor IB is a good fit before applying
 
 Required sections:
 
@@ -344,7 +344,7 @@ Required sections:
 
 Must include:
 
-- who Tutor IB is looking for
+- who Mentor IB is looking for
 - one primary CTA
 
 ### 9.2 Why teach here
@@ -455,7 +455,7 @@ If a page is meant to be strong for AI-assisted search surfaces, it should:
 - answer likely questions directly
 - use clear headings
 - explain who the content is for
-- show what Tutor IB actually knows through the page content
+- show what Mentor IB actually knows through the page content
 - avoid vague keyword padding
 
 A good test:
@@ -474,7 +474,7 @@ Do not:
 
 ## 15. Final Recommendation
 
-Tutor IB's public pages should behave like guided decision pages, not marketplace filler.
+Mentor IB's public pages should behave like guided decision pages, not marketplace filler.
 
 The content system should therefore optimize for:
 

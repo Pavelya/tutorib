@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { buildCanonicalUrl } from './canonical';
 import { buildOpenGraph } from './open-graph';
+import { site } from '@/lib/config/site';
 
 /**
  * Input contract for the metadata builder.
@@ -55,7 +56,7 @@ export function buildRouteMetadata(input: RouteMetadataInput): Metadata {
       ? { index: true, follow: true }
       : { index: false, follow: false },
     openGraph: buildOpenGraph({
-      title: typeof title === 'string' ? title : 'Tutor IB',
+      title: typeof title === 'string' ? title : site.name,
       description,
       pathname,
       type: ogType,
@@ -63,7 +64,7 @@ export function buildRouteMetadata(input: RouteMetadataInput): Metadata {
     }),
     twitter: {
       card: 'summary_large_image',
-      title: typeof title === 'string' ? title : 'Tutor IB',
+      title: typeof title === 'string' ? title : site.name,
       description,
     },
     ...extra,

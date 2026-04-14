@@ -1,8 +1,8 @@
-# Tutor IB Cross-Role Journey Inventory v1
+# Mentor IB Cross-Role Journey Inventory v1
 
 **Date:** 2026-04-11
 **Status:** Canonical product-journey inventory for student, tutor, admin, and system-driven flows
-**Scope:** meaningful public, authenticated, private, internal, happy-path, and failure-path journeys that the current Tutor IB docs pack intends to support
+**Scope:** meaningful public, authenticated, private, internal, happy-path, and failure-path journeys that the current Mentor IB docs pack intends to support
 **Companion docs:**
 - `docs/foundations/service-blueprint-two-sided.md`
 - `docs/foundations/ux-object-model.md`
@@ -11,7 +11,7 @@
 
 ## 1. Purpose
 
-This document turns the current Tutor IB product pack into one explicit journey inventory.
+This document turns the current Mentor IB product pack into one explicit journey inventory.
 
 It exists to answer:
 
@@ -55,7 +55,7 @@ They describe the meaning users must receive even if final wording changes later
 
 ### 2.4 Boundary rule
 
-This inventory covers the current approved Tutor IB scope.
+This inventory covers the current approved Mentor IB scope.
 
 The parent or guardian payer flow remains out of current scope.
 
@@ -77,7 +77,7 @@ The parent or guardian payer flow remains out of current scope.
 - `User sees`:
   - success: `Let's find tutors for your exact IB need.`
   - auth required: `Sign in to continue and save your progress.`
-  - role required: `Tell us how you'll use Tutor IB first.`
+  - role required: `Tell us how you'll use Mentor IB first.`
 - `Task coverage`: `P1-PUBLIC-002`, `P1-MATCH-001`, `P1-AUTH-001`, `P1-AUTH-002`
 
 ### J-PUB-002 Home to browse tutors
@@ -126,7 +126,7 @@ The parent or guardian payer flow remains out of current scope.
   1. `User` clicks a supporting public route from the header, footer, or contextual link.
   2. `System` navigates to the selected route.
   3. `User` reads process, trust, and support guidance.
-- `Outcome`: the user gets reassurance or clarification without leaving the Tutor IB ecosystem.
+- `Outcome`: the user gets reassurance or clarification without leaving the Mentor IB ecosystem.
 - `Unhappy cases`:
   - user expected a live support chat that does not exist
 - `User sees`:
@@ -146,7 +146,7 @@ The parent or guardian payer flow remains out of current scope.
 - `Unhappy cases`:
   - authenticated student without tutor capability must first add tutor intent through setup or tutor application entry. 
 - `User sees`:
-  - success: `Start your Tutor IB application.`
+  - success: `Start your Mentor IB application.`
   - setup required: `We'll set up your tutor role first.`
 - `Task coverage`: `P1-PUBLIC-001`, `P1-AUTH-001`, `P1-AUTH-002`, `P2-APPLY-001`
 
@@ -183,7 +183,7 @@ The parent or guardian payer flow remains out of current scope.
 - `Unhappy cases`:
   - user leaves before choosing a role
 - `User sees`:
-  - setup prompt: `Tell us how you'll use Tutor IB.`
+  - setup prompt: `Tell us how you'll use Mentor IB.`
   - incomplete setup: `Choose a role to continue.`
 - `Task coverage`: `P1-AUTH-001`, `P1-AUTH-002`, `P1-AUTH-003`
 
@@ -272,7 +272,7 @@ The parent or guardian payer flow remains out of current scope.
   2. `Student` clicks through problem selection, subject or component, urgency, support style, and language or timezone steps.
   3. `Student` submits the learning need.
   4. `System` navigates to results.
-- `Outcome`: Tutor IB creates or updates an active `LearningNeed` and shows match results.
+- `Outcome`: Mentor IB creates or updates an active `LearningNeed` and shows match results.
 - `Unhappy cases`:
   - the student exits mid-flow
   - the student submits incomplete required fields
@@ -1160,7 +1160,7 @@ These paths should not be implemented as if they already exist:
 - tutor auto-approval of bookings by default
 - tutor cold-outreach messaging to students
 - message attachments in MVP
-- native Tutor IB video conferencing
+- native Mentor IB video conferencing
 - calendar two-way sync in MVP
 - a stored-value wallet model
 - tutor-specific cancellation policies

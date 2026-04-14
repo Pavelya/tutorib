@@ -1,4 +1,4 @@
-# Tutor IB Analytics And Product Telemetry Architecture v1
+# Mentor IB Analytics And Product Telemetry Architecture v1
 
 **Date:** 2026-04-08
 **Status:** Standalone measurement architecture for product analytics, public-route traffic insight, and privacy-safe telemetry
@@ -6,7 +6,7 @@
 
 ## 1. Why This Document Exists
 
-This document defines how Tutor IB should measure product behavior and outcomes without turning analytics into a second ungoverned platform.
+This document defines how Mentor IB should measure product behavior and outcomes without turning analytics into a second ungoverned platform.
 
 It exists now because the approved product already implies the need to understand:
 
@@ -47,7 +47,7 @@ Those can come later as dedicated companion artifacts.
 
 ## 3. Core Recommendation
 
-Tutor IB should use one shared measurement architecture with four distinct systems:
+Mentor IB should use one shared measurement architecture with four distinct systems:
 
 - public discoverability measurement
 - privacy-friendly web traffic analytics
@@ -60,7 +60,7 @@ The practical rule is:
 - use Vercel Web Analytics for anonymous route-level traffic insight
 - use PostHog for event-based product telemetry
 - keep audit and security records outside the product analytics stream
-- keep the canonical event contract inside Tutor IB, not inside any vendor SDK
+- keep the canonical event contract inside Mentor IB, not inside any vendor SDK
 
 ## 4. Architecture Style For AI-Driven Implementation
 
@@ -94,7 +94,7 @@ That is enough to define what should be measured without yet locking every later
 
 ## 6. Measurement System Split
 
-Tutor IB should treat measurement as four related but distinct systems.
+Mentor IB should treat measurement as four related but distinct systems.
 
 ## 6.1 Discoverability measurement
 
@@ -172,7 +172,7 @@ The recommended measurement stack is:
 
 ## 7.2 Why this split is recommended
 
-This gives Tutor IB:
+This gives Mentor IB:
 
 - one tool optimized for public-route traffic on Vercel
 - one tool optimized for product funnels and event analysis
@@ -188,7 +188,7 @@ That makes it a poor sole foundation for product telemetry in a cost-sensitive M
 
 ## 7.4 Why PostHog is recommended for product telemetry
 
-PostHog's official docs and pricing support the kind of product analytics Tutor IB needs:
+PostHog's official docs and pricing support the kind of product analytics Mentor IB needs:
 
 - explicit event capture
 - identified and anonymous event handling
@@ -200,7 +200,7 @@ PostHog's official docs and pricing support the kind of product analytics Tutor 
 
 GA4 is valid for traffic and marketing reporting, but it is not the best primary home for the application's internal product-learning loop.
 
-Tutor IB needs product telemetry centered on:
+Mentor IB needs product telemetry centered on:
 
 - lessons
 - matching
@@ -213,7 +213,7 @@ That is better served by an event-first product analytics tool than by a marketi
 
 ## 8.1 Main rule
 
-Tutor IB should define one internal canonical analytics event contract and let vendor adapters send the events outward.
+Mentor IB should define one internal canonical analytics event contract and let vendor adapters send the events outward.
 
 ## 8.2 Boundary rule
 
@@ -446,7 +446,7 @@ Do not enable broad session replay across sensitive authenticated surfaces in th
 
 ## 13.2 Why this is the default
 
-Tutor IB handles:
+Mentor IB handles:
 
 - lessons
 - private messaging
@@ -596,7 +596,7 @@ Consider later:
 The architecture should lock the following decisions now:
 
 - measurement is split into discoverability, web traffic analytics, product telemetry, and audit logging
-- the canonical event contract belongs to Tutor IB, not to any vendor SDK
+- the canonical event contract belongs to Mentor IB, not to any vendor SDK
 - Vercel Web Analytics is for privacy-friendly route insight, not the sole product telemetry system
 - PostHog is the recommended MVP product telemetry tool
 - meaningful product actions should be captured explicitly
@@ -605,7 +605,7 @@ The architecture should lock the following decisions now:
 
 ## 20. Final Recommendation
 
-Tutor IB should measure the product through one clear internal analytics contract and a small toolset rather than through scattered scripts.
+Mentor IB should measure the product through one clear internal analytics contract and a small toolset rather than through scattered scripts.
 
 The recommended MVP architecture is:
 
