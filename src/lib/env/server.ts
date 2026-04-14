@@ -8,7 +8,13 @@ const serverEnvSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.url(),
 });
 
-function parseServerEnv() {
+type ServerEnv = z.infer<typeof serverEnvSchema>;
+
+let _cached: ServerEnv | undefined;
+
+function parseServerEnv(): ServerEnv {
+  if (_cached) return _cached;
+
   const result = serverEnvSchema.safeParse(process.env);
 
   if (!result.success) {
@@ -17,7 +23,14 @@ function parseServerEnv() {
     throw new Error('Server environment validation failed. Check logs above.');
   }
 
-  return result.data;
+  _cached = result.data;
+  return _cached;
 }
 
-export const serverEnv = parseServerEnv();
+/**
+ * Server environment variables — parsed and validated on first access.
+ * Lazy so that module imports during build don't throw when env vars are absent.
+ */
+export function getServerEnv(): ServerEnv {
+  return parseServerEnv();
+}

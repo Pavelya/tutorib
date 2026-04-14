@@ -1,8 +1,14 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import { serverEnv } from '@/lib/env/server';
+import { getServerEnv } from '@/lib/env/server';
 import * as schema from './schema';
 
-const queryClient = postgres(serverEnv.DATABASE_URL);
+let _db: ReturnType<typeof drizzle> | undefined;
 
-export const db = drizzle(queryClient, { schema });
+export function getDb() {
+  if (!_db) {
+    const queryClient = postgres(getServerEnv().DATABASE_URL);
+    _db = drizzle(queryClient, { schema });
+  }
+  return _db;
+}
