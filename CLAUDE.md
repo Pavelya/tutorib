@@ -4,7 +4,6 @@
 
 Tutor IB is an IB-native tutoring platform. Match-first, not marketplace-first.
 One shared ecosystem for students and tutors — not two separate apps.
-There is no codebase yet. Only planning docs exist under `docs/`.
 The old name "ibcamp" is dead. Never reference it.
 
 ## Stack (frozen)
@@ -72,21 +71,28 @@ For doc routing when uncertain: `docs/planning/agent-implementation-decision-ind
 
 ### Step 3: Answer pre-flight questions (before writing any code)
 
+State these answers explicitly before touching any code:
+
 - What is the exact task ID?
 - Is the task status `ready`?
 - Are all dependencies satisfied?
-- Which files/routes/modules will I touch?
-- What is explicitly out of scope?
+- What does the **Scope** section say? (list each item)
+- What does the **Out of scope** section say? (list each item)
+- Which files will I create or modify? (every file, explicitly)
+- Which packages will I install? (only those required by this task's scope — if none, say none)
+- Which other tasks own adjacent work I must NOT touch? (name them)
 - Does this need a migration, RLS change, DTO change, or provider integration?
 
-State these answers. If anything is unclear, read more docs before coding. If something is blocked, report it — do not improvise.
+If anything is unclear, read more docs before coding. If something is blocked, report it — do not improvise.
 
 ### Step 4: Implement
 
-- Implement the smallest coherent slice that satisfies the task
-- Stay inside the task's stated scope — nothing more
-- Reuse existing shared components, DTOs, and patterns
-- Run verification: typecheck (`tsc --noEmit`), lint (`eslint`), build (`next build`), and any task-specific tests
+- Implement ONLY what the task's Scope section lists. Nothing more.
+- Before creating each file, check: is this file required by the Scope? If not, skip it.
+- Before running `pnpm add`, check: is this package required by this task? If not, skip it.
+- Do not create stubs, placeholders, or empty files for future tasks.
+- Reuse existing shared components, DTOs, and patterns.
+- Run verification: typecheck (`tsc --noEmit`), lint (`eslint`), build (`next build`), and any task-specific tests.
 
 ### Step 5: Report
 
@@ -100,11 +106,18 @@ Blockers/Notes: <any issues, assumptions, or doc mismatches>
 
 ## Non-negotiable rules
 
-### Scope
+### Scope — this is the most important section
 - ONE task per session. Do not combine tasks.
-- Do not widen scope. Do not refactor unrelated code. Do not "clean up" adjacent files.
+- The task's **Scope** section is your hard boundary. If something is not listed there, do not build it.
+- The task's **Out of scope** section is an explicit exclusion list. If something is listed there, do not touch it under any circumstances.
+- Before creating any file, route, or package install, ask: **"Does the task's Scope section require this?"** If the answer is no, do not create it. Another task owns it.
+- Do not create files "because they'll be needed later." Each task creates only what it needs. The next task will create what it needs.
+- Do not install packages that are not directly needed by the current task. Other tasks will install their own dependencies when they run.
+- Do not create routes, pages, or stubs for other phases or other tasks. Even empty placeholder files for future work are scope creep.
 - Do not add features, config, or packages not required by the current task.
+- Do not refactor unrelated code. Do not "clean up" adjacent files.
 - Do not implement `draft` or `planned` tasks unless explicitly told to clarify them.
+- When in doubt about whether something is in scope, it is NOT in scope. Stop and ask.
 
 ### Code quality
 - Do not hardcode: design tokens, spacing, status values, reference data, legal copy, provider IDs, webhook paths, analytics destinations, or anything that belongs in a shared source of truth.
@@ -144,10 +157,8 @@ Blockers/Notes: <any issues, assumptions, or doc mismatches>
 - `noindex` on preview/staging.
 
 ### Git
-- Branch naming: `codex/<task-id>-<short-slug>` (e.g., `codex/p1-found-001-app-shell`)
-- Commit format: `<TASK_ID>: <short imperative summary>`
-- One branch per task. Do not mix tasks. Do not amend history unless asked.
-- Do not commit `.env`, secrets, or machine-specific artifacts. Commit `.env.example`.
+- Do not commit, push, or create branches. The human manages git.
+- Do not commit `.env`, secrets, or machine-specific artifacts.
 
 ## Task selection order
 
@@ -219,8 +230,9 @@ Within a step, tasks can be done sequentially or in parallel — they don't depe
 - Existing code conflicts with what you need to change
 - The task needs schema/auth work that wasn't named
 - Acceptance criteria can't be met without widening scope
+- You feel the urge to create "just one more file" that isn't in the Scope section
 
-Report the blocker clearly. Do not improvise workarounds.
+Report the blocker clearly. Do not improvise workarounds. Do not "help" by doing extra work.
 
 ## Doc navigation
 

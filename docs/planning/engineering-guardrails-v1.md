@@ -102,18 +102,23 @@ The following rules apply to all implementation work:
 
 ## 6. Scope And Change Isolation
 
-Each branch, change set, and implementation pass should stay focused on one coherent task.
+**The task's Scope section is the hard boundary for what an agent may create.** If a file, route, package, or behavior is not listed in the Scope section, do not create it. Another task owns it.
+
+Each change set and implementation pass should stay focused on one coherent task.
 
 Agents should:
 
 - implement one task id at a time
-- keep changes inside the files genuinely needed for that task
+- create only the files, routes, and packages listed or directly implied by the task's Scope section
 - separate follow-up cleanup into later tasks unless it directly blocks the assigned task
 - call out adjacent issues without silently fixing all of them
 
 Agents should not:
 
 - mix multiple backlog tasks into one change set
+- create placeholder files, stubs, or empty routes for future tasks
+- install packages that are needed by other tasks but not by the current task
+- create routes that belong to other phases or other task IDs
 - refactor unrelated modules during feature work
 - restructure broad folders because the current task touched one file there
 - upgrade tooling or dependencies while doing UI or feature work unless the task requires it

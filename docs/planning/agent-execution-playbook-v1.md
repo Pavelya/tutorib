@@ -200,15 +200,20 @@ Practical rule:
 
 ## 11. Scope Discipline Rules
 
+**The task's Scope section is the hard boundary.** Before creating any file, ask: "Does the Scope section require this?" If not, do not create it.
+
 Agents should:
 
-- implement only the task they were given
+- implement only what the task's Scope section lists
+- create only the files and packages directly required by the current task
 - reuse existing shared components, DTOs, service modules, and route patterns
 - update docs only if the implementation reveals a real decision mismatch
 - leave unrelated user changes untouched
 
 Agents should not:
 
+- create files, routes, or stubs for other tasks or future phases
+- install packages that other tasks will need but this task does not
 - widen a feature task into a stack refactor
 - add a second provider because it feels nicer
 - redesign the route tree during a page task
