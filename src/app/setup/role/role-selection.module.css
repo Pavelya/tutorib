@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: var(--space-6);
+  gap: var(--space-8);
+}
+
+.header {
+  text-align: center;
+  max-width: 480px;
+}
+
+.title {
+  font-family: var(--font-serif), serif;
+  font-size: var(--text-title-xl);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.subtitle {
+  font-size: var(--text-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-body);
+}
+
+.error {
+  background-color: var(--state-destructive-bg);
+  border: 1px solid var(--state-destructive-border);
+  color: var(--state-destructive-text);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-body-sm);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: 560px;
+}
+
+.roleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-8) var(--space-6);
+  background: var(--surface-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    border-color var(--motion-default),
+    box-shadow var(--motion-default),
+    background-color var(--motion-default);
+  text-align: center;
+}
+
+.roleCard:hover:not(:disabled) {
+  border-color: var(--color-forest-500);
+  box-shadow: var(--shadow-soft);
+  background: var(--surface-raised);
+}
+
+.roleCard:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.roleIcon {
+  font-size: 2.5rem;
+}
+
+.roleLabel {
+  font-size: var(--text-title-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: var(--line-tight);
+}
+
+.roleDescription {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-body);
+  max-width: 200px;
+}
+
+@media (max-width: 767px) {
+  .options {
+    flex-direction: column;
+  }
+
+  .roleCard {
+    padding: var(--space-6) var(--space-5);
+  }
+}
