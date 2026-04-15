@@ -5,11 +5,8 @@ import { createSupabaseBrowser } from '@/lib/supabase/client';
 import { Button } from '@/components/Button/Button';
 import { Input } from '@/components/Input/Input';
 import { InlineNotice } from '@/components/InlineNotice/InlineNotice';
+import { AUTH_ERROR_MESSAGES, isAuthErrorCode } from '@/lib/auth/auth-errors';
 import styles from './SignInForm.module.css';
-
-const ERROR_MESSAGES: Record<string, string> = {
-  auth_callback_failed: 'Sign-in failed. Please try again.',
-};
 
 interface SignInFormProps {
   callbackError?: string;
@@ -78,7 +75,9 @@ export function SignInForm({ callbackError }: SignInFormProps) {
     <div className={styles.form}>
       {callbackError && (
         <InlineNotice variant="warning">
-          {ERROR_MESSAGES[callbackError] ?? 'Something went wrong. Please try again.'}
+          {isAuthErrorCode(callbackError)
+            ? AUTH_ERROR_MESSAGES[callbackError]
+            : 'Something went wrong. Please try again.'}
         </InlineNotice>
       )}
 
