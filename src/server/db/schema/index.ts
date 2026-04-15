@@ -24,3 +24,11 @@ export {
   availabilityRules,
   availabilityOverrides,
 } from '@/modules/availability/schema';
+export {
+  conversations,
+  conversationParticipants,
+  messages,
+  messageReads,
+  userBlocks,
+  abuseReports,
+} from '@/modules/conversations/schema';
