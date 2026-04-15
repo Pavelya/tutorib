@@ -108,7 +108,17 @@ Outcome: completed | blocked
 Files changed: <list>
 Verification: <what was run and result>
 Blockers/Notes: <any issues, assumptions, or doc mismatches>
+
+Manual steps required (NEVER SKIP THIS SECTION):
+- Migrations to run: <list commands, e.g. `pnpm drizzle-kit push` or `pnpm drizzle-kit migrate`>
+- SQL to execute in Supabase: <any RLS policies, functions, triggers, seeds>
+- Environment variables to add: <any new .env entries>
+- Other manual steps: <anything the human must do before the code works>
+- Tests to run: <specific test commands or manual QA steps>
+- If none: "No manual steps required."
 ```
+
+**This section is mandatory.** If the task created migrations, RLS policies, database functions, triggers, or seed data, the human MUST know exactly what to run and in what order. Never assume the human will figure it out from the code.
 
 ## Non-negotiable rules
 

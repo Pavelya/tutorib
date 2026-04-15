@@ -42,3 +42,9 @@ export {
   lessonIssueCases,
 } from '@/modules/lessons/schema';
 export { payments, earnings } from '@/modules/payments/schema';
+export {
+  notifications,
+  notificationDeliveries,
+  policyNoticeVersions,
+  policyNoticeReceipts,
+} from '@/modules/notifications/schema';

@@ -4,6 +4,10 @@
 --         user_blocks, abuse_reports
 -- RLS: participant-scoped for conversations/messages, self-row for blocks/reports
 
+-- =========================================================================
+-- TABLE DEFINITIONS (all tables first, RLS policies after)
+-- =========================================================================
+
 -- ---------------------------------------------------------------------------
 -- conversations — one persistent thread per student-tutor relationship
 -- ---------------------------------------------------------------------------
@@ -19,7 +23,6 @@ CREATE TABLE conversations (
   updated_at              timestamptz NOT NULL DEFAULT now()
 );
 
--- One conversation per student-tutor pair
 CREATE UNIQUE INDEX uq_conversations_student_tutor
   ON conversations (student_profile_id, tutor_profile_id);
 
@@ -29,22 +32,6 @@ CREATE INDEX idx_conversations_tutor ON conversations (tutor_profile_id);
 CREATE TRIGGER conversations_updated_at
   BEFORE UPDATE ON conversations
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
-
--- RLS: participant-scoped — only conversation participants can read
-ALTER TABLE conversations ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY conversations_select_participant ON conversations
-  FOR SELECT
-  USING (
-    id IN (
-      SELECT conversation_id FROM conversation_participants
-      WHERE app_user_id IN (
-        SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-      )
-    )
-  );
-
--- Insert/update/delete are server-only (service role)
 
 -- ---------------------------------------------------------------------------
 -- conversation_participants — participant state and thread-specific preferences
@@ -61,7 +48,6 @@ CREATE TABLE conversation_participants (
   updated_at        timestamptz NOT NULL DEFAULT now()
 );
 
--- One participant record per conversation per user
 CREATE UNIQUE INDEX uq_conversation_participants_conv_user
   ON conversation_participants (conversation_id, app_user_id);
 
@@ -70,32 +56,6 @@ CREATE INDEX idx_conversation_participants_user ON conversation_participants (ap
 CREATE TRIGGER conversation_participants_updated_at
   BEFORE UPDATE ON conversation_participants
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
-
--- RLS: self-row access — can read/update own participant records
-ALTER TABLE conversation_participants ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY conversation_participants_select_own ON conversation_participants
-  FOR SELECT
-  USING (
-    app_user_id IN (
-      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-    )
-  );
-
-CREATE POLICY conversation_participants_update_own ON conversation_participants
-  FOR UPDATE
-  USING (
-    app_user_id IN (
-      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-    )
-  )
-  WITH CHECK (
-    app_user_id IN (
-      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-    )
-  );
-
--- Insert/delete are server-only (service role)
 
 -- ---------------------------------------------------------------------------
 -- messages — canonical message store
@@ -121,22 +81,6 @@ CREATE TRIGGER messages_updated_at
   BEFORE UPDATE ON messages
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
--- RLS: participant-scoped — only conversation participants can read messages
-ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY messages_select_participant ON messages
-  FOR SELECT
-  USING (
-    conversation_id IN (
-      SELECT conversation_id FROM conversation_participants
-      WHERE app_user_id IN (
-        SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-      )
-    )
-  );
-
--- Insert/update/delete are server-only (service role)
-
 -- ---------------------------------------------------------------------------
 -- message_reads — unread/read state tracking per participant per message
 -- ---------------------------------------------------------------------------
@@ -148,24 +92,10 @@ CREATE TABLE message_reads (
   created_at    timestamptz NOT NULL DEFAULT now()
 );
 
--- One read record per message per user
 CREATE UNIQUE INDEX uq_message_reads_message_user
   ON message_reads (message_id, app_user_id);
 
 CREATE INDEX idx_message_reads_user ON message_reads (app_user_id);
-
--- RLS: self-row access — can read own read-state records
-ALTER TABLE message_reads ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY message_reads_select_own ON message_reads
-  FOR SELECT
-  USING (
-    app_user_id IN (
-      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-    )
-  );
-
--- Insert is server-only (service role)
 
 -- ---------------------------------------------------------------------------
 -- user_blocks — blocking rule between users
@@ -179,7 +109,6 @@ CREATE TABLE user_blocks (
   updated_at            timestamptz NOT NULL DEFAULT now()
 );
 
--- One block record per directional pair
 CREATE UNIQUE INDEX uq_user_blocks_pair
   ON user_blocks (blocker_app_user_id, blocked_app_user_id);
 
@@ -188,19 +117,6 @@ CREATE INDEX idx_user_blocks_blocked ON user_blocks (blocked_app_user_id);
 CREATE TRIGGER user_blocks_updated_at
   BEFORE UPDATE ON user_blocks
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
-
--- RLS: self-row access — users can see their own block records
-ALTER TABLE user_blocks ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY user_blocks_select_own ON user_blocks
-  FOR SELECT
-  USING (
-    blocker_app_user_id IN (
-      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
-    )
-  );
-
--- Insert/update/delete are server-only (service role)
 
 -- ---------------------------------------------------------------------------
 -- abuse_reports — user-submitted report for moderation and trust review
@@ -225,7 +141,85 @@ CREATE TRIGGER abuse_reports_updated_at
   BEFORE UPDATE ON abuse_reports
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
--- RLS: self-row access — reporters can see their own reports
+-- =========================================================================
+-- RLS POLICIES (all tables exist now, safe to cross-reference)
+-- =========================================================================
+
+-- conversations: participant-scoped
+ALTER TABLE conversations ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY conversations_select_participant ON conversations
+  FOR SELECT
+  USING (
+    id IN (
+      SELECT conversation_id FROM conversation_participants
+      WHERE app_user_id IN (
+        SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+      )
+    )
+  );
+
+-- conversation_participants: self-row access
+ALTER TABLE conversation_participants ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY conversation_participants_select_own ON conversation_participants
+  FOR SELECT
+  USING (
+    app_user_id IN (
+      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+    )
+  );
+
+CREATE POLICY conversation_participants_update_own ON conversation_participants
+  FOR UPDATE
+  USING (
+    app_user_id IN (
+      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+    )
+  )
+  WITH CHECK (
+    app_user_id IN (
+      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+    )
+  );
+
+-- messages: participant-scoped
+ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY messages_select_participant ON messages
+  FOR SELECT
+  USING (
+    conversation_id IN (
+      SELECT conversation_id FROM conversation_participants
+      WHERE app_user_id IN (
+        SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+      )
+    )
+  );
+
+-- message_reads: self-row access
+ALTER TABLE message_reads ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY message_reads_select_own ON message_reads
+  FOR SELECT
+  USING (
+    app_user_id IN (
+      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+    )
+  );
+
+-- user_blocks: self-row access
+ALTER TABLE user_blocks ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY user_blocks_select_own ON user_blocks
+  FOR SELECT
+  USING (
+    blocker_app_user_id IN (
+      SELECT id FROM app_users WHERE auth_user_id = auth.uid()
+    )
+  );
+
+-- abuse_reports: self-row access
 ALTER TABLE abuse_reports ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY abuse_reports_select_own ON abuse_reports
@@ -235,5 +229,3 @@ CREATE POLICY abuse_reports_select_own ON abuse_reports
       SELECT id FROM app_users WHERE auth_user_id = auth.uid()
     )
   );
-
--- Insert/update/delete are server-only (service role)
