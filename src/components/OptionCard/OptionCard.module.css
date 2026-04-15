@@ -1,0 +1,91 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-ink-300);
+  background-color: var(--surface-panel);
+  cursor: pointer;
+  transition:
+    border-color var(--motion-fast),
+    background-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.card:hover {
+  border-color: var(--color-forest-500);
+  background-color: var(--color-forest-50);
+}
+
+.active {
+  border-color: var(--color-forest-600);
+  background-color: var(--color-forest-50);
+  box-shadow: 0 0 0 1px var(--color-forest-600);
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.input:focus-visible + .content ~ .radio {
+  outline: 2px solid var(--color-forest-500);
+  outline-offset: 2px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  font-size: var(--text-body-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-body);
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-ink-300);
+  flex-shrink: 0;
+  position: relative;
+  transition:
+    border-color var(--motion-fast),
+    background-color var(--motion-fast);
+}
+
+.active .radio {
+  border-color: var(--color-forest-600);
+  background-color: var(--color-forest-600);
+}
+
+.active .radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+}

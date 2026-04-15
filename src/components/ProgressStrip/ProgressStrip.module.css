@@ -1,0 +1,39 @@
+.strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.stepCount {
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stepLabel {
+  font-size: var(--text-title-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.track {
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-paper-2);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-forest-600);
+  transition: width var(--motion-default);
+}
