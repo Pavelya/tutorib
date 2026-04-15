@@ -171,6 +171,7 @@ Bad parallel examples:
 | 3 | `P15-COMP-002` | `ready` | `P1` | 2 | Compare route and decision surface |
 | 3 | `P15-STUD-003` | `draft` | `P1` | 3 | Tutor student relationship detail surface |
 | 4 | `P15-PUBLIC-001` | `draft` | `P2` | 4 | Public landing page visual enrichment |
+| 4 | `P15-PUBLIC-002` | `draft` | `P2` | 4 | Home route visual enrichment |
 | 5 | `P15-QUALITY-001` | `ready` | `P2` | 4 | Phase 1.5 verification and hardening pass |
 
 ## 10. Detailed Tasks
@@ -583,7 +584,7 @@ Enrich the four supporting public landing pages (`/how-it-works`, `/trust-and-sa
 **Out of scope**
 
 - changing page metadata, canonical, or robots behavior (already correct from P1-PUBLIC-001)
-- home page hero changes (owned by P1-PUBLIC-002)
+- home page visual enrichment (owned by P15-PUBLIC-002)
 - tutor profile page changes (owned by P1-PUBLIC-003)
 - new copy or content restructuring beyond what visual layout requires
 - new shared components — reuse what exists from Phase 1
@@ -602,7 +603,60 @@ Enrich the four supporting public landing pages (`/how-it-works`, `/trust-and-sa
 - public route SEO acceptance checklist re-check
 - Lighthouse accessibility audit on each page
 
-## 10.10 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
+## 10.10 `P15-PUBLIC-002` Home route visual enrichment
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 4
+**Depends on:** `P1-PUBLIC-002`, `P1-PUBLIC-003`, `P1-MATCH-002`
+
+**Goal**
+
+Visually enrich the home route (`/`) so it feels like a polished product landing page rather than a text-heavy content page. Replace the current all-text hero, proof card, sample matches, and trust sections with layouts that incorporate imagery, tutor preview cards with real data, branded illustrations or photography, and better visual scannability. By this point Phase 1 tutor data, profile media patterns, and shared components exist and can be reused.
+
+**Required source docs**
+
+- `docs/visual-design/hi-fi-key-screen-comps-v1.html`
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/architecture/file-and-media-architecture-v1.md`
+- `docs/planning/public-route-seo-acceptance-checklist-v1.md`
+
+**Scope**
+
+- add a hero visual element (brand illustration, photography, or product screenshot) alongside the existing hero copy
+- replace the static sample match rows with live or representative tutor preview cards using `PersonSummary` or a new tutor preview component, pulling from real approved tutor data where available
+- add visual section breaks, iconography, or decorative elements between content blocks to reduce wall-of-text feel
+- improve the proof card section with imagery or a visual story element instead of text-only study notes
+- add a visual element to the trust proof block (icons, illustrations, or trust badges)
+- ensure all visual additions are server-rendered, optimized with `next/image`, and do not degrade SEO or Core Web Vitals
+- reduce text density: trim or condense copy where visuals communicate the same idea more effectively
+
+**Out of scope**
+
+- changing page metadata, canonical, or robots behavior (already correct from P1-PUBLIC-002)
+- match flow internals
+- tutor profile route changes
+- supporting landing page enrichment (owned by P15-PUBLIC-001)
+- new copy strategy or brand messaging changes beyond trimming for visual balance
+
+**Acceptance criteria**
+
+- the home page has at least three non-text visual elements (hero image, tutor cards, trust icons/illustrations)
+- the page no longer feels like a text-heavy document — content blocks are scannable and visually broken up
+- sample tutor data is sourced from real approved tutor records or realistic representative data
+- all images use `next/image` with appropriate sizing and alt text
+- the page remains server-rendered with no client-only primary content
+- responsive behavior remains correct at phone, tablet, and desktop breakpoints
+- the page passes the public route SEO acceptance checklist after changes
+
+**Verification**
+
+- visual review at all three breakpoints
+- Lighthouse performance audit (no CLS regression from image loading)
+- public route SEO acceptance checklist re-check
+- accessibility audit (alt text, contrast, heading hierarchy)
+
+## 10.11 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
 
 **Status:** `ready`
 **Priority:** `P2`
