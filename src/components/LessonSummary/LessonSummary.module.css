@@ -1,0 +1,89 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-panel);
+  border: var(--border-subtle);
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.urgency {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--color-warning-500);
+  font-family: var(--font-mono), monospace;
+}
+
+.person {
+  /* PersonSummary slot */
+}
+
+.context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.subject {
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.datetime {
+  font-size: var(--text-utility-sm);
+  font-family: var(--font-mono), monospace;
+  color: var(--color-text-secondary);
+  line-height: var(--line-utility);
+}
+
+.price {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.note {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-body);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-divider);
+}
+
+/* ─── Compact ─── */
+
+.compact {
+  padding: var(--space-3);
+  gap: var(--space-2);
+}
+
+.compact .subject {
+  font-size: var(--text-caption);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 767px) {
+  .context {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+}

@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  gap: var(--space-4);
+  background-color: var(--state-destructive-bg);
+  border: 1px solid var(--state-destructive-border);
+  border-radius: var(--radius-md);
+}
+
+.heading {
+  font-size: var(--text-title-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: var(--line-tight);
+}
+
+.message {
+  font-size: var(--text-body-md);
+  color: var(--state-destructive-text);
+  line-height: var(--line-body);
+  max-width: 400px;
+}
+
+.action {
+  margin-top: var(--space-2);
+}

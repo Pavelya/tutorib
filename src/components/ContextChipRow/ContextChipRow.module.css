@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  line-height: var(--line-utility);
+  white-space: nowrap;
+  background-color: var(--color-forest-50);
+  color: var(--color-forest-700);
+  border: 1px solid var(--color-forest-100);
+}
+
+.muted {
+  background-color: var(--color-mist-100);
+  color: var(--color-ink-500);
+  border-color: var(--color-mist-300);
+}
+
+.warm {
+  background-color: var(--color-clay-100);
+  color: var(--color-clay-600);
+  border-color: var(--color-clay-100);
+}
+
+.overflow {
+  background-color: var(--surface-panel-soft);
+  color: var(--color-ink-500);
+  border-color: var(--color-ink-300);
+}
