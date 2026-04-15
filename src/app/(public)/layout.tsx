@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/seo/metadata/canonical';
 import { site } from '@/lib/config/site';
+import styles from './layout.module.css';
 
 /**
  * Public layout metadata — shared defaults for Class A public routes.
@@ -35,12 +36,12 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className={styles.publicMain}>
       {/* Public header — implemented in a later task */}
       <header />
-      <main>{children}</main>
+      <main className={styles.publicContent}>{children}</main>
       {/* Public footer — implemented in a later task */}
       <footer />
-    </>
+    </div>
   );
 }

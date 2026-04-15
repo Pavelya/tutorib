@@ -1,0 +1,215 @@
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+.hero {
+  margin-bottom: var(--space-16);
+}
+
+.hero h1 {
+  font-size: var(--text-title-xl);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.hero p {
+  font-size: var(--text-body-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+}
+
+.section {
+  margin-bottom: var(--space-12);
+}
+
+.section h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.section p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+  margin-bottom: var(--space-4);
+}
+
+.benefitsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.benefitsList li {
+  padding-left: var(--space-6);
+  position: relative;
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+}
+
+.benefitsList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-forest-500);
+}
+
+.processSteps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  counter-reset: process-step;
+}
+
+.processStep {
+  display: flex;
+  gap: var(--space-5);
+  counter-increment: process-step;
+}
+
+.processStep::before {
+  content: counter(process-step);
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-forest-100);
+  color: var(--color-forest-700);
+  font-weight: 600;
+  font-size: var(--text-body-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.processStep p {
+  margin-bottom: 0;
+}
+
+.processStep strong {
+  color: var(--color-text-primary);
+}
+
+.standardsPanel {
+  background-color: var(--surface-section);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10);
+  margin-bottom: var(--space-12);
+}
+
+.standardsPanel h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.standardsPanel p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+  margin-bottom: var(--space-4);
+}
+
+.faqSection {
+  margin-bottom: var(--space-12);
+}
+
+.faqSection h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-8);
+}
+
+.faqItem {
+  margin-bottom: var(--space-8);
+}
+
+.faqItem h3 {
+  font-size: var(--text-title-md);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.faqItem p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+}
+
+.ctaSection {
+  text-align: center;
+  padding: var(--space-10) 0;
+  border-top: 1px solid var(--color-divider);
+}
+
+.ctaSection h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.ctaSection p {
+  font-size: var(--text-body-lg);
+  color: var(--color-text-body);
+  margin-bottom: var(--space-6);
+}
+
+.ctaLink {
+  display: inline-block;
+  padding: var(--space-3) var(--space-8);
+  background-color: var(--color-cta-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--motion-fast);
+}
+
+.ctaLink:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.secondaryLink {
+  display: inline-block;
+  margin-top: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.secondaryLink:hover {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 1199px) {
+  .page {
+    padding: var(--space-12) var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: var(--space-10) var(--space-4);
+  }
+
+  .standardsPanel {
+    padding: var(--space-6);
+  }
+
+  .processStep {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}

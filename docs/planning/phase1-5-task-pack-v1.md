@@ -170,7 +170,8 @@ Bad parallel examples:
 | 2 | `P15-STUD-002` | `ready` | `P1` | 3 | Tutor students route and roster surface |
 | 3 | `P15-COMP-002` | `ready` | `P1` | 2 | Compare route and decision surface |
 | 3 | `P15-STUD-003` | `draft` | `P1` | 3 | Tutor student relationship detail surface |
-| 4 | `P15-QUALITY-001` | `ready` | `P2` | 4 | Phase 1.5 verification and hardening pass |
+| 4 | `P15-PUBLIC-001` | `draft` | `P2` | 4 | Public landing page visual enrichment |
+| 5 | `P15-QUALITY-001` | `ready` | `P2` | 4 | Phase 1.5 verification and hardening pass |
 
 ## 10. Detailed Tasks
 
@@ -552,7 +553,56 @@ Implement the saved tutors surface so students can view, manage, and return to t
 - mobile navigation integration review
 - component reuse review
 
-## 10.9 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
+## 10.9 `P15-PUBLIC-001` Public landing page visual enrichment
+
+**Status:** `draft`
+**Priority:** `P2`
+**Wave:** 4
+**Depends on:** `P1-PUBLIC-001`, `P1-PUBLIC-002`, `P1-PUBLIC-003`, `P1-MATCH-001`
+
+**Goal**
+
+Enrich the four supporting public landing pages (`/how-it-works`, `/trust-and-safety`, `/support`, `/become-a-tutor`) with visual elements so they feel like polished product pages rather than text-only content. By this point the shared components, tutor data, and visual patterns from Phase 1 exist and can be reused.
+
+**Required source docs**
+
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/architecture/content-template-spec-v1.md`
+- `docs/architecture/seo-app-architecture-v1.md`
+- `docs/planning/public-route-seo-acceptance-checklist-v1.md`
+
+**Scope**
+
+- add brand illustrations or imagery to each public landing page (hero visuals, section illustrations, or photography)
+- add sample tutor cards or `PersonSummary` components to `/how-it-works` and `/become-a-tutor` using real tutor data where available
+- add a `TrustProofBlock` or equivalent trust signal section to `/trust-and-safety` and `/how-it-works`
+- add visual section breaks, icons, or decorative elements using the approved design tokens
+- improve visual hierarchy and scannability with card-based layouts where appropriate
+- ensure all visual additions are server-rendered and do not degrade SEO or AI discoverability quality
+
+**Out of scope**
+
+- changing page metadata, canonical, or robots behavior (already correct from P1-PUBLIC-001)
+- home page hero changes (owned by P1-PUBLIC-002)
+- tutor profile page changes (owned by P1-PUBLIC-003)
+- new copy or content restructuring beyond what visual layout requires
+- new shared components — reuse what exists from Phase 1
+
+**Acceptance criteria**
+
+- each of the four landing pages has at least one non-text visual element (image, illustration, tutor card, or branded section)
+- pages remain server-rendered with no client-only primary content
+- visual additions use the approved design tokens and shared components
+- pages pass the public route SEO acceptance checklist after changes
+- responsive behavior remains correct at phone, tablet, and desktop breakpoints
+
+**Verification**
+
+- visual review at all three breakpoints
+- public route SEO acceptance checklist re-check
+- Lighthouse accessibility audit on each page
+
+## 10.10 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
 
 **Status:** `ready`
 **Priority:** `P2`

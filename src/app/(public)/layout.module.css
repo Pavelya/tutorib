@@ -1,0 +1,34 @@
+/*
+ * Shared public page shell styles.
+ * Used by (public)/layout.tsx — provides consistent structure
+ * for all Class A public marketing routes.
+ */
+
+.publicMain {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.publicContent {
+  flex: 1;
+}
+
+/* ─── Shared public page wrapper ─── */
+.pageContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+@media (max-width: 1199px) {
+  .pageContainer {
+    padding: var(--space-12) var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .pageContainer {
+    padding: var(--space-10) var(--space-4);
+  }
+}

@@ -1,0 +1,127 @@
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+.hero {
+  margin-bottom: var(--space-16);
+}
+
+.hero h1 {
+  font-size: var(--text-title-xl);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.hero p {
+  font-size: var(--text-body-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+}
+
+.topicNav {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.topicPill {
+  display: inline-block;
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--surface-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-body);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color var(--motion-fast), border-color var(--motion-fast);
+}
+
+.topicPill:hover {
+  background-color: var(--color-forest-50);
+  border-color: var(--color-forest-100);
+}
+
+.topicSection {
+  margin-bottom: var(--space-12);
+}
+
+.topicSection h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+  padding-top: var(--space-4);
+}
+
+.questionBlock {
+  margin-bottom: var(--space-8);
+}
+
+.questionBlock h3 {
+  font-size: var(--text-title-md);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.questionBlock p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+}
+
+.escalationPanel {
+  background-color: var(--surface-section);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10);
+  margin-top: var(--space-12);
+  text-align: center;
+}
+
+.escalationPanel h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.escalationPanel p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+  margin-bottom: var(--space-6);
+}
+
+.emailLink {
+  color: var(--color-cta-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.emailLink:hover {
+  color: var(--color-cta-primary-hover);
+}
+
+@media (max-width: 1199px) {
+  .page {
+    padding: var(--space-12) var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: var(--space-10) var(--space-4);
+  }
+
+  .topicNav {
+    gap: var(--space-2);
+  }
+
+  .escalationPanel {
+    padding: var(--space-6);
+  }
+}

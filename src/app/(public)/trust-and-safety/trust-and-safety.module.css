@@ -1,0 +1,124 @@
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+.hero {
+  margin-bottom: var(--space-16);
+}
+
+.hero h1 {
+  font-size: var(--text-title-xl);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.hero p {
+  font-size: var(--text-body-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+}
+
+.section {
+  margin-bottom: var(--space-12);
+}
+
+.section h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.section p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+  margin-bottom: var(--space-4);
+}
+
+.trustList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.trustList li {
+  padding-left: var(--space-6);
+  position: relative;
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+}
+
+.trustList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-forest-500);
+}
+
+.commitmentPanel {
+  background-color: var(--surface-section);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10);
+  margin-bottom: var(--space-12);
+}
+
+.commitmentPanel h2 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.commitmentPanel p {
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+}
+
+.ctaSection {
+  text-align: center;
+  padding: var(--space-10) 0;
+}
+
+.ctaSection p {
+  font-size: var(--text-body-lg);
+  color: var(--color-text-body);
+  margin-bottom: var(--space-6);
+}
+
+.ctaLink {
+  display: inline-block;
+  padding: var(--space-3) var(--space-8);
+  background-color: var(--color-cta-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--motion-fast);
+}
+
+.ctaLink:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+@media (max-width: 1199px) {
+  .page {
+    padding: var(--space-12) var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: var(--space-10) var(--space-4);
+  }
+
+  .commitmentPanel {
+    padding: var(--space-6);
+  }
+}
