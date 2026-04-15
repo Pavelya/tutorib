@@ -1,0 +1,272 @@
+/*
+ * Tutor profile route styles — P1-PUBLIC-003
+ * Layout: main content + sidebar at desktop, single column on mobile.
+ */
+
+/* ─── Page container ─── */
+
+.page {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── Profile header ─── */
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background-color: var(--surface-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+}
+
+.headerText h1 {
+  font-size: var(--text-title-lg);
+  line-height: var(--line-tight);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.headline {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-body);
+}
+
+/* ─── Content grid (main + sidebar) ─── */
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ─── Main column ─── */
+
+.mainCol {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.section {
+  padding: var(--space-6);
+  background-color: var(--surface-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+}
+
+.sectionTitle {
+  font-size: var(--text-body-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.bodyText {
+  margin: 0;
+  font-size: var(--text-body-md);
+  color: var(--color-text-body);
+  line-height: var(--line-body);
+  white-space: pre-line;
+}
+
+/* ─── Subjects ─── */
+
+.subjectList {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.subjectItem strong {
+  display: block;
+  font-size: var(--text-body-md);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.focusAreas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ─── Intro video ─── */
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--surface-section);
+}
+
+.videoIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ─── Sidebar ─── */
+
+.sidebar {
+  display: grid;
+  gap: var(--space-5);
+}
+
+/* CTA card */
+.ctaCard {
+  padding: var(--space-6);
+  background-color: var(--surface-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.pricing {
+  margin: 0;
+  font-size: var(--text-title-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.ctaPrimary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-cta-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--text-body-md);
+  text-decoration: none;
+  transition: background-color var(--motion-fast);
+  min-height: 44px;
+  box-shadow: var(--shadow-action);
+}
+
+.ctaPrimary:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.ctaSecondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-panel);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: var(--text-body-md);
+  text-decoration: none;
+  border: var(--border-subtle);
+  transition: background-color var(--motion-fast);
+  min-height: 44px;
+}
+
+.ctaSecondary:hover {
+  background-color: var(--color-paper-1);
+}
+
+/* Sidebar sections */
+.sidebarSection {
+  padding: var(--space-5);
+  background-color: var(--surface-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+}
+
+.sidebarTitle {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Trust proof */
+.trustList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.trustNote {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-caption);
+  color: var(--color-text-secondary);
+}
+
+/* Languages */
+.languageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.languageTag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-section);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--color-text-body);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 1023px) {
+  .page {
+    padding: var(--space-6);
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Move sidebar above main on tablet so CTA is visible early */
+  .sidebar {
+    order: -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+
+  .profileHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-5);
+  }
+
+  .section {
+    padding: var(--space-5);
+  }
+
+  .ctaCard {
+    padding: var(--space-5);
+  }
+
+  .sidebarSection {
+    padding: var(--space-4);
+  }
+}
