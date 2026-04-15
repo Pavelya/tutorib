@@ -32,3 +32,13 @@ export {
   userBlocks,
   abuseReports,
 } from '@/modules/conversations/schema';
+export { learningNeeds } from '@/modules/learning-needs/schema';
+export { matchRuns, matchCandidates } from '@/modules/matching/schema';
+export {
+  lessons,
+  lessonStatusHistory,
+  lessonMeetingAccess,
+  lessonReports,
+  lessonIssueCases,
+} from '@/modules/lessons/schema';
+export { payments, earnings } from '@/modules/payments/schema';
