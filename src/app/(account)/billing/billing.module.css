@@ -1,0 +1,21 @@
+.page {
+  padding-top: var(--space-6);
+}
+
+.heading {
+  font-size: var(--text-title-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.section {
+  margin-bottom: var(--space-6);
+}
+
+.sectionHeading {
+  font-size: var(--text-title-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
