@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
+import type Stripe from 'stripe';
+import { revalidatePath } from 'next/cache';
 import { getServerEnv } from '@/lib/env/server';
+import { getStripe } from '@/lib/stripe/client';
 import {
   recordWebhookEvent,
   markWebhookProcessed,
@@ -8,15 +10,7 @@ import {
   markWebhookFailed,
 } from '@/modules/jobs/webhook-service';
 import { VERIFICATION_STATUS } from '@/modules/jobs/job-status';
-
-let _stripe: Stripe | undefined;
-
-function getStripe(): Stripe {
-  if (!_stripe) {
-    _stripe = new Stripe(getServerEnv().STRIPE_SECRET_KEY);
-  }
-  return _stripe;
-}
+import { handleCheckoutSessionCompleted } from '@/modules/payments/service';
 
 /**
  * Stripe webhook events that the system currently handles.
@@ -81,11 +75,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ received: true });
   }
 
-  // Step 4: Dispatch to domain handlers
-  // Domain-specific webhook processing will be added by later tasks
-  // (P1-BOOK-001, P1-TUTOR-005, P1-LESS-002).
-  // For now, mark as processed to complete the verify-record-dispatch cycle.
+  // Step 4: Dispatch to domain handlers.
+  // P1-BOOK-001 owns `checkout.session.completed` — transitions payment to
+  // `authorized`. Capture/release events (`charge.captured`, `charge.refunded`)
+  // belong to P1-LESS-002; Connect events (`account.updated`) to P1-TUTOR-005.
   try {
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      await handleCheckoutSessionCompleted(session);
+      revalidatePath('/lessons');
+    }
     await markWebhookProcessed(webhookRow.id);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Processing failed';
