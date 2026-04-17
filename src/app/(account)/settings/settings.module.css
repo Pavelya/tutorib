@@ -55,3 +55,23 @@
     gap: var(--space-1);
   }
 }
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nameField {
+  /* isolates the Input component from the dl layout */
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.successMessage {
+  font-size: var(--text-body-sm);
+  color: var(--color-success, var(--color-text-secondary));
+}

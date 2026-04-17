@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { resolveAccountState } from '@/modules/accounts/service';
 import { Panel } from '@/components/Panel/Panel';
 import { site } from '@/lib/config/site';
+import { ProfileForm } from './ProfileForm';
 import styles from './settings.module.css';
 
 export const metadata: Metadata = {
@@ -24,24 +25,7 @@ export default async function SettingsPage() {
 
       <Panel as="section" variant="default" className={styles.section}>
         <h2 className={styles.sectionHeading}>Profile</h2>
-        <dl className={styles.fieldList}>
-          <div className={styles.field}>
-            <dt className={styles.label}>Name</dt>
-            <dd className={styles.value}>{appUser.full_name ?? 'Not set'}</dd>
-          </div>
-          <div className={styles.field}>
-            <dt className={styles.label}>Email</dt>
-            <dd className={styles.value}>{appUser.email}</dd>
-          </div>
-          <div className={styles.field}>
-            <dt className={styles.label}>Timezone</dt>
-            <dd className={styles.value}>{appUser.timezone ?? 'Not set'}</dd>
-          </div>
-          <div className={styles.field}>
-            <dt className={styles.label}>Language</dt>
-            <dd className={styles.value}>{appUser.preferred_language_code ?? 'Not set'}</dd>
-          </div>
-        </dl>
+        <ProfileForm initialName={appUser.full_name} email={appUser.email} />
       </Panel>
 
       <Panel as="section" variant="default" className={styles.section}>

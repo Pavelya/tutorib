@@ -1499,10 +1499,11 @@ Add editable name and preferred language fields to the `/settings` page so users
 **Scope**
 
 - editable full name field on `/settings` with inline validation
-- editable preferred language field on `/settings` (select from the `languages` reference table)
 - server action for account profile update with authorization and input validation
 - repository function to update `app_users.full_name` and `app_users.preferred_language_code`
-- remove email and timezone from the visible settings display (email is not editable, timezone is auto-detected by `P1-FOUND-004`)
+- remove timezone from the visible settings display (timezone is auto-detected by `P1-FOUND-004`)
+- remove language field, it's confusing, looks like the change for the whole interface
+- make email not editable, just displayed for the user
 
 **Out of scope**
 
@@ -1510,13 +1511,11 @@ Add editable name and preferred language fields to the `/settings` page so users
 - timezone editing (auto-detected, not user-editable)
 - avatar editing (separate task `P1-ACCOUNT-003`)
 - tutor-specific profile fields (owned by `P2-PROFILE-001`)
-- using preferred language to filter matching results (future product decision)
 
 **Acceptance criteria**
 
-- users can update their display name and preferred language from `/settings`
-- the language selector shows options from the `languages` reference table
-- input validation prevents empty names and invalid language codes
+- users can update their display name from `/settings`
+- input validation prevents empty names 
 - changes are persisted immediately and reflected on next page load
 - the server action enforces authentication and ownership
 

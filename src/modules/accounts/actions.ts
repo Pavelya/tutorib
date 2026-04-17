@@ -3,8 +3,42 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod/v4';
 import { resolveAccountState, ensureAppUser, selectRole } from './service';
+import { updateAppUserProfile } from './repository';
 
 const roleSchema = z.enum(['student', 'tutor']);
+
+const updateProfileSchema = z.object({
+  fullName: z.string().min(1, 'Name is required.').max(100).trim(),
+});
+
+export type UpdateProfileResult = {
+  ok: boolean;
+  code?: string;
+  message?: string;
+};
+
+export async function updateProfileAction(
+  _prevState: UpdateProfileResult | null,
+  formData: FormData,
+): Promise<UpdateProfileResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated' || !('appUser' in state)) {
+    return { ok: false, code: 'unauthorized', message: 'You must be signed in.' };
+  }
+
+  const raw = { fullName: formData.get('fullName') };
+  const parsed = updateProfileSchema.safeParse(raw);
+  if (!parsed.success) {
+    return {
+      ok: false,
+      code: 'validation_failed',
+      message: parsed.error.issues[0]?.message ?? 'Invalid input.',
+    };
+  }
+
+  await updateAppUserProfile(state.appUser.id, { fullName: parsed.data.fullName });
+  return { ok: true };
+}
 
 export type SelectRoleResult = {
   ok: boolean;

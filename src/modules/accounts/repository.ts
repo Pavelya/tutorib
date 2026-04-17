@@ -53,6 +53,28 @@ export async function findActiveRoles(appUserId: string): Promise<UserRole[]> {
 }
 
 /**
+ * Update display name and optional language preference for an app_user.
+ */
+export async function updateAppUserProfile(
+  appUserId: string,
+  data: { fullName: string; preferredLanguageCode?: string | null },
+): Promise<AppUser> {
+  const db = getDb();
+  const rows = await db
+    .update(appUsers)
+    .set({
+      full_name: data.fullName,
+      ...(data.preferredLanguageCode !== undefined && {
+        preferred_language_code: data.preferredLanguageCode,
+      }),
+      updated_at: new Date(),
+    })
+    .where(eq(appUsers.id, appUserId))
+    .returning();
+  return rows[0];
+}
+
+/**
  * Insert a new role for an app_user and update their onboarding/primary_role state.
  */
 export async function insertRoleAndUpdateUser(
