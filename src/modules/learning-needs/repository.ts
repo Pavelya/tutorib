@@ -17,6 +17,18 @@ export async function findStudentProfileByAppUserId(
   return rows[0];
 }
 
+export async function findLearningNeedById(
+  id: string,
+): Promise<LearningNeed | undefined> {
+  const db = getDb();
+  const rows = await db
+    .select()
+    .from(learningNeeds)
+    .where(eq(learningNeeds.id, id))
+    .limit(1);
+  return rows[0];
+}
+
 export async function createLearningNeed(data: {
   studentProfileId: string;
   needType: string;

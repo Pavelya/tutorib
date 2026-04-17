@@ -204,7 +204,7 @@ Step 2:  P1-FOUND-002 (design tokens)       + P1-SEO-001 (SEO foundations)
 Step 3:  P1-FOUND-003 (continuity anchors)  + P1-AUTH-002 (role selection)
          + P1-DATA-003 (lesson/booking schema) + P1-DATA-005 (notification schema)
          + P1-AUTH-003 (Google safety)
-Step 4:  P1-PUBLIC-001 (marketing route shell)
+Step 4:  P1-PUBLIC-001 (marketing route shell) + P1-FOUND-004 (timezone auto-detect)
 ```
 
 ### Wave 2: Match, discovery, booking
@@ -213,6 +213,7 @@ Step 4:  P1-PUBLIC-001 (marketing route shell)
 Step 5:  P1-PUBLIC-002 (home route)         + P1-PUBLIC-003 (tutor profile)
          + P1-MATCH-001 (match flow)        + P1-ACCOUNT-001 (account routes)
 Step 6:  P1-MATCH-002 (results route)       + P1-BOOK-001 (booking request)
+         + P1-ACCOUNT-002 (name/language editing)
 ```
 
 ### Wave 3: Continuity
@@ -220,6 +221,7 @@ Step 6:  P1-MATCH-002 (results route)       + P1-BOOK-001 (booking request)
 ```
 Step 7:  P1-MSG-001 (conversation list/thread)
          + P1-LESS-001 (lessons route)      + P1-NOTIF-001 (in-app notifications)
+         + P1-ACCOUNT-003 (avatar upload)
 Step 8:  P1-MSG-002 (message send/unread)   + P1-LESS-002 (lesson actions)
          + P1-NOTIF-002 (email delivery)
 ```

@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState, useCallback } from 'react';
+import { useActionState, useState } from 'react';
 import { Button } from '@/components/Button/Button';
 import { Panel } from '@/components/Panel/Panel';
 import { ProgressStrip } from '@/components/ProgressStrip/ProgressStrip';
@@ -82,15 +82,14 @@ export function MatchFlowClient() {
     null,
   );
 
-  const canContinue = useCallback(() => {
-    if (step === 1) return needType !== '';
-    if (step === 2) return urgencyLevel !== '';
-    if (step === 3) return supportStyle !== '';
-    return true;
-  }, [step, needType, urgencyLevel, supportStyle]);
+  const canContinue =
+    step === 1 ? needType !== '' :
+    step === 2 ? urgencyLevel !== '' :
+    step === 3 ? supportStyle !== '' :
+    true;
 
   const handleContinue = () => {
-    if (canContinue() && step < TOTAL_STEPS) {
+    if (canContinue && step < TOTAL_STEPS) {
       setStep((s) => s + 1);
     }
   };
@@ -213,7 +212,7 @@ export function MatchFlowClient() {
               <Button
                 type="button"
                 onClick={handleContinue}
-                disabled={!canContinue()}
+                disabled={!canContinue || undefined}
               >
                 Continue
               </Button>
@@ -226,7 +225,7 @@ export function MatchFlowClient() {
                 {freeTextNote && (
                   <input type="hidden" name="freeTextNote" value={freeTextNote} />
                 )}
-                <Button type="submit" disabled={isPending}>
+                <Button type="submit" disabled={isPending || undefined}>
                   {isPending ? 'Finding matches...' : 'See best fits'}
                 </Button>
               </form>

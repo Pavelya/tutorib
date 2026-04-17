@@ -169,14 +169,17 @@ Bad parallel examples:
 | 3 | `P1-DATA-003` | `ready` | `P0` | 1 | Learning need, match, lesson, and booking schema baseline |
 | 3 | `P1-DATA-005` | `ready` | `P1` | 1 | Notification, delivery, and legal-notice schema baseline |
 | 4 | `P1-PUBLIC-001` | `ready` | `P1` | 1 | Public marketing route shell set |
+| 4 | `P1-FOUND-004` | `ready` | `P1` | 1 | Timezone auto-detection and local-time display convention |
 | 5 | `P1-PUBLIC-002` | `ready` | `P1` | 2 | Home route implementation |
 | 5 | `P1-PUBLIC-003` | `ready` | `P1` | 2 | Public tutor profile route and SEO surface |
 | 5 | `P1-MATCH-001` | `ready` | `P1` | 2 | Match flow route implementation |
 | 5 | `P1-ACCOUNT-001` | `ready` | `P1` | 2 | Shared account routes and legal-notice surfaces |
 | 6 | `P1-MATCH-002` | `ready` | `P1` | 2 | Results route and match result cards |
 | 6 | `P1-BOOK-001` | `ready` | `P1` | 2 | Booking context route and booking request action |
+| 6 | `P1-ACCOUNT-002` | `ready` | `P1` | 2 | Account profile editing — name and preferred language |
 | 7 | `P1-MSG-001` | `ready` | `P1` | 3 | Shared conversation list and message thread routes |
 | 7 | `P1-LESS-001` | `ready` | `P1` | 3 | Shared lessons route and lesson summary/detail surfaces |
+| 7 | `P1-ACCOUNT-003` | `ready` | `P1` | 2 | Account avatar upload |
 | 7 | `P1-NOTIF-001` | `ready` | `P1` | 3 | In-app lifecycle notifications and legal-update notice flow |
 | 8 | `P1-MSG-002` | `ready` | `P1` | 3 | Message send, unread state, and notification hooks |
 | 8 | `P1-LESS-002` | `ready` | `P1` | 3 | Lesson actions: join, calendar, cancellation, and issue reporting |
@@ -1433,7 +1436,140 @@ Implement the shared account routes so student and tutor use the same account sh
 - shared-account route review
 - legal-notice visibility review
 
-## 9.28 `P1-NOTIF-001` In-app lifecycle notifications and legal-update notice flow
+## 9.28 `P1-FOUND-004` Timezone auto-detection and local-time display convention
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 1
+**Depends on:** `P1-AUTH-001`, `P1-DATA-001`
+
+**Goal**
+
+Implement the shared timezone infrastructure so every time-bearing surface in the product displays dates and times in the user's local timezone, with silent auto-detection on the client and a clear inline explanation pattern to avoid confusion between participants in different timezones.
+
+**Required source docs**
+
+- `docs/data/database-schema-outline-v1.md` (section 7.7 — timezone rule)
+- `docs/architecture/meeting-and-calendar-architecture-v1.md`
+- `docs/design-system/design-system-spec-final-v1.md`
+
+**Scope**
+
+- client-side timezone auto-detection using the `Intl` API
+- silent persist of detected timezone to `app_users.timezone` on sign-in or when the detected value changes
+- a shared date/time formatting utility (`src/lib/datetime`) that always converts UTC storage values to the user's local timezone for display
+- an inline timezone explanation pattern (e.g. "All times shown in your local timezone") for surfaces where timezone ambiguity could cause confusion (booking, lessons, schedule)
+- timezone is NOT displayed as an editable setting — it is auto-detected and updated silently
+
+**Out of scope**
+
+- timezone as a user-editable setting field
+- per-object timezone override UI
+- recurring schedule timezone management (owned by `P1-TUTOR-003`)
+
+**Acceptance criteria**
+
+- every time-bearing surface uses the shared formatting utility instead of ad hoc date formatting
+- the user's timezone is detected and persisted without requiring manual input
+- booking, lesson, and schedule surfaces include a brief timezone explanation where ambiguity is possible
+- UTC storage rule is preserved — no local-time storage anywhere
+
+**Verification**
+
+- cross-surface time-display consistency review
+- timezone detection and persistence review
+
+## 9.29 `P1-ACCOUNT-002` Account profile editing — name and preferred language
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 2
+**Depends on:** `P1-ACCOUNT-001`, `P1-DATA-001`
+
+**Goal**
+
+Add editable name and preferred language fields to the `/settings` page so users can update their display name and language preference from the shared account surface.
+
+**Required source docs**
+
+- `docs/data/database-schema-outline-v1.md`
+- `docs/data/data-dto-and-query-boundary-map-v1.md`
+- `docs/data/api-and-server-action-contracts-v1.md`
+
+**Scope**
+
+- editable full name field on `/settings` with inline validation
+- editable preferred language field on `/settings` (select from the `languages` reference table)
+- server action for account profile update with authorization and input validation
+- repository function to update `app_users.full_name` and `app_users.preferred_language_code`
+- remove email and timezone from the visible settings display (email is not editable, timezone is auto-detected by `P1-FOUND-004`)
+
+**Out of scope**
+
+- email editing (requires Supabase Auth flow, not a simple field update)
+- timezone editing (auto-detected, not user-editable)
+- avatar editing (separate task `P1-ACCOUNT-003`)
+- tutor-specific profile fields (owned by `P2-PROFILE-001`)
+- using preferred language to filter matching results (future product decision)
+
+**Acceptance criteria**
+
+- users can update their display name and preferred language from `/settings`
+- the language selector shows options from the `languages` reference table
+- input validation prevents empty names and invalid language codes
+- changes are persisted immediately and reflected on next page load
+- the server action enforces authentication and ownership
+
+**Verification**
+
+- settings form review
+- server action auth and validation review
+
+## 9.30 `P1-ACCOUNT-003` Account avatar upload
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 2
+**Depends on:** `P1-ACCOUNT-002`
+
+**Goal**
+
+Add avatar upload to the `/settings` page so users can set a profile image beyond what was imported from Google OAuth, using Supabase Storage for file hosting.
+
+**Required source docs**
+
+- `docs/architecture/file-and-media-architecture-v1.md`
+- `docs/data/database-schema-outline-v1.md`
+- `docs/data/data-dto-and-query-boundary-map-v1.md`
+
+**Scope**
+
+- Supabase Storage public bucket for user avatars (bucket setup is a manual prerequisite)
+- avatar upload component on `/settings`
+- image validation: file type (JPEG, PNG, WebP), max file size, minimum dimensions
+- server action to upload image to Supabase Storage and update `app_users.avatar_url`
+- avatar preview and replace flow
+
+**Out of scope**
+
+- server-side image resizing or cropping (use client-side constraints for MVP)
+- tutor credential or media uploads (owned by `P2-MEDIA-001`)
+- CDN or image optimization pipeline beyond Supabase Storage defaults
+
+**Acceptance criteria**
+
+- users can upload, preview, and replace their avatar from `/settings`
+- uploaded avatars are stored in a public Supabase Storage bucket with a predictable path convention
+- invalid files are rejected with clear error messages before upload
+- the avatar URL is persisted to `app_users.avatar_url` and reflected across the product
+
+**Verification**
+
+- upload and replace flow review
+- file validation review
+- storage access and path convention review
+
+## 9.31 `P1-NOTIF-001` In-app lifecycle notifications and legal-update notice flow
 
 **Status:** `ready`
 **Priority:** `P1`
@@ -1474,7 +1610,7 @@ Implement the in-app notification generation and read-state flows for Phase 1 li
 - notification object review
 - route and read-state review
 
-## 9.29 `P1-NOTIF-002` Transactional email delivery and branded email templates
+## 9.32 `P1-NOTIF-002` Transactional email delivery and branded email templates
 
 **Status:** `ready`
 **Priority:** `P1`
@@ -1518,7 +1654,7 @@ Implement the first transactional email pipeline so important Phase 1 lifecycle 
 - template review
 - email delivery and privacy review
 
-## 9.30 `P1-LESS-002` Lesson actions: join, calendar, cancellation, and issue reporting
+## 9.33 `P1-LESS-002` Lesson actions: join, calendar, cancellation, and issue reporting
 
 **Status:** `ready`
 **Priority:** `P1`
@@ -1561,7 +1697,7 @@ Implement the participant lesson actions that turn lesson detail into a real ope
 - lesson action review
 - payment-policy and issue-flow review
 
-## 9.31 `P1-TUTOR-005` Tutor earnings route and payout-readiness flow
+## 9.34 `P1-TUTOR-005` Tutor earnings route and payout-readiness flow
 
 **Status:** `ready`
 **Priority:** `P1`
