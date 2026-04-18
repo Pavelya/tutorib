@@ -232,7 +232,8 @@ Step 8:  P1-MSG-002 (message send/unread)   + P1-LESS-002 (lesson actions)
 Step 9:  P1-TUTOR-001 (overview)            + P1-TUTOR-003 (schedule)
 Step 10: P1-TUTOR-002 (tutor lessons)       + P1-TUTOR-004 (tutor messages)
          + P1-TUTOR-005 (earnings/payout)
-Step 11: P1-QUALITY-001 (observability)
+Step 11: P1-FOUND-005 (auth nav shells: student bottom nav, tutor drawer, header bell)
+         + P1-QUALITY-001 (observability)
 Step 12: P1-QUALITY-002 (release checklist)
 ```
 

@@ -189,6 +189,7 @@ Bad parallel examples:
 | 10 | `P1-TUTOR-002` | `ready` | `P1` | 4 | Tutor lessons route |
 | 10 | `P1-TUTOR-004` | `ready` | `P1` | 4 | Tutor messages route using shared conversation system |
 | 10 | `P1-TUTOR-005` | `ready` | `P1` | 4 | Tutor earnings route and payout-readiness flow |
+| 11 | `P1-FOUND-005` | `ready` | `P1` | 4 | Authenticated navigation shells: student bottom nav, tutor drawer, shared top header with notifications bell |
 | 11 | `P1-QUALITY-001` | `ready` | `P2` | 4 | Observability, analytics, and safe logging baseline |
 | 12 | `P1-QUALITY-002` | `ready` | `P2` | 4 | Phase 1 release and verification checklist pass |
 
@@ -1749,6 +1750,63 @@ Implement the tutor earnings route and payout-readiness experience so approved t
 - payout-readiness UX review
 - provider-handoff boundary review
 - Stripe Connect pre-fill and webhook handling review
+
+## 9.35 `P1-FOUND-005` Authenticated navigation shells: student bottom nav, tutor drawer, shared top header with notifications bell
+
+**Status:** `ready`
+**Priority:** `P1`
+**Wave:** 4
+**Depends on:** `P1-FOUND-001`, `P1-FOUND-002`, `P1-AUTH-002`, `P1-ACCOUNT-001`, `P1-MSG-001`, `P1-LESS-001`, `P1-NOTIF-001`, `P1-TUTOR-001`, `P1-TUTOR-002`, `P1-TUTOR-003`, `P1-TUTOR-004`, `P1-TUTOR-005`
+
+**Goal**
+
+Replace the placeholder `<nav />` markers in the student and tutor section layouts with the approved authenticated navigation shells so users can move between product destinations, see unread state, and reach notifications and account controls from every authenticated surface. This is the moment the one-ecosystem shell becomes real navigation, not a wireframe stub.
+
+**Required source docs**
+
+- `docs/foundations/ia-map-two-sided.md` (student desktop and mobile nav §6.1–6.3, tutor nav §7.1–7.4)
+- `docs/design-system/design-system-spec-final-v1.md`
+- `docs/design-system/component-specs-core-v1.md`
+- `docs/architecture/route-layout-implementation-map-v1.md`
+- `docs/architecture/accessibility-and-inclusive-ux-architecture-v1.md`
+
+**Scope**
+
+- shared top header for authenticated surfaces with: brand mark, account menu, notifications bell with unread badge sourced from `getUnreadCount`
+- student mobile bottom nav with exactly five destinations: Home, Match, Lessons, Messages, Saved (per IA §6.3, five-item max; unread indicator on Messages)
+- student desktop primary nav mirroring bottom nav destinations plus account menu (per IA §6.1)
+- tutor hamburger/drawer navigation with tutor destinations (Overview, Lessons, Messages, Schedule, Earnings, Settings) per IA §7.4
+- active-route state styling in each nav
+- bell links to `/notifications`; account menu links to `/settings`, `/privacy`, `/billing`, sign-out
+- shells wired into `src/app/(student)/layout.tsx` and `src/app/tutor/layout.tsx`
+- shell is Server Component where possible; unread counts read server-side and passed to client nav only where interactivity is required
+
+**Out of scope**
+
+- Saved route itself (owned by `P15-SAVED-001`)
+- notification preferences center
+- tutor `/tutor/students` route (Phase 1.5)
+- any new nav destination not in the IA map
+- redesign of the account header surface inside `(account)/layout.tsx` — it already ships with `AccountNav` from `P1-ACCOUNT-001` and should keep its own chrome
+- desktop-primary tutor top nav bar — tutor mode is desktop-primary but uses the drawer pattern per IA §7.4 to avoid divergent tutor chrome
+
+**Acceptance criteria**
+
+- student bottom nav renders on mobile breakpoints with the five IA destinations and hides/shows correctly on scroll per IA §6.3
+- Messages item shows an unread dot when the student has unread conversations
+- notifications bell shows an unread badge when `getUnreadCount > 0` and routes to `/notifications`
+- tutor drawer opens from a hamburger trigger, lists the tutor destinations, and closes on route change
+- both student and tutor surfaces share the same top header — no divergent header components per the one-ecosystem rule
+- account menu, bell, and sign-out are reachable from every authenticated surface
+- active destination has a visible selected state that meets contrast rules
+- legal-notice banner from `P1-NOTIF-001` continues to render above the nav shells without layout collision
+
+**Verification**
+
+- cross-breakpoint review of student and tutor shells
+- IA-map destination parity review
+- unread-state wiring review (bell + messages)
+- accessibility review: keyboard focus order, skip-to-content link, ARIA landmarks, color-contrast on selected states
 
 ## 10. Task Drafting Rules For Follow-Up
 

@@ -77,3 +77,23 @@ export type ConversationThreadResult =
   | { status: 'not_found' }
   | { status: 'unauthenticated' }
   | { status: 'forbidden' };
+
+// ---------------------------------------------------------------------------
+// Mutation results (Server Action boundary shapes)
+// ---------------------------------------------------------------------------
+
+export type SendMessageResult =
+  | { status: 'ok'; message_id: string; created_at: string }
+  | { status: 'validation_failed'; field: string; message: string }
+  | { status: 'unauthenticated' }
+  | { status: 'forbidden' }
+  | { status: 'not_found' }
+  | { status: 'conversation_unavailable' }
+  | { status: 'blocked' };
+
+export type MarkThreadReadResult =
+  | { status: 'ok'; marked_count: number }
+  | { status: 'validation_failed' }
+  | { status: 'unauthenticated' }
+  | { status: 'forbidden' }
+  | { status: 'not_found' };

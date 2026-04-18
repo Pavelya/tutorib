@@ -16,6 +16,8 @@ import type {
   ConversationListItemDto,
   ConversationThreadDto,
 } from '@/modules/conversations/dto';
+import { MessageComposer } from './MessageComposer';
+import { MarkReadOnMount } from './MarkReadOnMount';
 import styles from './messages.module.css';
 
 export const metadata: Metadata = {
@@ -209,9 +211,21 @@ function ConversationRow({
 
 function ThreadView({ thread }: { thread: ConversationThreadDto }) {
   const { counterpart } = thread;
+  const composerDisabled =
+    thread.conversation_status !== 'active' ||
+    thread.is_blocked_by_self ||
+    thread.is_blocked_by_counterpart;
+  const composerReason = thread.is_blocked_by_self
+    ? 'Unblock this person to resume messaging.'
+    : thread.is_blocked_by_counterpart
+      ? 'Messaging is unavailable right now.'
+      : thread.conversation_status !== 'active'
+        ? 'This conversation is no longer active.'
+        : undefined;
 
   return (
     <div className={styles.thread}>
+      <MarkReadOnMount conversationId={thread.conversation_id} />
       <header className={styles.threadHeader}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
           <Link href="/messages" className={styles.threadBackLink}>
@@ -298,13 +312,11 @@ function ThreadView({ thread }: { thread: ConversationThreadDto }) {
       </div>
 
       <footer className={styles.threadFooter}>
-        {/*
-          Message send lives in P1-MSG-002; this entry keeps the UI coherent
-          without shipping a write path this task doesn't own.
-        */}
-        <p className={styles.pendingSendNotice}>
-          Replying will be available shortly.
-        </p>
+        <MessageComposer
+          conversationId={thread.conversation_id}
+          disabled={composerDisabled}
+          disabledReason={composerReason}
+        />
       </footer>
     </div>
   );

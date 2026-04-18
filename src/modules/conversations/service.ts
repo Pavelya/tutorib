@@ -1,4 +1,4 @@
-import { resolveAccountState } from '@/modules/accounts/service';
+import { resolveAccountState, type AccountState } from '@/modules/accounts/service';
 import { findStudentProfileByAppUserId } from '@/modules/learning-needs/repository';
 import {
   findConversationsForParticipant,
@@ -7,6 +7,10 @@ import {
   findBlocksBetween,
   findThreadHeaderForParticipant,
   findThreadMessages,
+  findParticipantMembership,
+  findBlockBetweenPair,
+  insertMessageAndAdvanceConversation,
+  markConversationReadForParticipant,
   type ConversationListRow,
   type LastMessageRow,
   type ThreadHeaderRow,
@@ -19,7 +23,10 @@ import type {
   ConversationThreadResult,
   ThreadMessageDto,
   ConversationCounterpartDto,
+  SendMessageResult,
+  MarkThreadReadResult,
 } from './dto';
+import { sendMessageSchema, markThreadReadSchema } from './validation';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -154,6 +161,114 @@ export async function getConversationThreadForStudent(
   };
 
   return { status: 'ok', thread };
+}
+
+// ---------------------------------------------------------------------------
+// Write paths: send message, mark thread read
+// ---------------------------------------------------------------------------
+
+export async function sendMessage(input: {
+  conversationId: string;
+  body: string;
+}): Promise<SendMessageResult> {
+  const parsed = sendMessageSchema.safeParse(input);
+  if (!parsed.success) {
+    const first = parsed.error.issues[0];
+    return {
+      status: 'validation_failed',
+      field: String(first?.path[0] ?? 'body'),
+      message: first?.message ?? 'Invalid input.',
+    };
+  }
+
+  const state = await resolveAccountState();
+  if (!isAuthenticatedParticipant(state)) {
+    return state.status === 'unauthenticated'
+      ? { status: 'unauthenticated' }
+      : { status: 'forbidden' };
+  }
+
+  const actorAppUserId = state.appUser.id;
+
+  const membership = await findParticipantMembership(
+    parsed.data.conversationId,
+    actorAppUserId,
+  );
+
+  // Non-participants get the 404 posture — the boundary must not reveal that a
+  // thread exists to someone who cannot see it (contracts §14).
+  if (!membership) {
+    return { status: 'not_found' };
+  }
+
+  if (membership.conversation_status !== 'active') {
+    return { status: 'conversation_unavailable' };
+  }
+
+  const blocks = await findBlockBetweenPair(
+    actorAppUserId,
+    membership.counterpart_app_user_id,
+  );
+  if (blocks.length > 0) {
+    return { status: 'blocked' };
+  }
+
+  const inserted = await insertMessageAndAdvanceConversation({
+    conversationId: membership.conversation_id,
+    senderAppUserId: actorAppUserId,
+    body: parsed.data.body.trim(),
+  });
+
+  // Safe audit crumb: record the fact of a send without any body content
+  // (contracts §14: never log message bodies, meeting URLs, etc.).
+  console.info('[conversations] message.sent', {
+    conversation_id: membership.conversation_id,
+    message_id: inserted.message_id,
+    sender_app_user_id: actorAppUserId,
+  });
+
+  return {
+    status: 'ok',
+    message_id: inserted.message_id,
+    created_at: inserted.created_at.toISOString(),
+  };
+}
+
+export async function markThreadRead(input: {
+  conversationId: string;
+}): Promise<MarkThreadReadResult> {
+  const parsed = markThreadReadSchema.safeParse(input);
+  if (!parsed.success) {
+    return { status: 'validation_failed' };
+  }
+
+  const state = await resolveAccountState();
+  if (!isAuthenticatedParticipant(state)) {
+    return state.status === 'unauthenticated'
+      ? { status: 'unauthenticated' }
+      : { status: 'forbidden' };
+  }
+
+  const membership = await findParticipantMembership(
+    parsed.data.conversationId,
+    state.appUser.id,
+  );
+  if (!membership) {
+    return { status: 'not_found' };
+  }
+
+  const marked = await markConversationReadForParticipant(
+    parsed.data.conversationId,
+    state.appUser.id,
+  );
+
+  return { status: 'ok', marked_count: marked };
+}
+
+function isAuthenticatedParticipant(
+  state: AccountState,
+): state is Extract<AccountState, { appUser: unknown }> {
+  return state.status === 'student_active' || state.status === 'tutor_active';
 }
 
 // ---------------------------------------------------------------------------

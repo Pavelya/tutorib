@@ -7,6 +7,13 @@ import {
   messageReads,
   userBlocks,
 } from './schema';
+
+export interface ParticipantMembershipRow {
+  conversation_id: string;
+  conversation_status: string;
+  self_participant_id: string;
+  counterpart_app_user_id: string;
+}
 import { appUsers } from '@/modules/accounts/schema';
 import { tutorProfiles } from '@/modules/tutors/schema';
 
@@ -298,6 +305,180 @@ export async function findThreadMessages(
     .where(eq(messages.conversation_id, conversationId))
     .orderBy(asc(messages.created_at))
     .limit(limit);
+  return rows;
+}
+
+// ---------------------------------------------------------------------------
+// Write paths: participant membership lookup, message insert, read-state upsert
+// ---------------------------------------------------------------------------
+
+export async function findParticipantMembership(
+  conversationId: string,
+  appUserId: string,
+): Promise<ParticipantMembershipRow | undefined> {
+  const db = getDb();
+
+  const rows = await db
+    .select({
+      conversation_id: conversations.id,
+      conversation_status: conversations.conversation_status,
+      self_participant_id: conversationParticipants.id,
+    })
+    .from(conversations)
+    .innerJoin(
+      conversationParticipants,
+      and(
+        eq(conversationParticipants.conversation_id, conversations.id),
+        eq(conversationParticipants.app_user_id, appUserId),
+      ),
+    )
+    .where(eq(conversations.id, conversationId))
+    .limit(1);
+
+  if (rows.length === 0) return undefined;
+
+  const counterpartRows = await db
+    .select({ app_user_id: conversationParticipants.app_user_id })
+    .from(conversationParticipants)
+    .where(
+      and(
+        eq(conversationParticipants.conversation_id, conversationId),
+        sql`${conversationParticipants.app_user_id} <> ${appUserId}`,
+      ),
+    )
+    .limit(1);
+
+  if (counterpartRows.length === 0) return undefined;
+
+  return {
+    conversation_id: rows[0].conversation_id,
+    conversation_status: rows[0].conversation_status,
+    self_participant_id: rows[0].self_participant_id,
+    counterpart_app_user_id: counterpartRows[0].app_user_id,
+  };
+}
+
+export interface InsertedMessage {
+  message_id: string;
+  created_at: Date;
+}
+
+/**
+ * Insert a new message and advance the conversation's last-message pointer in
+ * a single transaction. The conversation's updated last_message_at becomes the
+ * canonical freshness signal that drives the in-app new-message indicator
+ * (conversation list ordering + unread counts from message_reads absence).
+ */
+export async function insertMessageAndAdvanceConversation(params: {
+  conversationId: string;
+  senderAppUserId: string;
+  body: string;
+}): Promise<InsertedMessage> {
+  const db = getDb();
+
+  return db.transaction(async (tx) => {
+    const [inserted] = await tx
+      .insert(messages)
+      .values({
+        conversation_id: params.conversationId,
+        sender_app_user_id: params.senderAppUserId,
+        body: params.body,
+      })
+      .returning({ id: messages.id, created_at: messages.created_at });
+
+    await tx
+      .update(conversations)
+      .set({
+        last_message_id: inserted.id,
+        last_message_at: inserted.created_at,
+        updated_at: inserted.created_at,
+      })
+      .where(eq(conversations.id, params.conversationId));
+
+    return { message_id: inserted.id, created_at: inserted.created_at };
+  });
+}
+
+/**
+ * Mark every message the counterpart sent in this conversation as read for the
+ * current participant. Idempotent via uq_message_reads_message_user — replayed
+ * calls leave existing reads intact (integration-idempotency-model §9.5).
+ * Returns the number of new read receipts written.
+ */
+export async function markConversationReadForParticipant(
+  conversationId: string,
+  appUserId: string,
+): Promise<number> {
+  const db = getDb();
+
+  const unreadMessages = await db
+    .select({ id: messages.id })
+    .from(messages)
+    .leftJoin(
+      messageReads,
+      and(
+        eq(messageReads.message_id, messages.id),
+        eq(messageReads.app_user_id, appUserId),
+      ),
+    )
+    .where(
+      and(
+        eq(messages.conversation_id, conversationId),
+        sql`${messages.sender_app_user_id} <> ${appUserId}`,
+        isNull(messages.removed_at),
+        isNull(messageReads.id),
+      ),
+    );
+
+  if (unreadMessages.length === 0) return 0;
+
+  const inserted = await db
+    .insert(messageReads)
+    .values(
+      unreadMessages.map((m) => ({
+        message_id: m.id,
+        app_user_id: appUserId,
+      })),
+    )
+    .onConflictDoNothing({
+      target: [messageReads.message_id, messageReads.app_user_id],
+    })
+    .returning({ id: messageReads.id });
+
+  return inserted.length;
+}
+
+export interface BlockPairRow {
+  blocker_app_user_id: string;
+  blocked_app_user_id: string;
+}
+
+export async function findBlockBetweenPair(
+  appUserIdA: string,
+  appUserIdB: string,
+): Promise<BlockPairRow[]> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      blocker_app_user_id: userBlocks.blocker_app_user_id,
+      blocked_app_user_id: userBlocks.blocked_app_user_id,
+    })
+    .from(userBlocks)
+    .where(
+      and(
+        eq(userBlocks.block_status, 'active'),
+        or(
+          and(
+            eq(userBlocks.blocker_app_user_id, appUserIdA),
+            eq(userBlocks.blocked_app_user_id, appUserIdB),
+          ),
+          and(
+            eq(userBlocks.blocker_app_user_id, appUserIdB),
+            eq(userBlocks.blocked_app_user_id, appUserIdA),
+          ),
+        ),
+      ),
+    );
   return rows;
 }
 
