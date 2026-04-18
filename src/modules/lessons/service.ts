@@ -6,8 +6,12 @@ import { getServerEnv } from '@/lib/env/server';
 import { site } from '@/lib/config/site';
 import {
   findBookingContextByMatchCandidateId,
+  findLessonDetailForStudent,
+  findLessonsForStudent,
   insertLessonRequest,
   insertLessonStatusHistory,
+  type StudentLessonDetailRow,
+  type StudentLessonListRow,
 } from './repository';
 import {
   insertPendingPayment,
@@ -17,6 +21,13 @@ import type {
   BookingContextDto,
   BookingContextResult,
   BookingRequestResult,
+  LessonIssueStatusDto,
+  LessonTutorSummaryDto,
+  StudentLessonCardDto,
+  StudentLessonDetailDto,
+  StudentLessonDetailResult,
+  StudentLessonListResult,
+  StudentLessonState,
 } from './dto';
 import type { BookingRequestInput } from './validation';
 
@@ -290,6 +301,180 @@ export async function createBookingRequest(
     lesson_id: lesson.id,
     checkout_url: session.url,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Student lesson list + detail (participant-scoped D4/D6)
+// ---------------------------------------------------------------------------
+
+// Per the lesson-issue-and-dispute model §6.1, a lesson issue can be reported
+// from scheduled_start_at until 24 hours after scheduled_end_at.
+const ISSUE_REPORTING_WINDOW_HOURS_AFTER_END = 24;
+
+export async function getStudentLessons(): Promise<StudentLessonListResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated') return { status: 'unauthenticated' };
+  if (state.status !== 'student_active') return { status: 'forbidden' };
+
+  const studentProfile = await findStudentProfileByAppUserId(state.appUser.id);
+  if (!studentProfile) return { status: 'forbidden' };
+
+  const rows = await findLessonsForStudent(studentProfile.id);
+  const now = DateTime.utc();
+  const lessons = rows.map((r) => toStudentLessonCardDto(r, now));
+  return { status: 'ok', lessons };
+}
+
+export async function getStudentLessonDetail(
+  lessonId: string,
+): Promise<StudentLessonDetailResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated') return { status: 'unauthenticated' };
+  if (state.status !== 'student_active') return { status: 'forbidden' };
+
+  const studentProfile = await findStudentProfileByAppUserId(state.appUser.id);
+  if (!studentProfile) return { status: 'forbidden' };
+
+  const row = await findLessonDetailForStudent(lessonId, studentProfile.id);
+  if (!row) return { status: 'not_found' };
+
+  const now = DateTime.utc();
+  return { status: 'ok', lesson: toStudentLessonDetailDto(row, now) };
+}
+
+// ---------------------------------------------------------------------------
+// DTO shaping helpers
+// ---------------------------------------------------------------------------
+
+function toStudentLessonCardDto(
+  row: StudentLessonListRow,
+  now: DateTime,
+): StudentLessonCardDto {
+  return {
+    lesson_id: row.lesson_id,
+    lesson_state: normalizeLessonState(row, now),
+    scheduled_start_at: row.scheduled_start_at.toISOString(),
+    scheduled_end_at: row.scheduled_end_at.toISOString(),
+    lesson_timezone: row.lesson_timezone,
+    subject_snapshot: row.subject_snapshot,
+    focus_snapshot: row.focus_snapshot,
+    price_amount: row.price_amount,
+    currency_code: row.currency_code,
+    tutor: toLessonTutorDto(row),
+    has_open_issue: row.has_open_issue,
+  };
+}
+
+function toStudentLessonDetailDto(
+  row: StudentLessonDetailRow,
+  now: DateTime,
+): StudentLessonDetailDto {
+  const lessonState = normalizeLessonState(row, now);
+  return {
+    lesson_id: row.lesson_id,
+    lesson_state: lessonState,
+    scheduled_start_at: row.scheduled_start_at.toISOString(),
+    scheduled_end_at: row.scheduled_end_at.toISOString(),
+    request_expires_at: row.request_expires_at
+      ? row.request_expires_at.toISOString()
+      : null,
+    lesson_timezone: row.lesson_timezone,
+    subject_snapshot: row.subject_snapshot,
+    focus_snapshot: row.focus_snapshot,
+    student_note_snapshot: row.student_note_snapshot,
+    price_amount: row.price_amount,
+    currency_code: row.currency_code,
+    tutor: toLessonTutorDto(row),
+    is_issue_reportable: canReportIssue(row, lessonState, now),
+    issue: toIssueStatusDto(row),
+  };
+}
+
+function toLessonTutorDto(
+  row: Pick<
+    StudentLessonListRow,
+    | 'tutor_profile_id'
+    | 'tutor_public_slug'
+    | 'tutor_display_name'
+    | 'tutor_headline'
+    | 'tutor_avatar_url'
+  >,
+): LessonTutorSummaryDto {
+  return {
+    tutor_profile_id: row.tutor_profile_id,
+    public_slug: row.tutor_public_slug,
+    display_name: row.tutor_display_name ?? 'Tutor',
+    headline: row.tutor_headline,
+    avatar_url: row.tutor_avatar_url,
+  };
+}
+
+function toIssueStatusDto(
+  row: StudentLessonDetailRow,
+): LessonIssueStatusDto | null {
+  if (!row.issue_case_id || !row.issue_case_status) return null;
+  return {
+    case_id: row.issue_case_id,
+    case_status: normalizeIssueCaseStatus(row.issue_case_status),
+    resolution_outcome: row.issue_resolution_outcome,
+    reported_at: row.issue_reported_at
+      ? row.issue_reported_at.toISOString()
+      : null,
+  };
+}
+
+function normalizeLessonState(
+  row: Pick<
+    StudentLessonListRow,
+    'lesson_status' | 'scheduled_end_at' | 'request_expires_at'
+  >,
+  now: DateTime,
+): StudentLessonState {
+  const status = row.lesson_status;
+  if (status === 'declined') return 'declined';
+  if (status === 'cancelled') return 'cancelled';
+  if (status === 'completed') return 'completed';
+  if (status === 'requested') {
+    if (row.request_expires_at && DateTime.fromJSDate(row.request_expires_at) < now) {
+      return 'expired';
+    }
+    return 'requested';
+  }
+  if (status === 'accepted') {
+    const end = DateTime.fromJSDate(row.scheduled_end_at);
+    return end < now ? 'completed' : 'upcoming';
+  }
+  return 'requested';
+}
+
+function normalizeIssueCaseStatus(
+  value: string,
+): LessonIssueStatusDto['case_status'] {
+  if (
+    value === 'open' ||
+    value === 'under_review' ||
+    value === 'resolved' ||
+    value === 'dismissed'
+  ) {
+    return value;
+  }
+  return 'open';
+}
+
+function canReportIssue(
+  row: Pick<StudentLessonDetailRow, 'scheduled_start_at' | 'scheduled_end_at'>,
+  state: StudentLessonState,
+  now: DateTime,
+): boolean {
+  // Only upcoming/completed lessons (i.e., the lesson actually happened or
+  // was supposed to happen) have a reportable window. Declined/cancelled/
+  // expired/requested states do not surface the issue entry.
+  if (state !== 'upcoming' && state !== 'completed') return false;
+  const start = DateTime.fromJSDate(row.scheduled_start_at);
+  const end = DateTime.fromJSDate(row.scheduled_end_at);
+  if (now < start) return false;
+  const windowClosesAt = end.plus({ hours: ISSUE_REPORTING_WINDOW_HOURS_AFTER_END });
+  return now <= windowClosesAt;
 }
 
 // ---------------------------------------------------------------------------

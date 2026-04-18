@@ -18,8 +18,14 @@ export async function createSupabaseServer() {
           return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
-          for (const { name, value, options } of cookiesToSet) {
-            cookieStore.set(name, value, options);
+          try {
+            for (const { name, value, options } of cookiesToSet) {
+              cookieStore.set(name, value, options);
+            }
+          } catch {
+            // Called from a Server Component — Next.js disallows cookie
+            // writes here. Middleware refreshes the session, so this is safe
+            // to ignore.
           }
         },
       },
