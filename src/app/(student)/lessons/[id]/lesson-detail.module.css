@@ -157,3 +157,85 @@
   font-size: var(--text-utility-sm);
   color: var(--color-text-secondary);
 }
+
+.joinRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.joinButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-forest-700);
+  color: var(--color-text-on-dark, #fff);
+  font-weight: 600;
+  font-size: var(--text-body-md);
+  text-decoration: none;
+}
+
+.joinButton:hover {
+  background: var(--color-forest-800, var(--color-forest-700));
+}
+
+.providerLabel {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.calendarRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.calendarLink {
+  font-size: var(--text-body-sm);
+  color: var(--color-forest-700);
+  text-decoration: none;
+}
+
+.calendarLink:hover {
+  text-decoration: underline;
+}
+
+.actionGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.actionRow {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.policyLine {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-body);
+}
+
+.cancelConfirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.issueForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.issueForm > :global(*) {
+  width: 100%;
+  max-width: 420px;
+}

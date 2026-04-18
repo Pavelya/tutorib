@@ -1,11 +1,18 @@
 import { and, desc, eq } from 'drizzle-orm';
 import { getDb } from '@/server/db/client';
-import { lessons, lessonStatusHistory, lessonIssueCases } from './schema';
+import {
+  lessons,
+  lessonStatusHistory,
+  lessonIssueCases,
+  lessonMeetingAccess,
+} from './schema';
 import { matchCandidates, matchRuns } from '@/modules/matching/schema';
 import { learningNeeds } from '@/modules/learning-needs/schema';
 import { tutorProfiles } from '@/modules/tutors/schema';
 import { appUsers } from '@/modules/accounts/schema';
 import { subjects, subjectFocusAreas } from '@/modules/reference/schema';
+import { payments } from '@/modules/payments/schema';
+import { studentProfiles } from '@/modules/accounts/schema';
 
 // ---------------------------------------------------------------------------
 // Internal row types — D0, never exported to routes or client components
@@ -174,6 +181,13 @@ export interface StudentLessonDetailRow extends StudentLessonListRow {
   issue_case_status: string | null;
   issue_resolution_outcome: string | null;
   issue_reported_at: Date | null;
+  meeting_provider: string | null;
+  meeting_url: string | null;
+  meeting_access_status: string | null;
+  tutor_app_user_id: string;
+  payment_id: string | null;
+  payment_status: string | null;
+  payment_intent_id: string | null;
 }
 
 export async function findLessonsForStudent(
@@ -256,6 +270,7 @@ export async function findLessonDetailForStudent(
       tutor_public_slug: tutorProfiles.public_slug,
       tutor_display_name: tutorProfiles.display_name,
       tutor_headline: tutorProfiles.headline,
+      tutor_app_user_id: tutorProfiles.app_user_id,
       tutor_avatar_url: appUsers.avatar_url,
     })
     .from(lessons)
@@ -287,6 +302,37 @@ export async function findLessonDetailForStudent(
 
   const issue = issueRows[0];
 
+  // Meeting access: most recent active row for the lesson (participant-private
+  // per meeting-and-calendar architecture §7.5 / §11).
+  const meetingRows = await db
+    .select({
+      provider: lessonMeetingAccess.provider,
+      meeting_url: lessonMeetingAccess.meeting_url,
+      access_status: lessonMeetingAccess.access_status,
+    })
+    .from(lessonMeetingAccess)
+    .where(eq(lessonMeetingAccess.lesson_id, lessonId))
+    .orderBy(desc(lessonMeetingAccess.updated_at))
+    .limit(1);
+
+  const meeting = meetingRows[0];
+
+  // Payment: participant-scoped payment for this lesson. Needed so the
+  // cancellation flow can release the authorization or issue a refund
+  // against the correct Stripe intent.
+  const paymentRows = await db
+    .select({
+      id: payments.id,
+      payment_status: payments.payment_status,
+      stripe_payment_intent_id: payments.stripe_payment_intent_id,
+    })
+    .from(payments)
+    .where(eq(payments.lesson_id, lessonId))
+    .orderBy(desc(payments.created_at))
+    .limit(1);
+
+  const payment = paymentRows[0];
+
   return {
     lesson_id: row.lesson_id,
     lesson_status: row.lesson_status,
@@ -304,10 +350,189 @@ export async function findLessonDetailForStudent(
     tutor_display_name: row.tutor_display_name,
     tutor_headline: row.tutor_headline,
     tutor_avatar_url: row.tutor_avatar_url,
+    tutor_app_user_id: row.tutor_app_user_id,
     has_open_issue: issue?.case_status === 'open',
     issue_case_id: issue?.id ?? null,
     issue_case_status: issue?.case_status ?? null,
     issue_resolution_outcome: issue?.resolution_outcome ?? null,
     issue_reported_at: issue?.student_reported_at ?? null,
+    meeting_provider: meeting?.provider ?? null,
+    meeting_url: meeting?.meeting_url ?? null,
+    meeting_access_status: meeting?.access_status ?? null,
+    payment_id: payment?.id ?? null,
+    payment_status: payment?.payment_status ?? null,
+    payment_intent_id: payment?.stripe_payment_intent_id ?? null,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Participant cancellation writes
+// ---------------------------------------------------------------------------
+
+export interface CancelLessonInput {
+  lessonId: string;
+  cancelledByAppUserId: string;
+  cancelledAt: Date;
+  fromStatus: string;
+}
+
+export async function markLessonCancelled(
+  input: CancelLessonInput,
+): Promise<void> {
+  const db = getDb();
+  await db
+    .update(lessons)
+    .set({
+      lesson_status: 'cancelled',
+      cancelled_at: input.cancelledAt,
+      cancelled_by_app_user_id: input.cancelledByAppUserId,
+      updated_at: input.cancelledAt,
+    })
+    .where(eq(lessons.id, input.lessonId));
+}
+
+// ---------------------------------------------------------------------------
+// Participant lesson-issue case writes
+// ---------------------------------------------------------------------------
+
+export async function findOpenLessonIssueCase(
+  lessonId: string,
+): Promise<{ id: string; case_status: string } | undefined> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      id: lessonIssueCases.id,
+      case_status: lessonIssueCases.case_status,
+    })
+    .from(lessonIssueCases)
+    .where(eq(lessonIssueCases.lesson_id, lessonId))
+    .orderBy(desc(lessonIssueCases.created_at))
+    .limit(1);
+  return rows[0];
+}
+
+export interface InsertLessonIssueInput {
+  lessonId: string;
+  studentClaimType: string;
+  studentReportedAt: Date;
+}
+
+export async function insertStudentLessonIssueCase(
+  input: InsertLessonIssueInput,
+): Promise<{ id: string }> {
+  const db = getDb();
+  const [row] = await db
+    .insert(lessonIssueCases)
+    .values({
+      lesson_id: input.lessonId,
+      case_status: 'open',
+      student_claim_type: input.studentClaimType,
+      student_reported_at: input.studentReportedAt,
+    })
+    .returning({ id: lessonIssueCases.id });
+  return row;
+}
+
+// ---------------------------------------------------------------------------
+// Payment release/refund helpers used by cancellation
+// ---------------------------------------------------------------------------
+
+export async function markPaymentCancelled(paymentId: string): Promise<void> {
+  const db = getDb();
+  await db
+    .update(payments)
+    .set({
+      payment_status: 'cancelled',
+      capture_cancelled_at: new Date(),
+      updated_at: new Date(),
+    })
+    .where(eq(payments.id, paymentId));
+}
+
+export async function markPaymentRefunded(paymentId: string): Promise<void> {
+  const db = getDb();
+  await db
+    .update(payments)
+    .set({
+      payment_status: 'refunded',
+      refunded_at: new Date(),
+      updated_at: new Date(),
+    })
+    .where(eq(payments.id, paymentId));
+}
+
+// ---------------------------------------------------------------------------
+// Participant-scoped calendar read
+// ---------------------------------------------------------------------------
+// Participant-safe projection used by the lesson `.ics` export. Returns the
+// lesson only when the caller is a participant (student owner or tutor owner).
+
+export interface LessonCalendarRow {
+  lesson_id: string;
+  lesson_status: string;
+  scheduled_start_at: Date;
+  scheduled_end_at: Date;
+  lesson_timezone: string;
+  subject_snapshot: string | null;
+  focus_snapshot: string | null;
+  tutor_display_name: string | null;
+  meeting_url: string | null;
+  meeting_access_status: string | null;
+}
+
+export async function findLessonCalendarForParticipant(
+  lessonId: string,
+  appUserId: string,
+): Promise<LessonCalendarRow | undefined> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      lesson_id: lessons.id,
+      lesson_status: lessons.lesson_status,
+      scheduled_start_at: lessons.scheduled_start_at,
+      scheduled_end_at: lessons.scheduled_end_at,
+      lesson_timezone: lessons.lesson_timezone,
+      subject_snapshot: lessons.subject_snapshot,
+      focus_snapshot: lessons.focus_snapshot,
+      student_app_user_id: studentProfiles.app_user_id,
+      tutor_app_user_id: tutorProfiles.app_user_id,
+      tutor_display_name: tutorProfiles.display_name,
+    })
+    .from(lessons)
+    .innerJoin(studentProfiles, eq(studentProfiles.id, lessons.student_profile_id))
+    .innerJoin(tutorProfiles, eq(tutorProfiles.id, lessons.tutor_profile_id))
+    .where(eq(lessons.id, lessonId))
+    .limit(1);
+
+  const row = rows[0];
+  if (!row) return undefined;
+
+  const isParticipant =
+    row.student_app_user_id === appUserId || row.tutor_app_user_id === appUserId;
+  if (!isParticipant) return undefined;
+
+  const meetingRows = await db
+    .select({
+      meeting_url: lessonMeetingAccess.meeting_url,
+      access_status: lessonMeetingAccess.access_status,
+    })
+    .from(lessonMeetingAccess)
+    .where(eq(lessonMeetingAccess.lesson_id, lessonId))
+    .orderBy(desc(lessonMeetingAccess.updated_at))
+    .limit(1);
+
+  const meeting = meetingRows[0];
+
+  return {
+    lesson_id: row.lesson_id,
+    lesson_status: row.lesson_status,
+    scheduled_start_at: row.scheduled_start_at,
+    scheduled_end_at: row.scheduled_end_at,
+    lesson_timezone: row.lesson_timezone,
+    subject_snapshot: row.subject_snapshot,
+    focus_snapshot: row.focus_snapshot,
+    tutor_display_name: row.tutor_display_name,
+    meeting_url: meeting?.meeting_url ?? null,
+    meeting_access_status: meeting?.access_status ?? null,
   };
 }

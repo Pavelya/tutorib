@@ -4,16 +4,20 @@ import { notFound, redirect } from 'next/navigation';
 import { DateTime } from 'luxon';
 import { Avatar } from '@/components/Avatar/Avatar';
 import { Badge } from '@/components/Badge/Badge';
-import { Button } from '@/components/Button/Button';
 import { InlineNotice } from '@/components/InlineNotice/InlineNotice';
 import { Panel } from '@/components/Panel/Panel';
 import { site } from '@/lib/config/site';
-import { getStudentLessonDetail } from '@/modules/lessons/service';
+import {
+  buildGoogleCalendarLink,
+  getStudentLessonDetail,
+} from '@/modules/lessons/service';
 import type {
   LessonIssueStatusDto,
+  LessonMeetingAccessDto,
   StudentLessonDetailDto,
   StudentLessonState,
 } from '@/modules/lessons/dto';
+import { CancelLessonForm, ReportIssueForm } from './LessonActions';
 import styles from './lesson-detail.module.css';
 
 export const metadata: Metadata = {
@@ -141,10 +145,99 @@ export default async function StudentLessonDetailPage({
         </Panel>
       )}
 
+      {lesson.lesson_state === 'upcoming' && (
+        <Panel variant="default" className={styles.section}>
+          <h2 className={styles.sectionHeading}>Join the lesson</h2>
+          <JoinSection meeting={lesson.meeting_access} />
+        </Panel>
+      )}
+
+      {(lesson.lesson_state === 'requested' ||
+        lesson.lesson_state === 'upcoming') && (
+        <Panel variant="default" className={styles.section}>
+          <h2 className={styles.sectionHeading}>Add to calendar</h2>
+          <CalendarSection lesson={lesson} />
+        </Panel>
+      )}
+
+      {(lesson.lesson_state === 'requested' ||
+        lesson.lesson_state === 'upcoming') && (
+        <Panel variant="default" className={styles.section}>
+          <h2 className={styles.sectionHeading}>Cancel lesson</h2>
+          <CancelLessonForm
+            lessonId={lesson.lesson_id}
+            policy={lesson.cancellation_policy}
+            lessonState={lesson.lesson_state}
+          />
+        </Panel>
+      )}
+
       <Panel variant="default" className={styles.section}>
         <h2 className={styles.sectionHeading}>Issue reporting</h2>
         <IssueSection lesson={lesson} />
       </Panel>
+    </div>
+  );
+}
+
+function JoinSection({ meeting }: { meeting: LessonMeetingAccessDto | null }) {
+  if (!meeting || !meeting.join_url || meeting.access_status !== 'active') {
+    return (
+      <InlineNotice variant="info">
+        <strong>Meeting link pending</strong>
+        <p>
+          Your tutor has not shared a meeting link yet. You will see the join
+          button here as soon as it is available.
+        </p>
+      </InlineNotice>
+    );
+  }
+
+  return (
+    <div className={styles.joinRow}>
+      <a
+        href={meeting.join_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.joinButton}
+      >
+        Join lesson
+      </a>
+      <span className={styles.providerLabel}>via {meeting.provider_label}</span>
+    </div>
+  );
+}
+
+function CalendarSection({ lesson }: { lesson: StudentLessonDetailDto }) {
+  const googleLink = buildGoogleCalendarLink({
+    lessonId: lesson.lesson_id,
+    scheduledStartAt: lesson.scheduled_start_at,
+    scheduledEndAt: lesson.scheduled_end_at,
+    subjectSnapshot: lesson.subject_snapshot,
+    focusSnapshot: lesson.focus_snapshot,
+    tutorDisplayName: lesson.tutor.display_name,
+    meetingUrl:
+      lesson.meeting_access?.access_status === 'active'
+        ? lesson.meeting_access.join_url
+        : null,
+  });
+
+  return (
+    <div className={styles.calendarRow}>
+      <a
+        href={googleLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.calendarLink}
+      >
+        Add to Google Calendar
+      </a>
+      <a
+        href={`/api/calendar/lessons/${lesson.lesson_id}/ics`}
+        className={styles.calendarLink}
+      >
+        Download .ics
+      </a>
     </div>
   );
 }
@@ -163,26 +256,7 @@ function IssueSection({ lesson }: { lesson: StudentLessonDetailDto }) {
     );
   }
 
-  return (
-    <div className={styles.issueEntry}>
-      <p className={styles.issueIntro}>
-        Something went wrong with this lesson? Report a structured issue so our
-        trust &amp; safety team can review it. Please don&apos;t use chat as the
-        reporting channel.
-      </p>
-      {/*
-        The reporting submission lives in P1-LESS-002. Keeping a disabled entry
-        here preserves a clear affordance without shipping a write path this
-        task does not own.
-      */}
-      <Button variant="secondary" disabled aria-disabled="true">
-        Report issue
-      </Button>
-      <p className={styles.issueHint}>
-        Reporting will be available shortly.
-      </p>
-    </div>
-  );
+  return <ReportIssueForm lessonId={lesson.lesson_id} />;
 }
 
 function IssueStatus({ issue }: { issue: LessonIssueStatusDto }) {

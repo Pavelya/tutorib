@@ -87,12 +87,47 @@ export interface LessonTutorSummaryDto {
 
 // Issue-state display for a lesson. Shaped as a small summary — does NOT
 // include counterparty evidence, internal review notes, or resolution
-// internals. The issue submission flow itself lives in P1-LESS-002.
+// internals.
 export interface LessonIssueStatusDto {
   case_id: string;
   case_status: 'open' | 'under_review' | 'resolved' | 'dismissed';
   resolution_outcome: string | null;
   reported_at: string | null;
+}
+
+// Canonical student-reportable lesson-issue reasons per
+// `lesson-issue-and-dispute-model-v1.md` §6.
+export const STUDENT_LESSON_ISSUE_REASONS = [
+  'tutor_absent',
+  'wrong_meeting_link',
+  'technical_failure',
+  'partial_delivery',
+] as const;
+
+export type StudentLessonIssueReason =
+  (typeof STUDENT_LESSON_ISSUE_REASONS)[number];
+
+// Participant meeting-access summary (D6). Participant-private data;
+// never appears in public DTOs or metadata.
+export interface LessonMeetingAccessDto {
+  provider: string;
+  provider_label: string;
+  join_url: string | null;
+  access_status: 'active' | 'pending' | 'inactive';
+}
+
+// Cancellation policy projected onto the current lesson state. The lesson
+// detail surface uses this to render an accurate, policy-correct action.
+export interface LessonCancellationPolicyDto {
+  can_cancel: boolean;
+  // Refund posture the student will see once they confirm cancellation.
+  // `none` is used when the lesson is not in a cancellable state at all.
+  refund_posture: 'full_refund' | 'no_refund' | 'authorization_released' | 'none';
+  // Hours between "now" and scheduled_start_at at the moment the DTO was
+  // built. Consumer may use this to show a countdown or explain the boundary.
+  hours_until_start: number | null;
+  // Hard boundary from the approved platform policy (2 hours).
+  policy_notice_hours: number;
 }
 
 export interface StudentLessonCardDto {
@@ -130,7 +165,57 @@ export interface StudentLessonDetailDto {
 
   // Present when a lesson issue case exists for this lesson.
   issue: LessonIssueStatusDto | null;
+
+  // Participant-private meeting access (provider + join url) for the join
+  // action. Null when no meeting access has been recorded yet.
+  meeting_access: LessonMeetingAccessDto | null;
+
+  // Policy-driven cancellation posture for the current lesson state.
+  cancellation_policy: LessonCancellationPolicyDto;
 }
+
+// Result of a participant cancellation attempt.
+export interface CancelLessonResultOk {
+  ok: true;
+  lesson_id: string;
+  refund_posture: 'full_refund' | 'no_refund' | 'authorization_released';
+}
+
+export interface CancelLessonResultErr {
+  ok: false;
+  code:
+    | 'unauthenticated'
+    | 'forbidden'
+    | 'not_found'
+    | 'invalid_state'
+    | 'provider_unavailable';
+  message: string;
+}
+
+export type CancelLessonResult = CancelLessonResultOk | CancelLessonResultErr;
+
+// Result of a lesson-issue report submission.
+export interface ReportLessonIssueResultOk {
+  ok: true;
+  case_id: string;
+}
+
+export interface ReportLessonIssueResultErr {
+  ok: false;
+  code:
+    | 'unauthenticated'
+    | 'forbidden'
+    | 'not_found'
+    | 'window_closed'
+    | 'already_reported'
+    | 'validation_failed';
+  message: string;
+  fieldErrors?: Record<string, string[]>;
+}
+
+export type ReportLessonIssueResult =
+  | ReportLessonIssueResultOk
+  | ReportLessonIssueResultErr;
 
 export type StudentLessonListResult =
   | { status: 'ok'; lessons: StudentLessonCardDto[] }
