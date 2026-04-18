@@ -22,6 +22,7 @@ export interface BookingContextRow {
   subject_name: string | null;
   focus_area_name: string | null;
   tutor_profile_id: string;
+  tutor_app_user_id: string;
   tutor_public_slug: string | null;
   tutor_display_name: string | null;
   tutor_headline: string | null;
@@ -47,6 +48,7 @@ export async function findBookingContextByMatchCandidateId(
       subject_name: subjects.name,
       focus_area_name: subjectFocusAreas.name,
       tutor_profile_id: tutorProfiles.id,
+      tutor_app_user_id: tutorProfiles.app_user_id,
       tutor_public_slug: tutorProfiles.public_slug,
       tutor_display_name: tutorProfiles.display_name,
       tutor_headline: tutorProfiles.headline,

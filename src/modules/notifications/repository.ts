@@ -10,6 +10,36 @@ export type NotificationRow = typeof notifications.$inferSelect;
 export type PolicyNoticeVersionRow = typeof policyNoticeVersions.$inferSelect;
 export type PolicyNoticeReceiptRow = typeof policyNoticeReceipts.$inferSelect;
 
+export interface InsertNotificationInput {
+  appUserId: string;
+  notificationType: string;
+  title: string;
+  bodySummary?: string | null;
+  objectType?: string | null;
+  objectId?: string | null;
+}
+
+/**
+ * Insert an in-app notification. Returns the created row.
+ */
+export async function insertNotification(
+  input: InsertNotificationInput,
+): Promise<NotificationRow> {
+  const db = getDb();
+  const [row] = await db
+    .insert(notifications)
+    .values({
+      app_user_id: input.appUserId,
+      notification_type: input.notificationType,
+      title: input.title,
+      body_summary: input.bodySummary ?? null,
+      object_type: input.objectType ?? null,
+      object_id: input.objectId ?? null,
+    })
+    .returning();
+  return row;
+}
+
 /**
  * Fetch notifications for a user, ordered by most recent first.
  */

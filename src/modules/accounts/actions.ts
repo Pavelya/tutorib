@@ -39,6 +39,7 @@ export async function updateProfileAction(
   }
 
   await updateAppUserProfile(state.appUser.id, { fullName: parsed.data.fullName });
+  revalidatePath('/settings');
   return { ok: true };
 }
 

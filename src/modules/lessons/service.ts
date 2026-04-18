@@ -17,6 +17,7 @@ import {
   insertPendingPayment,
   attachCheckoutSessionToPayment,
 } from '@/modules/payments/repository';
+import { emitLessonRequestSubmitted } from '@/modules/notifications/emit';
 import type {
   BookingContextDto,
   BookingContextResult,
@@ -295,6 +296,21 @@ export async function createBookingRequest(
   }
 
   await attachCheckoutSessionToPayment(payment.id, session.id);
+
+  // Notify the tutor that a request is waiting for their response. Emission
+  // failure must not block the booking return — the durable lesson row is the
+  // source of truth and a scheduled sweep can reconcile notifications later.
+  try {
+    await emitLessonRequestSubmitted({
+      lessonId: lesson.id,
+      tutorAppUserId: row.tutor_app_user_id,
+      studentDisplayName: state.appUser.full_name ?? null,
+      subjectSnapshot: row.subject_name,
+      scheduledStartAt: startUtc.toJSDate(),
+    });
+  } catch (err) {
+    console.error('[booking] notification emit failed:', safeErrorLabel(err));
+  }
 
   return {
     ok: true,
