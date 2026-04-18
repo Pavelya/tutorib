@@ -1,7 +1,19 @@
 import { eq } from 'drizzle-orm';
 import { getDb } from '@/server/db/client';
 import { appUsers } from '@/modules/accounts/schema';
-import { insertNotification } from './repository';
+import { dispatchJob } from '@/modules/jobs/service';
+import {
+  insertNotification,
+  insertNotificationDelivery,
+  type InsertNotificationInput,
+} from './repository';
+import { shouldSendEmail } from './email/channel-policy';
+import {
+  EMAIL_CHANNEL,
+  JOB_TYPE_SEND_TRANSACTIONAL_EMAIL,
+} from './email/constants';
+import { NOTIFICATION_TYPES } from './types';
+export { NOTIFICATION_TYPES } from './types';
 
 /**
  * Notification emission boundary.
@@ -15,25 +27,37 @@ import { insertNotification } from './repository';
  * conversations module and stay in-app only (architecture §8.5).
  */
 
-export const NOTIFICATION_TYPES = {
-  LESSON_REQUEST_SUBMITTED: 'lesson_request_submitted',
-  LESSON_ACCEPTED: 'lesson_accepted',
-  LESSON_DECLINED: 'lesson_declined',
-  LESSON_EXPIRED: 'lesson_expired',
-  LESSON_CANCELLED: 'lesson_cancelled',
-  LESSON_RESCHEDULED: 'lesson_rescheduled',
-  LESSON_REMINDER: 'lesson_reminder',
-  LESSON_ISSUE_ACKNOWLEDGED: 'lesson_issue_acknowledged',
-  LESSON_ISSUE_RESOLVED: 'lesson_issue_resolved',
-  PAYOUT_READY: 'payout_ready',
-  PAYOUT_HOLD: 'payout_hold',
-  LEGAL_UPDATE: 'legal_update',
-} as const;
-
 const OBJECT_TYPE_LESSON = 'lesson';
 const OBJECT_TYPE_LESSON_ISSUE = 'lesson_issue_case';
 const OBJECT_TYPE_PAYOUT = 'payout';
 const OBJECT_TYPE_POLICY_NOTICE = 'policy_notice_version';
+
+/**
+ * Insert the canonical in-app notification and fan out to secondary channels
+ * that the MVP channel policy requires (architecture §8.5). Email delivery is
+ * scheduled through the durable job system so retries and observability stay
+ * at the approved notification-delivery boundary.
+ */
+async function emitNotification(
+  input: InsertNotificationInput,
+): Promise<void> {
+  const notification = await insertNotification(input);
+
+  if (!shouldSendEmail(input.notificationType)) return;
+
+  const delivery = await insertNotificationDelivery({
+    notificationId: notification.id,
+    channel: EMAIL_CHANNEL,
+  });
+
+  await dispatchJob({
+    job_type: JOB_TYPE_SEND_TRANSACTIONAL_EMAIL,
+    idempotency_key: `email:${delivery.id}`,
+    trigger_object_type: 'notification_delivery',
+    trigger_object_id: delivery.id,
+    payload: { deliveryId: delivery.id },
+  });
+}
 
 export interface EmitLessonRequestSubmittedInput {
   lessonId: string;
@@ -51,7 +75,7 @@ export async function emitLessonRequestSubmitted(
 ): Promise<void> {
   const studentLabel = input.studentDisplayName?.trim() || 'A student';
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.tutorAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_REQUEST_SUBMITTED,
     title: `New ${subject} request`,
@@ -75,7 +99,7 @@ export async function emitLessonAccepted(
   input: EmitLessonLifecycleInput,
 ): Promise<void> {
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_ACCEPTED,
     title: `Your ${subject} is confirmed`,
@@ -93,7 +117,7 @@ export async function emitLessonDeclined(
   input: EmitLessonLifecycleInput,
 ): Promise<void> {
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_DECLINED,
     title: `${subject} request declined`,
@@ -111,7 +135,7 @@ export async function emitLessonExpired(
   input: EmitLessonLifecycleInput,
 ): Promise<void> {
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_EXPIRED,
     title: `${subject} request expired`,
@@ -128,7 +152,7 @@ export async function emitLessonCancelled(
   input: EmitLessonLifecycleInput,
 ): Promise<void> {
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_CANCELLED,
     title: `${subject} cancelled`,
@@ -145,7 +169,7 @@ export async function emitLessonRescheduled(
   input: EmitLessonLifecycleInput,
 ): Promise<void> {
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_RESCHEDULED,
     title: `${subject} rescheduled`,
@@ -162,7 +186,7 @@ export async function emitLessonReminder(
   input: EmitLessonLifecycleInput,
 ): Promise<void> {
   const subject = input.subjectSnapshot ?? 'lesson';
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_REMINDER,
     title: `Upcoming ${subject}`,
@@ -183,7 +207,7 @@ export interface EmitLessonIssueInput {
 export async function emitLessonIssueAcknowledged(
   input: EmitLessonIssueInput,
 ): Promise<void> {
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_ISSUE_ACKNOWLEDGED,
     title: 'We received your issue report',
@@ -204,7 +228,7 @@ export interface EmitLessonIssueResolvedInput extends EmitLessonIssueInput {
 export async function emitLessonIssueResolved(
   input: EmitLessonIssueResolvedInput,
 ): Promise<void> {
-  await insertNotification({
+  await emitNotification({
     appUserId: input.recipientAppUserId,
     notificationType: NOTIFICATION_TYPES.LESSON_ISSUE_RESOLVED,
     title: 'Lesson issue resolved',
@@ -225,7 +249,7 @@ export interface EmitPayoutInput {
  * Tutor payout is ready for withdrawal.
  */
 export async function emitPayoutReady(input: EmitPayoutInput): Promise<void> {
-  await insertNotification({
+  await emitNotification({
     appUserId: input.tutorAppUserId,
     notificationType: NOTIFICATION_TYPES.PAYOUT_READY,
     title: 'Payout ready',
@@ -243,7 +267,7 @@ export interface EmitPayoutHoldInput extends EmitPayoutInput {
  * Tutor payout is on hold and needs attention.
  */
 export async function emitPayoutHold(input: EmitPayoutHoldInput): Promise<void> {
-  await insertNotification({
+  await emitNotification({
     appUserId: input.tutorAppUserId,
     notificationType: NOTIFICATION_TYPES.PAYOUT_HOLD,
     title: 'Payout on hold',
@@ -279,7 +303,7 @@ export async function emitLegalUpdatePublishedToAllUsers(
 
   await Promise.all(
     users.map((u) =>
-      insertNotification({
+      emitNotification({
         appUserId: u.id,
         notificationType: NOTIFICATION_TYPES.LEGAL_UPDATE,
         title: input.title,

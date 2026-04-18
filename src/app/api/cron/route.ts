@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerEnv } from '@/lib/env/server';
 import { processDueJobs } from '@/modules/jobs/cron-runner';
+import { registerTransactionalEmailHandler } from '@/modules/notifications/email/job-handler';
+
+registerTransactionalEmailHandler();
 
 /**
  * Vercel Cron route for scheduled job execution.

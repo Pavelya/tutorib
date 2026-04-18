@@ -5,6 +5,7 @@ const supabaseHost = supabaseUrl ? new URL(supabaseUrl).hostname : undefined;
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  serverExternalPackages: ['resend'],
   images: {
     remotePatterns: [
       ...(supabaseHost

@@ -172,6 +172,7 @@ Bad parallel examples:
 | 3 | `P15-STUD-003` | `draft` | `P1` | 3 | Tutor student relationship detail surface |
 | 4 | `P15-PUBLIC-001` | `draft` | `P2` | 4 | Public landing page visual enrichment |
 | 4 | `P15-PUBLIC-002` | `draft` | `P2` | 4 | Home route visual enrichment |
+| 5 | `P15-NOTIF-001` | `ready` | `P2` | 4 | Supabase Auth email template branding alignment |
 | 5 | `P15-QUALITY-001` | `ready` | `P2` | 4 | Phase 1.5 verification and hardening pass |
 
 ## 10. Detailed Tasks
@@ -656,7 +657,54 @@ Visually enrich the home route (`/`) so it feels like a polished product landing
 - public route SEO acceptance checklist re-check
 - accessibility audit (alt text, contrast, heading hierarchy)
 
-## 10.11 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
+## 10.11 `P15-NOTIF-001` Supabase Auth email template branding alignment
+
+**Status:** `ready`
+**Priority:** `P2`
+**Wave:** 4
+**Depends on:** `P1-NOTIF-002`
+
+**Goal**
+
+Bring Supabase Auth emails (magic link, signup confirmation, email-change, password reset, invite) into visual alignment with the transactional branded email template established in `P1-NOTIF-002`, so the first message a new user receives from Mentor IB does not feel like a different product from the rest of the email experience.
+
+**Required source docs**
+
+- `docs/architecture/background-jobs-and-notifications-architecture-v1.md` (§8.6, §8.8)
+- `docs/design-system/design-system-spec-final-v1.md`
+- `src/modules/notifications/email/layout.ts` (branded layout reference)
+- `src/lib/config/site.ts` (brand strings)
+
+**Scope**
+
+- align the Supabase Auth template editor HTML for each active auth email (magic link, confirm signup, invite, change email, reset password) with the transactional branded layout
+- apply the same brand name, color family, typography direction, button style, and legal footer conventions used by the transactional template
+- confirm Supabase Auth SMTP is pointed at the same verified Resend domain and sender used by transactional mail
+- verify that preview text, subject lines, and CTA wording match the Mentor IB voice established in `P1-NOTIF-002`
+- document the configuration (template source, variables used, where the brand values come from) inside a short operational note so future template edits stay in sync
+
+**Out of scope**
+
+- routing auth emails through the product notification module (architecture §8.6 keeps them separate)
+- introducing React Email, MJML, or any new email-templating framework
+- adding new auth flows or changing auth copy beyond what branding requires
+- cross-locale auth email content (stays English-only for Phase 1.5)
+
+**Acceptance criteria**
+
+- each active Supabase Auth email visually matches the transactional branded layout at a quick scan (brand name, color, button, spacing, footer)
+- the auth email sender (`from`) is the same verified Resend domain used by transactional email
+- subject lines and preview text follow the same tone as the transactional template and use the site config brand name
+- a short runbook note exists explaining where the auth templates live (Supabase dashboard path), what was customized, and how to keep them in sync when the transactional layout changes
+- no code in the app repo routes auth emails through the notification module (architecture §8.6 is preserved)
+
+**Verification**
+
+- side-by-side visual review of one transactional email and one auth email at phone and desktop widths
+- deliverability check (SPF, DKIM, DMARC pass) on an auth email sent from a real Supabase project
+- brand and copy review against `docs/design-system/design-system-spec-final-v1.md`
+
+## 10.12 `P15-QUALITY-001` Phase 1.5 verification and hardening pass
 
 **Status:** `ready`
 **Priority:** `P2`

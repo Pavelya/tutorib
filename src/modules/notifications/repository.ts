@@ -1,12 +1,14 @@
-import { eq, and, desc, isNull, sql } from 'drizzle-orm';
+import { eq, and, desc, sql } from 'drizzle-orm';
 import { getDb } from '@/server/db/client';
 import {
   notifications,
+  notificationDeliveries,
   policyNoticeVersions,
   policyNoticeReceipts,
 } from './schema';
 
 export type NotificationRow = typeof notifications.$inferSelect;
+export type NotificationDeliveryRow = typeof notificationDeliveries.$inferSelect;
 export type PolicyNoticeVersionRow = typeof policyNoticeVersions.$inferSelect;
 export type PolicyNoticeReceiptRow = typeof policyNoticeReceipts.$inferSelect;
 
@@ -240,4 +242,77 @@ export async function recordPolicyNoticeAcknowledged(
     viewed_at: now,
     acknowledged_at: now,
   });
+}
+
+// ---------------------------------------------------------------------------
+// Notification deliveries — per-channel outbound attempt tracking
+// ---------------------------------------------------------------------------
+
+export async function insertNotificationDelivery(input: {
+  notificationId: string;
+  channel: string;
+}): Promise<NotificationDeliveryRow> {
+  const db = getDb();
+  const [row] = await db
+    .insert(notificationDeliveries)
+    .values({
+      notification_id: input.notificationId,
+      channel: input.channel,
+    })
+    .returning();
+  return row;
+}
+
+export async function findNotificationDeliveryById(
+  id: string,
+): Promise<NotificationDeliveryRow | null> {
+  const db = getDb();
+  const [row] = await db
+    .select()
+    .from(notificationDeliveries)
+    .where(eq(notificationDeliveries.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
+export async function findNotificationById(
+  id: string,
+): Promise<NotificationRow | null> {
+  const db = getDb();
+  const [row] = await db
+    .select()
+    .from(notifications)
+    .where(eq(notifications.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
+export async function markDeliverySent(
+  id: string,
+  providerMessageId: string | null,
+): Promise<void> {
+  const db = getDb();
+  const now = new Date();
+  await db
+    .update(notificationDeliveries)
+    .set({
+      delivery_status: 'sent',
+      provider_message_id: providerMessageId,
+      attempted_at: now,
+      updated_at: now,
+    })
+    .where(eq(notificationDeliveries.id, id));
+}
+
+export async function markDeliveryFailed(id: string): Promise<void> {
+  const db = getDb();
+  const now = new Date();
+  await db
+    .update(notificationDeliveries)
+    .set({
+      delivery_status: 'failed',
+      attempted_at: now,
+      updated_at: now,
+    })
+    .where(eq(notificationDeliveries.id, id));
 }

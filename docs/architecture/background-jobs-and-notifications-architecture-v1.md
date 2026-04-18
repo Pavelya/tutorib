@@ -296,9 +296,16 @@ Channel rule for MVP:
 
 ## 8.6 Auth-email exception
 
-Supabase Auth emails such as magic links are provider-managed auth flows.
+Supabase Auth emails such as magic links, signup confirmation, email-change, and password-reset are provider-managed auth flows.
 
 They are not part of the product notification module and should not be mixed into the same notification object model.
+
+However, they are still the first email most users will ever receive from Mentor IB. They must therefore visually align with the same branded template system used by transactional emails (see §8.8):
+
+- the Supabase auth email templates should mirror the transactional template's brand name, typography direction, color family, and layout conventions
+- alignment happens by configuring the Supabase Auth template editor, not by routing auth emails through the product notification module
+- the auth SMTP sender should be the same verified Resend domain used for transactional mail so deliverability and brand identity stay consistent
+- ongoing changes to the transactional template's visual system should trigger a parallel update to the Supabase auth templates so the two surfaces do not drift
 
 ## 8.7 Notification preference posture
 
