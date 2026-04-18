@@ -75,6 +75,22 @@ export async function updateAppUserProfile(
 }
 
 /**
+ * Update the avatar URL for an app_user.
+ */
+export async function updateAppUserAvatar(
+  appUserId: string,
+  avatarUrl: string | null,
+): Promise<AppUser> {
+  const db = getDb();
+  const rows = await db
+    .update(appUsers)
+    .set({ avatar_url: avatarUrl, updated_at: new Date() })
+    .where(eq(appUsers.id, appUserId))
+    .returning();
+  return rows[0];
+}
+
+/**
  * Insert a new role for an app_user and update their onboarding/primary_role state.
  */
 export async function insertRoleAndUpdateUser(

@@ -2,8 +2,10 @@
 
 import { redirect } from 'next/navigation';
 import { z } from 'zod/v4';
+import { revalidatePath } from 'next/cache';
 import { resolveAccountState, ensureAppUser, selectRole } from './service';
-import { updateAppUserProfile } from './repository';
+import { updateAppUserProfile, updateAppUserAvatar } from './repository';
+import { uploadAvatar, AVATAR_ALLOWED_MIME_TYPES, AVATAR_MAX_BYTES } from './avatar-storage';
 
 const roleSchema = z.enum(['student', 'tutor']);
 
@@ -38,6 +40,58 @@ export async function updateProfileAction(
 
   await updateAppUserProfile(state.appUser.id, { fullName: parsed.data.fullName });
   return { ok: true };
+}
+
+export type UploadAvatarResult = {
+  ok: boolean;
+  code?: string;
+  message?: string;
+  avatarUrl?: string;
+};
+
+export async function uploadAvatarAction(
+  _prevState: UploadAvatarResult | null,
+  formData: FormData,
+): Promise<UploadAvatarResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated' || !('appUser' in state)) {
+    return { ok: false, code: 'unauthorized', message: 'You must be signed in.' };
+  }
+
+  const file = formData.get('avatar');
+  if (!(file instanceof File) || file.size === 0) {
+    return { ok: false, code: 'missing_file', message: 'Please choose an image to upload.' };
+  }
+
+  if (!AVATAR_ALLOWED_MIME_TYPES.includes(file.type as (typeof AVATAR_ALLOWED_MIME_TYPES)[number])) {
+    return {
+      ok: false,
+      code: 'invalid_type',
+      message: 'Avatar must be a JPEG, PNG, or WebP image.',
+    };
+  }
+
+  if (file.size > AVATAR_MAX_BYTES) {
+    return {
+      ok: false,
+      code: 'file_too_large',
+      message: 'Avatar must be smaller than 5 MB.',
+    };
+  }
+
+  try {
+    const publicUrl = await uploadAvatar(state.appUser.id, file);
+    await updateAppUserAvatar(state.appUser.id, publicUrl);
+    revalidatePath('/settings');
+    return { ok: true, avatarUrl: publicUrl };
+  } catch (error) {
+    console.error('[uploadAvatarAction] upload failed', error);
+    return {
+      ok: false,
+      code: 'upload_failed',
+      message: 'Could not upload avatar. Please try again.',
+    };
+  }
 }
 
 export type SelectRoleResult = {
