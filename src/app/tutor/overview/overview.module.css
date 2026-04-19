@@ -1,0 +1,161 @@
+.page {
+  padding-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.heading {
+  font-size: var(--text-title-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.subheading {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.sectionHeading {
+  font-size: var(--text-title-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .metricGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metricTile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+}
+
+.metricLabel {
+  font-size: var(--text-utility-sm);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metricValue {
+  font-size: var(--text-title-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.readinessPanel {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.readinessHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.readinessMessage {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.gateList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gateRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-md, 12px);
+  background-color: var(--color-surface-soft, var(--color-forest-50));
+}
+
+.gateHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.gateLabel {
+  font-size: var(--text-body-md);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.gateHint {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.nextActionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.nextActionCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.nextActionTopRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: space-between;
+}
+
+.nextActionUrgency {
+  font-size: var(--text-utility-sm);
+  font-family: var(--font-mono), monospace;
+  color: var(--color-text-secondary);
+}
+
+.nextActionContext {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.nextActionSubject {
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.nextActionDateTime {
+  font-size: var(--text-utility-sm);
+  font-family: var(--font-mono), monospace;
+  color: var(--color-text-secondary);
+}
