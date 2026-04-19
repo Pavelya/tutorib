@@ -93,6 +93,25 @@ export const tutorLanguageCapabilities = pgTable(
 );
 
 // ---------------------------------------------------------------------------
+// tutor_meeting_preferences — tutor-owned default meeting provider and link
+// used as the source for new lesson meeting access snapshots.
+// ---------------------------------------------------------------------------
+export const tutorMeetingPreferences = pgTable('tutor_meeting_preferences', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  tutor_profile_id: uuid('tutor_profile_id')
+    .notNull()
+    .unique()
+    .references(() => tutorProfiles.id),
+  provider_key: text('provider_key').notNull(),
+  default_meeting_url: text('default_meeting_url'),
+  display_label: text('display_label'),
+  is_active: boolean('is_active').notNull().default(true),
+  last_validated_at: timestamp('last_validated_at', { withTimezone: true }),
+  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updated_at: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ---------------------------------------------------------------------------
 // tutor_credentials — private evidence records for verification and trust review
 // ---------------------------------------------------------------------------
 export const tutorCredentials = pgTable(

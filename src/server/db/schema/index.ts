@@ -18,6 +18,7 @@ export {
   tutorSubjectCapabilities,
   tutorLanguageCapabilities,
   tutorCredentials,
+  tutorMeetingPreferences,
 } from '@/modules/tutors/schema';
 export {
   schedulePolicies,
