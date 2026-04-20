@@ -227,3 +227,118 @@ export type StudentLessonDetailResult =
   | { status: 'not_found' }
   | { status: 'unauthenticated' }
   | { status: 'forbidden' };
+
+// ---------------------------------------------------------------------------
+// D6: Tutor lesson list + detail (participant-scoped, tutor actor)
+// ---------------------------------------------------------------------------
+
+// Tutor-side lesson state vocabulary mirrors the student set (same canonical
+// state machine), so the shared lesson hub presents one operational model.
+// Distinguishing the role here is purely for type safety — a tutor DTO must
+// not be passed to a student surface and vice versa.
+export type TutorLessonState =
+  | 'requested'
+  | 'upcoming'
+  | 'completed'
+  | 'declined'
+  | 'cancelled'
+  | 'expired';
+
+// Counterpart summary shown on tutor lesson surfaces. Participant-safe:
+// student display name, headline timezone snapshot, and avatar only.
+export interface LessonStudentSummaryDto {
+  student_profile_id: string;
+  display_name: string;
+  avatar_url: string | null;
+  timezone: string | null;
+}
+
+export interface TutorLessonCardDto {
+  lesson_id: string;
+  lesson_state: TutorLessonState;
+  scheduled_start_at: string;
+  scheduled_end_at: string;
+  request_expires_at: string | null;
+  lesson_timezone: string;
+  subject_snapshot: string | null;
+  focus_snapshot: string | null;
+  price_amount: string | null;
+  currency_code: string | null;
+  student: LessonStudentSummaryDto;
+  has_open_issue: boolean;
+}
+
+export interface TutorLessonDetailDto {
+  lesson_id: string;
+  lesson_state: TutorLessonState;
+  scheduled_start_at: string;
+  scheduled_end_at: string;
+  request_expires_at: string | null;
+  lesson_timezone: string;
+  subject_snapshot: string | null;
+  focus_snapshot: string | null;
+  student_note_snapshot: string | null;
+  price_amount: string | null;
+  currency_code: string | null;
+  student: LessonStudentSummaryDto;
+
+  // Tutor can act on a request only while it is still pending and not expired.
+  can_accept: boolean;
+  can_decline: boolean;
+
+  // Present when a lesson issue case exists. Same shape as the student side —
+  // the case is shared continuity data scoped to the lesson.
+  issue: LessonIssueStatusDto | null;
+
+  // Participant meeting access summary. Phase 1 surfaces the link read-only
+  // here; meeting-link editing is owned by the schedule task.
+  meeting_access: LessonMeetingAccessDto | null;
+}
+
+export type TutorLessonListResult =
+  | { status: 'ok'; lessons: TutorLessonCardDto[] }
+  | { status: 'unauthenticated' }
+  | { status: 'forbidden' };
+
+export type TutorLessonDetailResult =
+  | { status: 'ok'; lesson: TutorLessonDetailDto }
+  | { status: 'not_found' }
+  | { status: 'unauthenticated' }
+  | { status: 'forbidden' };
+
+export interface AcceptLessonResultOk {
+  ok: true;
+  lesson_id: string;
+}
+
+export interface AcceptLessonResultErr {
+  ok: false;
+  code:
+    | 'unauthenticated'
+    | 'forbidden'
+    | 'not_found'
+    | 'invalid_state'
+    | 'expired'
+    | 'provider_unavailable';
+  message: string;
+}
+
+export type AcceptLessonResult = AcceptLessonResultOk | AcceptLessonResultErr;
+
+export interface DeclineLessonResultOk {
+  ok: true;
+  lesson_id: string;
+}
+
+export interface DeclineLessonResultErr {
+  ok: false;
+  code:
+    | 'unauthenticated'
+    | 'forbidden'
+    | 'not_found'
+    | 'invalid_state'
+    | 'provider_unavailable';
+  message: string;
+}
+
+export type DeclineLessonResult = DeclineLessonResultOk | DeclineLessonResultErr;

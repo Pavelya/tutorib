@@ -1,0 +1,135 @@
+.page {
+  padding-top: var(--space-6);
+}
+
+.header {
+  margin-bottom: var(--space-5);
+}
+
+.heading {
+  font-size: var(--text-title-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.subheading {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.groupHeading {
+  font-size: var(--text-title-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.emptyHintPanel {
+  padding: var(--space-3) var(--space-4);
+}
+
+.emptyHint {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-md, 12px);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.cardLink:hover .card,
+.cardLink:focus-visible .card {
+  border-color: var(--color-forest-100);
+  background-color: var(--color-forest-50);
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid var(--color-forest-500);
+  outline-offset: 2px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.cardStatusRow {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.expiryHint {
+  font-size: var(--text-utility-sm);
+  color: var(--color-text-secondary);
+}
+
+.cardPerson {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.cardPersonBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cardPersonName {
+  font-size: var(--text-body-md);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardContext {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.cardSubject {
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.cardDatetime {
+  font-size: var(--text-utility-sm);
+  font-family: var(--font-mono), monospace;
+  color: var(--color-text-secondary);
+}

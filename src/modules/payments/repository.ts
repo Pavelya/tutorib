@@ -78,3 +78,16 @@ export async function markPaymentAuthorized(
     })
     .where(eq(payments.id, input.paymentId));
 }
+
+export async function markPaymentCaptured(paymentId: string): Promise<void> {
+  const db = getDb();
+  const now = new Date();
+  await db
+    .update(payments)
+    .set({
+      payment_status: 'captured',
+      captured_at: now,
+      updated_at: now,
+    })
+    .where(eq(payments.id, paymentId));
+}

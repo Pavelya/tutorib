@@ -8,35 +8,49 @@ import {
   findBookingContextByMatchCandidateId,
   findLessonCalendarForParticipant,
   findLessonDetailForStudent,
+  findLessonDetailForTutor,
+  findLessonParticipants,
   findLessonsForStudent,
+  findLessonsForTutor,
   findOpenLessonIssueCase,
   insertLessonRequest,
   insertLessonStatusHistory,
   insertStudentLessonIssueCase,
+  markLessonAccepted,
   markLessonCancelled,
+  markLessonDeclined,
   markPaymentCancelled,
   markPaymentRefunded,
   type LessonCalendarRow,
   type StudentLessonDetailRow,
   type StudentLessonListRow,
+  type TutorLessonDetailRow,
+  type TutorLessonListRow,
 } from './repository';
 import {
   insertPendingPayment,
   attachCheckoutSessionToPayment,
+  markPaymentCaptured,
 } from '@/modules/payments/repository';
+import { findTutorIdentityByAppUserId } from '@/modules/tutors/overview-repository';
 import {
+  emitLessonAccepted,
   emitLessonCancelled,
+  emitLessonDeclined,
   emitLessonIssueAcknowledged,
   emitLessonRequestSubmitted,
 } from '@/modules/notifications/emit';
 import type {
+  AcceptLessonResult,
   BookingContextDto,
   BookingContextResult,
   BookingRequestResult,
   CancelLessonResult,
+  DeclineLessonResult,
   LessonCancellationPolicyDto,
   LessonIssueStatusDto,
   LessonMeetingAccessDto,
+  LessonStudentSummaryDto,
   LessonTutorSummaryDto,
   ReportLessonIssueResult,
   StudentLessonCardDto,
@@ -44,11 +58,17 @@ import type {
   StudentLessonDetailResult,
   StudentLessonListResult,
   StudentLessonState,
+  TutorLessonCardDto,
+  TutorLessonDetailDto,
+  TutorLessonDetailResult,
+  TutorLessonListResult,
+  TutorLessonState,
 } from './dto';
 import type {
   BookingRequestInput,
   CancelLessonInput,
   ReportLessonIssueInput,
+  TutorLessonActionInput,
 } from './validation';
 
 // ---------------------------------------------------------------------------
@@ -974,4 +994,354 @@ export function buildGoogleCalendarLink(input: {
 
 function toGcalDate(iso: string): string {
   return DateTime.fromISO(iso).toUTC().toFormat("yyyyLLdd'T'HHmmss'Z'");
+}
+
+// ---------------------------------------------------------------------------
+// Tutor lesson list + detail (participant-scoped D6, tutor actor)
+// ---------------------------------------------------------------------------
+
+export async function getTutorLessons(): Promise<TutorLessonListResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated') return { status: 'unauthenticated' };
+  if (
+    state.status !== 'tutor_active' &&
+    state.status !== 'tutor_pending_review'
+  ) {
+    return { status: 'forbidden' };
+  }
+
+  const identity = await findTutorIdentityByAppUserId(state.appUser.id);
+  if (!identity) return { status: 'forbidden' };
+
+  const rows = await findLessonsForTutor(identity.tutor_profile_id);
+  const now = DateTime.utc();
+  const lessons = rows.map((r) => toTutorLessonCardDto(r, now));
+  return { status: 'ok', lessons };
+}
+
+export async function getTutorLessonDetail(
+  lessonId: string,
+): Promise<TutorLessonDetailResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated') return { status: 'unauthenticated' };
+  if (
+    state.status !== 'tutor_active' &&
+    state.status !== 'tutor_pending_review'
+  ) {
+    return { status: 'forbidden' };
+  }
+
+  const identity = await findTutorIdentityByAppUserId(state.appUser.id);
+  if (!identity) return { status: 'forbidden' };
+
+  const row = await findLessonDetailForTutor(lessonId, identity.tutor_profile_id);
+  if (!row) return { status: 'not_found' };
+
+  const now = DateTime.utc();
+  return { status: 'ok', lesson: toTutorLessonDetailDto(row, now) };
+}
+
+function toTutorLessonCardDto(
+  row: TutorLessonListRow,
+  now: DateTime,
+): TutorLessonCardDto {
+  return {
+    lesson_id: row.lesson_id,
+    lesson_state: normalizeTutorLessonState(row, now),
+    scheduled_start_at: row.scheduled_start_at.toISOString(),
+    scheduled_end_at: row.scheduled_end_at.toISOString(),
+    request_expires_at: row.request_expires_at
+      ? row.request_expires_at.toISOString()
+      : null,
+    lesson_timezone: row.lesson_timezone,
+    subject_snapshot: row.subject_snapshot,
+    focus_snapshot: row.focus_snapshot,
+    price_amount: row.price_amount,
+    currency_code: row.currency_code,
+    student: toLessonStudentDto(row),
+    has_open_issue: row.has_open_issue,
+  };
+}
+
+function toTutorLessonDetailDto(
+  row: TutorLessonDetailRow,
+  now: DateTime,
+): TutorLessonDetailDto {
+  const lessonState = normalizeTutorLessonState(row, now);
+  const canAct = lessonState === 'requested';
+  return {
+    lesson_id: row.lesson_id,
+    lesson_state: lessonState,
+    scheduled_start_at: row.scheduled_start_at.toISOString(),
+    scheduled_end_at: row.scheduled_end_at.toISOString(),
+    request_expires_at: row.request_expires_at
+      ? row.request_expires_at.toISOString()
+      : null,
+    lesson_timezone: row.lesson_timezone,
+    subject_snapshot: row.subject_snapshot,
+    focus_snapshot: row.focus_snapshot,
+    student_note_snapshot: row.student_note_snapshot,
+    price_amount: row.price_amount,
+    currency_code: row.currency_code,
+    student: toLessonStudentDto(row),
+    can_accept: canAct,
+    can_decline: canAct,
+    issue: toTutorIssueStatusDto(row),
+    meeting_access: toTutorMeetingAccessDto(row, lessonState),
+  };
+}
+
+function toLessonStudentDto(
+  row: Pick<
+    TutorLessonListRow,
+    | 'student_profile_id'
+    | 'student_display_name'
+    | 'student_full_name'
+    | 'student_avatar_url'
+    | 'student_timezone'
+  >,
+): LessonStudentSummaryDto {
+  return {
+    student_profile_id: row.student_profile_id,
+    display_name:
+      row.student_display_name ?? row.student_full_name ?? 'Student',
+    avatar_url: row.student_avatar_url,
+    timezone: row.student_timezone,
+  };
+}
+
+function toTutorMeetingAccessDto(
+  row: TutorLessonDetailRow,
+  state: TutorLessonState,
+): LessonMeetingAccessDto | null {
+  if (state !== 'upcoming' && state !== 'completed') return null;
+  if (!row.meeting_provider) return null;
+  return {
+    provider: row.meeting_provider,
+    provider_label: meetingProviderLabel(row.meeting_provider),
+    join_url: row.meeting_url,
+    access_status: normalizeMeetingAccessStatus(row.meeting_access_status),
+  };
+}
+
+function normalizeTutorLessonState(
+  row: Pick<
+    TutorLessonListRow,
+    'lesson_status' | 'scheduled_end_at' | 'request_expires_at'
+  >,
+  now: DateTime,
+): TutorLessonState {
+  // Mirrors the student state derivation. Kept separate so the role-safe DTO
+  // type does not leak into student helpers and vice versa.
+  return normalizeLessonState(row, now);
+}
+
+function toTutorIssueStatusDto(
+  row: Pick<
+    TutorLessonDetailRow,
+    | 'issue_case_id'
+    | 'issue_case_status'
+    | 'issue_resolution_outcome'
+    | 'issue_reported_at'
+  >,
+): LessonIssueStatusDto | null {
+  if (!row.issue_case_id || !row.issue_case_status) return null;
+  return {
+    case_id: row.issue_case_id,
+    case_status: normalizeIssueCaseStatus(row.issue_case_status),
+    resolution_outcome: row.issue_resolution_outcome,
+    reported_at: row.issue_reported_at
+      ? row.issue_reported_at.toISOString()
+      : null,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Tutor accept (capture authorization) / decline (release authorization)
+// ---------------------------------------------------------------------------
+
+export async function acceptLessonAsTutor(
+  input: TutorLessonActionInput,
+): Promise<AcceptLessonResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated') {
+    return {
+      ok: false,
+      code: 'unauthenticated',
+      message: 'Sign in to accept a lesson request.',
+    };
+  }
+  if (
+    state.status !== 'tutor_active' &&
+    state.status !== 'tutor_pending_review'
+  ) {
+    return {
+      ok: false,
+      code: 'forbidden',
+      message: 'Only tutors can accept lesson requests.',
+    };
+  }
+
+  const identity = await findTutorIdentityByAppUserId(state.appUser.id);
+  if (!identity) {
+    return { ok: false, code: 'forbidden', message: 'Tutor profile not found.' };
+  }
+
+  const row = await findLessonDetailForTutor(input.lessonId, identity.tutor_profile_id);
+  if (!row) {
+    return { ok: false, code: 'not_found', message: 'Lesson not found.' };
+  }
+
+  const now = DateTime.utc();
+  const lessonState = normalizeTutorLessonState(row, now);
+
+  if (lessonState === 'expired') {
+    return {
+      ok: false,
+      code: 'expired',
+      message: 'This request has expired and can no longer be accepted.',
+    };
+  }
+  if (lessonState !== 'requested') {
+    return {
+      ok: false,
+      code: 'invalid_state',
+      message: 'This lesson is not awaiting your response.',
+    };
+  }
+
+  // Capture the authorized payment intent. If capture fails we do not flip
+  // lesson state — the tutor sees an actionable error and can retry.
+  if (row.payment_id && row.payment_intent_id && row.payment_status === 'authorized') {
+    try {
+      await getStripe().paymentIntents.capture(row.payment_intent_id);
+      await markPaymentCaptured(row.payment_id);
+    } catch (err) {
+      console.error('[lesson-accept] Stripe capture failed:', safeErrorLabel(err));
+      return {
+        ok: false,
+        code: 'provider_unavailable',
+        message:
+          'Could not contact the payment provider. Please try again in a moment.',
+      };
+    }
+  }
+
+  const acceptedAt = new Date();
+  await markLessonAccepted({ lessonId: input.lessonId, acceptedAt });
+  await insertLessonStatusHistory({
+    lessonId: input.lessonId,
+    fromStatus: row.lesson_status,
+    toStatus: 'accepted',
+    changedByAppUserId: state.appUser.id,
+    changeReason: 'tutor_accepted',
+  });
+
+  const participants = await findLessonParticipants(input.lessonId);
+  if (participants) {
+    try {
+      await emitLessonAccepted({
+        lessonId: input.lessonId,
+        recipientAppUserId: participants.student_app_user_id,
+        subjectSnapshot: participants.subject_snapshot,
+        scheduledStartAt: participants.scheduled_start_at,
+      });
+    } catch (err) {
+      console.error('[lesson-accept] notify student failed:', safeErrorLabel(err));
+    }
+  }
+
+  return { ok: true, lesson_id: input.lessonId };
+}
+
+export async function declineLessonAsTutor(
+  input: TutorLessonActionInput,
+): Promise<DeclineLessonResult> {
+  const state = await resolveAccountState();
+  if (state.status === 'unauthenticated') {
+    return {
+      ok: false,
+      code: 'unauthenticated',
+      message: 'Sign in to decline a lesson request.',
+    };
+  }
+  if (
+    state.status !== 'tutor_active' &&
+    state.status !== 'tutor_pending_review'
+  ) {
+    return {
+      ok: false,
+      code: 'forbidden',
+      message: 'Only tutors can decline lesson requests.',
+    };
+  }
+
+  const identity = await findTutorIdentityByAppUserId(state.appUser.id);
+  if (!identity) {
+    return { ok: false, code: 'forbidden', message: 'Tutor profile not found.' };
+  }
+
+  const row = await findLessonDetailForTutor(input.lessonId, identity.tutor_profile_id);
+  if (!row) {
+    return { ok: false, code: 'not_found', message: 'Lesson not found.' };
+  }
+
+  const now = DateTime.utc();
+  const lessonState = normalizeTutorLessonState(row, now);
+
+  if (lessonState !== 'requested') {
+    return {
+      ok: false,
+      code: 'invalid_state',
+      message: 'This lesson is not awaiting your response.',
+    };
+  }
+
+  // Release the authorization hold so the student is not charged. Phase-1
+  // policy: declines never capture. As with cancel, provider failures are
+  // surfaced to the tutor — they retry rather than silently flip lesson state.
+  if (
+    row.payment_id &&
+    row.payment_intent_id &&
+    (row.payment_status === 'authorized' || row.payment_status === 'pending')
+  ) {
+    try {
+      await getStripe().paymentIntents.cancel(row.payment_intent_id);
+      await markPaymentCancelled(row.payment_id);
+    } catch (err) {
+      console.error('[lesson-decline] Stripe release failed:', safeErrorLabel(err));
+      return {
+        ok: false,
+        code: 'provider_unavailable',
+        message:
+          'Could not contact the payment provider. Please try again in a moment.',
+      };
+    }
+  }
+
+  const declinedAt = new Date();
+  await markLessonDeclined({ lessonId: input.lessonId, declinedAt });
+  await insertLessonStatusHistory({
+    lessonId: input.lessonId,
+    fromStatus: row.lesson_status,
+    toStatus: 'declined',
+    changedByAppUserId: state.appUser.id,
+    changeReason: 'tutor_declined',
+  });
+
+  const participants = await findLessonParticipants(input.lessonId);
+  if (participants) {
+    try {
+      await emitLessonDeclined({
+        lessonId: input.lessonId,
+        recipientAppUserId: participants.student_app_user_id,
+        subjectSnapshot: participants.subject_snapshot,
+        scheduledStartAt: participants.scheduled_start_at,
+      });
+    } catch (err) {
+      console.error('[lesson-decline] notify student failed:', safeErrorLabel(err));
+    }
+  }
+
+  return { ok: true, lesson_id: input.lessonId };
 }

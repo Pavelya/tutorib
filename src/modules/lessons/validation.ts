@@ -29,3 +29,9 @@ export const reportLessonIssueSchema = z.object({
 });
 
 export type ReportLessonIssueInput = z.infer<typeof reportLessonIssueSchema>;
+
+export const tutorLessonActionSchema = z.object({
+  lessonId: z.string().uuid(),
+});
+
+export type TutorLessonActionInput = z.infer<typeof tutorLessonActionSchema>;

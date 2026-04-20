@@ -366,6 +366,272 @@ export async function findLessonDetailForStudent(
 }
 
 // ---------------------------------------------------------------------------
+// Participant-scoped tutor lesson list + detail (D6, tutor actor)
+// ---------------------------------------------------------------------------
+
+export interface TutorLessonListRow {
+  lesson_id: string;
+  lesson_status: string;
+  scheduled_start_at: Date;
+  scheduled_end_at: Date;
+  request_expires_at: Date | null;
+  lesson_timezone: string;
+  subject_snapshot: string | null;
+  focus_snapshot: string | null;
+  price_amount: string | null;
+  currency_code: string | null;
+  student_profile_id: string;
+  student_display_name: string | null;
+  student_full_name: string | null;
+  student_avatar_url: string | null;
+  student_timezone: string | null;
+  has_open_issue: boolean;
+}
+
+export interface TutorLessonDetailRow extends TutorLessonListRow {
+  student_note_snapshot: string | null;
+  issue_case_id: string | null;
+  issue_case_status: string | null;
+  issue_resolution_outcome: string | null;
+  issue_reported_at: Date | null;
+  meeting_provider: string | null;
+  meeting_url: string | null;
+  meeting_access_status: string | null;
+  payment_id: string | null;
+  payment_status: string | null;
+  payment_intent_id: string | null;
+}
+
+export async function findLessonsForTutor(
+  tutorProfileId: string,
+): Promise<TutorLessonListRow[]> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      lesson_id: lessons.id,
+      lesson_status: lessons.lesson_status,
+      scheduled_start_at: lessons.scheduled_start_at,
+      scheduled_end_at: lessons.scheduled_end_at,
+      request_expires_at: lessons.request_expires_at,
+      lesson_timezone: lessons.lesson_timezone,
+      subject_snapshot: lessons.subject_snapshot,
+      focus_snapshot: lessons.focus_snapshot,
+      price_amount: lessons.price_amount,
+      currency_code: lessons.currency_code,
+      student_profile_id: studentProfiles.id,
+      student_display_name: studentProfiles.display_name,
+      student_full_name: appUsers.full_name,
+      student_avatar_url: appUsers.avatar_url,
+      student_timezone: appUsers.timezone,
+      issue_case_status: lessonIssueCases.case_status,
+    })
+    .from(lessons)
+    .innerJoin(studentProfiles, eq(studentProfiles.id, lessons.student_profile_id))
+    .leftJoin(appUsers, eq(appUsers.id, studentProfiles.app_user_id))
+    .leftJoin(
+      lessonIssueCases,
+      and(
+        eq(lessonIssueCases.lesson_id, lessons.id),
+        eq(lessonIssueCases.case_status, 'open'),
+      ),
+    )
+    .where(eq(lessons.tutor_profile_id, tutorProfileId))
+    .orderBy(desc(lessons.scheduled_start_at));
+
+  return rows.map((r) => ({
+    lesson_id: r.lesson_id,
+    lesson_status: r.lesson_status,
+    scheduled_start_at: r.scheduled_start_at,
+    scheduled_end_at: r.scheduled_end_at,
+    request_expires_at: r.request_expires_at,
+    lesson_timezone: r.lesson_timezone,
+    subject_snapshot: r.subject_snapshot,
+    focus_snapshot: r.focus_snapshot,
+    price_amount: r.price_amount,
+    currency_code: r.currency_code,
+    student_profile_id: r.student_profile_id,
+    student_display_name: r.student_display_name,
+    student_full_name: r.student_full_name,
+    student_avatar_url: r.student_avatar_url,
+    student_timezone: r.student_timezone,
+    has_open_issue: r.issue_case_status !== null,
+  }));
+}
+
+export async function findLessonDetailForTutor(
+  lessonId: string,
+  tutorProfileId: string,
+): Promise<TutorLessonDetailRow | undefined> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      lesson_id: lessons.id,
+      tutor_profile_id: lessons.tutor_profile_id,
+      lesson_status: lessons.lesson_status,
+      scheduled_start_at: lessons.scheduled_start_at,
+      scheduled_end_at: lessons.scheduled_end_at,
+      request_expires_at: lessons.request_expires_at,
+      lesson_timezone: lessons.lesson_timezone,
+      subject_snapshot: lessons.subject_snapshot,
+      focus_snapshot: lessons.focus_snapshot,
+      student_note_snapshot: lessons.student_note_snapshot,
+      price_amount: lessons.price_amount,
+      currency_code: lessons.currency_code,
+      student_profile_id: studentProfiles.id,
+      student_display_name: studentProfiles.display_name,
+      student_full_name: appUsers.full_name,
+      student_avatar_url: appUsers.avatar_url,
+      student_timezone: appUsers.timezone,
+    })
+    .from(lessons)
+    .innerJoin(studentProfiles, eq(studentProfiles.id, lessons.student_profile_id))
+    .leftJoin(appUsers, eq(appUsers.id, studentProfiles.app_user_id))
+    .where(eq(lessons.id, lessonId))
+    .limit(1);
+
+  const row = rows[0];
+  if (!row) return undefined;
+
+  // Object-level authorization: only the owning tutor may read the detail.
+  // Non-matching owner collapses outward to not_found (DTO §27).
+  if (row.tutor_profile_id !== tutorProfileId) return undefined;
+
+  const issueRows = await db
+    .select({
+      id: lessonIssueCases.id,
+      case_status: lessonIssueCases.case_status,
+      resolution_outcome: lessonIssueCases.resolution_outcome,
+      student_reported_at: lessonIssueCases.student_reported_at,
+    })
+    .from(lessonIssueCases)
+    .where(eq(lessonIssueCases.lesson_id, lessonId))
+    .orderBy(desc(lessonIssueCases.created_at))
+    .limit(1);
+
+  const issue = issueRows[0];
+
+  const meetingRows = await db
+    .select({
+      provider: lessonMeetingAccess.provider,
+      meeting_url: lessonMeetingAccess.meeting_url,
+      access_status: lessonMeetingAccess.access_status,
+    })
+    .from(lessonMeetingAccess)
+    .where(eq(lessonMeetingAccess.lesson_id, lessonId))
+    .orderBy(desc(lessonMeetingAccess.updated_at))
+    .limit(1);
+
+  const meeting = meetingRows[0];
+
+  const paymentRows = await db
+    .select({
+      id: payments.id,
+      payment_status: payments.payment_status,
+      stripe_payment_intent_id: payments.stripe_payment_intent_id,
+    })
+    .from(payments)
+    .where(eq(payments.lesson_id, lessonId))
+    .orderBy(desc(payments.created_at))
+    .limit(1);
+
+  const payment = paymentRows[0];
+
+  return {
+    lesson_id: row.lesson_id,
+    lesson_status: row.lesson_status,
+    scheduled_start_at: row.scheduled_start_at,
+    scheduled_end_at: row.scheduled_end_at,
+    request_expires_at: row.request_expires_at,
+    lesson_timezone: row.lesson_timezone,
+    subject_snapshot: row.subject_snapshot,
+    focus_snapshot: row.focus_snapshot,
+    student_note_snapshot: row.student_note_snapshot,
+    price_amount: row.price_amount,
+    currency_code: row.currency_code,
+    student_profile_id: row.student_profile_id,
+    student_display_name: row.student_display_name,
+    student_full_name: row.student_full_name,
+    student_avatar_url: row.student_avatar_url,
+    student_timezone: row.student_timezone,
+    has_open_issue: issue?.case_status === 'open',
+    issue_case_id: issue?.id ?? null,
+    issue_case_status: issue?.case_status ?? null,
+    issue_resolution_outcome: issue?.resolution_outcome ?? null,
+    issue_reported_at: issue?.student_reported_at ?? null,
+    meeting_provider: meeting?.provider ?? null,
+    meeting_url: meeting?.meeting_url ?? null,
+    meeting_access_status: meeting?.access_status ?? null,
+    payment_id: payment?.id ?? null,
+    payment_status: payment?.payment_status ?? null,
+    payment_intent_id: payment?.stripe_payment_intent_id ?? null,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Tutor accept / decline writes
+// ---------------------------------------------------------------------------
+
+export async function markLessonAccepted(input: {
+  lessonId: string;
+  acceptedAt: Date;
+}): Promise<void> {
+  const db = getDb();
+  await db
+    .update(lessons)
+    .set({
+      lesson_status: 'accepted',
+      accepted_at: input.acceptedAt,
+      updated_at: input.acceptedAt,
+    })
+    .where(eq(lessons.id, input.lessonId));
+}
+
+export async function markLessonDeclined(input: {
+  lessonId: string;
+  declinedAt: Date;
+}): Promise<void> {
+  const db = getDb();
+  await db
+    .update(lessons)
+    .set({
+      lesson_status: 'declined',
+      declined_at: input.declinedAt,
+      updated_at: input.declinedAt,
+    })
+    .where(eq(lessons.id, input.lessonId));
+}
+
+// Lookup the participants needed to notify after a tutor action without
+// re-reading the full detail row. Kept narrow on purpose.
+export interface LessonParticipantsRow {
+  lesson_id: string;
+  student_app_user_id: string;
+  tutor_app_user_id: string;
+  subject_snapshot: string | null;
+  scheduled_start_at: Date;
+}
+
+export async function findLessonParticipants(
+  lessonId: string,
+): Promise<LessonParticipantsRow | undefined> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      lesson_id: lessons.id,
+      student_app_user_id: studentProfiles.app_user_id,
+      tutor_app_user_id: tutorProfiles.app_user_id,
+      subject_snapshot: lessons.subject_snapshot,
+      scheduled_start_at: lessons.scheduled_start_at,
+    })
+    .from(lessons)
+    .innerJoin(studentProfiles, eq(studentProfiles.id, lessons.student_profile_id))
+    .innerJoin(tutorProfiles, eq(tutorProfiles.id, lessons.tutor_profile_id))
+    .where(eq(lessons.id, lessonId))
+    .limit(1);
+  return rows[0];
+}
+
+// ---------------------------------------------------------------------------
 // Participant cancellation writes
 // ---------------------------------------------------------------------------
 

@@ -10,7 +10,7 @@ const serverEnvSchema = z.object({
   STRIPE_WEBHOOK_SECRET: z.string().min(1),
   CRON_SECRET: z.string().min(1),
   RESEND_API_KEY: z.string().min(1),
-  RESEND_FROM_EMAIL: z.email(),
+  RESEND_FROM_EMAIL: z.string().min(1),
 });
 
 type ServerEnv = z.infer<typeof serverEnvSchema>;

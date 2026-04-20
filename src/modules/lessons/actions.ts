@@ -6,10 +6,13 @@ import {
   bookingRequestSchema,
   cancelLessonSchema,
   reportLessonIssueSchema,
+  tutorLessonActionSchema,
 } from './validation';
 import {
+  acceptLessonAsTutor,
   cancelLessonAsStudent,
   createBookingRequest,
+  declineLessonAsTutor,
   reportLessonIssueAsStudent,
 } from './service';
 import type { BookingRequestResult } from './dto';
@@ -156,4 +159,70 @@ export async function reportLessonIssueAction(
   revalidatePath('/notifications');
 
   return { ok: true, caseId: result.case_id };
+}
+
+// ---------------------------------------------------------------------------
+// Tutor accept / decline actions
+// ---------------------------------------------------------------------------
+
+export type TutorLessonActionResult =
+  | { ok: true; lessonId: string }
+  | { ok: false; code: string; message: string };
+
+export async function acceptLessonAction(
+  _prevState: TutorLessonActionResult | null,
+  formData: FormData,
+): Promise<TutorLessonActionResult> {
+  const parsed = tutorLessonActionSchema.safeParse({
+    lessonId: formData.get('lessonId'),
+  });
+
+  if (!parsed.success) {
+    return {
+      ok: false,
+      code: 'validation_failed',
+      message: 'Invalid request.',
+    };
+  }
+
+  const result = await acceptLessonAsTutor(parsed.data);
+  if (!result.ok) {
+    return { ok: false, code: result.code, message: result.message };
+  }
+
+  revalidatePath('/tutor/lessons');
+  revalidatePath(`/tutor/lessons/${parsed.data.lessonId}`);
+  revalidatePath('/tutor/overview');
+  revalidatePath('/notifications');
+
+  return { ok: true, lessonId: result.lesson_id };
+}
+
+export async function declineLessonAction(
+  _prevState: TutorLessonActionResult | null,
+  formData: FormData,
+): Promise<TutorLessonActionResult> {
+  const parsed = tutorLessonActionSchema.safeParse({
+    lessonId: formData.get('lessonId'),
+  });
+
+  if (!parsed.success) {
+    return {
+      ok: false,
+      code: 'validation_failed',
+      message: 'Invalid request.',
+    };
+  }
+
+  const result = await declineLessonAsTutor(parsed.data);
+  if (!result.ok) {
+    return { ok: false, code: result.code, message: result.message };
+  }
+
+  revalidatePath('/tutor/lessons');
+  revalidatePath(`/tutor/lessons/${parsed.data.lessonId}`);
+  revalidatePath('/tutor/overview');
+  revalidatePath('/notifications');
+
+  return { ok: true, lessonId: result.lesson_id };
 }
