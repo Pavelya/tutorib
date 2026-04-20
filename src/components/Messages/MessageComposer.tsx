@@ -6,10 +6,8 @@ import {
   sendMessageAction,
   type SendMessageActionResult,
 } from '@/modules/conversations/actions';
-import {
-  MESSAGE_BODY_MAX_CHARS,
-} from '@/modules/conversations/validation';
-import styles from './messages.module.css';
+import { MESSAGE_BODY_MAX_CHARS } from '@/modules/conversations/validation';
+import styles from './MessagesView.module.css';
 
 interface MessageComposerProps {
   conversationId: string;

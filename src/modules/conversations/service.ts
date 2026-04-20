@@ -1,5 +1,4 @@
 import { resolveAccountState, type AccountState } from '@/modules/accounts/service';
-import { findStudentProfileByAppUserId } from '@/modules/learning-needs/repository';
 import {
   findConversationsForParticipant,
   findLastMessagesByIds,
@@ -44,19 +43,14 @@ const THREAD_MESSAGE_PAGE_SIZE = 100;
 // Public service API
 // ---------------------------------------------------------------------------
 
-export async function getConversationListForStudent(): Promise<ConversationListResult> {
+export async function getConversationListForCurrentParticipant(): Promise<ConversationListResult> {
   const state = await resolveAccountState();
 
   if (state.status === 'unauthenticated') {
     return { status: 'unauthenticated' };
   }
 
-  if (state.status !== 'student_active') {
-    return { status: 'forbidden' };
-  }
-
-  const studentProfile = await findStudentProfileByAppUserId(state.appUser.id);
-  if (!studentProfile) {
+  if (!isAuthenticatedParticipant(state)) {
     return { status: 'forbidden' };
   }
 
@@ -109,7 +103,7 @@ export async function getConversationListForStudent(): Promise<ConversationListR
   return { status: 'ok', conversations: conversationsDto };
 }
 
-export async function getConversationThreadForStudent(
+export async function getConversationThreadForCurrentParticipant(
   conversationId: string,
 ): Promise<ConversationThreadResult> {
   const state = await resolveAccountState();
@@ -118,12 +112,7 @@ export async function getConversationThreadForStudent(
     return { status: 'unauthenticated' };
   }
 
-  if (state.status !== 'student_active') {
-    return { status: 'forbidden' };
-  }
-
-  const studentProfile = await findStudentProfileByAppUserId(state.appUser.id);
-  if (!studentProfile) {
+  if (!isAuthenticatedParticipant(state)) {
     return { status: 'forbidden' };
   }
 

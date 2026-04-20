@@ -38,6 +38,7 @@ export async function sendMessageAction(
     // message architecture §13.1: in-app new-message indicator is the
     // unread + last_message_at signal on these surfaces).
     revalidatePath('/messages');
+    revalidatePath('/tutor/messages');
     return { ok: true, messageId: result.message_id };
   }
 
@@ -85,6 +86,7 @@ export async function markThreadReadAction(
 
   if (result.status === 'ok') {
     revalidatePath('/messages');
+    revalidatePath('/tutor/messages');
     return { ok: true, markedCount: result.marked_count };
   }
 
