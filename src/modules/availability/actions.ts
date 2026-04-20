@@ -2,14 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 import {
-  createAvailabilityRule,
-  deleteAvailabilityRule,
+  replaceAvailabilityWindows,
   updateMeetingPreference,
   updateSchedulePolicy,
 } from './service';
 import {
-  createAvailabilityRuleSchema,
-  deleteAvailabilityRuleSchema,
+  replaceAvailabilityWindowsSchema,
   updateMeetingPreferenceSchema,
   updateSchedulePolicySchema,
 } from './validation';
@@ -28,12 +26,6 @@ export async function updateSchedulePolicyAction(
   formData: FormData,
 ): Promise<ScheduleActionResult> {
   const parsed = updateSchedulePolicySchema.safeParse({
-    timezone: formData.get('timezone'),
-    minimumNoticeMinutes: formData.get('minimumNoticeMinutes'),
-    bufferBeforeMinutes: formData.get('bufferBeforeMinutes'),
-    bufferAfterMinutes: formData.get('bufferAfterMinutes'),
-    dailyCapacity: formData.get('dailyCapacity') ?? '',
-    weeklyCapacity: formData.get('weeklyCapacity') ?? '',
     isAcceptingNewStudents: formData.get('isAcceptingNewStudents') === 'on',
   });
 
@@ -48,40 +40,19 @@ export async function updateSchedulePolicyAction(
   return { ok: true };
 }
 
-export async function createAvailabilityRuleAction(
+export async function replaceAvailabilityWindowsAction(
   _prevState: ScheduleActionResult | null,
   formData: FormData,
 ): Promise<ScheduleActionResult> {
-  const parsed = createAvailabilityRuleSchema.safeParse({
-    dayOfWeek: formData.get('dayOfWeek'),
-    startLocalTime: formData.get('startLocalTime'),
-    endLocalTime: formData.get('endLocalTime'),
+  const parsed = replaceAvailabilityWindowsSchema.safeParse({
+    windows: formData.get('windows'),
   });
 
   if (!parsed.success) {
     return toValidationResult(parsed.error);
   }
 
-  const result = await createAvailabilityRule(parsed.data);
-  if (!result.ok) return result;
-
-  revalidatePath('/tutor/schedule');
-  return { ok: true };
-}
-
-export async function deleteAvailabilityRuleAction(
-  _prevState: ScheduleActionResult | null,
-  formData: FormData,
-): Promise<ScheduleActionResult> {
-  const parsed = deleteAvailabilityRuleSchema.safeParse({
-    ruleId: formData.get('ruleId'),
-  });
-
-  if (!parsed.success) {
-    return toValidationResult(parsed.error);
-  }
-
-  const result = await deleteAvailabilityRule(parsed.data);
+  const result = await replaceAvailabilityWindows(parsed.data);
   if (!result.ok) return result;
 
   revalidatePath('/tutor/schedule');
@@ -95,8 +66,6 @@ export async function updateMeetingPreferenceAction(
   const parsed = updateMeetingPreferenceSchema.safeParse({
     providerKey: formData.get('providerKey'),
     defaultMeetingUrl: formData.get('defaultMeetingUrl') ?? '',
-    displayLabel: formData.get('displayLabel') ?? '',
-    isActive: formData.get('isActive') === 'on',
   });
 
   if (!parsed.success) {

@@ -178,6 +178,34 @@ export async function deleteAvailabilityRuleOwned(
   return (result as unknown as { count?: number }).count ?? 0;
 }
 
+export interface ReplaceAvailabilityRuleInput {
+  dayOfWeek: number;
+  startLocalTime: string;
+  endLocalTime: string;
+}
+
+export async function replaceAvailabilityRulesForTutor(
+  tutorProfileId: string,
+  windows: ReplaceAvailabilityRuleInput[],
+): Promise<void> {
+  const db = getDb();
+  await db.transaction(async (tx) => {
+    await tx
+      .delete(availabilityRules)
+      .where(eq(availabilityRules.tutor_profile_id, tutorProfileId));
+    if (windows.length === 0) return;
+    await tx.insert(availabilityRules).values(
+      windows.map((w) => ({
+        tutor_profile_id: tutorProfileId,
+        day_of_week: w.dayOfWeek,
+        start_local_time: w.startLocalTime,
+        end_local_time: w.endLocalTime,
+        visibility_status: 'active',
+      })),
+    );
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Meeting preference
 // ---------------------------------------------------------------------------

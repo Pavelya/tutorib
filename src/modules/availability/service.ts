@@ -1,13 +1,12 @@
 import { resolveAccountState } from '@/modules/accounts/service';
 import {
-  deleteAvailabilityRuleOwned,
   findActiveMeetingProviders,
   findAvailabilityRules,
   findMeetingPreference,
   findSchedulePolicy,
   findTutorScheduleIdentity,
-  insertAvailabilityRule,
   isKnownMeetingProvider,
+  replaceAvailabilityRulesForTutor,
   upsertMeetingPreference,
   upsertSchedulePolicy,
 } from './repository';
@@ -19,17 +18,21 @@ import type {
   TutorScheduleResult,
 } from './dto';
 import type {
-  CreateAvailabilityRuleInput,
-  DeleteAvailabilityRuleInput,
+  ReplaceAvailabilityWindowsInput,
   UpdateMeetingPreferenceInput,
   UpdateSchedulePolicyInput,
 } from './validation';
 
 const DEFAULT_TIMEZONE = 'UTC';
 
-// Phase 1 minimum booking notice. Slot generation hides anything inside this
-// window even if the tutor has technically set a smaller value somewhere.
+// Phase 1 platform defaults. These aren't tutor-editable until admin settings
+// land; the schedule surface preserves them on every policy upsert so no
+// tutor can shrink the 8-hour booking floor or invent buffers/caps.
 const PHASE1_MINIMUM_NOTICE_FLOOR = 480;
+const PHASE1_BUFFER_BEFORE = 0;
+const PHASE1_BUFFER_AFTER = 0;
+const PHASE1_DAILY_CAPACITY: number | null = null;
+const PHASE1_WEEKLY_CAPACITY: number | null = null;
 
 // ---------------------------------------------------------------------------
 // Read: full schedule view for the current tutor.
@@ -47,25 +50,21 @@ export async function getTutorSchedule(): Promise<TutorScheduleResult> {
     findActiveMeetingProviders(),
   ]);
 
-  const policy: SchedulePolicyDto = policyRow
-    ? {
-        timezone: policyRow.timezone,
-        minimum_notice_minutes: policyRow.minimum_notice_minutes,
-        buffer_before_minutes: policyRow.buffer_before_minutes,
-        buffer_after_minutes: policyRow.buffer_after_minutes,
-        daily_capacity: policyRow.daily_capacity,
-        weekly_capacity: policyRow.weekly_capacity,
-        is_accepting_new_students: policyRow.is_accepting_new_students,
-      }
-    : {
-        timezone: accountTimezone ?? DEFAULT_TIMEZONE,
-        minimum_notice_minutes: PHASE1_MINIMUM_NOTICE_FLOOR,
-        buffer_before_minutes: 0,
-        buffer_after_minutes: 0,
-        daily_capacity: null,
-        weekly_capacity: null,
-        is_accepting_new_students: true,
-      };
+  const resolvedTimezone =
+    policyRow?.timezone ?? accountTimezone ?? DEFAULT_TIMEZONE;
+
+  const policy: SchedulePolicyDto = {
+    timezone: resolvedTimezone,
+    minimum_notice_minutes:
+      policyRow?.minimum_notice_minutes ?? PHASE1_MINIMUM_NOTICE_FLOOR,
+    buffer_before_minutes:
+      policyRow?.buffer_before_minutes ?? PHASE1_BUFFER_BEFORE,
+    buffer_after_minutes:
+      policyRow?.buffer_after_minutes ?? PHASE1_BUFFER_AFTER,
+    daily_capacity: policyRow?.daily_capacity ?? PHASE1_DAILY_CAPACITY,
+    weekly_capacity: policyRow?.weekly_capacity ?? PHASE1_WEEKLY_CAPACITY,
+    is_accepting_new_students: policyRow?.is_accepting_new_students ?? true,
+  };
 
   const rules: AvailabilityRuleDto[] = ruleRows.map((row) => ({
     id: row.id,
@@ -121,51 +120,42 @@ export async function updateSchedulePolicy(
   const auth = await requireTutor();
   if (auth.kind !== 'ok') return mutationFromAuth(auth.result);
 
-  if (input.bufferBeforeMinutes + input.bufferAfterMinutes > 240) {
-    return {
-      ok: false,
-      code: 'buffers_too_long',
-      message: 'Combined buffers cannot exceed 4 hours.',
-    };
-  }
+  const existing = await findSchedulePolicy(auth.tutorProfileId);
+  const timezone =
+    existing?.timezone ?? auth.accountTimezone ?? DEFAULT_TIMEZONE;
 
   await upsertSchedulePolicy({
     tutorProfileId: auth.tutorProfileId,
-    timezone: input.timezone,
-    minimumNoticeMinutes: input.minimumNoticeMinutes,
-    bufferBeforeMinutes: input.bufferBeforeMinutes,
-    bufferAfterMinutes: input.bufferAfterMinutes,
-    dailyCapacity: input.dailyCapacity,
-    weeklyCapacity: input.weeklyCapacity,
+    timezone,
+    minimumNoticeMinutes:
+      existing?.minimum_notice_minutes ?? PHASE1_MINIMUM_NOTICE_FLOOR,
+    bufferBeforeMinutes:
+      existing?.buffer_before_minutes ?? PHASE1_BUFFER_BEFORE,
+    bufferAfterMinutes:
+      existing?.buffer_after_minutes ?? PHASE1_BUFFER_AFTER,
+    dailyCapacity: existing?.daily_capacity ?? PHASE1_DAILY_CAPACITY,
+    weeklyCapacity: existing?.weekly_capacity ?? PHASE1_WEEKLY_CAPACITY,
     isAcceptingNewStudents: input.isAcceptingNewStudents,
   });
 
   return { ok: true };
 }
 
-export async function createAvailabilityRule(
-  input: CreateAvailabilityRuleInput,
+export async function replaceAvailabilityWindows(
+  input: ReplaceAvailabilityWindowsInput,
 ): Promise<ScheduleMutationResult> {
   const auth = await requireTutor();
   if (auth.kind !== 'ok') return mutationFromAuth(auth.result);
 
-  await insertAvailabilityRule({
-    tutorProfileId: auth.tutorProfileId,
-    dayOfWeek: input.dayOfWeek,
-    startLocalTime: `${input.startLocalTime}:00`,
-    endLocalTime: `${input.endLocalTime}:00`,
-  });
+  await replaceAvailabilityRulesForTutor(
+    auth.tutorProfileId,
+    input.windows.map((w) => ({
+      dayOfWeek: w.dayOfWeek,
+      startLocalTime: formatHour(w.startHour),
+      endLocalTime: formatHour(w.endHour),
+    })),
+  );
 
-  return { ok: true };
-}
-
-export async function deleteAvailabilityRule(
-  input: DeleteAvailabilityRuleInput,
-): Promise<ScheduleMutationResult> {
-  const auth = await requireTutor();
-  if (auth.kind !== 'ok') return mutationFromAuth(auth.result);
-
-  await deleteAvailabilityRuleOwned(auth.tutorProfileId, input.ruleId);
   return { ok: true };
 }
 
@@ -188,8 +178,10 @@ export async function updateMeetingPreference(
     tutorProfileId: auth.tutorProfileId,
     providerKey: input.providerKey,
     defaultMeetingUrl: input.defaultMeetingUrl,
-    displayLabel: input.displayLabel,
-    isActive: input.isActive,
+    displayLabel: null,
+    // A link is "active" when the tutor has actually set a URL. Saving a blank
+    // URL effectively pauses the default without a separate toggle.
+    isActive: input.defaultMeetingUrl !== null,
   });
 
   return { ok: true };
@@ -240,4 +232,10 @@ function trimLocalTime(value: string): string {
 
 function normalizeVisibility(value: string): AvailabilityRuleVisibility {
   return value === 'paused' ? 'paused' : 'active';
+}
+
+function formatHour(hour: number): string {
+  // Postgres `time` accepts 24:00:00 as the upper bound; pad to HH:00:00.
+  const hh = hour.toString().padStart(2, '0');
+  return `${hh}:00:00`;
 }

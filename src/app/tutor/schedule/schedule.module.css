@@ -1,8 +1,20 @@
 .page {
-  padding-top: var(--space-6);
+  padding: var(--space-6) var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: var(--space-6) var(--space-8);
+  }
+}
+
+.container {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  max-width: 960px;
+  margin-inline: auto;
+  width: 100%;
 }
 
 .header {
@@ -51,6 +63,12 @@
   padding: var(--space-4);
 }
 
+@media (min-width: 768px) {
+  .formPanel {
+    padding: var(--space-5);
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -69,14 +87,6 @@
   }
 }
 
-.checkboxRow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--text-body-sm);
-  color: var(--color-text-primary);
-}
-
 .formActions {
   display: flex;
   justify-content: flex-end;
@@ -92,70 +102,290 @@
   color: var(--color-danger, var(--color-text-primary));
 }
 
-.rulesBlock {
-  display: flex;
-  flex-direction: column;
+/* Booking status section -------------------------------------------------- */
+
+.policyRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-4);
+  align-items: start;
 }
 
-.rulesList {
+@media (max-width: 640px) {
+  .policyRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toggleRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.toggleRow input[type='checkbox'] {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-accent, var(--color-text-primary));
+}
+
+.toggleLabel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 
-.ruleRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding: var(--space-3);
-  border-radius: var(--radius-md, 12px);
-  background-color: var(--color-surface-soft, var(--color-forest-50));
-}
-
-.ruleSummary {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  align-items: baseline;
-}
-
-.ruleDay {
+.toggleTitle {
   font-size: var(--text-body-md);
   font-weight: 500;
   color: var(--color-text-primary);
 }
 
-.ruleTime {
+.toggleHint {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.policyMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  border-radius: var(--radius-md, 12px);
+  background-color: var(--color-surface-soft, var(--color-forest-50));
+  min-width: 180px;
+}
+
+.policyMetaLabel {
   font-size: var(--text-utility-sm);
-  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.policyMetaValue {
+  font-size: var(--text-body-md);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.policyMetaHint {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Availability grid ------------------------------------------------------- */
+
+.gridForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.gridWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gridScroll {
+  overflow-x: auto;
+  padding-bottom: var(--space-1);
+}
+
+.grid {
+  display: grid;
+  gap: 2px;
+  min-width: 560px;
+  user-select: none;
+}
+
+.gridCorner {
+  width: 36px;
+}
+
+.gridHourHeader {
+  font-size: var(--text-utility-sm);
+  color: var(--color-text-secondary);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  padding-bottom: 2px;
+}
+
+.gridDayLabel {
+  font-size: var(--text-utility-sm);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  padding-right: var(--space-2);
+  display: flex;
+  align-items: center;
+  min-width: 36px;
+}
+
+.gridCell {
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-soft, rgba(0, 0, 0, 0.08));
+  background-color: var(--color-surface-soft, var(--color-forest-50));
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.08s ease, border-color 0.08s ease;
+}
+
+.gridCell:hover {
+  border-color: var(--color-accent, var(--color-text-primary));
+}
+
+.gridCell:focus-visible {
+  outline: 2px solid var(--color-accent, var(--color-text-primary));
+  outline-offset: 1px;
+}
+
+.gridCellActive {
+  background-color: var(--color-accent, var(--color-forest-500, #2f6f4f));
+  border-color: var(--color-accent, var(--color-forest-500, #2f6f4f));
+}
+
+.gridLegend {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.gridActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.gridSummary {
+  font-size: var(--text-body-sm);
   color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
 }
 
-.deleteRuleForm {
-  display: inline-flex;
-}
-
-.addRuleForm {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr auto;
-  gap: var(--space-3);
-  align-items: end;
-}
-
-.addRuleActions {
+.gridActionButtons {
   display: flex;
-  justify-content: flex-end;
+  gap: var(--space-2);
+  flex-wrap: wrap;
 }
 
-@media (max-width: 640px) {
-  .addRuleForm {
-    grid-template-columns: 1fr;
-  }
-  .addRuleActions {
-    justify-content: stretch;
-  }
+/* Booking status — inline confirmation */
+
+.confirmNotice {
+  padding: var(--space-3) var(--space-4);
+}
+
+.confirmBody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.confirmCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 220px;
+  font-size: var(--text-body-sm);
+  color: var(--color-text-primary);
+}
+
+.confirmCopy strong {
+  font-weight: 600;
+}
+
+.confirmActions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Meeting preference — provider cards */
+
+.providerFieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.providerLegend {
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  padding: 0;
+}
+
+.providerList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-2);
+}
+
+.providerCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid var(--color-border-soft, rgba(0, 0, 0, 0.12));
+  background-color: var(--surface-panel, var(--color-surface, #fff));
+  cursor: pointer;
+  transition: border-color 0.08s ease, box-shadow 0.08s ease,
+    background-color 0.08s ease;
+}
+
+.providerCard:hover {
+  border-color: var(--color-accent, var(--color-forest-500));
+}
+
+.providerCardSelected {
+  border-color: var(--color-accent, var(--color-forest-600));
+  box-shadow: 0 0 0 1px var(--color-accent, var(--color-forest-600));
+  background-color: var(--color-forest-50, #f1f6f2);
+}
+
+.providerRadio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.providerRadio:focus-visible + .providerIcon {
+  outline: 2px solid var(--color-accent, var(--color-forest-500));
+  outline-offset: 2px;
+}
+
+.providerIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.providerName {
+  font-size: var(--text-body-md);
+  color: var(--color-text-primary);
+  line-height: 1.3;
 }
